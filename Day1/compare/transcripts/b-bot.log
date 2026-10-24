@@ -1,0 +1,12 @@
+===== harness: attempt 1: base URL via env =====
+{"time":"2026-10-24T16:31:20.179161+03:00","level":"INFO","msg":"weatherbot started"}
+{"time":"2026-10-24T16:31:35.609727+03:00","level":"WARN","msg":"weather request failed","err":"get current weather: weather provider rate limited"}
+{"time":"2026-10-24T16:31:52.213777+03:00","level":"WARN","msg":"weather request failed","err":"get current weather: weather provider unavailable: Get \"http://127.0.0.1:57679/data/2.5/weather?appid=[REDACTED]&lang=ru&q=Slow&units=metric\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+{"time":"2026-10-24T16:31:52.749689+03:00","level":"WARN","msg":"weather request failed","err":"get current weather: weather provider unavailable: decode response: unexpected EOF"}
+===== harness: SIGTERM (main run) =====
+{"time":"2026-10-24T16:31:57.117613+03:00","level":"INFO","msg":"weatherbot stopped"}
+===== harness: run 2: wrong OWM key =====
+{"time":"2026-10-24T16:31:57.134869+03:00","level":"INFO","msg":"weatherbot started"}
+{"time":"2026-10-24T16:31:57.178187+03:00","level":"WARN","msg":"weather request failed","err":"get current weather: weather provider auth failed"}
+===== harness: SIGTERM (wrong key run) =====
+{"time":"2026-10-24T16:31:57.743407+03:00","level":"INFO","msg":"weatherbot stopped"}

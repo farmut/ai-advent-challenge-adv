@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>{{.Title}}</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #c9d8e3; }
+  body { font: 14px/1.38 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #000; }
+  .page { padding: 16px 16px 40px; }
+  h1 { font-size: 17px; margin: 0 0 4px; text-align: center; }
+  .sub { text-align: center; font-size: 12px; color: #4a5b68; margin-bottom: 10px; }
+  .cols { display: grid; gap: 12px; }
+  .wide .cols { grid-template-columns: 1fr 1fr; }
+  .card { background: #fff; border-radius: 10px; padding: 8px 10px; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+  .card h2 { font-size: 15px; margin: 0 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 12px; border-radius: 10px; padding: 1px 8px; }
+  .ok { background: #dff3e1; color: #1b6b2a; }
+  .bad { background: #fde2e1; color: #a12622; }
+  .notes { margin: 6px 0 0; padding-left: 16px; font-size: 11.5px; color: #3c4a55; }
+  .row { margin-top: 12px; }
+  .pill { display: block; width: fit-content; margin: 0 auto 6px; background: rgba(0,0,0,.28); color: #fff; font-size: 12.5px; font-weight: 600; border-radius: 12px; padding: 2px 12px; }
+  .cells { display: grid; gap: 12px; }
+  .wide .cells { grid-template-columns: 1fr 1fr; }
+  .cell { display: flex; flex-direction: column; gap: 4px; }
+  .msg { max-width: 82%; padding: 6px 10px 5px; border-radius: 14px; white-space: pre-wrap; word-wrap: break-word; box-shadow: 0 1px 1px rgba(0,0,0,.13); position: relative; }
+  .user { align-self: flex-end; background: #3390ec; color: #fff; border-bottom-right-radius: 4px; }
+  .bot { align-self: flex-start; background: #f1f1f4; border-bottom-left-radius: 4px; }
+  .meta { font-size: 11px; opacity: .65; margin-left: 8px; float: right; margin-top: 4px; }
+  .count { display: inline-block; font-size: 11px; font-weight: 700; background: rgba(0,0,0,.18); border-radius: 8px; padding: 0 6px; margin-left: 6px; }
+  .user .count { background: rgba(255,255,255,.3); }
+  .noreply { align-self: flex-start; font-style: italic; color: #a12622; background: #fff4f3; border-radius: 10px; padding: 4px 10px; font-size: 13px; }
+  .marks { display: flex; flex-wrap: wrap; gap: 4px; align-self: stretch; }
+  .info { font-size: 11.5px; color: #33424e; word-break: break-all; }
+  .chatnote { align-self: flex-end; font-size: 11px; color: #33424e; }
+  .vh { text-align: center; font-weight: 700; font-size: 13px; color: #24333f; }
+</style>
+</head>
+<body class="{{if .Wide}}wide{{end}}">
+<div class="page">
+  <h1>{{.Title}}</h1>
+  <div class="sub">Реальные ответы ботов фейковым серверам Telegram/OpenWeatherMap · {{.Generated}}{{if .PartLabel}} · {{.PartLabel}}{{end}}</div>
+  <div class="cols">
+    {{range .Columns}}
+    <div class="card">
+      <h2>{{.Title}}</h2>
+      <div class="chips">{{range .Summary}}<span class="chip {{if .OK}}ok{{else}}bad{{end}}">{{mark .OK}} {{.Text}}</span>{{end}}</div>
+      {{if .Notes}}<ul class="notes">{{range .Notes}}<li>{{.}}</li>{{end}}</ul>{{end}}
+    </div>
+    {{end}}
+  </div>
+  {{$wide := .Wide}}
+  {{range .Rows}}
+  <div class="row">
+    <span class="pill">#{{.ID}} · {{.Title}}</span>
+    <div class="cells">
+      {{range $i, $c := .Cells}}
+      <div class="cell">
+        {{if $wide}}<div class="vh">{{if eq $i 0}}A{{else}}B{{end}}</div>{{end}}
+        {{if $c.Missing}}<div class="noreply">сценарий не выполнялся</div>{{else}}
+        {{if $c.ChatNote}}<div class="chatnote">{{$c.ChatNote}}</div>{{end}}
+        {{range $c.Inputs}}<div class="msg user">{{.Text}}{{if gt .Count 1}}<span class="count">×{{.Count}}</span>{{end}}</div>{{end}}
+        {{range $c.Replies}}<div class="msg bot">{{.Text}}{{if gt .Count 1}}<span class="count">×{{.Count}}</span>{{end}}<span class="meta">{{.Meta}}</span></div>{{end}}
+        {{if $c.NoReply}}<div class="noreply">{{$c.NoReply}}</div>{{end}}
+        <div class="marks">{{range $c.Marks}}<span class="chip {{if .OK}}ok{{else}}bad{{end}}">{{mark .OK}} {{.Text}}</span>{{end}}</div>
+        {{if $c.Info}}<div class="info">{{$c.Info}}</div>{{end}}
+        {{end}}
+      </div>
+      {{end}}
+    </div>
+  </div>
+  {{end}}
+</div>
+</body>
+</html>

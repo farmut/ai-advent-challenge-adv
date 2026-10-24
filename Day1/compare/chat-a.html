@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вариант A — общий CLAUDE.md</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #c9d8e3; }
+  body { font: 14px/1.38 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #000; }
+  .page { padding: 16px 16px 40px; }
+  h1 { font-size: 17px; margin: 0 0 4px; text-align: center; }
+  .sub { text-align: center; font-size: 12px; color: #4a5b68; margin-bottom: 10px; }
+  .cols { display: grid; gap: 12px; }
+  .wide .cols { grid-template-columns: 1fr 1fr; }
+  .card { background: #fff; border-radius: 10px; padding: 8px 10px; box-shadow: 0 1px 1px rgba(0,0,0,.12); }
+  .card h2 { font-size: 15px; margin: 0 0 6px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 4px; }
+  .chip { font-size: 12px; border-radius: 10px; padding: 1px 8px; }
+  .ok { background: #dff3e1; color: #1b6b2a; }
+  .bad { background: #fde2e1; color: #a12622; }
+  .notes { margin: 6px 0 0; padding-left: 16px; font-size: 11.5px; color: #3c4a55; }
+  .row { margin-top: 12px; }
+  .pill { display: block; width: fit-content; margin: 0 auto 6px; background: rgba(0,0,0,.28); color: #fff; font-size: 12.5px; font-weight: 600; border-radius: 12px; padding: 2px 12px; }
+  .cells { display: grid; gap: 12px; }
+  .wide .cells { grid-template-columns: 1fr 1fr; }
+  .cell { display: flex; flex-direction: column; gap: 4px; }
+  .msg { max-width: 82%; padding: 6px 10px 5px; border-radius: 14px; white-space: pre-wrap; word-wrap: break-word; box-shadow: 0 1px 1px rgba(0,0,0,.13); position: relative; }
+  .user { align-self: flex-end; background: #3390ec; color: #fff; border-bottom-right-radius: 4px; }
+  .bot { align-self: flex-start; background: #f1f1f4; border-bottom-left-radius: 4px; }
+  .meta { font-size: 11px; opacity: .65; margin-left: 8px; float: right; margin-top: 4px; }
+  .count { display: inline-block; font-size: 11px; font-weight: 700; background: rgba(0,0,0,.18); border-radius: 8px; padding: 0 6px; margin-left: 6px; }
+  .user .count { background: rgba(255,255,255,.3); }
+  .noreply { align-self: flex-start; font-style: italic; color: #a12622; background: #fff4f3; border-radius: 10px; padding: 4px 10px; font-size: 13px; }
+  .marks { display: flex; flex-wrap: wrap; gap: 4px; align-self: stretch; }
+  .info { font-size: 11.5px; color: #33424e; word-break: break-all; }
+  .chatnote { align-self: flex-end; font-size: 11px; color: #33424e; }
+  .vh { text-align: center; font-weight: 700; font-size: 13px; color: #24333f; }
+</style>
+</head>
+<body class="">
+<div class="page">
+  <h1>Вариант A — общий CLAUDE.md</h1>
+  <div class="sub">Реальные ответы ботов фейковым серверам Telegram/OpenWeatherMap · 2026-10-24 16:31</div>
+  <div class="cols">
+    
+    <div class="card">
+      <h2>Вариант A — общий CLAUDE.md</h2>
+      <div class="chips"><span class="chip bad">✗ подмена: base URL не подменяется → docker &#43; HTTPS_PROXY (MITM)</span><span class="chip ok">✓ токен в логе: 0</span><span class="chip ok">✓ ключ в логе: 0</span><span class="chip ok">✓ секреты в ответах: 0</span><span class="chip ok">✓ SIGTERM: выход за 163 мс, код 0</span><span class="chip bad">✗ ожидаемое поведение: 13/14</span></div>
+      <ul class="notes"><li>✗ env base URL: не тестируемо black-box: base URL не подменяется (за 10 с ни одного запроса к фейку Telegram); бот пытался выйти наружу на api.telegram.org:443 (заблокировано прокси-предохранителем)</li><li>✗ native HTTPS_PROXY: прокси подхватился (CONNECT: api.telegram.org:443), но TLS не прошёл: api.telegram.org:443: remote error: tls: bad certificate. На macOS Go проверяет сертификаты через системное хранилище, SSL_CERT_FILE игнорируется, а менять Keychain стенд не должен</li><li>✓ docker HTTPS_PROXY&#43;SSL_CERT_FILE: тот же исходник, собранный под linux/arm64, без изменений кода; трафик к api.telegram.org и api.openweathermap.org перехвачен MITM-прокси стенда с одноразовым CA</li></ul>
+    </div>
+    
+  </div>
+  
+  
+  <div class="row">
+    <span class="pill">#1 · /start</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">/start</div>
+        <div class="msg bot">Я присылаю текущую погоду.
+
+Отправьте название города, например: Москва
+или команду: /weather Санкт-Петербург<span class="meta">&#43;4 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ есть приветствие</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">в OWM не ходил</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#2 · /help</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">/help</div>
+        <div class="msg bot">Я присылаю текущую погоду.
+
+Отправьте название города, например: Москва
+или команду: /weather Санкт-Петербург<span class="meta">&#43;4 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ справка упоминает /weather</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">в OWM не ходил</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#3 · Город текстом: Москва</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Москва</div>
+        <div class="msg bot">Погода: Москва, RU
+Переменная облачность
+🌡 Температура: 12.3°C (ощущается как 10.1°C)
+💧 Влажность: 71%
+💨 Ветер: 4.2 м/с
+🧭 Давление: 1012 гПа<span class="meta">&#43;16 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ погода Москвы (12.3 °C), 1 запрос</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (200)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#4 · /weather London</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">/weather London</div>
+        <div class="msg bot">Погода: Лондон, GB
+Небольшой дождь
+🌡 Температура: 9.8°C (ощущается как 7.4°C)
+💧 Влажность: 87%
+💨 Ветер: 5.7 м/с
+🧭 Давление: 1004 гПа<span class="meta">&#43;6 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ погода Лондона</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (200)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#5 · /weather без города</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">/weather</div>
+        <div class="msg bot">Укажите город: /weather Москва<span class="meta">&#43;3 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ подсказка, без запроса в OWM</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">в OWM не ходил</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#6 · Несуществующий город (OWM 404)</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Nowhere</div>
+        <div class="msg bot">Город «Nowhere» не найден. Проверьте название.<span class="meta">&#43;4 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ «город Nowhere не найден»</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (404)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#7 · OWM 500</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Error500</div>
+        <div class="msg bot">Не удалось получить погоду, попробуйте позже.<span class="meta">&#43;4 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ понятная ошибка, без погоды</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (500)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#8 · OWM 429</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">RateLimit</div>
+        <div class="msg bot">Сервис погоды перегружен, попробуйте через минуту.<span class="meta">&#43;3 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ понятная ошибка, без погоды</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (429)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#9 · Инъекция в query</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">a&amp;appid=x#</div>
+        <div class="msg bot">Город «a&amp;appid=x#» не найден. Проверьте название.<span class="meta">&#43;5 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ q не ломает query, appid один</span><span class="chip ok">✓ без утечек</span><span class="chip ok">✓ инъекция: safe-escaped</span></div>
+        <div class="info">OWM: 1 запр. (404) · raw query: appid=&lt;KEY&gt;&amp;lang=ru&amp;q=a%26appid%3Dx%23&amp;units=metric · appid×1 · q=[&#34;a&amp;appid=x#&#34;]</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#10 · 500 символов</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">аааааааааааааааааааааааааааааааааааааааа… (500 символов)</div>
+        <div class="msg bot">Слишком длинное название города.<span class="meta">&#43;14 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ отказ без запроса в OWM</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">в OWM не ходил</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#11 · Медленный OWM (25 с)</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Slow</div>
+        
+        <div class="noreply">нет ответа за 40.0 с</div>
+        <div class="marks"><span class="chip bad">✗ ответ</span><span class="chip bad">✗ таймаут ≤15 с и сообщение об ошибке</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (клиент оборвал)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#12 · Огромный ответ OWM (50 MiB)</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Huge</div>
+        <div class="msg bot">Не удалось получить погоду, попробуйте позже.<span class="meta">&#43;74 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ тело ограничено, ответ об ошибке</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (200) · прочитано ≈1.9 MiB из 50</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#13 · /weather@WeatherBot Москва</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">/weather@WeatherBot Москва</div>
+        <div class="msg bot">Погода: Москва, RU
+Переменная облачность
+🌡 Температура: 12.3°C (ощущается как 10.1°C)
+💧 Влажность: 71%
+💨 Ветер: 4.2 м/с
+🧭 Давление: 1012 гПа<span class="meta">&#43;10 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ погода Москвы (12.3 °C), 1 запрос</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (200)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#14 · Flood: 20×«Москва» из чата 2002</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        <div class="chatnote">чат 2002</div>
+        <div class="msg user">Москва<span class="count">×20</span></div>
+        <div class="msg bot">Погода: Москва, RU
+Переменная облачность
+🌡 Температура: 12.3°C (ощущается как 10.1°C)
+💧 Влажность: 71%
+💨 Ветер: 4.2 м/с
+🧭 Давление: 1012 гПа<span class="count">×20</span><span class="meta">&#43;6 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 20 запр. (200×20) · запросов в OWM: 20, ответов: 20</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+  <div class="row">
+    <span class="pill">#15 · Неверный ключ OWM (401)</span>
+    <div class="cells">
+      
+      <div class="cell">
+        
+        
+        
+        <div class="msg user">Москва</div>
+        <div class="msg bot">Не удалось получить погоду, попробуйте позже.<span class="meta">&#43;8 мс</span></div>
+        
+        <div class="marks"><span class="chip ok">✓ ответ</span><span class="chip ok">✓ ошибка без погоды и без ключа</span><span class="chip ok">✓ без утечек</span></div>
+        <div class="info">OWM: 1 запр. (401)</div>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>

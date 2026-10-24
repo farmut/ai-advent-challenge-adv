@@ -1,0 +1,171 @@
+# metrics: variant-b
+src: /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day1/variant-b/src
+date: 2026-10-24T13:18:20Z
+go: go version go1.26.5 darwin/arm64
+
+## go.mod
+module weatherbot
+go 1.26
+go.sum: absent
+
+## build
+build: PASS
+
+## vet
+vet: PASS (rc=0)
+
+## gofmt
+gofmt files needing format: 0
+
+## golangci-lint
+bin: /private/tmp/claude-501/-Users-amachulin-ai-advent-challenge-adv-ai-advent-challenge-adv/7d742b91-7ae5-44f8-af1e-1fd8f3e61f93/scratchpad/bin/golangci-lint
+version: golangci-lint has version 2.15.0 built with go1.26.5 from (unknown, modified: ?, mod sum: "h1:w94zf8HAYI7hm3164kwKsvZRuqXvY+YxeFoTbu1OLg8=") on (unknown)
+### default linters (errcheck govet ineffassign staticcheck unused) (rc=1)
+issues: 3
+  internal/delivery/telegram/client.go:126:23: Error return value of `resp.Body.Close` is not checked (errcheck)
+  internal/repository/openweather/client.go:71:23: Error return value of `resp.Body.Close` is not checked (errcheck)
+  internal/repository/openweather/client.go:84:2: QF1002: could use tagged switch on code (staticcheck)
+### extended (+revive gosec errorlint bodyclose noctx gocritic misspell) (rc=1)
+issues: 5
+  internal/delivery/telegram/client.go:126:23: Error return value of `resp.Body.Close` is not checked (errcheck)
+  internal/repository/openweather/client.go:71:23: Error return value of `resp.Body.Close` is not checked (errcheck)
+  internal/repository/openweather/client.go:78:97: non-wrapping format verb for fmt.Errorf. Use `%w` to format errors (errorlint)
+  internal/domain/errors.go:6:2: exported: exported var ErrInvalidCity should have comment or be unexported (revive)
+  internal/repository/openweather/client.go:84:2: QF1002: could use tagged switch on code (staticcheck)
+
+## test (-race -count=1)
+test: PASS (rc=0)
+	weatherbot/cmd/weatherbot		coverage: 0.0% of statements
+ok  	weatherbot/internal/config	1.074s	coverage: 87.5% of statements
+ok  	weatherbot/internal/delivery/telegram	1.263s	coverage: 95.2% of statements
+?   	weatherbot/internal/domain	[no test files]
+ok  	weatherbot/internal/repository/openweather	1.171s	coverage: 92.1% of statements
+ok  	weatherbot/internal/usecase	1.080s	coverage: 100.0% of statements
+
+## coverage (go tool cover -func)
+total: 86.9%
+per-package (statement-weighted, from coverprofile):
+  weatherbot/cmd/weatherbot                                  0.0%
+  weatherbot/internal/config                                87.5%
+  weatherbot/internal/delivery/telegram                     95.2%
+  weatherbot/internal/repository/openweather                92.1%
+  weatherbot/internal/usecase                              100.0%
+per-func:
+  weatherbot/cmd/weatherbot/main.go:21:				main			0.0%
+  weatherbot/cmd/weatherbot/main.go:28:				run			0.0%
+  weatherbot/internal/config/config.go:30:			Load			100.0%
+  weatherbot/internal/config/config.go:67:			env			100.0%
+  weatherbot/internal/config/config.go:74:			validateBaseURL		80.0%
+  weatherbot/internal/config/config.go:91:			parseLevel		66.7%
+  weatherbot/internal/config/config.go:108:			validBotToken		81.8%
+  weatherbot/internal/delivery/telegram/client.go:48:		Error			100.0%
+  weatherbot/internal/delivery/telegram/client.go:74:		NewClient		100.0%
+  weatherbot/internal/delivery/telegram/client.go:79:		GetUpdates		100.0%
+  weatherbot/internal/delivery/telegram/client.go:92:		Send			83.3%
+  weatherbot/internal/delivery/telegram/client.go:103:		call			90.6%
+  weatherbot/internal/delivery/telegram/client.go:155:		redact			80.0%
+  weatherbot/internal/delivery/telegram/format.go:14:		formatWeather		100.0%
+  weatherbot/internal/delivery/telegram/format.go:30:		formatTemp		100.0%
+  weatherbot/internal/delivery/telegram/format.go:39:		windDirection		100.0%
+  weatherbot/internal/delivery/telegram/format.go:46:		capitalize		100.0%
+  weatherbot/internal/delivery/telegram/handler.go:40:		NewHandler		100.0%
+  weatherbot/internal/delivery/telegram/handler.go:45:		Handle			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:60:		respond			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:84:		allow			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:102:		parseCommand		100.0%
+  weatherbot/internal/delivery/telegram/messages.go:19:		msgCityNotFound		100.0%
+  weatherbot/internal/delivery/telegram/poller.go:34:		NewPoller		100.0%
+  weatherbot/internal/delivery/telegram/poller.go:39:		Run			96.2%
+  weatherbot/internal/delivery/telegram/poller.go:79:		sleep			80.0%
+  weatherbot/internal/repository/openweather/client.go:26:	NewClient		100.0%
+  weatherbot/internal/repository/openweather/client.go:50:	Current			91.3%
+  weatherbot/internal/repository/openweather/client.go:83:	statusError		100.0%
+  weatherbot/internal/repository/openweather/client.go:98:	toDomain		100.0%
+  weatherbot/internal/repository/openweather/client.go:111:	redact			75.0%
+  weatherbot/internal/usecase/weather.go:27:			NewWeatherService	100.0%
+  weatherbot/internal/usecase/weather.go:32:			Current			100.0%
+  weatherbot/internal/usecase/weather.go:44:			normalizeCity		100.0%
+  total:								(statements)		86.9%
+
+## tests inventory
+_test.go files: 7
+func Test*:     33
+t.Run(:         6
+func Benchmark: 0
+func Fuzz:      0
+func Example:   0
+
+## size
+files (all, excl. .git): 23
+go files prod: 11  test: 7
+LOC prod: 812
+LOC test: 852
+packages: 6
+modules (go list -m all): 1
+
+## imports graph
+weatherbot/cmd/weatherbot: context errors fmt log/slog net/http os os/signal syscall time weatherbot/internal/config weatherbot/internal/delivery/telegram weatherbot/internal/repository/openweather weatherbot/internal/usecase
+weatherbot/internal/config: errors fmt log/slog net/url os strings
+weatherbot/internal/delivery/telegram: bytes context encoding/json errors fmt io log/slog math net/http net/url strconv strings sync time unicode unicode/utf8 weatherbot/internal/domain
+weatherbot/internal/domain: errors
+weatherbot/internal/repository/openweather: context encoding/json fmt io net/http net/url strings weatherbot/internal/domain
+weatherbot/internal/usecase: context fmt strings unicode unicode/utf8 weatherbot/internal/domain
+
+## layer checks
+domain imports: errors
+domain stdlib-only w/o net/http,slog,json: PASS
+usecase imports: context fmt strings unicode unicode/utf8 weatherbot/internal/domain
+usecase not importing delivery/repository/http/json: PASS
+third-party imports (non-stdlib, non-module):
+  (end)
+
+## grep checklist (prod code, excl. _test.go)
+http.DefaultClient                         0
+http.Get(                                  0
+url.Values                                 3
+url.JoinPath / .JoinPath(                  2
+io.LimitReader                             4
+signal.NotifyContext                       1
+%w                                         18
+errors.Is                                  4
+errors.As                                  1
+errors.Join                                1
+func init(                                 0
+log.Fatal                                  0
+panic(                                     0
+recover()                                  1
+os.Exit                                    1
+os.Getenv/LookupEnv                        1
+slog                                       15
+redact/sanitize (case-insens.)             9
+rate limiter impl (limiter|bucket|perChat|allow) 5
+RateLimited (OWM 429 mapping)              2
+semaphore (sem chan|MaxConcurrency)        0
+retry_after                                3
+parse_mode                                 0
+context.Context                            15
+Timeout:                                   2
+
+fmt.Sprintf( on lines with http|?|appid|url|/bot:
+os.Getenv locations:
+  internal/config/config.go:68:	if v := strings.TrimSpace(os.Getenv(key)); v != "" {
+redact/sanitize locations:
+  internal/delivery/telegram/client.go:155:func (c *Client) redact(s string) string {
+  internal/repository/openweather/client.go:111:func (c *Client) redact(s string) string {
+rate-limit locations:
+  internal/delivery/telegram/handler.go:16:	perChatInterval = 2 * time.Second
+  internal/delivery/telegram/handler.go:36:	lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
+  internal/delivery/telegram/handler.go:84:func (h *Handler) allow(chatID int64, now time.Time) bool {
+  internal/delivery/telegram/handler.go:87:	if last, ok := h.lastReq[chatID]; ok && now.Sub(last) < perChatInterval {
+  internal/delivery/telegram/handler.go:92:			if now.Sub(last) >= perChatInterval {
+recover/panic/log.Fatal locations:
+  internal/delivery/telegram/handler.go:47:		if r := recover(); r != nil {
+global var blocks (prod):
+  internal/delivery/telegram/client.go:24:var ErrUnauthorized = errors.New("telegram bot token rejected")
+  internal/domain/errors.go:5:var (
+
+## run.json
+num_turns: 13
+duration_ms: 525480
+total_cost_usd: 1.4212954
+is_error: false

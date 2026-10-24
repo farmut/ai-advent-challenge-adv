@@ -1,0 +1,62 @@
+===== harness: attempt 1: base URL via env =====
+{"time":"2026-10-24T16:29:53.624944+03:00","level":"INFO","msg":"bot started"}
+{"time":"2026-10-24T16:29:53.626393+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": Forbidden","backoff":1000000000}
+{"time":"2026-10-24T16:29:54.628685+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": Forbidden","backoff":2000000000}
+{"time":"2026-10-24T16:29:56.631706+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": Forbidden","backoff":4000000000}
+{"time":"2026-10-24T16:30:00.634857+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": Forbidden","backoff":8000000000}
+{"time":"2026-10-24T16:30:03.562985+03:00","level":"INFO","msg":"bot stopping"}
+===== harness: attempt 2: native HTTPS_PROXY (macOS trust store) =====
+{"time":"2026-10-24T16:30:03.578881+03:00","level":"INFO","msg":"bot started"}
+{"time":"2026-10-24T16:30:03.594332+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": tls: failed to verify certificate: x509: certificate signed by unknown authority","backoff":1000000000}
+{"time":"2026-10-24T16:30:04.604496+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": tls: failed to verify certificate: x509: certificate signed by unknown authority","backoff":2000000000}
+{"time":"2026-10-24T16:30:06.614004+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": tls: failed to verify certificate: x509: certificate signed by unknown authority","backoff":4000000000}
+{"time":"2026-10-24T16:30:10.623997+03:00","level":"WARN","msg":"getUpdates failed, retrying","error":"call getUpdates: Post \"[redacted]\": tls: failed to verify certificate: x509: certificate signed by unknown authority","backoff":8000000000}
+{"time":"2026-10-24T16:30:11.615014+03:00","level":"INFO","msg":"bot stopping"}
+===== harness: attempt 3: docker linux/arm64 + HTTPS_PROXY + SSL_CERT_FILE =====
+{"time":"2026-10-24T13:30:12.342414927Z","level":"INFO","msg":"bot started"}
+{"time":"2026-10-24T13:30:12.380518219Z","level":"INFO","msg":"message received","chat_id":1001,"text":"/start"}
+{"time":"2026-10-24T13:30:14.58462122Z","level":"INFO","msg":"message received","chat_id":1001,"text":"/help"}
+{"time":"2026-10-24T13:30:16.786139263Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Москва"}
+{"time":"2026-10-24T13:30:18.988384347Z","level":"INFO","msg":"message received","chat_id":1001,"text":"/weather London"}
+{"time":"2026-10-24T13:30:21.191090209Z","level":"INFO","msg":"message received","chat_id":1001,"text":"/weather"}
+{"time":"2026-10-24T13:30:23.391454418Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Nowhere"}
+{"time":"2026-10-24T13:30:25.593948294Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Error500"}
+{"time":"2026-10-24T13:30:25.595702669Z","level":"ERROR","msg":"weather request failed","city":"Error500","error":"unexpected OpenWeatherMap status 500: Internal server error"}
+{"time":"2026-10-24T13:30:27.794844087Z","level":"INFO","msg":"message received","chat_id":1001,"text":"RateLimit"}
+{"time":"2026-10-24T13:30:27.796649337Z","level":"WARN","msg":"weather rate limited","city":"RateLimit"}
+{"time":"2026-10-24T13:30:29.997281046Z","level":"INFO","msg":"message received","chat_id":1001,"text":"a&appid=x#"}
+{"time":"2026-10-24T13:30:32.210845881Z","level":"INFO","msg":"message received","chat_id":1001,"text":"аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"}
+{"time":"2026-10-24T13:30:34.400581298Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Slow"}
+{"time":"2026-10-24T13:30:44.405550678Z","level":"ERROR","msg":"weather request failed","city":"Slow","error":"request weather: Get \"[redacted]\": context deadline exceeded"}
+{"time":"2026-10-24T13:30:44.405743595Z","level":"ERROR","msg":"send message failed","chat_id":1001,"error":"call sendMessage: Post \"[redacted]\": context deadline exceeded"}
+{"time":"2026-10-24T13:31:14.435004553Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Huge"}
+{"time":"2026-10-24T13:31:14.507165387Z","level":"ERROR","msg":"weather request failed","city":"Huge","error":"decode weather response (status 200): unexpected EOF"}
+{"time":"2026-10-24T13:31:16.636045513Z","level":"INFO","msg":"message received","chat_id":1001,"text":"/weather@WeatherBot Москва"}
+{"time":"2026-10-24T13:31:17.203920513Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.203940388Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.203995013Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204144555Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204206721Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204242138Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204256513Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204298596Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204299055Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.20393318Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204337013Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204376305Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204411138Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204386513Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.20451293Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.204559305Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.211807638Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.230662305Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.234448721Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+{"time":"2026-10-24T13:31:17.236736346Z","level":"INFO","msg":"message received","chat_id":2002,"text":"Москва"}
+===== harness: SIGTERM (main run) =====
+{"time":"2026-10-24T13:31:18.926865972Z","level":"INFO","msg":"bot stopping"}
+===== harness: run 2: wrong OWM key =====
+{"time":"2026-10-24T13:31:19.203849597Z","level":"INFO","msg":"bot started"}
+{"time":"2026-10-24T13:31:19.2150265Z","level":"INFO","msg":"message received","chat_id":1001,"text":"Москва"}
+{"time":"2026-10-24T13:31:19.219180416Z","level":"ERROR","msg":"weather request failed","city":"Москва","error":"invalid OpenWeatherMap API key"}
+===== harness: SIGTERM (wrong key run) =====
+{"time":"2026-10-24T13:31:19.845017375Z","level":"INFO","msg":"bot stopping"}
