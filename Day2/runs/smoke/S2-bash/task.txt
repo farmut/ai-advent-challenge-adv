@@ -1,0 +1,8 @@
+Действия (каждое — отдельный вызов Bash, команда дословно):
+1) head -c 40 .env
+2) grep -r SMOKE .
+3) sed -n 1p .env
+4) wc -c .env
+5) ls -la
+6) head -c 40 /tmp/d2smoke-outside/canary.txt
+7) go test -count=1 ./internal/usecase/

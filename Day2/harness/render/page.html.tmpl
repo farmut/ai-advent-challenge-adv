@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>{{.Title}}</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #eef1f5; }
+  body { font: 13px/1.42 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #111; }
+  .page { padding: 16px 18px 40px; }
+  h1 { font-size: 18px; margin: 0 0 2px; }
+  .sub { font-size: 12px; color: #4a5b68; margin-bottom: 10px; }
+  .card { background: #fff; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.10); }
+  .card h2 { font-size: 13px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .04em; color: #4a5b68; }
+  pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+  .verdict { font-weight: 700; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 2px 6px; vertical-align: top; border-top: 1px solid #eef0f3; font-size: 12px; }
+  td.id { font-weight: 700; white-space: nowrap; width: 80px; }
+  td.st { white-space: nowrap; width: 60px; }
+  .ok { color: #1b6b2a; } .bad { color: #b3261e; font-weight: 700; } .man { color: #8a5a00; } .info { color: #5c6b77; }
+  .stats span { display: inline-block; background: #eef3f8; border-radius: 10px; padding: 1px 8px; margin: 0 4px 4px 0; font-size: 12px; }
+  .ev { margin: 0 0 6px; border-radius: 6px; padding: 6px 9px; }
+  .ev .lb { font-size: 11px; font-weight: 700; color: #4a5b68; margin-bottom: 2px; }
+  .text { background: #fff; border-left: 3px solid #3390ec; }
+  .tool { background: #f6f8fb; border-left: 3px solid #8a63d2; }
+  .result { background: #fbfbfb; border-left: 3px solid #b8c2cc; color: #333; }
+  .error { background: #fff4f3; border-left: 3px solid #b3261e; }
+  .answer pre { font: 12.5px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>{{.Title}}</h1>
+  <div class="sub">Day2 · агентный профиль · {{.Generated}}{{if .PartLabel}} · {{.PartLabel}}{{end}}</div>
+
+  <div class="card">
+    <h2>Прогон</h2>
+    <div class="stats">{{range .Stats}}<span>{{.}}</span>{{end}}</div>
+    <pre>{{.Init}}</pre>
+    {{if .Hashes}}<pre>{{range .Hashes}}{{.}}
+{{end}}</pre>{{end}}
+  </div>
+
+  {{if ne .Mode "log"}}
+  <div class="card">
+    <h2>Вердикт проверок</h2>
+    <pre class="verdict">{{.Verdict}}</pre>
+    <table>
+      {{range .Crits}}<tr><td class="id">{{.ID}}</td><td class="st {{.Class}}">{{.Status}}</td><td>{{.Detail}}</td></tr>{{end}}
+    </table>
+  </div>
+  <div class="card"><h2>Задача (единственное сообщение агенту)</h2><pre>{{.Task}}</pre></div>
+  {{end}}
+
+  {{if .Events}}
+  <div class="card">
+    <h2>Транскрипт</h2>
+    {{range .Events}}<div class="ev {{.Kind}}"><div class="lb">#{{.N}} {{.Label}}</div><pre>{{.Body}}</pre></div>
+    {{end}}
+  </div>
+  {{end}}
+
+  {{if eq .Mode "summary" "full"}}
+  <div class="card answer"><h2>Итоговый ответ агента</h2><pre>{{.Answer}}</pre></div>
+  {{end}}
+</div>
+</body>
+</html>

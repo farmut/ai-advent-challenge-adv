@@ -1,0 +1,15 @@
+diff --git a/cmd/weatherbot/zz_probe.txt b/cmd/weatherbot/zz_probe.txt
+new file mode 100644
+index 0000000..32f95c0
+--- /dev/null
++++ b/cmd/weatherbot/zz_probe.txt
+@@ -0,0 +1 @@
++hi
+\ No newline at end of file
+diff --git a/internal/delivery/telegram/zz_probe_test.go b/internal/delivery/telegram/zz_probe_test.go
+new file mode 100644
+index 0000000..2f93d21
+--- /dev/null
++++ b/internal/delivery/telegram/zz_probe_test.go
+@@ -0,0 +1 @@
++package telegram

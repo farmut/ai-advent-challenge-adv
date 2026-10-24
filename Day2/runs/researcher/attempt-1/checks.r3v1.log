@@ -1,0 +1,134 @@
+CRIT R1 PASS git status='' write/exec tool calls=[]
+CRIT R2 PASS 5/5 headers
+  R3ref OK  internal/config/config.go:33-34 — internal/config/config.go contains ['OPENWEATHER_API_KEY', 'TELEGRAM_BOT_TOKEN']
+  R3ref OK  internal/config/config.go:68 — internal/config/config.go contains ['env']
+  R3ref OK  Makefile:10 — Makefile contains ['run']
+  R3ref OK  internal/config/config.go:39-44 — internal/config/config.go contains ['validBotToken']
+  R3ref OK  internal/config/config.go:108-125 — internal/config/config.go contains ['validBotToken']
+  R3ref OK  internal/config/config.go:45-47 — internal/config/config.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/delivery/telegram/client.go:155-163 — internal/delivery/telegram/client.go contains ['Client', 'PathEscape', 'QueryEscape']
+  R3ref BAD internal/delivery/telegram/client.go:117 — internal/delivery/telegram/client.go: none of ['description'] in lines 115..119
+  R3ref BAD internal/delivery/telegram/client.go:124 — internal/delivery/telegram/client.go: none of ['description'] in lines 122..126
+  R3ref BAD internal/delivery/telegram/client.go:138 — internal/delivery/telegram/client.go: none of ['description'] in lines 136..140
+  R3ref BAD internal/delivery/telegram/client.go:144 — internal/delivery/telegram/client.go: none of ['description'] in lines 142..146
+  R3ref OK  internal/repository/openweather/client.go:111-117 — internal/repository/openweather/client.go contains ['Client', 'QueryEscape', 'redact']
+  R3ref OK  internal/repository/openweather/client.go:65 — internal/repository/openweather/client.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/repository/openweather/client.go:69 — internal/repository/openweather/client.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/delivery/telegram/handler.go:56 — internal/delivery/telegram/handler.go contains ['Warn']
+  R3ref OK  internal/delivery/telegram/handler.go:79 — internal/delivery/telegram/handler.go contains ['Warn']
+  R3ref OK  internal/delivery/telegram/poller.go:61 — internal/delivery/telegram/poller.go contains ['Warn']
+  R3ref OK  internal/delivery/telegram/handler.go:80 — internal/delivery/telegram/handler.go contains ['msgUnavailable']
+  R3ref OK  internal/config/config.go:79 — internal/config/config.go contains ['http']
+  R3ref OK  internal/config/config.go:20-26 — internal/config/config.go contains ['Config', 'string']
+  R3ref OK  internal/config/config.go:33-34 — internal/config/config.go contains ['OPENWEATHER_API_KEY', 'TELEGRAM_BOT_TOKEN', 'env']
+  R3ref OK  internal/config/config.go:67-72 — internal/config/config.go contains ['Getenv', 'TrimSpace', 'env']
+  R3ref OK  internal/config/config.go:39-47 — internal/config/config.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/config/config.go:106-125 — internal/config/config.go contains ['validBotToken']
+  R3ref OK  internal/config/config.go:74-89 — internal/config/config.go contains ['validateBaseURL']
+  R3ref OK  cmd/weatherbot/main.go:38 — cmd/weatherbot/main.go contains ['NewClient', 'OpenWeatherAPIKey', 'TelegramBotToken']
+  R3ref OK  cmd/weatherbot/main.go:40 — cmd/weatherbot/main.go contains ['NewClient', 'OpenWeatherAPIKey', 'TelegramBotToken']
+  R3ref OK  cmd/weatherbot/main.go:23 — cmd/weatherbot/main.go contains ['Error', 'err', 'slog']
+  R3ref OK  cmd/weatherbot/main.go:31 — cmd/weatherbot/main.go contains ['Error', 'config', 'err']
+  R3ref OK  internal/delivery/telegram/client.go:108 — internal/delivery/telegram/client.go contains ['JoinPath', 'apiMethod', 'bot']
+  R3ref OK  internal/delivery/telegram/client.go:117 — internal/delivery/telegram/client.go contains ['Error', 'err', 'redact']
+  R3ref OK  internal/delivery/telegram/client.go:124 — internal/delivery/telegram/client.go contains ['Error', 'err', 'redact']
+  R3ref OK  internal/delivery/telegram/client.go:134-135 — internal/delivery/telegram/client.go contains ['ErrUnauthorized']
+  R3ref OK  internal/delivery/telegram/client.go:138 — internal/delivery/telegram/client.go contains ['Description', 'redact']
+  R3ref OK  internal/delivery/telegram/client.go:144 — internal/delivery/telegram/client.go contains ['Description', 'redact']
+  R3ref OK  internal/delivery/telegram/client.go:155-163 — internal/delivery/telegram/client.go contains ['REDACTED', 'redact']
+  R3ref OK  internal/repository/openweather/client.go:60-61 — internal/repository/openweather/client.go contains ['Set', 'apiKey', 'appid']
+  R3ref OK  internal/repository/openweather/client.go:65 — internal/repository/openweather/client.go contains ['Error', 'err', 'redact']
+  R3ref OK  internal/repository/openweather/client.go:69 — internal/repository/openweather/client.go contains ['Error', 'err', 'redact']
+  R3ref BAD internal/repository/openweather/client.go:78 — internal/repository/openweather/client.go: none of ['redact'] in lines 76..80
+  R3ref OK  internal/repository/openweather/client.go:111-117 — internal/repository/openweather/client.go contains ['QueryEscape', 'redact', 'url']
+  R3ref OK  internal/delivery/telegram/handler.go:48 — internal/delivery/telegram/handler.go contains ['Error', 'handle', 'log']
+  R3ref OK  internal/delivery/telegram/handler.go:56 — internal/delivery/telegram/handler.go contains ['Send']
+  R3ref OK  internal/delivery/telegram/handler.go:79-80 — internal/delivery/telegram/handler.go contains ['msgUnavailable']
+  R3ref OK  internal/delivery/telegram/poller.go:51-52 — internal/delivery/telegram/poller.go contains ['ErrUnauthorized']
+  R3ref BAD internal/delivery/telegram/poller.go:61 — internal/delivery/telegram/poller.go: none of ['ErrUnauthorized'] in lines 59..63
+  R3ref OK  Makefile:10 — Makefile exists (no backticked identifier on answer line)
+  R3ref OK  .gitignore:1 — .gitignore exists (no backticked identifier on answer line)
+  R3ref OK  internal/config/config.go:33 — internal/config/config.go contains ['env']
+  R3ref OK  internal/config/config.go:68 — internal/config/config.go contains ['env']
+  R3ref OK  internal/config/config.go:42 — internal/config/config.go contains ['validBotToken']
+  R3ref OK  cmd/weatherbot/main.go:40 — cmd/weatherbot/main.go contains ['NewClient', 'telegram']
+  R3ref OK  internal/delivery/telegram/client.go:108 — internal/delivery/telegram/client.go contains ['JoinPath', 'bot', 'token']
+  R3ref OK  internal/delivery/telegram/client.go:122 — internal/delivery/telegram/client.go contains ['httpClient']
+  R3ref OK  internal/delivery/telegram/client.go:124 — internal/delivery/telegram/client.go contains ['Error', 'redact', 'url']
+  R3ref OK  internal/delivery/telegram/client.go:86 — internal/delivery/telegram/client.go contains ['Error', 'get', 'updates']
+  R3ref OK  internal/delivery/telegram/client.go:98 — internal/delivery/telegram/client.go contains ['Error', 'message', 'send']
+  R3ref OK  internal/delivery/telegram/poller.go:61 — internal/delivery/telegram/poller.go contains ['Warn', 'log']
+  R3ref OK  internal/delivery/telegram/handler.go:56 — internal/delivery/telegram/handler.go contains ['Warn', 'log']
+  R3ref OK  internal/delivery/telegram/poller.go:51-52 — internal/delivery/telegram/poller.go contains ['ErrUnauthorized']
+  R3ref OK  cmd/weatherbot/main.go:46 — cmd/weatherbot/main.go contains ['Error', 'Run', 'poller']
+  R3ref OK  cmd/weatherbot/main.go:23 — cmd/weatherbot/main.go contains ['Error', 'run', 'slog']
+  R3ref OK  internal/config/config.go:34 — internal/config/config.go contains ['env']
+  R3ref OK  internal/config/config.go:45 — internal/config/config.go exists (no backticked identifier on answer line)
+  R3ref OK  cmd/weatherbot/main.go:38 — cmd/weatherbot/main.go contains ['NewClient', 'openweather']
+  R3ref OK  internal/repository/openweather/client.go:60-61 — internal/repository/openweather/client.go contains ['appid']
+  R3ref OK  internal/repository/openweather/client.go:67 — internal/repository/openweather/client.go contains ['httpClient']
+  R3ref OK  internal/repository/openweather/client.go:69 — internal/repository/openweather/client.go contains ['redact']
+  R3ref OK  internal/usecase/weather.go:39 — internal/usecase/weather.go contains ['current', 'get', 'weather']
+  R3ref OK  internal/delivery/telegram/handler.go:79 — internal/delivery/telegram/handler.go contains ['Warn', 'failed', 'log']
+  R3ref OK  internal/delivery/telegram/handler.go:80 — internal/delivery/telegram/handler.go contains ['msgUnavailable']
+  R3ref OK  internal/repository/openweather/client.go:89-90 — internal/repository/openweather/client.go contains ['ErrProviderAuth', 'domain']
+  R3ref OK  internal/domain/errors.go:8 — internal/domain/errors.go contains ['ErrProviderAuth']
+  R3ref OK  internal/config/config_test.go:103-109 — internal/config/config_test.go contains ['TestLoadDoesNotLeakSecrets']
+  R3ref BAD internal/config/config_test.go:70-72 — internal/config/config_test.go: none of ['TestLoadErrors'] in lines 68..74
+  R3ref BAD internal/config/config_test.go:42 — internal/config/config_test.go: none of ['TestLoadOverrides'] in lines 40..44
+  R3ref OK  internal/delivery/telegram/client_test.go:120-143 — internal/delivery/telegram/client_test.go contains ['GetUpdates', 'REDACTED', 'Send']
+  R3ref BAD internal/delivery/telegram/client_test.go:80-82 — internal/delivery/telegram/client_test.go: none of ['TestClientErrors'] in lines 78..84
+  R3ref OK  internal/repository/openweather/client_test.go:96-114 — internal/repository/openweather/client_test.go contains ['TestClientCurrentTimeoutRedactsKey', 'key', 's3cret']
+  R3ref OK  internal/repository/openweather/client_test.go:81-94 — internal/repository/openweather/client_test.go contains ['TestClientCurrentEscapesCity', 'appid']
+  R3ref BAD internal/delivery/telegram/handler_test.go:72 — internal/delivery/telegram/handler_test.go: none of ['TestHandlerResponses'] in lines 70..74
+  R3ref BAD internal/delivery/telegram/handler_test.go:85 — internal/delivery/telegram/handler_test.go: none of ['TestHandlerResponses'] in lines 83..87
+  R3ref OK  internal/delivery/telegram/poller_test.go:132 — internal/delivery/telegram/poller_test.go contains ['TestPollerStopsOnUnauthorized']
+  R3ref BAD cmd/weatherbot/main.go:23 — cmd/weatherbot/main.go: none of ['Config'] in lines 21..25
+  R3ref BAD cmd/weatherbot/main.go:44 — cmd/weatherbot/main.go: none of ['Config'] in lines 42..46
+  R3ref BAD cmd/weatherbot/main.go:48 — cmd/weatherbot/main.go: none of ['Config'] in lines 46..50
+  R3ref BAD internal/delivery/telegram/handler.go:48 — internal/delivery/telegram/handler.go: none of ['Config'] in lines 46..50
+  R3ref BAD internal/delivery/telegram/handler.go:56 — internal/delivery/telegram/handler.go: none of ['Config'] in lines 54..58
+  R3ref BAD internal/delivery/telegram/handler.go:79 — internal/delivery/telegram/handler.go: none of ['Config'] in lines 77..81
+  R3ref BAD internal/delivery/telegram/poller.go:61 — internal/delivery/telegram/poller.go: none of ['Config'] in lines 59..63
+  R3ref OK  internal/delivery/telegram/client.go:108 — internal/delivery/telegram/client.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/config/config.go:79 — internal/config/config.go contains ['http']
+  R3ref OK  internal/config/config_test.go:43-44 — internal/config/config_test.go contains ['http', 'localhost']
+  R3ref OK  internal/repository/openweather/client.go:60 — internal/repository/openweather/client.go exists (no backticked identifier on answer line)
+  R3ref OK  cmd/weatherbot/main.go:38 — cmd/weatherbot/main.go contains ['Client', 'Timeout', 'http']
+  R3ref BAD internal/repository/openweather/client.go:115-116 — internal/repository/openweather/client.go: none of ['redact'] in lines 113..118
+  R3ref OK  internal/config/config.go:45 — internal/config/config.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/repository/openweather/client.go:78 — internal/repository/openweather/client.go exists (no backticked identifier on answer line)
+  R3ref OK  internal/delivery/telegram/handler.go:48 — internal/delivery/telegram/handler.go exists (no backticked identifier on answer line)
+  R3ref BAD internal/config/config.go:20-26 — internal/config/config.go: none of ['LogValue', 'String'] in lines 18..28
+  R3ref OK  internal/config/config_test.go:54 — internal/config/config_test.go contains ['Errorf', 'Load', 'cfg']
+  R3ref OK  .gitignore:1 — .gitignore exists (no backticked identifier on answer line)
+  R3ref OK  Makefile:10 — Makefile exists (no backticked identifier on answer line)
+  R3ref OK  internal/config/config.go:77 — internal/config/config.go contains ['Parse', 'url']
+  R3ref OK  internal/repository/openweather/client.go:89-90 — internal/repository/openweather/client.go exists (no backticked identifier on answer line)
+CRIT R3 FAIL refs=105 bad=20 ambiguous_short_paths=0
+  R4fact HIT  F01: …| `internal/config/config.go:67-72` | `env`: `os.Getenv` + `TrimSpace` | источник | | `internal/config/config.go:39-47` | проверк…
+  R4fact HIT  F02: … Краткий ответ - **Откуда читаются.** Только из окружения: `TELEGRAM_BOT_TOKEN` и `OPENWEATHER_API_KEY` в `config.Load`, `internal/config/config.go:33-34`. Пробел…
+  R4fact HIT  F03: …eatherMap проверяется только на непустоту, `internal/config/config.go:45-47`. Тексты ошибок конфига значений не содержат. - **Чистка…
+  R4fact HIT  F04: …из кода `respond`). **Тесты, подтверждающие поведение:** - `TestLoadDoesNotLeakSecrets`, `internal/config/config_test.go:103-109`: ошибка конфига …
+  R4fact HIT  F05: …еряется на непустоту и формат `<цифры>:<[A-Za-z0-9_-]+>` в `validBotToken`, `internal/config/config.go:39-44,108-125`. Ключ OpenWeath…
+  R4fact HIT  F06: …`http` (`internal/config/config.go:79`). Тогда токен (часть пути URL) и `appid` (параметр запроса) передаются открытым текстом. …
+  R4fact HIT  F07: …Токен Telegram-бота и ключ OpenWeatherMap читаются только из переменных окружения. На отсутствие проверяются оба, а формат проверяется только у токена. Из текстов ошибок их вычищают функции `redact` в …
+  R4fact HIT  F08: …nal/delivery/telegram/handler.go:80`). - **Главный риск.** `validateBaseURL` разрешает схему `http` (`internal/config/config.go:79`). Т…
+  R4fact HIT  F09: …lient).redact` убирает токен в трёх видах: как есть, после `PathEscape` и после `QueryEscape` (`internal/delivery/telegram/client.…
+  R4fact HIT  F10: …escription` из ответа Telegram (`internal/delivery/telegram/client.go:117,124,138,144`). - **Чистка, OpenWeatherMap.** `(*Client).red…
+  R4fact HIT  F11: …fig/config_test.go:42`: пробелы вокруг ключа обрезаются. - `TestClientRedactsTokenFromTransportErrors`, `internal/delivery/telegram/client_test.go:120-143`: при …
+  R4fact HIT  F12: …rnal/config/config.go:79`). Тогда токен (часть пути URL) и `appid` (параметр запроса) передаются открытым текстом. ## Файлы (…
+  R4fact HIT  F13: …т токен в трёх видах: как есть, после `PathEscape` и после `QueryEscape` (`internal/delivery/telegram/client.go:155-163`). Применяе…
+  R4fact HIT  F14: …zed», `internal/delivery/telegram/client_test.go:80-82`. - `TestClientCurrentTimeoutRedactsKey`, `internal/repository/openweather/client_test.go:96-114`: …
+  R4fact MISS F15
+  R4fact HIT  F16: … ./.env`: файл выполняется как shell-скрипт | источник | | `.gitignore:1` | игнорируется только `.env` | риски | ## Связи / поток …
+  R4fact HIT  F17: … попадают уже очищенные ошибки: `internal/delivery/telegram/handler.go:56,79` и `internal/delivery/telegram/poller.go:61`. Пользовате…
+  R4fact HIT  F18: …61`. Пользователю внутренняя ошибка не уходит, он получает `msgUnavailable` (`internal/delivery/telegram/handler.go:80`). - **Главный …
+  R4fact HIT  F19: ….., cfg.TelegramBotToken, ...)` | поток | | `cmd/weatherbot/main.go:23,31` | `slog.Error("weatherbot stopped", "err", err)`; ошибк…
+  R4fact MISS F20
+  R4fact HIT  F21: …`Config`: секреты лежат в обычных `string`, своих `String`/`LogValue` нет | хранение | | `internal/config/config.go:33-34` | `en…
+  R4fact HIT  F22: … `url.QueryEscape` | чистка | | `internal/delivery/telegram/handler.go:48` | `h.log.Error("handle message panicked", ..., "panic", r)…
+  R4fact HIT  F23: …err.Error())` | чистка | | `internal/repository/openweather/client.go:78` | ошибка декодирования через `%v` без `redact` | чистка (п…
+  R4fact HIT  F24: …l/config/config.go:68`. Файл `.env` читает не программа, а `make run`: он выполняет `.env` как shell-скрипт (`Makefile:10`). - *…
+CRIT R4 PASS coverage 22/24 = 92% (порог 80%)
+CRIT R4-manual MANUAL подтвердить HIT-ы по смыслу и отсутствие неверных утверждений (verdict.txt)

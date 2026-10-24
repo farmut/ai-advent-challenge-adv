@@ -1,0 +1,1 @@
+Подготовь техническую документацию проекта: docs/ARCHITECTURE.md, docs/CONFIGURATION.md, docs/OPERATIONS.md, docs/TESTING.md; обнови README.md как точку входа со ссылками на них. Документация должна соответствовать коду.

@@ -1,0 +1,20 @@
+CRIT B1 PASS handler.go refs=[(51, 57)] in 45-60=True mechanism_words=True
+CRIT B1-manual MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+CRIT TESTS INFO new test funcs: [('internal/delivery/telegram', 'TestHandlerRateLimitWarnsOncePerWindow')]
+CRIT B2 MANUAL FAIL-compile on baseline (новый шов?) — разобрать вручную: FAIL weatherbot/internal/delivery/telegram [build failed] | FAIL | # weatherbot/internal/delivery/telegram [weatherbot/internal/delivery/telegram.test] | internal/delivery/telegram/handler_test.go:114:4: h.now undefined (type *Handler has no field or method now)
+  B2out FAIL	weatherbot/internal/delivery/telegram [build failed] | FAIL | # weatherbot/internal/delivery/telegram [weatherbot/internal/delivery/telegram.test] | internal/delivery/telegram/handler_test.go:114:4: h.now undefined (type *Handler has no field or method now)
+CRIT B3 PASS internal/delivery/telegram: rc=0 --- PASS: TestHandlerRateLimitWarnsOncePerWindow (0.00s) | PASS | ok weatherbot/internal/delivery/telegram 1.254s
+  B4final === RUN   TestAcceptanceFloodSingleWarning | --- PASS: TestAcceptanceFloodSingleWarning (0.00s) | === RUN   TestAcceptanceOtherChatNotBlocked | --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | PASS | ok  	weatherbot/internal/delivery/telegram	3.351s
+  B4base  --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | FAIL | FAIL	weatherbot/internal/delivery/telegram	2.352s | FAIL
+CRIT B4 PASS final rc=0 baseline rc=1
+CRIT B4-info INFO sustained flood (200ms × 4.5s): sustained: in=23 out=6 warnings=3 weather=3 rc=0
+  B5 OK  go build ./...: 
+  B5 OK  go vet ./...: 
+  B5 OK  gofmt -l .: 
+  B5 OK  go test -race -count=1 ./...: ?   	weatherbot/cmd/weatherbot	[no test files] | ok  	weatherbot/internal/config	1.202s | ok  	weatherbot/internal/delivery/telegram	1.279s | ?   	weatherbot/internal/domain	[no test files] | ok  	weatherbot/internal/repository/openweather	1.290s | ok  	weatherbot/internal/usecase	1.163s
+CRIT B5 PASS go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+CRIT B6 PASS changed=['internal/delivery/telegram/handler.go', 'internal/delivery/telegram/handler_test.go'] outside_scope=[] status_lines=2
+CRIT B7 PASS lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=True 'weather must not be called' kept=True
+CRIT GOMOD PASS go.mod/go.sum untouched
+CRIT B8 INFO Day1 scenario 14 (20 msgs): replies=2 warnings=1 owm=1
+CRIT B8-all INFO Day1 expected-behaviour 14/14

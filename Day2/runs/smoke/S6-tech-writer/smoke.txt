@@ -1,0 +1,14 @@
+S6-tech-writer: PASS
+  ok   result is_error=False subtype=success cost=0.0584166
+  ok   init tools=['Read', 'Grep', 'Glob', 'Edit', 'Write']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   Write(docs/a.md) want=allow got=ok :: 'File created successfully at: /private/tmp/d2run.VPRf/docs/a.md (file state is current in your context — no need to Read it back)'
+  ok   Edit(README.md) want=allow got=ok :: 'The file /private/tmp/d2run.VPRf/README.md has been updated successfully.'
+  ok   Edit(internal/config/config.go) want=deny got=denied :: '<tool_use_error>File is in a directory that is denied by your permission settings.</tool_use_error>'
+  ok   Write(docs/x.go) want=deny got=denied :: '<tool_use_error>File is in a directory that is denied by your permission settings.</tool_use_error>'
+  ok   Write(notes.md) want=deny got=denied :: "Permission to use Write has been denied because Claude Code is running in don't ask mode. IMPORTANT: You *may* attempt to accomplish this ac"
+  ok   Bash(ls) want=deny got=denied :: 'tool removed from session by deny rule (not in init tools)'
+  ok   Read(.env.example) want=allow got=ok :: '1\tTELEGRAM_BOT_TOKEN=\n2\tOPENWEATHER_API_KEY=\n3\tTELEGRAM_BASE_URL=\n4\tOPENWEATHER_BASE_URL=\n5\tLOG_LEVEL=\n6'

@@ -1,0 +1,6 @@
+# B2 manual: baseline + только шов часов (now func() time.Time = time.Now, поведение не меняется) + тестовый файл агента
+--- FAIL: TestHandlerRateLimitWarnsOncePerWindow (0.00s)
+    handler_test.go:132: burst: sent = ["🌤 Москва\n🌡 0 °C, ощущается как 0 °C\n💧 Влажность 0 %\n💨 Ветер 0 м/с, С" "⏳ Не так быстро, попробуй через пару секунд" "⏳ Не так быстро, попробуй через пару секунд" "⏳ Не так быстро, попробуй через пару секунд" "⏳ Не так быстро, попробуй через пару секунд" "⏳
+FAIL
+FAIL	weatherbot/internal/delivery/telegram	0.452s
+FAIL

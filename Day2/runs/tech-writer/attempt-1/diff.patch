@@ -1,0 +1,633 @@
+diff --git a/README.md b/README.md
+index 3e92396..82a9422 100644
+--- a/README.md
++++ b/README.md
+@@ -1,5 +1,7 @@
+ # weatherbot
+ 
++**Аудитория:** все, кто впервые знакомится с проектом: разработчики и операторы.
++
+ Telegram-бот, который присылает текущую погоду в городе из
+ [OpenWeatherMap](https://openweathermap.org/current). Go 1.26, только стандартная библиотека,
+ long polling (входящий HTTP-сервер не нужен).
+@@ -12,62 +14,82 @@ long polling (входящий HTTP-сервер не нужен).
+ 💨 Ветер 4 м/с, СЗ
+ ```
+ 
+-## Команды
++## Документация
++
++| Документ | Для кого | О чём |
++|----------|----------|-------|
++| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | разработчики | слои и пакеты, поток сообщения, интеграции с Telegram и OpenWeatherMap, обработка ошибок, backoff |
++| [docs/CONFIGURATION.md](docs/CONFIGURATION.md) | операторы, разработчики | переменные окружения, проверки, `.env`, параметры, заданные в коде |
++| [docs/OPERATIONS.md](docs/OPERATIONS.md) | операторы | сборка, запуск, остановка, коды выхода, логи, поведение при сбоях, ограничения, диагностика |
++| [docs/TESTING.md](docs/TESTING.md) | разработчики | запуск тестов и линтера, работа тестов без сети, покрытие |
++
++## Команды бота
+ 
+-| Ввод              | Ответ                              |
+-|-------------------|------------------------------------|
+-| `/start`          | приветствие                        |
+-| `/help`           | список команд                      |
+-| `/weather Казань` | погода в Казани                    |
+-| `Казань`          | то же самое — текст = город        |
++| Ввод | Ответ |
++|------|-------|
++| `/start` | приветствие |
++| `/help` (и любая неизвестная команда) | список команд |
++| `/weather Казань` | погода в Казани |
++| `Казань` | то же самое: текст без `/` считается названием города |
+ 
+-Не чаще одного запроса в 2 секунды на чат.
++Команды можно писать в любом регистре и с суффиксом `@ИмяБота`. Название города: от 1 до 64
++символов, только буквы, пробел, дефис, точка и запятая.
++
++Каждый чат может отправлять не больше одного сообщения в 2 секунды, включая `/start` и
++`/help`. На более частые сообщения бот отвечает «⏳ Не так быстро, попробуй через пару
++секунд».
+ 
+ ## Переменные окружения
+ 
+-| Переменная             | Обязательна | По умолчанию                     |
+-|------------------------|-------------|----------------------------------|
+-| `TELEGRAM_BOT_TOKEN`   | да          | —                                |
+-| `OPENWEATHER_API_KEY`  | да          | —                                |
+-| `TELEGRAM_BASE_URL`    | нет         | `https://api.telegram.org`       |
+-| `OPENWEATHER_BASE_URL` | нет         | `https://api.openweathermap.org` |
+-| `LOG_LEVEL`            | нет         | `info` (`debug/info/warn/error`) |
++| Переменная | Обязательна | По умолчанию |
++|------------|-------------|--------------|
++| `TELEGRAM_BOT_TOKEN` | да | — |
++| `OPENWEATHER_API_KEY` | да | — |
++| `TELEGRAM_BASE_URL` | нет | `https://api.telegram.org` |
++| `OPENWEATHER_BASE_URL` | нет | `https://api.openweathermap.org` |
++| `LOG_LEVEL` | нет | `info` (`debug`/`info`/`warn`/`error`) |
+ 
+-Токен бота выдаёт [@BotFather](https://t.me/BotFather), ключ API — личный кабинет OpenWeatherMap
+-(новый ключ активируется не сразу, до пары часов). При ошибках конфигурации бот перечисляет все
+-проблемы сразу и завершается с кодом 1.
++Токен бота выдаёт @BotFather в Telegram, ключ API — личный кабинет OpenWeatherMap. При ошибках
++конфигурации бот перечисляет все проблемы сразу **в stderr** и завершается с кодом 1. Правила
++проверки описаны в [docs/CONFIGURATION.md](docs/CONFIGURATION.md).
+ 
+ ## Запуск
+ 
+ ```sh
+ cp .env.example .env   # заполнить TELEGRAM_BOT_TOKEN и OPENWEATHER_API_KEY
+-make run               # подхватит .env
++make run               # подгружает .env; его значения перекрывают переменные окружения
+ ```
+ 
+ или напрямую:
+ 
+ ```sh
+-export TELEGRAM_BOT_TOKEN=... OPENWEATHER_API_KEY=...
++export TELEGRAM_BOT_TOKEN=<TELEGRAM_BOT_TOKEN> OPENWEATHER_API_KEY=<OPENWEATHER_API_KEY>
+ go run ./cmd/weatherbot
+ ```
+ 
+-Логи — JSON в stdout. Остановка — Ctrl+C или SIGTERM.
++Рабочие логи пишутся в stdout в формате JSON. Запись об аварийном завершении пишется в stderr
++обычным текстом. Остановка — Ctrl+C или SIGTERM, код выхода 0. Если Telegram отвергает токен,
++бот завершается с кодом 1. Подробнее — в [docs/OPERATIONS.md](docs/OPERATIONS.md).
+ 
+ ## Разработка
+ 
+ ```sh
+-make test    # go test -race -cover ./...  (без сети: всё через httptest)
+-make lint    # go vet + gofmt -l
++make test    # go test -race -cover ./...  (без внешней сети: httptest и фейки)
++make lint    # go vet ./... + проверка gofmt -l
+ make build   # bin/weatherbot
+ ```
+ 
++Подробнее — в [docs/TESTING.md](docs/TESTING.md).
++
+ ## Структура
+ 
+ ```
+-cmd/weatherbot             точка входа, DI, graceful shutdown
+-internal/config            чтение и валидация env
+-internal/domain            сущность Weather и доменные ошибки
+-internal/usecase           WeatherService: валидация города, порт WeatherProvider
++cmd/weatherbot                    точка входа, сборка зависимостей, обработка SIGINT/SIGTERM
++internal/config                   чтение и валидация env
++internal/domain                   сущность Weather и доменные ошибки
++internal/usecase                  WeatherService: валидация города, порт WeatherProvider
+ internal/repository/openweather   адаптер OpenWeatherMap
+-internal/delivery/telegram клиент Bot API, long polling, команды, форматирование, тексты
++internal/delivery/telegram        клиент Bot API, long polling, команды, форматирование, тексты
+ ```
++
++Подробнее — в [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+diff --git a/docs/ARCHITECTURE.md b/docs/ARCHITECTURE.md
+new file mode 100644
+index 0000000..9e787d6
+--- /dev/null
++++ b/docs/ARCHITECTURE.md
+@@ -0,0 +1,180 @@
++# Архитектура weatherbot
++
++**Аудитория:** разработчики, которые меняют или расширяют код бота.
++
++Связанные документы: [CONFIGURATION.md](CONFIGURATION.md), [OPERATIONS.md](OPERATIONS.md),
++[TESTING.md](TESTING.md), [README](../README.md).
++
++## Обзор
++
++weatherbot — один процесс на Go (модуль `weatherbot`, `go 1.26`, см. [go.mod](../go.mod)) без
++внешних зависимостей: только стандартная библиотека. Бот получает сообщения из Telegram через
++long polling (`getUpdates`), запрашивает текущую погоду у OpenWeatherMap и отвечает в чат
++обычным текстом. Входящий HTTP-сервер не поднимается, состояние на диске не хранится.
++
++## Слои и пакеты
++
++| Пакет | Роль | Ключевые типы |
++|-------|------|---------------|
++| [cmd/weatherbot](../cmd/weatherbot/main.go) | точка входа: загрузка конфигурации, сборка зависимостей, обработка сигналов | `main`, `run` |
++| [internal/config](../internal/config/config.go) | чтение и валидация переменных окружения | `Config`, `Load` |
++| [internal/domain](../internal/domain/weather.go) | сущность и доменные ошибки ([errors.go](../internal/domain/errors.go)) | `Weather`, `ErrInvalidCity`, `ErrCityNotFound`, `ErrProviderAuth`, `ErrRateLimited`, `ErrProviderUnavailable` |
++| [internal/usecase](../internal/usecase/weather.go) | бизнес-логика: нормализация и валидация названия города | `WeatherService`, порт `WeatherProvider` |
++| [internal/repository/openweather](../internal/repository/openweather/client.go) | адаптер OpenWeatherMap Current Weather API | `Client` |
++| [internal/delivery/telegram](../internal/delivery/telegram/client.go) | клиент Bot API, цикл long polling, разбор команд, форматирование, тексты ответов | `Client`, `Poller`, `Handler` |
++
++Направление зависимостей: `cmd` → `config`, `delivery/telegram`, `repository/openweather`,
++`usecase`; `delivery` и `repository` → `domain`; `usecase` → `domain`. Слои связаны через
++интерфейсы, объявленные на стороне потребителя:
++
++- `usecase.WeatherProvider` — реализует `openweather.Client` ([weather.go:17](../internal/usecase/weather.go));
++- `telegram.WeatherGetter` — реализует `usecase.WeatherService` ([handler.go:21](../internal/delivery/telegram/handler.go));
++- `telegram.Sender` и `telegram.UpdatesGetter` — реализует `telegram.Client`
++  ([handler.go:26](../internal/delivery/telegram/handler.go), [poller.go:16](../internal/delivery/telegram/poller.go));
++- `telegram.MessageHandler` — реализует `telegram.Handler` ([poller.go:21](../internal/delivery/telegram/poller.go)).
++
++Сборка зависимостей — в `run` ([main.go:28-50](../cmd/weatherbot/main.go)):
++
++```
++config.Load → openweather.NewClient (http.Client, Timeout 10s)
++            → usecase.NewWeatherService
++            → telegram.NewClient (http.Client, Timeout 40s)
++            → telegram.NewHandler(service, bot, logger)
++            → telegram.NewPoller(bot, handler, logger).Run(ctx)
++```
++
++## Поток обработки сообщения
++
++1. `Poller.Run` вызывает `GetUpdates(ctx, offset)` в бесконечном цикле
++   ([poller.go:39-76](../internal/delivery/telegram/poller.go)). Начальный `offset` — 0, после
++   каждого апдейта `offset = max(offset, update_id+1)`.
++2. Апдейты без `message` или с пустым `text` пропускаются (но `offset` продвигается)
++   ([poller.go:69-72](../internal/delivery/telegram/poller.go)).
++3. Для каждого текстового сообщения синхронно вызывается `Handler.Handle(ctx, chatID, text)`.
++4. `Handle` ([handler.go:45-58](../internal/delivery/telegram/handler.go)):
++   - проверяет лимит частоты на чат (`allow`); при превышении отвечает `msgTooFrequent`;
++   - иначе разбирает текст (`parseCommand`) и формирует ответ (`respond`);
++   - отправляет ответ через `Sender.Send`; ошибка отправки только логируется;
++   - паника внутри обработки перехватывается `recover` и логируется, бот продолжает работу;
++     в этом случае пользователь ответа не получает.
++5. `respond` ([handler.go:60-82](../internal/delivery/telegram/handler.go)):
++
++| Ввод | Результат |
++|------|-----------|
++| `/start` | `msgStart` |
++| любая другая команда, кроме `/weather` (в т.ч. `/help`, `/foo`) | `msgHelp` |
++| `/weather` без аргумента или только пробелы | `msgEmptyCity` |
++| `/weather <город>` или текст без `/` | запрос погоды |
++
++   Команда приводится к нижнему регистру, суффикс `@BotName` отбрасывается, разделителем
++   команды и аргумента служит любой пробельный символ, включая перевод строки
++   ([handler.go:102-113](../internal/delivery/telegram/handler.go)).
++6. `WeatherService.Current` нормализует город ([weather.go:44-58](../internal/usecase/weather.go)):
++   строка должна быть валидным UTF-8, пробелы схлопываются в один, длина после нормализации
++   1–64 руны (`maxCityRunes`), допустимы только буквы (`unicode.IsLetter`), пробел, `-`, `.`, `,`.
++   Иначе — `domain.ErrInvalidCity` без обращения к провайдеру.
++7. `openweather.Client.Current` выполняет HTTP-запрос и отображает ответ в `domain.Weather`.
++8. `formatWeather` ([format.go:14-27](../internal/delivery/telegram/format.go)) собирает текст:
++   температуры округляются до целых со знаком `+` для положительных, ветер — до целых м/с,
++   направление — один из 8 румбов (`С`, `СВ`, `В`, `ЮВ`, `Ю`, `ЮЗ`, `З`, `СЗ`), первая буква
++   описания делается заглавной; строки со страной и описанием опускаются, если поля пусты.
++
++Отображение ошибок в ответ пользователю ([handler.go:71-81](../internal/delivery/telegram/handler.go)):
++
++| Ошибка | Ответ | Лог |
++|--------|-------|-----|
++| `ErrInvalidCity` | `msgInvalidCity` | нет |
++| `ErrCityNotFound` | `msgCityNotFound(<город>)` | нет |
++| любая другая (`ErrProviderAuth`, `ErrRateLimited`, `ErrProviderUnavailable`, прочие) | `msgUnavailable` | `WARN weather request failed` |
++
++Все тексты ответов — в [messages.go](../internal/delivery/telegram/messages.go).
++
++## Внешние интеграции
++
++### Telegram Bot API
++
++[internal/delivery/telegram/client.go](../internal/delivery/telegram/client.go)
++
++- URL: `<TELEGRAM_BASE_URL>/bot<token>/<method>` (через `url.JoinPath`, [client.go:108](../internal/delivery/telegram/client.go)).
++- `getUpdates`: `GET`, параметры `offset`, `timeout=30` (`longPollTimeout`),
++  `allowed_updates=["message"]` ([client.go:79-89](../internal/delivery/telegram/client.go)).
++- `sendMessage`: `POST`, тело JSON `{"chat_id": ..., "text": ...}`, `Content-Type: application/json`,
++  `parse_mode` не задаётся — ответы уходят как обычный текст ([client.go:92-101](../internal/delivery/telegram/client.go)).
++- Тело ответа читается не более 1 MiB (`maxBodyBytes`, [client.go:19](../internal/delivery/telegram/client.go)).
++- Обработка статусов ([client.go:129-150](../internal/delivery/telegram/client.go)):
++
++| Статус | Ошибка |
++|--------|--------|
++| 200, `ok: true` | нет; `result` декодируется в целевой тип |
++| 200, `ok: false` | `api error: <description>` |
++| 200, невалидный JSON | `decode response: ...` |
++| 429 | `*retryAfterError` с `parameters.retry_after` секунд |
++| 401, 404 | `ErrUnauthorized` (токен отвергнут) |
++| прочие | `status <код>: <description>` |
++
++### OpenWeatherMap
++
++[internal/repository/openweather/client.go](../internal/repository/openweather/client.go)
++
++- `GET <OPENWEATHER_BASE_URL>/data/2.5/weather?q=<город>&units=metric&lang=ru&appid=<ключ>`
++  ([client.go:55-61](../internal/repository/openweather/client.go)). Параметры кодируются
++  через `url.Values`, поэтому символы вроде `&` в названии не могут подменить параметры.
++- Из ответа используются поля `name`, `sys.country`, `main.temp`, `main.feels_like`,
++  `main.humidity`, `weather[0].description`, `wind.speed`, `wind.deg` ([client.go:30-47](../internal/repository/openweather/client.go)).
++- Тело читается не более 1 MiB (`maxBodyBytes`, [client.go:16](../internal/repository/openweather/client.go)).
++- Обработка статусов ([client.go:83-96](../internal/repository/openweather/client.go)):
++
++| Статус / ситуация | Ошибка |
++|-------------------|--------|
++| 200 | нет |
++| 200, невалидный JSON | `ErrProviderUnavailable` |
++| 404 | `ErrCityNotFound` |
++| 401 | `ErrProviderAuth` |
++| 429 | `ErrRateLimited` |
++| прочие статусы | `ErrProviderUnavailable` |
++| сетевая ошибка, таймаут, отмена контекста | `ErrProviderUnavailable` |
++
++Ретраев к OpenWeatherMap нет: одна попытка на сообщение.
++
++## Конкурентность и состояние
++
++- Обработка строго последовательная: один цикл `Poller.Run`, `Handle` вызывается синхронно
++  ([poller.go:73](../internal/delivery/telegram/poller.go)). Медленный ответ OpenWeatherMap
++  (до 10 с) задерживает ответы во всех чатах.
++- Всё состояние в памяти и теряется при перезапуске:
++  - `offset` long polling ([poller.go:40](../internal/delivery/telegram/poller.go));
++  - карта `lastReq` для лимита частоты ([handler.go:36](../internal/delivery/telegram/handler.go)),
++    защищена `sync.Mutex`.
++- Лимит частоты ([handler.go:84-99](../internal/delivery/telegram/handler.go)): не чаще одного
++  сообщения в 2 с (`perChatInterval`) на чат. Учитывается любое сообщение, включая `/start` и
++  `/help`; отклонённое сообщение получает `msgTooFrequent` и не обновляет отметку времени.
++  Когда в карте не меньше 10 000 чатов (`maxTrackedChats`), при следующем разрешённом
++  запросе из неё удаляются записи старше 2 с. Жёсткого верхнего предела размера карты нет:
++  если все записи свежие, карта продолжает расти.
++
++## Повторы и backoff при ошибках Telegram
++
++[poller.go:46-67](../internal/delivery/telegram/poller.go):
++
++- `ErrUnauthorized` — цикл завершается с ошибкой, процесс выходит с кодом 1.
++- 429 с `retry_after > 0` — пауза ровно `retry_after`, текущий backoff не меняется.
++- Любая другая ошибка (в т.ч. 429 без `retry_after`) — пауза `backoff`, затем backoff
++  удваивается: 1 с, 2 с, 4 с … до 30 с (`minBackoff`, `maxBackoff`, [poller.go:10-13](../internal/delivery/telegram/poller.go)).
++- Успешный `getUpdates` сбрасывает backoff на 1 с.
++- Пауза прерывается отменой контекста (`sleep`, [poller.go:79-88](../internal/delivery/telegram/poller.go)).
++
++Ошибки `sendMessage` (включая 429 и 401/404) не повторяются: сообщение теряется, в лог пишется
++`WARN send message` ([handler.go:55-57](../internal/delivery/telegram/handler.go)).
++
++## Защита секретов и входных данных
++
++- Токен бота и ключ API удаляются из текстов ошибок и заменяются на `[REDACTED]` в сыром и
++  URL-экранированном виде (`redact`: [telegram/client.go:155-163](../internal/delivery/telegram/client.go),
++  [openweather/client.go:111-117](../internal/repository/openweather/client.go)).
++- `config.Load` не включает значения секретов в сообщения об ошибках
++  ([config.go:28-29](../internal/config/config.go)).
++- Формат токена проверяется при старте, потому что токен подставляется в путь URL
++  ([config.go:106-125](../internal/config/config.go)).
++- Ответы отправляются без `parse_mode`, поэтому пользовательский ввод не интерпретируется как
++  разметка.
++- Внутренние ошибки пользователю не показываются: он видит только тексты из `messages.go`.
+diff --git a/docs/CONFIGURATION.md b/docs/CONFIGURATION.md
+new file mode 100644
+index 0000000..2d02f92
+--- /dev/null
++++ b/docs/CONFIGURATION.md
+@@ -0,0 +1,107 @@
++# Конфигурация weatherbot
++
++**Аудитория:** операторы, которые разворачивают бота, и разработчики, которые меняют настройки.
++
++Связанные документы: [ARCHITECTURE.md](ARCHITECTURE.md), [OPERATIONS.md](OPERATIONS.md),
++[TESTING.md](TESTING.md), [README](../README.md).
++
++Бот настраивается только переменными окружения. Флагов командной строки и файлов
++конфигурации нет. Чтение и проверка — `config.Load` в
++[internal/config/config.go](../internal/config/config.go).
++
++## Переменные окружения
++
++| Переменная | Обязательна | По умолчанию | Правила проверки |
++|------------|-------------|--------------|------------------|
++| `TELEGRAM_BOT_TOKEN` | да | — | формат `<цифры>:<секрет>`; секрет — только латинские буквы, цифры, `_` и `-` |
++| `OPENWEATHER_API_KEY` | да | — | непустая строка |
++| `TELEGRAM_BASE_URL` | нет | `https://api.telegram.org` | абсолютный URL со схемой `http`/`https`, непустым хостом, без query и fragment |
++| `OPENWEATHER_BASE_URL` | нет | `https://api.openweathermap.org` | те же правила, что для `TELEGRAM_BASE_URL` |
++| `LOG_LEVEL` | нет | `info` | `debug`, `info`, `warn` или `error`, регистр не важен |
++
++Источники: значения по умолчанию — [config.go:13-17](../internal/config/config.go), чтение —
++[config.go:32-37](../internal/config/config.go) и [config.go:54](../internal/config/config.go),
++проверки — [config.go:39-57](../internal/config/config.go), [config.go:74-125](../internal/config/config.go).
++
++Общие правила:
++
++- Пробелы по краям значения обрезаются ([config.go:67-72](../internal/config/config.go)).
++- Пустое значение (или только пробелы) равносильно отсутствию переменной: для необязательных
++  подставляется значение по умолчанию, для обязательных это ошибка. Поэтому пустые строки из
++  [.env.example](../.env.example) безопасны для необязательных переменных.
++- Базовый URL может содержать путь (например, `http://localhost:8081/proxy`): пути API
++  добавляются к нему через `url.JoinPath`.
++- `TELEGRAM_BASE_URL` и `OPENWEATHER_BASE_URL` нужны в основном для локальных заглушек и
++  прокси, например `http://localhost:8081`.
++- `LOG_LEVEL=debug` допустим, но сейчас в коде нет сообщений уровня DEBUG, поэтому вывод такой
++  же, как при `info`.
++
++Где взять значения:
++
++- `TELEGRAM_BOT_TOKEN` выдаёт @BotFather в Telegram.
++- `OPENWEATHER_API_KEY` выдаётся в личном кабинете OpenWeatherMap.
++
++## Поведение при ошибках конфигурации
++
++- `config.Load` собирает все найденные проблемы и возвращает их одной ошибкой
++  (`errors.Join`, [config.go:60-62](../internal/config/config.go)).
++- Значения секретов в текст ошибки не попадают.
++- Процесс пишет запись `weatherbot stopped` уровня `ERROR` с полем `err` через стандартный
++  логгер `slog` и завершается с кодом 1 ([main.go:21-31](../cmd/weatherbot/main.go)). Это
++  происходит до создания JSON-логгера, поэтому запись попадает в **stderr в текстовом
++  формате**, а не в JSON в stdout.
++
++Пример значения поля `err`, когда ошибок несколько (части разделены переводом строки, тексты из
++[config.go](../internal/config/config.go)):
++
++```
++load config: TELEGRAM_BOT_TOKEN is required
++OPENWEATHER_API_KEY is required
++LOG_LEVEL: unknown level "verbose", want debug, info, warn or error
++```
++
++Прочие варианты: `TELEGRAM_BOT_TOKEN has invalid format, want <digits>:<secret>`,
++`<VAR>: scheme must be http or https, got "..."`, `<VAR>: host is empty`,
++`<VAR>: query and fragment are not allowed`, `<VAR>: parse url: ...`.
++
++Формат токена проверяется только при старте. То, что Telegram принимает этот токен, видно лишь
++по первому `getUpdates`: если Telegram ответит 401 или 404, бот завершится (см.
++[OPERATIONS.md](OPERATIONS.md#коды-выхода)).
++
++## Файл .env и `make run`
++
++- Шаблон: [.env.example](../.env.example) — все пять переменных с пустыми значениями.
++- `.env` указан в [.gitignore](../.gitignore) и в репозиторий не попадает.
++- Сам бот `.env` не читает. Его подгружает цель `run` в [Makefile](../Makefile): если файл
++  есть, он выполняется через `.` с `set -a`, поэтому **значения из `.env` перекрывают уже
++  заданные переменные окружения**. Это касается и пустых строк вида `LOG_LEVEL=`: они
++  затирают значение из окружения, и бот берёт значение по умолчанию (а для обязательных
++  переменных сообщает об ошибке). Без `.env` используется текущее окружение.
++- `.env` выполняется как shell-скрипт: значения со спецсимволами shell нужно брать в кавычки.
++
++Пример `.env`:
++
++```sh
++TELEGRAM_BOT_TOKEN=<TELEGRAM_BOT_TOKEN>
++OPENWEATHER_API_KEY=<OPENWEATHER_API_KEY>
++TELEGRAM_BASE_URL=
++OPENWEATHER_BASE_URL=
++LOG_LEVEL=info
++```
++
++## Параметры, заданные в коде
++
++Эти значения не настраиваются через окружение; для изменения нужна правка кода.
++
++| Параметр | Значение | Где |
++|----------|----------|-----|
++| Таймаут HTTP-клиента OpenWeatherMap | 10 с | [main.go:38](../cmd/weatherbot/main.go) |
++| Таймаут HTTP-клиента Telegram | 40 с (должен быть больше long-poll таймаута) | [main.go:40](../cmd/weatherbot/main.go) |
++| Long-poll таймаут `getUpdates` | 30 с | `longPollTimeout`, [client.go:20](../internal/delivery/telegram/client.go) |
++| Начальный / максимальный backoff `getUpdates` | 1 с / 30 с, удвоение | `minBackoff`, `maxBackoff`, [poller.go:10-13](../internal/delivery/telegram/poller.go) |
++| Лимит частоты на чат | 1 сообщение в 2 с | `perChatInterval`, [handler.go:16](../internal/delivery/telegram/handler.go) |
++| Порог очистки карты лимитера | 10 000 чатов | `maxTrackedChats`, [handler.go:17](../internal/delivery/telegram/handler.go) |
++| Максимальная длина названия города | 64 руны | `maxCityRunes`, [weather.go:14](../internal/usecase/weather.go) |
++| Максимальный размер читаемого тела ответа | 1 MiB | `maxBodyBytes`, [telegram/client.go:19](../internal/delivery/telegram/client.go), [openweather/client.go:16](../internal/repository/openweather/client.go) |
++| Единицы и язык OpenWeatherMap | `units=metric`, `lang=ru` | [openweather/client.go:58-59](../internal/repository/openweather/client.go) |
++| Типы апдейтов Telegram | `allowed_updates=["message"]` | [client.go:83](../internal/delivery/telegram/client.go) |
+diff --git a/docs/OPERATIONS.md b/docs/OPERATIONS.md
+new file mode 100644
+index 0000000..72f57e6
+--- /dev/null
++++ b/docs/OPERATIONS.md
+@@ -0,0 +1,127 @@
++# Эксплуатация weatherbot
++
++**Аудитория:** операторы, которые собирают, запускают и сопровождают бота.
++
++Связанные документы: [CONFIGURATION.md](CONFIGURATION.md), [ARCHITECTURE.md](ARCHITECTURE.md),
++[TESTING.md](TESTING.md), [README](../README.md).
++
++## Требования
++
++- Go 1.26 (по [go.mod](../go.mod)); внешних Go-зависимостей нет.
++- Исходящий HTTPS-доступ к Telegram Bot API и OpenWeatherMap (или к адресам из
++  `TELEGRAM_BASE_URL` / `OPENWEATHER_BASE_URL`).
++- Входящие порты не нужны: бот работает через long polling.
++- Для бота не должен быть настроен webhook: пока он активен, Telegram отклоняет `getUpdates`.
++  Бот сам webhook не снимает. Такие отказы он считает временной ошибкой и повторяет запрос с
++  backoff (см. [Диагностика](#диагностика)).
++
++## Сборка и запуск
++
++Цели [Makefile](../Makefile):
++
++```sh
++make build   # go build -o bin/weatherbot ./cmd/weatherbot
++make run     # подгружает .env (если есть) и выполняет go run ./cmd/weatherbot
++```
++
++Запуск собранного бинарника:
++
++```sh
++export TELEGRAM_BOT_TOKEN=<TELEGRAM_BOT_TOKEN> OPENWEATHER_API_KEY=<OPENWEATHER_API_KEY>
++./bin/weatherbot
++```
++
++Переменные и их проверка описаны в [CONFIGURATION.md](CONFIGURATION.md). Бинарник `.env` не
++читает: его подгружает только `make run`.
++
++Запускайте **один экземпляр на токен**. В коде нет координации между экземплярами: два
++процесса с одним токеном будут конкурировать за `getUpdates`.
++
++## Остановка
++
++- `SIGINT` (Ctrl+C) или `SIGTERM` отменяют корневой контекст
++  (`signal.NotifyContext`, [main.go:35](../cmd/weatherbot/main.go)).
++- Текущий запрос `getUpdates` или пауза backoff прерываются сразу.
++- Активные запросы к OpenWeatherMap и `sendMessage` выполняются с тем же контекстом и тоже
++  прерываются. Сообщения, которые обрабатывались в момент остановки, остаются без ответа, а в
++  лог могут попасть записи `WARN weather request failed` / `WARN send message` с ошибкой отмены
++  контекста.
++- После выхода из цикла пишется `INFO weatherbot stopped`, код выхода 0
++  ([main.go:45-49](../cmd/weatherbot/main.go)).
++
++## Коды выхода
++
++| Код | Когда | Источник |
++|-----|-------|----------|
++| 0 | остановка по `SIGINT`/`SIGTERM` | [main.go:45-49](../cmd/weatherbot/main.go) |
++| 1 | ошибка конфигурации | [main.go:29-32](../cmd/weatherbot/main.go) |
++| 1 | Telegram ответил на `getUpdates` статусом 401 или 404 (токен отвергнут или неверный `TELEGRAM_BASE_URL`) | [poller.go:51-53](../internal/delivery/telegram/poller.go), [client.go:134-135](../internal/delivery/telegram/client.go) |
++
++Остальные ошибки Telegram и все ошибки OpenWeatherMap процесс не останавливают.
++
++## Логи
++
++- Рабочие логи — JSON (`slog.NewJSONHandler`) в **stdout**, уровень задаётся `LOG_LEVEL`
++  ([main.go:33](../cmd/weatherbot/main.go)). Стандартные поля: `time`, `level`, `msg`.
++- Финальная запись при аварийном завершении (`ERROR weatherbot stopped`, поле `err`) пишется
++  стандартным логгером `slog` в **stderr в текстовом формате**, не в JSON
++  ([main.go:23](../cmd/weatherbot/main.go)). Собирайте оба потока.
++- Токен бота и ключ OpenWeatherMap в ошибках заменяются на `[REDACTED]`.
++- Тексты сообщений пользователей не логируются. В записях `send message` и
++  `handle message panicked` есть `chat_id`. В записи `weather request failed` есть только
++  текст ошибки, но при сетевой ошибке или таймауте он включает URL запроса к OpenWeatherMap с
++  названием города (ключ в нём заменён на `[REDACTED]`).
++
++Все записи, которые пишет бот:
++
++| Уровень | `msg` | Поля | Что означает | Источник |
++|---------|-------|------|--------------|----------|
++| INFO | `weatherbot started` | — | конфигурация загружена, начинается polling | [main.go:44](../cmd/weatherbot/main.go) |
++| INFO | `weatherbot stopped` | — | штатная остановка по сигналу | [main.go:48](../cmd/weatherbot/main.go) |
++| ERROR (stderr, текст) | `weatherbot stopped` | `err` | аварийный выход с кодом 1 | [main.go:23](../cmd/weatherbot/main.go) |
++| WARN | `get updates` | `err`, `retry_in` | ошибка `getUpdates`, будет повтор через `retry_in` | [poller.go:61](../internal/delivery/telegram/poller.go) |
++| WARN | `weather request failed` | `err` | OpenWeatherMap недоступен, вернул 401/429/5xx/невалидный ответ; пользователь получил «Сервис погоды сейчас недоступен» | [handler.go:79](../internal/delivery/telegram/handler.go) |
++| WARN | `send message` | `chat_id`, `err` | ответ не доставлен, повторов нет | [handler.go:56](../internal/delivery/telegram/handler.go) |
++| ERROR | `handle message panicked` | `chat_id`, `panic` | паника при обработке сообщения перехвачена, ответ не отправлен | [handler.go:48](../internal/delivery/telegram/handler.go) |
++
++Сообщений уровня DEBUG в коде нет.
++
++## Поведение при сбоях
++
++| Ситуация | Поведение |
++|----------|-----------|
++| Telegram недоступен, 5xx, сетевая ошибка, невалидный ответ | повтор `getUpdates` с backoff 1 с → 2 с → 4 с … максимум 30 с; успешный запрос сбрасывает backoff ([poller.go](../internal/delivery/telegram/poller.go)) |
++| Telegram 429 на `getUpdates` | пауза ровно `retry_after` секунд; если его нет — обычный backoff |
++| Telegram 401/404 на `getUpdates` | выход с кодом 1 |
++| Ошибка `sendMessage` (любая, включая 429 и 401/404) | `WARN send message`, ответ теряется, бот продолжает работу |
++| OpenWeatherMap: неверный ключ (401) | пользователь получает «сервис недоступен», `WARN weather request failed`; бот **не** останавливается — следите за логами |
++| OpenWeatherMap: 429, 5xx, таймаут 10 с, невалидный JSON, тело больше 1 MiB | «сервис недоступен» и `WARN weather request failed`; повторов нет |
++| OpenWeatherMap: 404 | пользователь получает «Не нашёл город …», в лог не пишется |
++| Паника в обработчике сообщения | перехватывается, `ERROR handle message panicked`, обработка следующих сообщений продолжается |
++
++## Ограничения
++
++- **Последовательная обработка.** Сообщения обрабатываются по одному. Пока идёт запрос к
++  OpenWeatherMap (до 10 с), остальные чаты ждут.
++- **Лимит частоты.** Не больше одного сообщения в 2 с на чат, считая любые сообщения, включая
++  `/start` и `/help`. На лишнее сообщение бот отвечает «⏳ Не так быстро…». Лимит
++  хранится в памяти и сбрасывается при перезапуске. Глобального лимита на все чаты нет.
++- **Состояние только в памяти.** `offset` long polling не сохраняется. Telegram считает
++  апдейты подтверждёнными только после следующего `getUpdates` с большим `offset`. Поэтому
++  после перезапуска последняя обработанная пачка может прийти снова, и пользователи получат
++  повторные ответы.
++- **Только текстовые сообщения.** Запрашивается `allowed_updates=["message"]`; апдейты без
++  текста пропускаются молча.
++- **Название города:** 1–64 символа после схлопывания пробелов, только буквы, пробел, `-`,
++  `.`, `,`. Цифры, апострофы и эмодзи отклоняются без запроса к OpenWeatherMap
++  ([weather.go:44-58](../internal/usecase/weather.go)).
++- Нет health-check эндпоинта и метрик: о работе бота можно судить только по логам.
++
++## Диагностика
++
++| Симптом | Что проверить |
++|---------|---------------|
++| Процесс сразу завершается, в stdout пусто | stderr: там текст ошибки конфигурации; см. [CONFIGURATION.md](CONFIGURATION.md) |
++| Выход с кодом 1 после `weatherbot started` | stderr: `telegram bot token rejected: status 401/404` — неверный токен или `TELEGRAM_BASE_URL` |
++| Бот не отвечает, в логах повторяется `WARN get updates` | поле `err`: сетевые ошибки и 5xx — проблемы доступа к Telegram API с хоста; `status 409: ...` — у бота активен webhook или запущен второй экземпляр с тем же токеном. Поле `retry_in` показывает паузу до повтора |
++| Все запросы погоды — «сервис недоступен» | `WARN weather request failed`: `weather provider auth failed` — неверный или ещё не активированный ключ; `weather provider rate limited` — исчерпан лимит тарифа; `weather provider unavailable` — сеть, таймаут, 5xx |
+diff --git a/docs/TESTING.md b/docs/TESTING.md
+new file mode 100644
+index 0000000..77ad13c
+--- /dev/null
++++ b/docs/TESTING.md
+@@ -0,0 +1,72 @@
++# Тестирование weatherbot
++
++**Аудитория:** разработчики, которые запускают и пишут тесты.
++
++Связанные документы: [ARCHITECTURE.md](ARCHITECTURE.md), [CONFIGURATION.md](CONFIGURATION.md),
++[OPERATIONS.md](OPERATIONS.md), [README](../README.md).
++
++## Команды
++
++Цели [Makefile](../Makefile):
++
++```sh
++make test   # go test -race -cover ./...
++make lint   # go vet ./... и проверка gofmt -l .; при неотформатированных файлах печатает их и выходит с ошибкой
++```
++
++Запуск отдельного пакета или теста:
++
++```sh
++go test ./internal/usecase/
++go test -run TestPollerBackoffAndRetryAfter ./internal/delivery/telegram/
++go test -run 'TestClientCurrent$' ./internal/repository/openweather/
++```
++
++`make test` включает race detector (`-race`), поэтому окружению нужна его поддержка.
++
++## Как тесты обходятся без внешних сервисов
++
++Тесты не обращаются ни к Telegram, ни к OpenWeatherMap, и им не нужны настоящие токены:
++
++- **HTTP-клиенты** (`telegram.Client`, `openweather.Client`) проверяются на локальном
++  `httptest.NewServer`, адрес которого передаётся как базовый URL. Сервер проверяет метод, путь
++  и параметры запроса и возвращает подготовленные статусы и тела.
++- **Обработчик и poller** работают с фейками интерфейсов: `fakeWeather`, `fakeSender`
++  ([handler_test.go](../internal/delivery/telegram/handler_test.go)), `fakeUpdates`,
++  `fakeHandler` ([poller_test.go](../internal/delivery/telegram/poller_test.go)).
++- **Usecase** использует `fakeProvider` ([weather_test.go](../internal/usecase/weather_test.go)).
++- **Время.** Паузу backoff в `Poller` можно подменить через поле `wait`
++  ([poller.go:30](../internal/delivery/telegram/poller.go)): тесты записывают запрошенные
++  задержки и не ждут их. Лимит частоты проверяется прямым вызовом `allow(chatID, now)` с
++  заданным временем. Единственный тест с реальным ожиданием — `TestPollerStopsWhileWaiting`:
++  он проверяет, что пауза в 1 с прерывается отменой контекста примерно через 20 мс.
++- **Конфигурация.** Переменные задаются через `t.Setenv`. Хелпер `setEnv` выставляет все пять
++  переменных, поэтому окружение разработчика не влияет на результат
++  ([config_test.go:13-18](../internal/config/config_test.go)).
++- В тестах используются фиктивные значения (`123456:test-token`, `test-key`).
++
++## Что покрыто
++
++| Пакет | Файл | Что проверяется |
++|-------|------|-----------------|
++| `internal/config` | [config_test.go](../internal/config/config_test.go) | значения по умолчанию; переопределения и обрезка пробелов; `LOG_LEVEL` без учёта регистра; сбор нескольких ошибок сразу; формат токена; секреты не попадают в текст ошибки |
++| `internal/usecase` | [weather_test.go](../internal/usecase/weather_test.go) | нормализация города (пробелы, дефис, точка, запятая, `Ё`, ровно 64 руны); отказ для пустой строки, 65 рун, цифр, `&`, `/`, управляющих символов, невалидного UTF-8, эмодзи — без вызова провайдера; ошибка провайдера оборачивается |
++| `internal/repository/openweather` | [client_test.go](../internal/repository/openweather/client_test.go) | путь и параметры запроса; отображение 200/404/401/429/5xx/418/битого JSON в доменные ошибки; отображение полей в `domain.Weather`; экранирование города в query; ключ скрыт в ошибке таймаута; отменённый контекст |
++| `internal/delivery/telegram` | [client_test.go](../internal/delivery/telegram/client_test.go) | `getUpdates` (параметры, игнор `edited_message`); `sendMessage` (JSON-тело, без `parse_mode`); 429 с `retry_after`, 401, 400, 502, `ok:false`, битый JSON; токен скрыт в транспортных ошибках |
++| | [poller_test.go](../internal/delivery/telegram/poller_test.go) | продвижение `offset` и пропуск апдейтов без текста; последовательность backoff (1 с, 2 с, `retry_after`, 4 с, сброс на 1 с); потолок 30 с; остановка на `ErrUnauthorized`; прерывание паузы отменой |
++| | [handler_test.go](../internal/delivery/telegram/handler_test.go) | ответы на команды, `@BotName`, регистр, перевод строки как разделитель; отображение ошибок в тексты; внутренние ошибки не видны пользователю; лимит частоты и очистка карты чатов; восстановление после паники; ошибка отправки; `parseCommand` |
++| | [format_test.go](../internal/delivery/telegram/format_test.go) | итоговый текст погоды; пропуск пустых полей; округление температуры; румбы ветра, включая отрицательные и больше 360°; `capitalize` |
++
++Тестов для [cmd/weatherbot](../cmd/weatherbot/main.go) (сборка зависимостей, сигналы, коды
++выхода) нет. Интеграционных тестов с настоящими API тоже нет.
++
++## Соглашения для новых тестов
++
++- Не обращайтесь к сети: для HTTP используйте `httptest.NewServer`, для слоёв выше —
++  фейки интерфейсов из [ARCHITECTURE.md](ARCHITECTURE.md#слои-и-пакеты).
++- Не ждите реальное время: подменяйте `Poller.wait` или передавайте время явно, как в `allow`.
++- Для контекста используйте `t.Context()`, для логгера — `slog.New(slog.DiscardHandler)`, как в
++  существующих тестах.
++- Проверяйте ошибки через `errors.Is` / `errors.As` с доменными ошибками, а не по тексту, кроме
++  случаев, где проверяется сам текст (например, отсутствие секретов).
++- Перед коммитом выполните `make lint` и `make test`.

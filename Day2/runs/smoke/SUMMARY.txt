@@ -1,0 +1,15 @@
+# Smoke summary (Sat Oct 24 22:00:32 MSK 2026)
+S0S1-researcher: PASS
+S1-bug-fixer: PASS
+S1-tech-writer: PASS
+S2-bash: PASS
+S2: PASS
+S3-profile: PASS
+S3: PASS
+S4-gocache-outside (до fallback, ожидаемо): FAIL
+S4: PASS
+S5: PASS
+S6-bug-fixer: PASS
+S6-tech-writer: PASS
+S7-try2-syntax (ошибка в тесте зонда, инфраструктура): FAIL
+S7: PASS

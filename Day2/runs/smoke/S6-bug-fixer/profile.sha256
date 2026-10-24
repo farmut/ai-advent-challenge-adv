@@ -1,0 +1,3 @@
+f27348c905c90bd83b8a726b0db8efe0658453b93aba9543fbef85a3f470e1bb  harness/smoke-probe.md
+535ec2d7393eaf8215d712f7c454e4bbe928a008eaec893822a608ec7219336a  profiles/bug-fixer.settings.json
+acf6cd550295bc4ab74971397e5b0d3e9e5eceff9ec07f5d5c6ef8c375715ebd  runs/smoke/S6-bug-fixer/task.txt

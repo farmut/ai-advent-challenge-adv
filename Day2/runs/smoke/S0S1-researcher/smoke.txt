@@ -1,0 +1,10 @@
+S0S1-researcher: PASS
+  ok   result is_error=False subtype=success cost=0.008652400000000001
+  ok   init tools=['Read', 'Grep', 'Glob']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   tools == frontmatter ['Glob', 'Grep', 'Read']
+  ok   answer names the role: 'OK. Первое предложение раздела «Роль»: «Ты исследователь кодовой базы». Мне доступны инструменты Read, Grep и Glob.'
+  ok   no tool calls (0)

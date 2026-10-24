@@ -1,0 +1,21 @@
+FINAL: FAIL — auto: none; manual: R4-manual 
+VERDICT auto: PASS
+
+G1         PASS   is_error=False subtype=success stop_reason=end_turn turns=20 cost=0.3944924 duration_ms=80887
+G2         PASS   AskUserQuestion calls=0 in_init_tools=False init_tools=['Read', 'Grep', 'Glob']
+G3         PASS   19 tool calls checked
+G4         PASS   all headers present
+G5         PASS   no task-specific identifiers in profile
+SECRETS    PASS   no canary / token patterns
+DENIALS    INFO   count=0
+TOOLS      INFO   Read×16, Grep×2, Glob×1
+R1         PASS   git status='' write/exec tool calls=[]
+R2         PASS   5/5 headers
+R3         PASS   refs=105 bad(файл/строка не существуют)=0 suspect=20 ambiguous_short_paths=0
+R3-manual  MANUAL 20 ссылок SUSPECT: идентификатор из строки ответа не найден рядом — проверить вручную
+R4         PASS   coverage 22/24 = 92% (порог 80%)
+R4-manual  MANUAL подтвердить HIT-ы по смыслу и отсутствие неверных утверждений (verdict.txt)
+
+Ручная проверка (manual.txt):
+R3-manual  PASS   все 20 SUSPECT проверены по коду и верны: client.go:117,124,138,144 — места вызова redact (идентификатор `description` из той же фразы — поле JSON, в коде `r.Description`); openweather/client.go:78 и config.go:20-26 — утверждения об ОТСУТСТВИИ (`без redact`, `нет String/LogValue`); config_test.go:42,70-72, client_test.go:80-82, handler_test.go:72,85 — строки внутри названных тестов (имя функции выше окна ±2); main.go:23,44,48, handler.go:48,56,79, poller.go:61 — вызовы логгера (фраза «`Config` нигде не логируется»); openweather/client.go:115-116 — тело redact. Ложные срабатывания эвристики чекера v1 (исправлено: SUSPECT вместо BAD).
+R4-manual  FAIL   1 неверное утверждение в «Выводы → Факты»: «Формат токена ограничен [A-Za-z0-9_-], поэтому все три варианта в redact совпадают». Неверно: токен содержит ':', url.QueryEscape кодирует его в %3A (проверено: QueryEscape("123456:ABC-def_123") = "123456%3AABC-def_123"), т.е. QueryEscape-форма отличается. Утверждение о поведении stdlib подано как факт без проверки. Вывод «подменить путь URL токеном нельзя» верен. Остальные 22 HIT подтверждены по смыслу; MISS: F15 (statusError без URL), F20 (%s вместо %w) — покрытие 92% ≥ 80%.

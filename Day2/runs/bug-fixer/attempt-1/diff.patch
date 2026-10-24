@@ -1,0 +1,127 @@
+diff --git a/internal/delivery/telegram/handler.go b/internal/delivery/telegram/handler.go
+index 93031ab..a7e71e4 100644
+--- a/internal/delivery/telegram/handler.go
++++ b/internal/delivery/telegram/handler.go
+@@ -34,11 +34,16 @@ type Handler struct {
+ 	log     *slog.Logger
+ 	mu      sync.Mutex
+ 	lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
++	warned  map[int64]struct{}  // чаты, которым в текущем окне уже ушло предупреждение; ключи ⊆ lastReq
++	now     func() time.Time    // часы; подменяются в тестах
+ }
+ 
+ // NewHandler создаёт обработчик сообщений.
+ func NewHandler(weather WeatherGetter, sender Sender, log *slog.Logger) *Handler {
+-	return &Handler{weather: weather, sender: sender, log: log, lastReq: make(map[int64]time.Time)}
++	return &Handler{
++		weather: weather, sender: sender, log: log,
++		lastReq: make(map[int64]time.Time), warned: make(map[int64]struct{}), now: time.Now,
++	}
+ }
+ 
+ // Handle обрабатывает одно сообщение. Паника не роняет бота.
+@@ -48,9 +53,14 @@ func (h *Handler) Handle(ctx context.Context, chatID int64, text string) {
+ 			h.log.Error("handle message panicked", "chat_id", chatID, "panic", r)
+ 		}
+ 	}()
+-	reply := msgTooFrequent
+-	if h.allow(chatID, time.Now()) {
++	var reply string
++	switch {
++	case h.allow(chatID, h.now()):
+ 		reply = h.respond(ctx, text)
++	case h.markWarned(chatID):
++		reply = msgTooFrequent
++	default:
++		return // предупреждение в этом окне уже отправлено — молча игнорируем
+ 	}
+ 	if err := h.sender.Send(ctx, chatID, reply); err != nil {
+ 		h.log.Warn("send message", "chat_id", chatID, "err", err) // Sender уже вернул redacted-ошибку
+@@ -91,10 +101,24 @@ func (h *Handler) allow(chatID int64, now time.Time) bool {
+ 		for id, last := range h.lastReq {
+ 			if now.Sub(last) >= perChatInterval {
+ 				delete(h.lastReq, id)
++				delete(h.warned, id)
+ 			}
+ 		}
+ 	}
+ 	h.lastReq[chatID] = now
++	delete(h.warned, chatID) // новое окно — можно снова предупредить
++	return true
++}
++
++// markWarned отмечает, что в текущем окне чату отправлено предупреждение.
++// Возвращает false, если предупреждение в этом окне уже было.
++func (h *Handler) markWarned(chatID int64) bool {
++	h.mu.Lock()
++	defer h.mu.Unlock()
++	if _, ok := h.warned[chatID]; ok {
++		return false
++	}
++	h.warned[chatID] = struct{}{}
+ 	return true
+ }
+ 
+diff --git a/internal/delivery/telegram/handler_test.go b/internal/delivery/telegram/handler_test.go
+index 04a07e2..1489764 100644
+--- a/internal/delivery/telegram/handler_test.go
++++ b/internal/delivery/telegram/handler_test.go
+@@ -106,6 +106,58 @@ func TestHandlerRateLimit(t *testing.T) {
+ 	}
+ }
+ 
++func TestHandlerRateLimitWarnsOncePerWindow(t *testing.T) {
++	w := &fakeWeather{w: domain.Weather{City: "Москва"}}
++	h, s := newTestHandler(w)
++	start := time.Now()
++	now := start
++	h.now = func() time.Time { return now }
++
++	count := func(text string) int {
++		n := 0
++		for _, m := range s.sent {
++			if m == text {
++				n++
++			}
++		}
++		return n
++	}
++
++	h.Handle(t.Context(), 1, "Москва")
++	for i := range 10 {
++		now = start.Add(time.Duration(i+1) * 100 * time.Millisecond)
++		h.Handle(t.Context(), 1, "спам")
++	}
++	if len(s.sent) != 2 || s.sent[0] != formatWeather(w.w) || s.sent[1] != msgTooFrequent {
++		t.Fatalf("burst: sent = %q, want [weather, one warning]", s.sent)
++	}
++
++	// Другой чат во время спама первого не страдает и получает своё предупреждение.
++	h.Handle(t.Context(), 2, "/start")
++	h.Handle(t.Context(), 2, "/start")
++	h.Handle(t.Context(), 2, "/start")
++	if got := count(msgStart); got != 1 {
++		t.Errorf("chat 2 start replies = %d, want 1", got)
++	}
++	if got := count(msgTooFrequent); got != 2 {
++		t.Errorf("warnings after chat 2 burst = %d, want 2", got)
++	}
++
++	// Новое окно: запрос снова обслуживается, и новый всплеск даёт ровно одно предупреждение.
++	now = start.Add(2 * time.Second)
++	h.Handle(t.Context(), 1, "/start")
++	for i := range 5 {
++		now = start.Add(2*time.Second + time.Duration(i+1)*100*time.Millisecond)
++		h.Handle(t.Context(), 1, "спам")
++	}
++	if got := count(msgStart); got != 2 {
++		t.Errorf("start replies = %d, want 2 (new window must be served)", got)
++	}
++	if got := count(msgTooFrequent); got != 3 {
++		t.Errorf("warnings total = %d, want 3 (one per window per chat)", got)
++	}
++}
++
+ func TestHandlerAllow(t *testing.T) {
+ 	h, _ := newTestHandler(&fakeWeather{})
+ 	now := time.Now()

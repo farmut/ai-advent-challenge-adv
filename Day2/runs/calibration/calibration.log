@@ -1,0 +1,114 @@
+# Калибровка проверок (Sat Oct 24 21:47:46 MSK 2026)
+
+## 1. Скрытый приёмочный тест на чистом baseline (ожидается FAIL)
+=== RUN   TestAcceptanceFloodSingleWarning
+    zz_flood_acceptance_test.go:87: warnings in burst = 10, want <= 1
+    zz_flood_acceptance_test.go:90: outgoing messages for burst of 11 = 11, want <= 2
+--- FAIL: TestAcceptanceFloodSingleWarning (0.00s)
+=== RUN   TestAcceptanceOtherChatNotBlocked
+--- PASS: TestAcceptanceOtherChatNotBlocked (0.00s)
+=== RUN   TestAcceptanceRecoversAfterWindow
+--- PASS: TestAcceptanceRecoversAfterWindow (2.10s)
+FAIL
+FAIL	weatherbot/internal/delivery/telegram	2.346s
+FAIL
+
+## 2. Скрытый тест на эталонном фиксе (scratchpad-копия, фикс в Day2 не сохраняется; ожидается PASS)
+Эталонный фикс: при отказе лимита предупреждение отправляется, только если с прошлого предупреждения в этом чате прошло >= perChatInterval; иначе сообщение молча отбрасывается.
+diff --git ainternal/delivery/telegram/handler.go b/internal/delivery/telegram/handler.go
+index 93031ab..cc47564 100644
+--- ainternal/delivery/telegram/handler.go
++++ b/internal/delivery/telegram/handler.go
+@@ -34,11 +34,12 @@ type Handler struct {
+ 	log     *slog.Logger
+ 	mu      sync.Mutex
+ 	lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
++	warned  map[int64]time.Time
+ }
+ 
+ // NewHandler создаёт обработчик сообщений.
+ func NewHandler(weather WeatherGetter, sender Sender, log *slog.Logger) *Handler {
+-	return &Handler{weather: weather, sender: sender, log: log, lastReq: make(map[int64]time.Time)}
++	return &Handler{weather: weather, sender: sender, log: log, lastReq: make(map[int64]time.Time), warned: make(map[int64]time.Time)}
+ }
+ 
+ // Handle обрабатывает одно сообщение. Паника не роняет бота.
+@@ -48,9 +49,12 @@ func (h *Handler) Handle(ctx context.Context, chatID int64, text string) {
+ 			h.log.Error("handle message panicked", "chat_id", chatID, "panic", r)
+ 		}
+ 	}()
++	now := time.Now()
+ 	reply := msgTooFrequent
+-	if h.allow(chatID, time.Now()) {
++	if h.allow(chatID, now) {
+ 		reply = h.respond(ctx, text)
++	} else if !h.shouldWarn(chatID, now) {
++		return
+ 	}
+ 	if err := h.sender.Send(ctx, chatID, reply); err != nil {
+ 		h.log.Warn("send message", "chat_id", chatID, "err", err) // Sender уже вернул redacted-ошибку
+@@ -111,3 +115,16 @@ func parseCommand(text string) (cmd, arg string) {
+ 	head, _, _ = strings.Cut(head, "@")
+ 	return strings.ToLower(head), strings.TrimSpace(rest)
+ }
++
++func (h *Handler) shouldWarn(chatID int64, now time.Time) bool {
++	h.mu.Lock()
++	defer h.mu.Unlock()
++	if last, ok := h.warned[chatID]; ok && now.Sub(last) < perChatInterval {
++		return false
++	}
++	if len(h.warned) >= maxTrackedChats {
++		clear(h.warned)
++	}
++	h.warned[chatID] = now
++	return true
++}
+=== RUN   TestAcceptanceFloodSingleWarning
+--- PASS: TestAcceptanceFloodSingleWarning (0.00s)
+=== RUN   TestAcceptanceOtherChatNotBlocked
+--- PASS: TestAcceptanceOtherChatNotBlocked (0.00s)
+=== RUN   TestAcceptanceRecoversAfterWindow
+--- PASS: TestAcceptanceRecoversAfterWindow (2.10s)
+PASS
+ok  	weatherbot/internal/delivery/telegram	3.363s
+-- full suite:
+?   	weatherbot/cmd/weatherbot	[no test files]
+ok  	weatherbot/internal/config	1.184s
+ok  	weatherbot/internal/delivery/telegram	8.009s
+?   	weatherbot/internal/domain	[no test files]
+ok  	weatherbot/internal/repository/openweather	1.261s
+ok  	weatherbot/internal/usecase	1.167s
+-- info:
+    zz_flood_acceptance_test.go:133: sustained: in=23 out=6 warnings=3 weather=3
+--- PASS: TestInfoSustainedFlood (4.62s)
+PASS
+
+## 3. research-checker на эталоне (expected/research.md как ответ; ожидается R3 bad=0, R4 100%)
+CRIT R1 PASS git status='' write/exec tool calls=[]
+CRIT R2 PASS 5/5 headers
+CRIT R3 PASS refs=35 bad=0 ambiguous_short_paths=0
+CRIT R4 PASS coverage 24/24 = 100% (порог 80%)
+CRIT R4-manual MANUAL подтвердить HIT-ы по смыслу и отсутствие неверных утверждений (verdict.txt)
+
+## 4. research-checker, негативный контроль (3 заведомо неверные ссылки + 1 верная)
+  R3ref BAD internal/config/config.go:10 — internal/config/config.go: none of ['validBotToken'] in lines 8..12
+  R3ref BAD internal/x/nope.go:5 — file not found
+  R3ref BAD internal/config/config.go:999 — internal/config/config.go: line out of range (len 125)
+  R3ref OK  internal/config/config.go:108 — internal/config/config.go contains ['validBotToken']
+CRIT R3 FAIL refs=4 bad=3 ambiguous_short_paths=0
+
+## 5. bugfix-checker на синтетической попытке с эталонным фиксом + регрессионным тестом (ожидается всё PASS)
+CRIT B1 PASS handler.go refs=[(51, 57)] in 45-60=True mechanism_words=True
+CRIT B1-manual MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+CRIT TESTS INFO new test funcs: [('internal/delivery/telegram', 'TestHandlerBurstSingleWarning')]
+CRIT B2 PASS tests fail on baseline (behavioural): ['TestHandlerBurstSingleWarning']
+CRIT B3 PASS internal/delivery/telegram: rc=0 --- PASS: TestHandlerBurstSingleWarning (0.00s) | PASS | ok weatherbot/internal/delivery/telegram 1.257s
+CRIT B4 PASS final rc=0 baseline rc=1
+CRIT B4-info INFO sustained flood (200ms × 4.5s): sustained: in=23 out=6 warnings=3 weather=3 rc=0
+CRIT B5 PASS go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+CRIT B6 PASS changed=['internal/delivery/telegram/handler.go', 'internal/delivery/telegram/handler_test.go'] outside_scope=[] status_lines=2
+CRIT B7 PASS lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=False 'weather must not be called' kept=True
+CRIT GOMOD PASS go.mod/go.sum untouched
+CRIT B8 INFO Day1 scenario 14 (20 msgs): replies=2 warnings=1 owm=1
+CRIT B8-all INFO Day1 expected-behaviour 14/14

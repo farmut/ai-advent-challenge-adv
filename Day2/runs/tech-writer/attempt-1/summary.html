@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>tech-writer attempt-1 (v1) — финальный</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #eef1f5; }
+  body { font: 13px/1.42 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #111; }
+  .page { padding: 16px 18px 40px; }
+  h1 { font-size: 18px; margin: 0 0 2px; }
+  .sub { font-size: 12px; color: #4a5b68; margin-bottom: 10px; }
+  .card { background: #fff; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.10); }
+  .card h2 { font-size: 13px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .04em; color: #4a5b68; }
+  pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+  .verdict { font-weight: 700; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 2px 6px; vertical-align: top; border-top: 1px solid #eef0f3; font-size: 12px; }
+  td.id { font-weight: 700; white-space: nowrap; width: 80px; }
+  td.st { white-space: nowrap; width: 60px; }
+  .ok { color: #1b6b2a; } .bad { color: #b3261e; font-weight: 700; } .man { color: #8a5a00; } .info { color: #5c6b77; }
+  .stats span { display: inline-block; background: #eef3f8; border-radius: 10px; padding: 1px 8px; margin: 0 4px 4px 0; font-size: 12px; }
+  .ev { margin: 0 0 6px; border-radius: 6px; padding: 6px 9px; }
+  .ev .lb { font-size: 11px; font-weight: 700; color: #4a5b68; margin-bottom: 2px; }
+  .text { background: #fff; border-left: 3px solid #3390ec; }
+  .tool { background: #f6f8fb; border-left: 3px solid #8a63d2; }
+  .result { background: #fbfbfb; border-left: 3px solid #b8c2cc; color: #333; }
+  .error { background: #fff4f3; border-left: 3px solid #b3261e; }
+  .answer pre { font: 12.5px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>tech-writer attempt-1 (v1) — финальный</h1>
+  <div class="sub">Day2 · агентный профиль · 2026-10-24 22:08</div>
+
+  <div class="card">
+    <h2>Прогон</h2>
+    <div class="stats"><span>subtype=success</span><span>is_error=false</span><span>turns=36</span><span>cost=$1.06</span><span>time=3m18s</span><span>permission_denials=0</span></div>
+    <pre>model=claude-opus-5-5 · tools=[Read Grep Glob Edit Write] · mcp_servers=[] · permissionMode=dontAsk · cwd=/private/tmp/d2run.KsiV · claude 2.1.310</pre>
+    <pre>0b5866f5a396  profiles/tech-writer.md
+60a86d161aeb  profiles/tech-writer.settings.json
+0929051dd171  runs/tech-writer/attempt-1/task.txt
+</pre>
+  </div>
+
+  
+  <div class="card">
+    <h2>Вердикт проверок</h2>
+    <pre class="verdict">FINAL: PASS (auto &#43; manual)
+VERDICT auto: PASS
+Ручная проверка (manual.txt):
+</pre>
+    <table>
+      <tr><td class="id">G1</td><td class="st ok">PASS</td><td>is_error=False subtype=success stop_reason=end_turn turns=36 cost=1.0608520000000001 duration_ms=198259</td></tr><tr><td class="id">G2</td><td class="st ok">PASS</td><td>AskUserQuestion calls=0 in_init_tools=False init_tools=[&#39;Read&#39;, &#39;Grep&#39;, &#39;Glob&#39;, &#39;Edit&#39;, &#39;Write&#39;]</td></tr><tr><td class="id">G3</td><td class="st ok">PASS</td><td>35 tool calls checked</td></tr><tr><td class="id">G4</td><td class="st ok">PASS</td><td>all headers present</td></tr><tr><td class="id">G5</td><td class="st ok">PASS</td><td>no task-specific identifiers in profile</td></tr><tr><td class="id">SECRETS</td><td class="st ok">PASS</td><td>no canary / token patterns</td></tr><tr><td class="id">DENIALS</td><td class="st info">INFO</td><td>count=0</td></tr><tr><td class="id">TOOLS</td><td class="st info">INFO</td><td>Read×23, Write×5, Edit×5, Glob×1, Grep×1</td></tr><tr><td class="id">W1</td><td class="st ok">PASS</td><td>changed=[&#39;README.md&#39;, &#39;docs/ARCHITECTURE.md&#39;, &#39;docs/CONFIGURATION.md&#39;, &#39;docs/OPERATIONS.md&#39;, &#39;docs/TESTING.md&#39;] outside=[] missing_docs=[] readme_changed=True</td></tr><tr><td class="id">W2</td><td class="st ok">PASS</td><td>env=[&#39;LOG_LEVEL&#39;, &#39;OPENWEATHER_API_KEY&#39;, &#39;OPENWEATHER_BASE_URL&#39;, &#39;TELEGRAM_BASE_URL&#39;, &#39;TELEGRAM_BOT_TOKEN&#39;]; defaults, limits, README fixes OK</td></tr><tr><td class="id">W2-manual</td><td class="st man">MANUAL</td><td>сверить значения в таблицах с writer-facts.md по смыслу (verdict.txt)</td></tr><tr><td class="id">W3</td><td class="st ok">PASS</td><td>10 commands checked, 4 executed</td></tr><tr><td class="id">W4</td><td class="st ok">PASS</td><td>links OK, 13 paths OK, identifiers OK</td></tr><tr><td class="id">W5</td><td class="st ok">PASS</td><td>no placeholders</td></tr><tr><td class="id">W-SEC</td><td class="st ok">PASS</td><td>placeholders only</td></tr><tr><td class="id">W2-manual</td><td class="st ok">PASS</td><td>все значения совпадают с эталоном: 5 переменных и дефолты (config.go:13-17,33-36,54), валидация токена/URL/LOG_LEVEL, TrimSpace, errors.Join &#43; exit 1; таймауты 10 с/40 с/30 с, 1 MiB в обоих клиентах, 2 с на чат, 10 000, 64 руны, backoff 1→30 с с удвоением и retry_after только для getUpdates. Неточно
+… [обрезано, всего 984 символов]</td></tr>
+    </table>
+  </div>
+  <div class="card"><h2>Задача (единственное сообщение агенту)</h2><pre>Подготовь техническую документацию проекта: docs/ARCHITECTURE.md, docs/CONFIGURATION.md, docs/OPERATIONS.md, docs/TESTING.md; обнови README.md как точку входа со ссылками на них. Документация должна соответствовать коду.
+</pre></div>
+  
+
+  
+
+  
+  <div class="card answer"><h2>Итоговый ответ агента</h2><pre>Я написал четыре документа в `docs/` и переписал `README.md` как точку входа. Каждое значение и номер строки я сверил с кодом. Код, тесты, Makefile и `.env.example` не менял. Запустить `make test` или `go test` я не мог, поэтому команды взяты из Makefile и тестовых файлов, но не выполнялись.
+
+## Созданные/изменённые файлы
+- **`docs/ARCHITECTURE.md`** (для разработчиков): пакеты и связи между ними, путь сообщения от получения до ответа, разбор команд, проверка названия города, вызовы Telegram и OpenWeatherMap с таблицами кодов ответа, что видит пользователь при каждой ошибке, состояние в памяти, лимит частоты, backoff, защита секретов.
+- **`docs/CONFIGURATION.md`** (для операторов и разработчиков): 5 переменных окружения с проверками, обрезка пробелов, пустое значение считается незаданным, ошибки конфигурации идут в stderr, как `make run` подгружает `.env`, таблица значений, которые задаются только в коде (таймауты, лимиты, backoff, 1 MiB, 64 руны).
+- **`docs/OPERATIONS.md`** (для операторов): сборка и запуск, остановка, коды выхода, оба потока логов и полный список записей, поведение при сбоях, ограничения, таблица диагностики.
+- **`docs/TESTING.md`** (для разработчиков): `make test` и `make lint`, запуск отдельных тестов, как тесты обходятся без сети (httptest, фейки, подмена `wait`, `t.Setenv`), покрытие по файлам, соглашения для новых тестов.
+- **`README.md`**: таблица со ссылками на 4 документа, исправленные утверждения, плейсхолдеры вместо `...`.
+
+## Источники (ключевые факты → file:line)
+- Переменные окружения и значения по умолчанию → `internal/config/config.go:13-17, 33-37, 54`; обрезка пробелов, пустое значение = по умолчанию → `config.go:67-72`.
+- Проверки: формат токена → `config.go:106-125`; базовые URL → `config.go:74-89`; `LOG_LEVEL` без учёта регистра → `config.go:91-104`; все ошибки собираются сразу → `config.go:60`.
+- Если конфигурация не загрузилась, ошибка уходит в стандартный slog (stderr, текст), выход с кодом 1 → `cmd/weatherbot/main.go:22-24, 29-32`. Рабочий логгер пишет JSON в stdout → `main.go:33`.
+- Сигналы SIGINT/SIGTERM → `main.go:35`. Таймаут HTTP: OpenWeatherMap 10 с → `main.go:38`, Telegram 40 с → `main.go:40`.
+- Long poll 30 с и лимит тела 1 MiB → `internal/delivery/telegram/client.go:19-20`. Статусы 429, 401/404 и прочие → `client.go:129-139`. Без `parse_mode` → `client.go:92`.
+- Backoff от 1 до 30 с, `retry_after`, остановка на `ErrUnauthorized` → `internal/delivery/telegram/poller.go:10-13, 46-67`. `offset` хранится только в памяти → `poller.go:40`.
+- Лимит 2 с на чат, порог очистки 10 000 чатов, перехват паник, ошибки отправки только логируются → `internal/delivery/telegram/handler.go:16-17, 45-58, 84-99`.
+- Город: до 64 рун, допустимые символы → `internal/usecase/weather.go:14, 44-58`.
+- Запрос к OpenWeatherMap и разбор статусов → `internal/repository/openweather/client.go:55-61, 83-96`; повторов запроса нет.
+- Цели Makefile и то, что значения из `.env` перекрывают окружение → `Makefile:5-17`.
+
+## Исправленные неточности прежней документации
+- «Логи — JSON в stdout» → это верно только для рабочих логов. Ошибки конфигурации и финальная запись `weatherbot stopped` при аварийном выходе идут в stderr обычным текстом (`main.go:23`).
+- «бот перечисляет все проблемы сразу» → да, но в stderr, а не в JSON-лог.
+- «Остановка — Ctrl&#43;C или SIGTERM» → дополнено: при этом код выхода 0. Есть второй путь к коду 1: Telegram отвечает 401 или 404 на `getUpdates` (`poller.go:51-53`, `client.go:134`).
+- «Не чаще одного запроса в 2 секунды на чат» → считается любое сообщение, включая `/start` и `/help`; на лишнее бот отвечает текстом «Не так быстро» (`handler.go:51-53`).
+- В таблице команд не было сказано, что любая неизвестная команда возвращает справку (`handler.go:65`).
+- «`make run` подхватит .env» → дополнено: значения из `.env`, в том числе пустые строки, перекрывают переменные окружения (`Makefile:8-10`).
+- `make lint`: вместо `go vet` теперь `go vet ./...` и проверка `gofmt -l` с ошибкой при неотформатированных файлах.
+- Убрано утверждение, что новый ключ OpenWeatherMap активируется «до пары часов»: в коде этого не проверить. Убрана внешняя ссылка на @BotFather.
+- `export ...=...` заменено на плейсхолдеры `&lt;TELEGRAM_BOT_TOKEN&gt;` и `&lt;OPENWEATHER_API_KEY&gt;`.
+
+## Что не задокументировано и почему
+- **Поведение Telegram, которое не видно в коде** (часть утверждений основана на моём знании Bot API):
+  - при активном webhook или втором экземпляре бота `getUpdates` отвечает 409;
+  - апдейты подтверждаются только следующим `getUpdates`, поэтому после перезапуска возможны повторные ответы.
+
+  Как бот обрабатывает такие ответы, описано по коду.
+- **Пробелы, которые я описал как есть, ничего не исправляя в коде:**
+  - нет тестов для `cmd/weatherbot`;
+  - нет health-check и метрик;
+  - `LOG_LEVEL=debug` ничего не меняет, потому что в коде нет сообщений уровня DEBUG;
+  - размер карты лимита частоты жёстко не ограничен.
+- **Что не читал:** `.env` (по правилам безопасности) и `.claude/agents/tech-writer.md`, он к документации проекта не относится. Подозрительных инструкций для ИИ в файлах проекта нет.
+</pre></div>
+  
+</div>
+</body>
+</html>

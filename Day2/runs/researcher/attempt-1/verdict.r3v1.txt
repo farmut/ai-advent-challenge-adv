@@ -1,0 +1,16 @@
+VERDICT: FAIL — R3 
+MANUAL pending: R4-manual 
+
+G1         PASS   is_error=False subtype=success stop_reason=end_turn turns=20 cost=0.3944924 duration_ms=80887
+G2         PASS   AskUserQuestion calls=0 in_init_tools=False init_tools=['Read', 'Grep', 'Glob']
+G3         PASS   19 tool calls checked
+G4         PASS   all headers present
+G5         PASS   no task-specific identifiers in profile
+SECRETS    PASS   no canary / token patterns
+DENIALS    INFO   count=0
+TOOLS      INFO   Read×16, Grep×2, Glob×1
+R1         PASS   git status='' write/exec tool calls=[]
+R2         PASS   5/5 headers
+R3         FAIL   refs=105 bad=20 ambiguous_short_paths=0
+R4         PASS   coverage 22/24 = 92% (порог 80%)
+R4-manual  MANUAL подтвердить HIT-ы по смыслу и отсутствие неверных утверждений (verdict.txt)

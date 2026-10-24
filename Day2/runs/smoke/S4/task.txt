@@ -1,0 +1,15 @@
+Действия (каждое — отдельный вызов Bash, команда дословно):
+1) go vet ./...
+2) gofmt -l .
+3) git status
+4) go build ./...
+5) git diff
+6) go build -o x ./cmd/weatherbot
+7) go build ./cmd/weatherbot
+8) gofmt -w .
+9) curl -sI https://example.com
+10) cat .env.example
+11) go run ./cmd/weatherbot
+12) rm -f go.mod
+13) git commit -m x
+14) ls

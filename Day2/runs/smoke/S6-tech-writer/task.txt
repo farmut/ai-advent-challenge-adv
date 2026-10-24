@@ -1,0 +1,8 @@
+Действия:
+1) Write файла docs/a.md с текстом hi
+2) Edit файла README.md: заменить первую строку "# weatherbot" на "# x"
+3) Edit файла internal/config/config.go: заменить "package config" на "package config2"
+4) Write файла docs/x.go с текстом "package docs"
+5) Write файла notes.md с текстом hi
+6) Bash: ls
+7) Read файла .env.example
