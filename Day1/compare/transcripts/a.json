@@ -1,0 +1,954 @@
+{
+  "variant": "a",
+  "started_at": "2026-10-24T16:29:53.445369+03:00",
+  "duration_ms": 86460,
+  "source": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day1/variant-a/src",
+  "build": {
+    "ok": true,
+    "binary": "weatherbot-a"
+  },
+  "mode": "docker-https-proxy-mitm",
+  "mode_note": "base URL зашит в коде; бот запущен в alpine-контейнере с HTTPS_PROXY и SSL_CERT_FILE, запросы к настоящим хостам перехвачены прокси стенда",
+  "env_names": {
+    "found_in_source": [
+      "LOG_LEVEL",
+      "OPENWEATHER_API_KEY",
+      "OPENWEATHER_LANG",
+      "OPENWEATHER_UNITS",
+      "REQUEST_TIMEOUT",
+      "TELEGRAM_BOT_TOKEN"
+    ],
+    "telegram_base_url_vars": [
+      "TELEGRAM_BASE_URL",
+      "TELEGRAM_API_URL",
+      "TELEGRAM_API_BASE_URL",
+      "TELEGRAM_URL",
+      "TG_API_URL",
+      "BOT_API_URL"
+    ],
+    "owm_base_url_vars": [
+      "OPENWEATHER_BASE_URL",
+      "OPENWEATHER_API_URL",
+      "OPENWEATHERMAP_BASE_URL",
+      "OWM_BASE_URL",
+      "OWM_API_URL",
+      "WEATHER_API_URL",
+      "WEATHER_BASE_URL"
+    ]
+  },
+  "attempts": [
+    {
+      "name": "env base URL",
+      "ok": false,
+      "detail": "не тестируемо black-box: base URL не подменяется (за 10 с ни одного запроса к фейку Telegram); бот пытался выйти наружу на api.telegram.org:443 (заблокировано прокси-предохранителем)",
+      "elapsed_ms": 10015
+    },
+    {
+      "name": "native HTTPS_PROXY",
+      "ok": false,
+      "detail": "прокси подхватился (CONNECT: api.telegram.org:443), но TLS не прошёл: api.telegram.org:443: remote error: tls: bad certificate. На macOS Go проверяет сертификаты через системное хранилище, SSL_CERT_FILE игнорируется, а менять Keychain стенд не должен",
+      "elapsed_ms": 8053
+    },
+    {
+      "name": "docker HTTPS_PROXY+SSL_CERT_FILE",
+      "ok": true,
+      "detail": "тот же исходник, собранный под linux/arm64, без изменений кода; трафик к api.telegram.org и api.openweathermap.org перехвачен MITM-прокси стенда с одноразовым CA",
+      "elapsed_ms": 257
+    }
+  ],
+  "scenarios": [
+    {
+      "id": 1,
+      "title": "/start",
+      "chat_id": 1001,
+      "inputs": [
+        "/start"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Я присылаю текущую погоду.\n\nОтправьте название города, например: Москва\nили команду: /weather Санкт-Петербург",
+          "at_ms": 4
+        }
+      ],
+      "owm_queries": [],
+      "first_reply_ms": 4,
+      "waited_ms": 565,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "есть приветствие"
+      }
+    },
+    {
+      "id": 2,
+      "title": "/help",
+      "chat_id": 1001,
+      "inputs": [
+        "/help"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Я присылаю текущую погоду.\n\nОтправьте название города, например: Москва\nили команду: /weather Санкт-Петербург",
+          "at_ms": 4
+        }
+      ],
+      "owm_queries": [],
+      "first_reply_ms": 4,
+      "waited_ms": 566,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "справка упоминает /weather"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Город текстом: Москва",
+      "chat_id": 1001,
+      "inputs": [
+        "Москва"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 16
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 16,
+      "waited_ms": 568,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "погода Москвы (12.3 °C), 1 запрос"
+      }
+    },
+    {
+      "id": 4,
+      "title": "/weather London",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather London"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Погода: Лондон, GB\nНебольшой дождь\n🌡 Температура: 9.8°C (ощущается как 7.4°C)\n💧 Влажность: 87%\n💨 Ветер: 5.7 м/с\n🧭 Давление: 1004 гПа",
+          "at_ms": 6
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=London\u0026units=metric",
+          "q": [
+            "London"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 481,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 6,
+      "waited_ms": 568,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "погода Лондона"
+      }
+    },
+    {
+      "id": 5,
+      "title": "/weather без города",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Укажите город: /weather Москва",
+          "at_ms": 3
+        }
+      ],
+      "owm_queries": [],
+      "first_reply_ms": 3,
+      "waited_ms": 566,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "подсказка, без запроса в OWM"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Несуществующий город (OWM 404)",
+      "chat_id": 1001,
+      "inputs": [
+        "Nowhere"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Город «Nowhere» не найден. Проверьте название.",
+          "at_ms": 4
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=Nowhere\u0026units=metric",
+          "q": [
+            "Nowhere"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 404,
+          "bytes_sent": 41,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 4,
+      "waited_ms": 565,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "«город Nowhere не найден»"
+      }
+    },
+    {
+      "id": 7,
+      "title": "OWM 500",
+      "chat_id": 1001,
+      "inputs": [
+        "Error500"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Не удалось получить погоду, попробуйте позже.",
+          "at_ms": 4
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=Error500\u0026units=metric",
+          "q": [
+            "Error500"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 500,
+          "bytes_sent": 46,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 4,
+      "waited_ms": 568,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "понятная ошибка, без погоды"
+      }
+    },
+    {
+      "id": 8,
+      "title": "OWM 429",
+      "chat_id": 1001,
+      "inputs": [
+        "RateLimit"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Сервис погоды перегружен, попробуйте через минуту.",
+          "at_ms": 3
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=RateLimit\u0026units=metric",
+          "q": [
+            "RateLimit"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 429,
+          "bytes_sent": 196,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 3,
+      "waited_ms": 568,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "понятная ошибка, без погоды"
+      }
+    },
+    {
+      "id": 9,
+      "title": "Инъекция в query",
+      "chat_id": 1001,
+      "inputs": [
+        "a\u0026appid=x#"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Город «a\u0026appid=x#» не найден. Проверьте название.",
+          "at_ms": 5
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=a%26appid%3Dx%23\u0026units=metric",
+          "q": [
+            "a\u0026appid=x#"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 404,
+          "bytes_sent": 41,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 5,
+      "waited_ms": 567,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "injection": "safe-escaped",
+        "expect": true,
+        "expect_note": "q не ломает query, appid один"
+      }
+    },
+    {
+      "id": 10,
+      "title": "500 символов",
+      "chat_id": 1001,
+      "inputs": [
+        "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Слишком длинное название города.",
+          "at_ms": 14
+        }
+      ],
+      "owm_queries": [],
+      "first_reply_ms": 14,
+      "waited_ms": 568,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "отказ без запроса в OWM"
+      }
+    },
+    {
+      "id": 11,
+      "title": "Медленный OWM (25 с)",
+      "chat_id": 1001,
+      "inputs": [
+        "Slow"
+      ],
+      "replies": [],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=Slow\u0026units=metric",
+          "q": [
+            "Slow"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 0,
+          "bytes_sent": 0,
+          "duration_ms": 10003,
+          "client_aborted": true
+        }
+      ],
+      "first_reply_ms": null,
+      "waited_ms": 40033,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "таймаут ≤15 с и сообщение об ошибке"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Огромный ответ OWM (50 MiB)",
+      "chat_id": 1001,
+      "inputs": [
+        "Huge"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Не удалось получить погоду, попробуйте позже.",
+          "at_ms": 74
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=Huge\u0026units=metric",
+          "q": [
+            "Huge"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 2002954,
+          "duration_ms": 55,
+          "client_aborted": true
+        }
+      ],
+      "first_reply_ms": 74,
+      "waited_ms": 615,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "тело ограничено, ответ об ошибке"
+      }
+    },
+    {
+      "id": 13,
+      "title": "/weather@WeatherBot Москва",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather@WeatherBot Москва"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 10
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 10,
+      "waited_ms": 566,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "погода Москвы (12.3 °C), 1 запрос"
+      }
+    },
+    {
+      "id": 14,
+      "title": "Flood: 20×«Москва» из чата 2002",
+      "chat_id": 2002,
+      "inputs": [
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва"
+      ],
+      "replies": [
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 6
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 23
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 29
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 32
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 36
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 42
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 51
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 54
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 56
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 56
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 56
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 56
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        },
+        {
+          "chat_id": 2002,
+          "text": "Погода: Москва, RU\nПеременная облачность\n🌡 Температура: 12.3°C (ощущается как 10.1°C)\n💧 Влажность: 71%\n💨 Ветер: 4.2 м/с\n🧭 Давление: 1012 гПа",
+          "at_ms": 58
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        },
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cKEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": true,
+          "status": 200,
+          "bytes_sent": 547,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 6,
+      "waited_ms": 1643,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false
+      },
+      "note": "запросов в OWM: 20, ответов: 20"
+    },
+    {
+      "id": 15,
+      "title": "Неверный ключ OWM (401)",
+      "chat_id": 1001,
+      "inputs": [
+        "Москва"
+      ],
+      "replies": [
+        {
+          "chat_id": 1001,
+          "text": "Не удалось получить погоду, попробуйте позже.",
+          "at_ms": 8
+        }
+      ],
+      "owm_queries": [
+        {
+          "path": "/data/2.5/weather",
+          "raw_query": "appid=\u003cWRONG_KEY\u003e\u0026lang=ru\u0026q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0\u0026units=metric",
+          "q": [
+            "Москва"
+          ],
+          "appid_count": 1,
+          "appid_valid": false,
+          "status": 401,
+          "bytes_sent": 107,
+          "duration_ms": 0,
+          "client_aborted": false
+        }
+      ],
+      "first_reply_ms": 8,
+      "waited_ms": 566,
+      "flags": {
+        "replied": true,
+        "leak_in_reply": false,
+        "expect": true,
+        "expect_note": "ошибка без погоды и без ключа"
+      }
+    }
+  ],
+  "leaks": {
+    "token_in_log": 0,
+    "key_in_log": 0,
+    "token_in_replies": 0,
+    "key_in_replies": 0
+  },
+  "shutdown": {
+    "signal": "SIGTERM",
+    "graceful": true,
+    "elapsed_ms": 163,
+    "exit_code": 0,
+    "killed": false
+  },
+  "shutdown_wrong_key": {
+    "signal": "SIGTERM",
+    "graceful": true,
+    "elapsed_ms": 125,
+    "exit_code": 0,
+    "killed": false
+  },
+  "telegram_requests": {
+    "getUpdates": 79,
+    "sendMessage": 33
+  }
+}

@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CLAUDE.md: A vs B</title>
+<style>
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef1f5; --text:#16191d; --muted:#4f5864;
+  --border:#d5dae1; --accent:#1f5fbf; --good:#0f6b35; --good-bg:#e3f4e9; --bad:#a3221b; --bad-bg:#fbe7e5;
+  --warn:#7a5200; --warn-bg:#fdf1d6; --a:#7a3fb0; --b:#0d6e78; --code-bg:#f1f3f6;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#111418; --surface:#1a1e24; --surface-2:#232830; --text:#e7eaee; --muted:#a6afba;
+    --border:#343b45; --accent:#7fb0ff; --good:#6fdc98; --good-bg:#16311f; --bad:#ff9d94; --bad-bg:#3a1b19;
+    --warn:#f2c46b; --warn-bg:#352a12; --a:#c9a2f0; --b:#6fd3dc; --code-bg:#151a20;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#111418; --surface:#1a1e24; --surface-2:#232830; --text:#e7eaee; --muted:#a6afba;
+  --border:#343b45; --accent:#7fb0ff; --good:#6fdc98; --good-bg:#16311f; --bad:#ff9d94; --bad-bg:#3a1b19;
+  --warn:#f2c46b; --warn-bg:#352a12; --a:#c9a2f0; --b:#6fd3dc; --code-bg:#151a20;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:1080px;margin:0 auto;padding:24px 16px 64px}
+h1{font-size:clamp(1.6rem,4vw,2.3rem);line-height:1.2;margin:0 0 6px}
+h2{font-size:1.35rem;margin:44px 0 12px;padding-top:8px;border-top:1px solid var(--border)}
+h3{font-size:1.08rem;margin:24px 0 8px}
+p,li{max-width:75ch}
+a{color:var(--accent)}
+code{font-family:var(--mono);font-size:.88em;background:var(--code-bg);padding:1px 4px;border-radius:4px;overflow-wrap:anywhere}
+.lead{color:var(--muted);margin:0 0 16px}
+.tag{display:inline-block;font-weight:700;font-size:.8rem;padding:1px 8px;border-radius:999px;color:var(--surface)}
+.tag-a{background:var(--a)} .tag-b{background:var(--b)}
+.hero{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:18px 0}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;min-width:0}
+.card h3{margin:0 0 6px}
+.card p{margin:4px 0;color:var(--muted)}
+.verdict{background:var(--surface);border-left:4px solid var(--accent);border-radius:6px;padding:12px 16px;margin:16px 0}
+.metrics{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,220px),1fr));gap:10px}
+.m{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 12px;min-width:0}
+.m .k{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.m .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:3px 6px;border-radius:6px}
+.m .row b{font-variant-numeric:tabular-nums;font-size:1.05rem}
+.m .lbl{font-size:.8rem;font-weight:700}
+.m .lbl.a{color:var(--a)} .m .lbl.b{color:var(--b)}
+.m .row.best{background:var(--good-bg);outline:1px solid var(--good)}
+.m .row.best b::after{content:" ✓";color:var(--good)}
+.m .note{font-size:.78rem;color:var(--muted);margin-top:4px}
+.tbl{overflow-x:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface);margin:10px 0}
+table{border-collapse:collapse;width:100%;font-size:.92rem}
+th,td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--border)}
+th{background:var(--surface-2);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.ok{color:var(--good)} td.fail{color:var(--bad);background:var(--bad-bg);font-weight:600} td.note{color:var(--warn)}
+.factors{counter-reset:f;list-style:none;padding:0;margin:0}
+.factors li{counter-increment:f;position:relative;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px 12px 52px;margin:8px 0;max-width:none}
+.factors li::before{content:counter(f);position:absolute;left:14px;top:12px;width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--surface);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.counter{background:var(--warn-bg);border:1px solid var(--border);border-radius:10px;padding:10px 16px}
+details{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin:10px 0}
+summary{cursor:pointer;padding:10px 14px;font-weight:600}
+summary:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.pair{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:10px;padding:0 12px 12px}
+.pair>div{min-width:0}
+.pair .cap{font-size:.85rem;color:var(--muted);margin:4px 0}
+pre{margin:0;background:var(--code-bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;overflow-x:auto;font:13px/1.5 var(--mono);tab-size:4}
+pre code{background:none;padding:0;font-size:inherit;overflow-wrap:normal}
+figure{margin:12px 0}
+figure img{display:block;max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px;background:var(--surface)}
+figcaption{font-size:.88rem;color:var(--muted);margin-top:6px}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.mark{font-weight:700}
+footer{margin-top:48px;color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<main>
+
+<h1>CLAUDE.md: A против B</h1>
+<p class="lead">Day1, 2026-10-24. Один промпт, два набора правил, один Telegram-бот погоды на Go (OpenWeatherMap). Markdown-версия: <a href="REPORT.md">REPORT.md</a>.</p>
+
+<div class="hero">
+  <div class="card">
+    <h3><span class="tag tag-a">A</span> Общие формулировки</h3>
+    <p><a href="variant-a/CLAUDE.md">variant-a/CLAUDE.md</a>, 16 строк: «чистый код», «лучшие практики», «безопасно», «готово к продакшену».</p>
+    <p>Review <b>22/32</b>, black-box <b>13/14</b>, $0.888, 214.7 с.</p>
+  </div>
+  <div class="card">
+    <h3><span class="tag tag-b">B</span> Подробные правила</h3>
+    <p><a href="variant-b/CLAUDE.md">variant-b/CLAUDE.md</a>, 594 строки: стек, слои, папки, naming, контракты, security, UX, 5 примеров, 5 антипаттернов, шаблон, DoD.</p>
+    <p>Review <b>30/32</b>, black-box <b>14/14</b>, $1.421, 525.5 с.</p>
+  </div>
+</div>
+
+<div class="verdict"><b>Коротко.</b> B лучше по защитным механизмам и тестируемости. Почти половина его кода скопирована из примеров CLAUDE.md, вместе с ошибкой в правиле валидации. A лучше в конкурентности и shutdown, дешевле и быстрее. По одному прогону на вариант (n = 1).</div>
+
+<h2 id="method">Методология</h2>
+<ul>
+  <li><b>Изоляция.</b> Чистый scratchpad с <code>git init</code>, внутри только <code>CLAUDE.md</code> варианта. Команда <code>claude -p "$(cat prompt.txt)" --setting-sources project --model claude-opus-5-5 --permission-mode bypassPermissions --output-format json --max-budget-usd 6</code>. Глобальный CLAUDE.md и хуки не загружаются.</li>
+  <li><b>Одинаковые условия.</b> claude-opus-5-5, Claude Code 2.1.310, Go 1.26.5. Промпт одинаковый, «на Go» указано в нём самом. sha256 записаны в <a href="env.txt">env.txt</a>.</li>
+  <li><b><code>bypassPermissions</code></b> выбрал пользователь, бюджет $6 на прогон.</li>
+  <li><b>Метрики</b> собраны скриптом <a href="compare/metrics.sh">metrics.sh</a>, <b>ручное review</b> по 16 критериям (0–2) лежит в <a href="compare/review.md">review.md</a>, <b>black-box</b> проверял <a href="compare/harness/README.md">harness</a>: 15 сценариев против фейковых Telegram и OWM.</li>
+</ul>
+<h3>Ограничения</h3>
+<ul>
+  <li><b>n = 1</b>: разброс между прогонами не измерялся.</li>
+  <li>Base URL у A зашит в коде, поэтому A проверялся только в docker (linux) через MITM-прокси с одноразовым CA. B проверялся штатно, через env.</li>
+  <li>Сценарий 7 (Error500) у B отклонён валидацией из-за цифр и до OWM не дошёл. Это оговорка стенда, путь 5xx у B покрыт юнит-тестами.</li>
+  <li>golangci-lint 2.4.0 не работает с go1.26, поэтому использован 2.15.0, пересобранный под go1.26.5.</li>
+</ul>
+<h3>Инциденты процесса</h3>
+<ul>
+  <li>В черновом прогоне harness фиктивный токен ушёл на настоящий <code>api.telegram.org</code> (ответ 401). После этого в стенд добавлен deny-прокси.</li>
+  <li>CA стенда в системный keychain не добавлялся (проверено).</li>
+</ul>
+
+<h2 id="metrics">Метрики</h2>
+<p class="lead">Лучшее значение выделено фоном и отметкой ✓. Если отметки нет, значения равны.</p>
+<div class="metrics">
+  <div class="m"><div class="k">Ручное review</div>
+    <div class="row"><span class="lbl a">A</span><b>22 / 32</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>30 / 32</b></div></div>
+  <div class="m"><div class="k">Black-box, ожидаемое поведение</div>
+    <div class="row"><span class="lbl a">A</span><b>13 / 14</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>14 / 14</b></div></div>
+  <div class="m"><div class="k">Покрытие тестами</div>
+    <div class="row"><span class="lbl a">A</span><b>84.5%</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>86.9%</b></div></div>
+  <div class="m"><div class="k">Тестов (func Test)</div>
+    <div class="row"><span class="lbl a">A</span><b>24</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>33</b></div></div>
+  <div class="m"><div class="k">LOC prod / test</div>
+    <div class="row"><span class="lbl a">A</span><b>726 / 567</b></div>
+    <div class="row"><span class="lbl b">B</span><b>812 / 852</b></div>
+    <div class="note">Файлов: 20 / 23</div></div>
+  <div class="m"><div class="k">build · vet · gofmt · test -race</div>
+    <div class="row"><span class="lbl a">A</span><b>PASS · 0 файлов</b></div>
+    <div class="row"><span class="lbl b">B</span><b>PASS · 0 файлов</b></div></div>
+  <div class="m"><div class="k">golangci-lint default / extended</div>
+    <div class="row best"><span class="lbl a">A</span><b>3 / 4</b></div>
+    <div class="row"><span class="lbl b">B</span><b>3 / 5</b></div></div>
+  <div class="m"><div class="k">go.mod</div>
+    <div class="row"><span class="lbl a">A</span><b>go 1.25</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>go 1.26</b></div>
+    <div class="note">Стек требует Go 1.26</div></div>
+  <div class="m"><div class="k">Стоимость прогона</div>
+    <div class="row best"><span class="lbl a">A</span><b>$0.888</b></div>
+    <div class="row"><span class="lbl b">B</span><b>$1.421</b></div></div>
+  <div class="m"><div class="k">Время прогона</div>
+    <div class="row best"><span class="lbl a">A</span><b>214.7 с</b></div>
+    <div class="row"><span class="lbl b">B</span><b>525.5 с</b></div></div>
+  <div class="m"><div class="k">Ходов агента</div>
+    <div class="row"><span class="lbl a">A</span><b>20</b></div>
+    <div class="row best"><span class="lbl b">B</span><b>13</b></div></div>
+  <div class="m"><div class="k">Утечки токена и ключа</div>
+    <div class="row"><span class="lbl a">A</span><b>0</b></div>
+    <div class="row"><span class="lbl b">B</span><b>0</b></div></div>
+</div>
+<p>Источники: <a href="compare/metrics-a.txt">metrics-a.txt</a>, <a href="compare/metrics-b.txt">metrics-b.txt</a>, <a href="variant-a/run.json">a/run.json</a>, <a href="variant-b/run.json">b/run.json</a>.</p>
+
+<h2 id="blackbox">Black-box сценарии</h2>
+<p class="lead">Реальные бинари против фейковых Telegram и OWM. Данные: <a href="compare/transcripts/a.json">a.json</a>, <a href="compare/transcripts/b.json">b.json</a>.</p>
+<div class="tbl"><table>
+<thead><tr><th>#</th><th>Сценарий</th><th>A</th><th>B</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><code>/start</code></td><td class="ok">✓ приветствие</td><td class="ok">✓ приветствие</td></tr>
+<tr><td>2</td><td><code>/help</code></td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>3</td><td><code>Москва</code></td><td class="ok">✓ 1 запрос в OWM</td><td class="ok">✓ 1 запрос в OWM</td></tr>
+<tr><td>4</td><td><code>/weather London</code></td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>5</td><td><code>/weather</code> без города</td><td class="ok">✓ подсказка, OWM не вызван</td><td class="ok">✓ подсказка, OWM не вызван</td></tr>
+<tr><td>6</td><td><code>Nowhere</code> (404)</td><td class="ok">✓ «не найден»</td><td class="ok">✓ «не найден»</td></tr>
+<tr><td>7</td><td><code>Error500</code> (500)</td><td class="ok">✓ общая ошибка</td><td class="note">✓* отклонён валидацией, до OWM не дошёл</td></tr>
+<tr><td>8</td><td><code>RateLimit</code> (429)</td><td class="ok">✓ «перегружен»</td><td class="ok">✓ «недоступен»</td></tr>
+<tr><td>9</td><td>Инъекция <code>a&amp;appid=x#</code></td><td class="ok">✓ экранирована, appid один</td><td class="ok">✓ отклонена до OWM</td></tr>
+<tr><td>10</td><td>500 символов</td><td class="ok">✓ отказ без OWM</td><td class="ok">✓ отказ без OWM</td></tr>
+<tr><td>11</td><td><code>Slow</code> (OWM 25 с)</td><td class="fail">✗ ответа нет за 40 с</td><td class="ok">✓ ошибка через 10.0 с</td></tr>
+<tr><td>12</td><td><code>Huge</code> (50 MiB)</td><td class="ok">✓ прочитано ~1.9 MiB</td><td class="ok">✓ прочитано ~2.3 MiB</td></tr>
+<tr><td>13</td><td><code>/weather@WeatherBot Москва</code></td><td class="ok">✓</td><td class="ok">✓</td></tr>
+<tr><td>14</td><td>Flood 20 × «Москва»</td><td class="note">20 запросов в OWM, 20 ответов</td><td class="note">1 запрос в OWM, 1 погода + 19 «Не так быстро»</td></tr>
+<tr><td>15</td><td>Неверный ключ (401)</td><td class="ok">✓ без ключа в ответе</td><td class="ok">✓ без ключа в ответе</td></tr>
+<tr><td></td><td>SIGTERM</td><td class="ok">✓ graceful, 163 мс</td><td class="ok">✓ graceful, 3 мс</td></tr>
+<tr><td></td><td>Способ запуска</td><td>docker + MITM (base URL зашит)</td><td>env <code>*_BASE_URL</code></td></tr>
+</tbody></table></div>
+
+<h3>Скриншоты чатов</h3>
+<figure>
+  <img src="compare/screenshots/chat-side-by-side.png" alt="Ответы ботов A и B по 15 сценариям, слева A, справа B" loading="lazy">
+  <figcaption>Слева A, справа B. Интерактивная версия: <a href="compare/chat-side-by-side.html">chat-side-by-side.html</a>. Отдельно: <a href="compare/screenshots/chat-a.png">chat-a.png</a>, <a href="compare/screenshots/chat-b.png">chat-b.png</a>.</figcaption>
+</figure>
+
+<h2 id="review">Ручное review</h2>
+<div class="tbl"><table>
+<thead><tr><th>Критерий (0–2)</th><th>A</th><th>B</th></tr></thead>
+<tbody>
+<tr><td>Слои и направление зависимостей</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>Тестируемость</td><td>2</td><td>2</td></tr>
+<tr><td>Покрытие и качество тестов</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>vet / gofmt / lint</td><td>2</td><td>2</td></tr>
+<tr><td>Ошибки (%w, sentinel, статусы OWM)</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>Таймауты, context</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>Graceful shutdown</td><td>2 ✓</td><td>1</td></tr>
+<tr><td>Конфиг и секреты</td><td>2</td><td>2</td></tr>
+<tr><td>Redact токена и ключа</td><td>2</td><td>2</td></tr>
+<tr><td>Построение URL, валидация города</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>LimitReader, статус до decode</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>Rate limit, flood, recover</td><td>0</td><td>2 ✓</td></tr>
+<tr><td>Telegram: offset, retry_after</td><td>1</td><td>2 ✓</td></tr>
+<tr><td>UX текстов</td><td>2 ✓</td><td>1</td></tr>
+<tr><td>Naming</td><td>2</td><td>2</td></tr>
+<tr><td>Соответствие своему CLAUDE.md</td><td>1</td><td>2 ✓</td></tr>
+<tr><th>Итого</th><th>22</th><th>30 ✓</th></tr>
+</tbody></table></div>
+
+<h3>Найденные баги</h3>
+<div class="tbl"><table>
+<thead><tr><th>Вариант</th><th>Баг</th><th>Где</th></tr></thead>
+<tbody>
+<tr><td>A</td><td>Общий дедлайн на запрос к OWM и sendMessage: если OWM медленный, ответ не уходит</td><td><code>bot/bot.go:137</code>, <code>bot/handler.go:62</code></td></tr>
+<tr><td>A</td><td>JSON декодируется до проверки статуса</td><td><code>weather/client.go:106-111</code></td></tr>
+<tr><td>A</td><td><code>/weather\nМосква</code> даёт «Неизвестная команда»</td><td><code>bot/handler.go:52</code></td></tr>
+<tr><td>A</td><td>Ввод из пробелов даёт «Город «» не найден»</td><td><code>bot/handler.go:31</code></td></tr>
+<tr><td>A</td><td>Нет recover: паника роняет процесс</td><td><code>bot/bot.go:125-128</code></td></tr>
+<tr><td>B</td><td>Валидация отвергает <code>Val-d'Or</code>, цифры, деванагари, NFD (правило из §7 CLAUDE.md)</td><td><code>usecase/weather.go:52-55</code></td></tr>
+<tr><td>B</td><td>Последовательная обработка: медленный OWM блокирует всех</td><td><code>delivery/telegram/poller.go:73</code></td></tr>
+<tr><td>B</td><td>Ответ на каждое flood-сообщение, 429 на sendMessage не ретраится</td><td><code>delivery/telegram/handler.go:51-57</code></td></tr>
+<tr><td>B</td><td>SIGTERM обрывает текущий ответ</td><td><code>poller.go:73</code></td></tr>
+<tr><td>Оба</td><td>Дубли после рестарта (offset)</td><td>A <code>bot.go:115</code>, B <code>poller.go:69</code></td></tr>
+</tbody></table></div>
+
+<h2 id="diff">Ключевые фрагменты диффа</h2>
+<p class="lead">Полный дифф: <a href="compare/diff.patch">diff.patch</a> (3209 строк). Пути указаны относительно <code>variant-*/src</code>.</p>
+
+<details open>
+<summary>1. OWM-клиент: статус до decode</summary>
+<div class="pair">
+<div><p class="cap"><span class="tag tag-a">A</span> <code>internal/weather/client.go:104-114</code>: decode идёт раньше статуса</p>
+<pre><code>defer resp.Body.Close()
+
+var body apiResponse
+if err := json.NewDecoder(io.LimitReader(resp.Body, maxResponseBytes)).Decode(&amp;body); err != nil {
+    return Weather{}, fmt.Errorf("decode weather response (status %d): %w", resp.StatusCode, err)
+}
+
+if err := statusError(resp.StatusCode, body.Message); err != nil {
+    return Weather{}, err
+}</code></pre></div>
+<div><p class="cap"><span class="tag tag-b">B</span> <code>internal/repository/openweather/client.go:71-80</code>: пример 9.3 почти дословно</p>
+<pre><code>defer resp.Body.Close()
+
+if err := statusError(resp.StatusCode); err != nil {
+    return domain.Weather{}, err
+}
+var body currentResponse
+if err := json.NewDecoder(io.LimitReader(resp.Body, maxBodyBytes)).Decode(&amp;body); err != nil {
+    return domain.Weather{}, fmt.Errorf("%w: decode response: %v", domain.ErrProviderUnavailable, err)
+}</code></pre></div>
+</div>
+</details>
+
+<details>
+<summary>2. Построение URL Telegram</summary>
+<div class="pair">
+<div><p class="cap"><span class="tag tag-a">A</span> <code>internal/telegram/client.go:105</code>: Sprintf с непроверенным токеном</p>
+<pre><code>endpoint := fmt.Sprintf("%s/bot%s/%s", c.baseURL, c.token, method)</code></pre></div>
+<div><p class="cap"><span class="tag tag-b">B</span> <code>internal/delivery/telegram/client.go:104-109</code>: JoinPath, токен проверен в config</p>
+<pre><code>u, err := url.Parse(c.baseURL)
+if err != nil {
+    return fmt.Errorf("parse base url: %w", err)
+}
+u = u.JoinPath("bot"+c.token, apiMethod) // формат токена проверен в config
+u.RawQuery = q.Encode()</code></pre></div>
+</div>
+</details>
+
+<details>
+<summary>3. main и DI: откуда берётся base URL</summary>
+<div class="pair">
+<div><p class="cap"><span class="tag tag-a">A</span> <code>cmd/weatherbot/main.go:37-38</code>: пустой base URL, используется зашитый DefaultBaseURL</p>
+<pre><code>tg := telegram.NewClient(&amp;http.Client{Timeout: pollTimeout + 10*time.Second}, "", cfg.TelegramToken)
+owm := weather.NewClient(&amp;http.Client{Timeout: cfg.RequestTimeout}, "", cfg.WeatherAPIKey, cfg.WeatherUnits, cfg.WeatherLang)</code></pre></div>
+<div><p class="cap"><span class="tag tag-b">B</span> <code>cmd/weatherbot/main.go:38-42</code>: base URL из env (<code>config.go:35-36</code>), пример 9.5 дословно</p>
+<pre><code>weather := openweather.NewClient(cfg.OpenWeatherBaseURL, cfg.OpenWeatherAPIKey, &amp;http.Client{Timeout: 10 * time.Second})
+service := usecase.NewWeatherService(weather)
+bot := telegram.NewClient(cfg.TelegramBaseURL, cfg.TelegramBotToken, &amp;http.Client{Timeout: 40 * time.Second})
+handler := telegram.NewHandler(service, bot, logger)
+poller := telegram.NewPoller(bot, handler, logger)</code></pre></div>
+</div>
+</details>
+
+<details>
+<summary>4. Валидация города</summary>
+<div class="pair">
+<div><p class="cap"><span class="tag tag-a">A</span> <code>internal/bot/handler.go:57-59</code>: только длина</p>
+<pre><code>if utf8.RuneCountInString(city) &gt; maxCityLength {
+    return cityTooLongText
+}</code></pre></div>
+<div><p class="cap"><span class="tag tag-b">B</span> <code>internal/usecase/weather.go:48-56</code>: правило §7 вместе с дефектом (нет апострофов и цифр)</p>
+<pre><code>city := strings.Join(strings.Fields(raw), " ")
+if n := utf8.RuneCountInString(city); n == 0 || n &gt; maxCityRunes {
+    return "", domain.ErrInvalidCity
+}
+for _, r := range city {
+    if !unicode.IsLetter(r) &amp;&amp; !strings.ContainsRune(" -.,", r) {
+        return "", domain.ErrInvalidCity // заодно отсекает управляющие символы
+    }
+}</code></pre></div>
+</div>
+</details>
+
+<details>
+<summary>5. Конкурентность: здесь A лучше</summary>
+<div class="pair">
+<div><p class="cap"><span class="tag tag-a">A</span> <code>internal/bot/bot.go:120-128</code>: семафор 16, WithoutCancel, wg.Wait</p>
+<pre><code>select {
+case b.sem &lt;- struct{}{}:
+case &lt;-ctx.Done():
+    return nil
+}
+wg.Go(func() {
+    defer func() { &lt;-b.sem }()
+    b.handleMessage(handlerCtx, msg)
+})</code></pre></div>
+<div><p class="cap"><span class="tag tag-b">B</span> <code>internal/delivery/telegram/poller.go:68-74</code>: синхронно в цикле polling</p>
+<pre><code>for _, u := range updates {
+    offset = max(offset, u.UpdateID+1)
+    if u.Message == nil || u.Message.Text == "" {
+        continue
+    }
+    p.handler.Handle(ctx, u.Message.Chat.ID, u.Message.Text)
+}</code></pre></div>
+</div>
+</details>
+
+<h2 id="factors">Что сильнее всего повлияло на качество</h2>
+<ol class="factors">
+  <li><b>Примеры рабочего кода.</b> Самый сильный рычаг. Около 345 строк (~42% из 812 строк prod-кода B) скопированы почти дословно: <code>main.go</code> и <code>domain</code> один в один, в OWM-клиенте изменены 2 строки из 117. Рычаг работает в обе стороны: вместе с хорошими решениями переносятся и ошибки правила (строгая валидация города, sentinel без doc).</li>
+  <li><b>Явные контракты и порты.</b> <code>baseURL</code> и <code>*http.Client</code> в конструкторе, base URL из env. Это вопрос тестируемости: B проверяется black-box штатно, для A понадобились docker и MITM, а черновой прогон отправил фиктивный токен на настоящий Telegram.</li>
+  <li><b>Антипаттерны и security-запреты.</b> Статус до decode, LimitReader, rate limit, recover, retry_after. За них B получил больше баллов по шести критериям review. В A есть только то, что модель сделала сама. На flood: 20 запросов в OWM у A против 1 у B.</li>
+  <li><b>Структура папок и слои.</b> Раскладка B совпадает с правилами 1:1, <code>domain</code> импортирует только <code>errors</code>. У A своя раскладка и утилитный пакет <code>httpx</code>.</li>
+  <li><b>UX-эталон и тексты в messages.go.</b> Формат ответа единый и совпадает с эталоном, тексты дружелюбные. Цена: <code>metric</code>/<code>ru</code> зашиты в код.</li>
+  <li><b>Конкретика версий.</b> У B <code>go 1.26</code>, как требуют правила, у A <code>go 1.25</code>.</li>
+</ol>
+<div class="counter">
+  <p><b>Чего правила B не дали.</b></p>
+  <ul>
+    <li>Про конкурентность обработки в правилах ничего нет, поэтому B обрабатывает сообщения последовательно и здесь хуже A.</li>
+    <li>CLAUDE.md длиной 594 строки обошёлся на 60% дороже ($1.421 против $0.888) и занял в 2.4 раза больше времени (525.5 с против 214.7 с), хотя ходов меньше (13 против 20). Cache-read: 605 тыс. токенов против 286 тыс.</li>
+    <li>n = 1.</li>
+  </ul>
+</div>
+
+<h2 id="conclusions">Выводы и рекомендации</h2>
+<ul>
+  <li>Подробный CLAUDE.md поднял качество: review 30 против 22, black-box 14/14 против 13/14. Главный выигрыш дали защитные механизмы и тестируемость, которые общие формулировки не задают.</li>
+  <li>A без конкретики написал идиоматичный код с лучшей конкурентностью и shutdown, но пропустил всё, о чём правила не сказали явно.</li>
+  <li>Примеры кода работают как копипаст: ошибка в примере обходится дороже ошибки в тексте.</li>
+</ul>
+<h3>Что добавить в CLAUDE.md</h3>
+<ol>
+  <li><b>Правило конкурентности</b>: параллельная обработка с семафором, recover в каждом обработчике, <code>context.WithoutCancel</code> + <code>WaitGroup</code> при остановке. С примером кода.</li>
+  <li><b>Раздельные дедлайны</b> на запрос к OWM и на sendMessage.</li>
+  <li><b>Мягкая и тестируемая валидация города</b>: разрешить апострофы, цифры и комбинирующие знаки, нормализовать в NFC. Добавить таблицу допустимых примеров (<code>Val-d'Or</code>, <code>Ust'-Kut</code>, <code>मुंबई</code>, <code>New York</code>) и недопустимых, и требовать по ней табличный тест.</li>
+  <li><b>Offset при рестарте</b>: перед выходом подтвердить последний <code>update_id</code>, чтобы не было дублей.</li>
+  <li><b>Flood на исходящих</b>: одно предупреждение за окно, 429 и retry_after на sendMessage.</li>
+  <li><b>Doc-комментарии на sentinel-ошибках</b> прямо в примерах.</li>
+  <li><b>units/lang через env</b> с дефолтами.</li>
+  <li><b>Сократить объём</b>: длинные примеры оставить только там, где без них модель ошибается.</li>
+</ol>
+
+<h2 id="artifacts">Артефакты</h2>
+<div class="tbl"><table>
+<tbody>
+<tr><td>Промпт и окружение</td><td><a href="prompt.txt">prompt.txt</a>, <a href="env.txt">env.txt</a></td></tr>
+<tr><td>Правила</td><td><a href="variant-a/CLAUDE.md">variant-a/CLAUDE.md</a>, <a href="variant-b/CLAUDE.md">variant-b/CLAUDE.md</a></td></tr>
+<tr><td>Код</td><td><a href="variant-a/src">variant-a/src</a>, <a href="variant-b/src">variant-b/src</a></td></tr>
+<tr><td>Прогоны</td><td><a href="variant-a/run.json">a/run.json</a>, <a href="variant-b/run.json">b/run.json</a></td></tr>
+<tr><td>Метрики</td><td><a href="compare/metrics-a.txt">metrics-a.txt</a>, <a href="compare/metrics-b.txt">metrics-b.txt</a>, <a href="compare/metrics.sh">metrics.sh</a></td></tr>
+<tr><td>Деревья и дифф</td><td><a href="compare/tree-a.txt">tree-a.txt</a>, <a href="compare/tree-b.txt">tree-b.txt</a>, <a href="compare/diff.patch">diff.patch</a></td></tr>
+<tr><td>Review</td><td><a href="compare/review.md">review.md</a></td></tr>
+<tr><td>Black-box</td><td><a href="compare/harness/README.md">harness</a>, <a href="compare/transcripts/a.json">a.json</a>, <a href="compare/transcripts/b.json">b.json</a>, <a href="compare/chat-side-by-side.html">chat-side-by-side.html</a></td></tr>
+</tbody></table></div>
+
+<footer>Day1 · ai-advent-challenge-adv · 2026-10-24</footer>
+</main>
+</body>
+</html>
