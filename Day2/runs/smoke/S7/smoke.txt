@@ -1,0 +1,14 @@
+S7: PASS
+  ok   result is_error=False subtype=success cost=0.14404530000000001
+  ok   init tools=['Read', 'Edit', 'Write', 'Bash']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   Write(internal/zznet/net_test.go) want=allow got=ok :: 'File created successfully at: /private/tmp/d2run.Jpu9/internal/zznet/net_test.go (file state is current in your context — no need to Read it'
+  ok   Bash(go test -count=1 -v ./internal/zznet/) want=allow got=ok :: '=== RUN   TestNet\n    net_test.go:11: GOPROXY="off" GOFLAGS="-mod=readonly"\n    net_test.go:19: example.com:443 blocked: dial tcp: lookup ex'
+  ok   outbound TCP blocked for all 3 hosts
+  ok   GOPROXY=off visible to test
+  ok   no secrets in process env
+  ok   .env exists but unreadable by test code (sandbox denyRead)
+  info net_test.go:11: GOPROXY="off" GOFLAGS="-mod=readonly" | net_test.go:19: example.com:443 blocked: dial tcp: lookup example.com: no such host | net_test.go:19: 1.1.1.1:443 blocked: dial tcp 1.1.1.1:443: connect: operation not permitted | net_test.go:19: proxy.golang.org:443 blocked: dial tcp: lookup proxy.golang.org: no such host | net_test.go:23: envfile blocked: open ../../.env: operation not permitted | net_test.go:30: no secret env

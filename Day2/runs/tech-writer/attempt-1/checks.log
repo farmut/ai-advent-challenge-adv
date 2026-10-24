@@ -1,0 +1,26 @@
+CRIT W1 PASS changed=['README.md', 'docs/ARCHITECTURE.md', 'docs/CONFIGURATION.md', 'docs/OPERATIONS.md', 'docs/TESTING.md'] outside=[] missing_docs=[] readme_changed=True
+  W2limit OK   OWM timeout 10s
+  W2limit OK   Telegram timeout 40s
+  W2limit OK   long poll 30s
+  W2limit OK   body 1 MiB
+  W2limit OK   per-chat 2s
+  W2limit OK   maxTrackedChats
+  W2limit OK   city 64
+  W2limit OK   backoff 1s..30s
+  W2readme json/stdout claim=True stderr_mentioned=True
+CRIT W2 PASS env=['LOG_LEVEL', 'OPENWEATHER_API_KEY', 'OPENWEATHER_BASE_URL', 'TELEGRAM_BASE_URL', 'TELEGRAM_BOT_TOKEN']; defaults, limits, README fixes OK
+CRIT W2-manual MANUAL сверить значения в таблицах с writer-facts.md по смыслу (verdict.txt)
+  W3cmd OK    cp .env.example .env (source exists=True)
+  W3cmd OK    make run (make target exists=True)
+  W3cmd OK    export TELEGRAM_BOT_TOKEN=<TELEGRAM_BOT_TOKEN> OPENWEATHER_API_KEY=<OPENWEATHER_API_KEY> (vars known=True)
+  W3cmd OK    go run ./cmd/weatherbot (path exists=True, not executed: needs real secrets)
+  W3cmd INFO  go test -run TestPollerBackoffAndRetryAfter ./internal/delivery/telegram/ (not classified, not executed)
+  W3cmd INFO  go test -run 'TestClientCurrent$' ./internal/repository/openweather/ (not classified, not executed)
+  W3cmd OK    make test (executed, rc=0) ok  	weatherbot/internal/repository/openweather	1.281s	coverage: 92.1% of statements | ok  	weatherbot/internal/usecase	1.184s	coverage: 100.0% of statements
+  W3cmd OK    make lint (executed, rc=0) go vet ./...
+  W3cmd OK    make build (executed, rc=0) go build -o bin/weatherbot ./cmd/weatherbot
+  W3cmd OK    go test ./internal/usecase/ (executed, rc=0) ok  	weatherbot/internal/usecase	0.183s
+CRIT W3 PASS 10 commands checked, 4 executed
+CRIT W4 PASS links OK, 13 paths OK, identifiers OK
+CRIT W5 PASS no placeholders
+CRIT W-SEC PASS placeholders only

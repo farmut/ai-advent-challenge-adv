@@ -1,0 +1,9 @@
+S3-profile: PASS
+  ok   result is_error=False subtype=success cost=0.006976400000000001
+  ok   init tools=['Read', 'Grep', 'Glob']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   no write/exec tool calls: []
+  ok   git status empty: ''

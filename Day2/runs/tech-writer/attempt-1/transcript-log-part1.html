@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>tech-writer attempt-1 (v1) — финальный</title>
+<style>
+  html, body { margin: 0; padding: 0; background: #eef1f5; }
+  body { font: 13px/1.42 -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; color: #111; }
+  .page { padding: 16px 18px 40px; }
+  h1 { font-size: 18px; margin: 0 0 2px; }
+  .sub { font-size: 12px; color: #4a5b68; margin-bottom: 10px; }
+  .card { background: #fff; border-radius: 8px; padding: 10px 12px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,.10); }
+  .card h2 { font-size: 13px; margin: 0 0 6px; text-transform: uppercase; letter-spacing: .04em; color: #4a5b68; }
+  pre { margin: 0; white-space: pre-wrap; word-wrap: break-word; font: 12px/1.4 ui-monospace, Menlo, monospace; }
+  .verdict { font-weight: 700; font-size: 14px; }
+  table { border-collapse: collapse; width: 100%; }
+  td { padding: 2px 6px; vertical-align: top; border-top: 1px solid #eef0f3; font-size: 12px; }
+  td.id { font-weight: 700; white-space: nowrap; width: 80px; }
+  td.st { white-space: nowrap; width: 60px; }
+  .ok { color: #1b6b2a; } .bad { color: #b3261e; font-weight: 700; } .man { color: #8a5a00; } .info { color: #5c6b77; }
+  .stats span { display: inline-block; background: #eef3f8; border-radius: 10px; padding: 1px 8px; margin: 0 4px 4px 0; font-size: 12px; }
+  .ev { margin: 0 0 6px; border-radius: 6px; padding: 6px 9px; }
+  .ev .lb { font-size: 11px; font-weight: 700; color: #4a5b68; margin-bottom: 2px; }
+  .text { background: #fff; border-left: 3px solid #3390ec; }
+  .tool { background: #f6f8fb; border-left: 3px solid #8a63d2; }
+  .result { background: #fbfbfb; border-left: 3px solid #b8c2cc; color: #333; }
+  .error { background: #fff4f3; border-left: 3px solid #b3261e; }
+  .answer pre { font: 12.5px/1.45 -apple-system, "Segoe UI", Roboto, sans-serif; }
+</style>
+</head>
+<body>
+<div class="page">
+  <h1>tech-writer attempt-1 (v1) — финальный</h1>
+  <div class="sub">Day2 · агентный профиль · 2026-10-24 22:08 · лог, часть 1 из 2</div>
+
+  <div class="card">
+    <h2>Прогон</h2>
+    <div class="stats"><span>subtype=success</span><span>is_error=false</span><span>turns=36</span><span>cost=$1.06</span><span>time=3m18s</span><span>permission_denials=0</span></div>
+    <pre>model=claude-opus-5-5 · tools=[Read Grep Glob Edit Write] · mcp_servers=[] · permissionMode=dontAsk · cwd=/private/tmp/d2run.KsiV · claude 2.1.310</pre>
+    <pre>0b5866f5a396  profiles/tech-writer.md
+60a86d161aeb  profiles/tech-writer.settings.json
+0929051dd171  runs/tech-writer/attempt-1/task.txt
+</pre>
+  </div>
+
+  
+
+  
+  <div class="card">
+    <h2>Транскрипт</h2>
+    <div class="ev tool"><div class="lb">#1 → Glob</div><pre>{&#34;pattern&#34;:&#34;**/*&#34;}</pre></div>
+    <div class="ev result"><div class="lb">#1 ← Glob</div><pre>cmd/weatherbot/main.go
+go.mod
+Makefile
+internal/repository/openweather/client.go
+internal/repository/openweather/client_test.go
+internal/config/config.go
+internal/config/config_test.go
+internal/delivery/telegram/handler.go
+internal/delivery/telegram/format_test.go
+internal/delivery/telegram/format.go
+internal/delivery/telegram/client.go
+internal/delivery/telegram/messages.go
+internal/delivery/telegram/poller.go
+internal/delivery/telegram/handler_test.go
+internal/delivery/telegram/poller_test.go
+internal/delivery/telegram/client_test.go
+internal/usecase/weather.go
+internal/usecase/weather_test.go
+internal/domain/weather.go
+internal/domain/errors.go
+README.md
+.gitignore
+.env.example
+.git/description
+.git/hooks/commit-msg.sample
+.git/hooks/pre-rebase.sample
+.git/hooks/sendemail-validate.sample
+.git/hooks/pre-commit.sample
+.git/hooks/applypatch-msg.sample
+.git/hooks/fsmonitor-watchman.sample
+.git/hooks/pre-receive.sample
+.git/hooks/prepare-commit-msg.sample
+.git/hooks/post-update.sample
+.git/hooks/pre-merge-commit.sample
+.git/hooks/pre-applypatch.sample
+.git/hooks/pre-push.sample
+.git/hooks/update.sample
+.git/hooks/push-to-checkout.sample
+.git/config
+.git/HEAD
+.git/objects/18/d1e6cb3fb
+… [обрезано, всего 3264 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#2 → Read</div><pre>/private/tmp/d2run.KsiV/README.md</pre></div>
+    <div class="ev result"><div class="lb">#2 ← Read</div><pre>1	# weatherbot
+2	
+3	Telegram-бот, который присылает текущую погоду в городе из
+4	[OpenWeatherMap](https://openweathermap.org/current). Go 1.26, только стандартная библиотека,
+5	long polling (входящий HTTP-сервер не нужен).
+6	
+7	```
+8	🌤 Москва, RU
+9	🌡 &#43;12 °C, ощущается как &#43;10 °C
+10	☁️ Переменная облачность
+11	💧 Влажность 71 %
+12	💨 Ветер 4 м/с, СЗ
+13	```
+14	
+15	## Команды
+16	
+17	| Ввод              | Ответ                              |
+18	|-------------------|------------------------------------|
+19	| `/start`          | приветствие                        |
+20	| `/help`           | список команд                      |
+21	| `/weather Казань` | погода в Казани                    |
+22	| `Казань`          | то же самое — текст = город        |
+23	
+24	Не чаще одного запроса в 2 секунды на чат.
+25	
+26	## Переменные окружения
+27	
+28	| Переменная             | Обязательна | По умолчанию                     |
+29	|------------------------|-------------|----------------------------------|
+30	| `TELEGRAM_BOT_TOKEN`   | да          | —                                |
+31	| `OPENWEATHER_API_KEY`  | да          | —                                |
+32	| `TELEGRAM_BASE_URL`    | нет         | `http
+… [обрезано, всего 2627 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#3 → Read</div><pre>/private/tmp/d2run.KsiV/cmd/weatherbot/main.go</pre></div>
+    <div class="ev result"><div class="lb">#3 ← Read</div><pre>1	// Command weatherbot — Telegram-бот, присылающий текущую погоду из OpenWeatherMap.
+2	package main
+3	
+4	import (
+5		&#34;context&#34;
+6		&#34;errors&#34;
+7		&#34;fmt&#34;
+8		&#34;log/slog&#34;
+9		&#34;net/http&#34;
+10		&#34;os&#34;
+11		&#34;os/signal&#34;
+12		&#34;syscall&#34;
+13		&#34;time&#34;
+14	
+15		&#34;weatherbot/internal/config&#34;
+16		&#34;weatherbot/internal/delivery/telegram&#34;
+17		&#34;weatherbot/internal/repository/openweather&#34;
+18		&#34;weatherbot/internal/usecase&#34;
+19	)
+20	
+21	func main() {
+22		if err := run(); err != nil {
+23			slog.Error(&#34;weatherbot stopped&#34;, &#34;err&#34;, err)
+24			os.Exit(1)
+25		}
+26	}
+27	
+28	func run() error {
+29		cfg, err := config.Load()
+30		if err != nil {
+31			return fmt.Errorf(&#34;load config: %w&#34;, err)
+32		}
+33		logger := slog.New(slog.NewJSONHandler(os.Stdout, &amp;slog.HandlerOptions{Level: cfg.LogLevel}))
+34	
+35		ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+36		defer stop()
+37	
+38		weather := openweather.NewClient(cfg.OpenWeatherBaseURL, cfg.OpenWeatherAPIKey, &amp;http.Client{Timeout: 10 * time.Second})
+39		service := usecase.NewWeatherService(weather)
+40		bot := telegram.NewClient(cfg.TelegramBaseURL, cfg.TelegramBotToken, &amp;http.Client{Timeout: 40 * time.Second})
+41		handler := telegram.NewHandler(servi
+… [обрезано, всего 1508 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#4 → Read</div><pre>/private/tmp/d2run.KsiV/internal/config/config.go</pre></div>
+    <div class="ev result"><div class="lb">#4 ← Read</div><pre>1	// Package config читает и валидирует конфигурацию из переменных окружения.
+2	package config
+3	
+4	import (
+5		&#34;errors&#34;
+6		&#34;fmt&#34;
+7		&#34;log/slog&#34;
+8		&#34;net/url&#34;
+9		&#34;os&#34;
+10		&#34;strings&#34;
+11	)
+12	
+13	const (
+14		defaultTelegramBaseURL    = &#34;https://api.telegram.org&#34;
+15		defaultOpenWeatherBaseURL = &#34;https://api.openweathermap.org&#34;
+16		defaultLogLevel           = &#34;info&#34;
+17	)
+18	
+19	// Config — настройки бота.
+20	type Config struct {
+21		TelegramBotToken   string
+22		OpenWeatherAPIKey  string
+23		TelegramBaseURL    string
+24		OpenWeatherBaseURL string
+25		LogLevel           slog.Level
+26	}
+27	
+28	// Load читает окружение и возвращает все найденные проблемы разом.
+29	// Значения секретов в тексты ошибок не попадают.
+30	func Load() (Config, error) {
+31		var errs []error
+32		cfg := Config{
+33			TelegramBotToken:   env(&#34;TELEGRAM_BOT_TOKEN&#34;, &#34;&#34;),
+34			OpenWeatherAPIKey:  env(&#34;OPENWEATHER_API_KEY&#34;, &#34;&#34;),
+35			TelegramBaseURL:    env(&#34;TELEGRAM_BASE_URL&#34;, defaultTelegramBaseURL),
+36			OpenWeatherBaseURL: env(&#34;OPENWEATHER_BASE_URL&#34;, defaultOpenWeatherBaseURL),
+37		}
+38	
+39		switch {
+40		case cfg.TelegramBotToken == &#34;&#34;:
+41			errs = append(errs, errors.New(&#34;TELEGRAM_BOT_TOKEN is required&#34;))
+42		case !vali
+… [обрезано, всего 3765 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#5 → Read</div><pre>/private/tmp/d2run.KsiV/Makefile</pre></div>
+    <div class="ev result"><div class="lb">#5 ← Read</div><pre>1	BIN := bin/weatherbot
+2	
+3	.PHONY: build run test lint
+4	
+5	build:
+6		go build -o $(BIN) ./cmd/weatherbot
+7	
+8	# Подхватывает .env, если он есть (значения из .env перекрывают окружение).
+9	run:
+10		@set -a; [ -f .env ] &amp;&amp; . ./.env; set &#43;a; go run ./cmd/weatherbot
+11	
+12	test:
+13		go test -race -cover ./...
+14	
+15	lint:
+16		go vet ./...
+17		@out=&#34;$$(gofmt -l .)&#34;; if [ -n &#34;$$out&#34; ]; then echo &#34;gofmt needed:&#34;; echo &#34;$$out&#34;; exit 1; fi
+18	</pre></div>
+    <div class="ev tool"><div class="lb">#6 → Read</div><pre>/private/tmp/d2run.KsiV/.env.example</pre></div>
+    <div class="ev result"><div class="lb">#6 ← Read</div><pre>1	TELEGRAM_BOT_TOKEN=
+2	OPENWEATHER_API_KEY=
+3	TELEGRAM_BASE_URL=
+4	OPENWEATHER_BASE_URL=
+5	LOG_LEVEL=
+6	</pre></div>
+    <div class="ev tool"><div class="lb">#7 → Read</div><pre>/private/tmp/d2run.KsiV/go.mod</pre></div>
+    <div class="ev result"><div class="lb">#7 ← Read</div><pre>1	module weatherbot
+2	
+3	go 1.26
+4	</pre></div>
+    <div class="ev tool"><div class="lb">#8 → Read</div><pre>/private/tmp/d2run.KsiV/.gitignore</pre></div>
+    <div class="ev result"><div class="lb">#8 ← Read</div><pre>1	.env
+2	/bin/
+3	*.out
+4	</pre></div>
+    <div class="ev tool"><div class="lb">#9 → Read</div><pre>/private/tmp/d2run.KsiV/internal/repository/openweather/client.go</pre></div>
+    <div class="ev result"><div class="lb">#9 ← Read</div><pre>1	// Package openweather — адаптер к OpenWeatherMap Current Weather API.
+2	package openweather
+3	
+4	import (
+5		&#34;context&#34;
+6		&#34;encoding/json&#34;
+7		&#34;fmt&#34;
+8		&#34;io&#34;
+9		&#34;net/http&#34;
+10		&#34;net/url&#34;
+11		&#34;strings&#34;
+12	
+13		&#34;weatherbot/internal/domain&#34;
+14	)
+15	
+16	const maxBodyBytes = 1 &lt;&lt; 20 // 1 MiB
+17	
+18	// Client запрашивает текущую погоду у OpenWeatherMap.
+19	type Client struct {
+20		baseURL    string
+21		apiKey     string
+22		httpClient *http.Client
+23	}
+24	
+25	// NewClient создаёт клиент. httpClient обязан иметь Timeout.
+26	func NewClient(baseURL, apiKey string, httpClient *http.Client) *Client {
+27		return &amp;Client{baseURL: baseURL, apiKey: apiKey, httpClient: httpClient}
+28	}
+29	
+30	type currentResponse struct {
+31		Name string `json:&#34;name&#34;`
+32		Sys  struct {
+33			Country string `json:&#34;country&#34;`
+34		} `json:&#34;sys&#34;`
+35		Main struct {
+36			Temp      float64 `json:&#34;temp&#34;`
+37			FeelsLike float64 `json:&#34;feels_like&#34;`
+38			Humidity  int     `json:&#34;humidity&#34;`
+39		} `json:&#34;main&#34;`
+40		Weather []struct {
+41			Description string `json:&#34;description&#34;`
+42		} `json:&#34;weather&#34;`
+43		Wind struct {
+44			Speed float64 `json:&#34;speed&#34;`
+45			Deg   int     `json:&#34;deg&#34;`
+46		} `json:&#34;wind&#34;`
+47	}
+48	
+49	// Current возв
+… [обрезано, всего 3537 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#10 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/poller.go</pre></div>
+    <div class="ev result"><div class="lb">#10 ← Read</div><pre>1	package telegram
+2	
+3	import (
+4		&#34;context&#34;
+5		&#34;errors&#34;
+6		&#34;log/slog&#34;
+7		&#34;time&#34;
+8	)
+9	
+10	const (
+11		minBackoff = time.Second
+12		maxBackoff = 30 * time.Second
+13	)
+14	
+15	// UpdatesGetter — источник апдейтов для long polling.
+16	type UpdatesGetter interface {
+17		GetUpdates(ctx context.Context, offset int64) ([]Update, error)
+18	}
+19	
+20	// MessageHandler обрабатывает одно текстовое сообщение.
+21	type MessageHandler interface {
+22		Handle(ctx context.Context, chatID int64, text string)
+23	}
+24	
+25	// Poller крутит цикл getUpdates и раздаёт сообщения обработчику.
+26	type Poller struct {
+27		updates UpdatesGetter
+28		handler MessageHandler
+29		log     *slog.Logger
+30		wait    func(ctx context.Context, d time.Duration) error // подменяется в тестах
+31	}
+32	
+33	// NewPoller создаёт poller.
+34	func NewPoller(updates UpdatesGetter, handler MessageHandler, log *slog.Logger) *Poller {
+35		return &amp;Poller{updates: updates, handler: handler, log: log, wait: sleep}
+36	}
+37	
+38	// Run работает до отмены ctx (возвращает ctx.Err()) или до отказа Telegram в токене.
+39	func (p *Poller) Run(ctx context.Context) error {
+40		var offset int64
+41		backoff := minBackoff
+42		for {
+43			if err := ctx.E
+… [обрезано, всего 2313 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#11 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/handler.go</pre></div>
+    <div class="ev result"><div class="lb">#11 ← Read</div><pre>1	package telegram
+2	
+3	import (
+4		&#34;context&#34;
+5		&#34;errors&#34;
+6		&#34;log/slog&#34;
+7		&#34;strings&#34;
+8		&#34;sync&#34;
+9		&#34;time&#34;
+10		&#34;unicode&#34;
+11	
+12		&#34;weatherbot/internal/domain&#34;
+13	)
+14	
+15	const (
+16		perChatInterval = 2 * time.Second
+17		maxTrackedChats = 10_000 // после этого из карты выкидываются устаревшие записи
+18	)
+19	
+20	// WeatherGetter — то, что handler&#39;у нужно от usecase.
+21	type WeatherGetter interface {
+22		Current(ctx context.Context, city string) (domain.Weather, error)
+23	}
+24	
+25	// Sender отправляет текст в чат.
+26	type Sender interface {
+27		Send(ctx context.Context, chatID int64, text string) error
+28	}
+29	
+30	// Handler превращает входящее сообщение в ответ.
+31	type Handler struct {
+32		weather WeatherGetter
+33		sender  Sender
+34		log     *slog.Logger
+35		mu      sync.Mutex
+36		lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
+37	}
+38	
+39	// NewHandler создаёт обработчик сообщений.
+40	func NewHandler(weather WeatherGetter, sender Sender, log *slog.Logger) *Handler {
+41		return &amp;Handler{weather: weather, sender: sender, log: log, lastReq: make(map[int64]time.Time)}
+42	}
+43	
+44	// Handle обрабатывает одно сообщение. Паника не роняет бота.
+45	func (h *Handler) Handle(ctx c
+… [обрезано, всего 3301 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#12 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/client.go</pre></div>
+    <div class="ev result"><div class="lb">#12 ← Read</div><pre>1	// Package telegram — delivery-слой: long polling Telegram Bot API и обработка команд.
+2	package telegram
+3	
+4	import (
+5		&#34;bytes&#34;
+6		&#34;context&#34;
+7		&#34;encoding/json&#34;
+8		&#34;errors&#34;
+9		&#34;fmt&#34;
+10		&#34;io&#34;
+11		&#34;net/http&#34;
+12		&#34;net/url&#34;
+13		&#34;strconv&#34;
+14		&#34;strings&#34;
+15		&#34;time&#34;
+16	)
+17	
+18	const (
+19		maxBodyBytes    = 1 &lt;&lt; 20 // 1 MiB
+20		longPollTimeout = 30      // секунд; http.Client.Timeout должен быть больше
+21	)
+22	
+23	// ErrUnauthorized — Telegram отверг токен бота; ретраи бессмысленны.
+24	var ErrUnauthorized = errors.New(&#34;telegram bot token rejected&#34;)
+25	
+26	// Update — входящее обновление Bot API (нужны только сообщения).
+27	type Update struct {
+28		UpdateID int64    `json:&#34;update_id&#34;`
+29		Message  *Message `json:&#34;message&#34;`
+30	}
+31	
+32	// Message — входящее сообщение.
+33	type Message struct {
+34		Chat Chat   `json:&#34;chat&#34;`
+35		Text string `json:&#34;text&#34;`
+36	}
+37	
+38	// Chat — чат, из которого пришло сообщение.
+39	type Chat struct {
+40		ID int64 `json:&#34;id&#34;`
+41	}
+42	
+43	// retryAfterError — Telegram попросил подождать (HTTP 429).
+44	type retryAfterError struct {
+45		after time.Duration
+46	}
+47	
+48	func (e *retryAfterError) Error() string {
+49		return &#34;telegram rate limited, retry after &#34; &#43; e.
+… [обрезано, всего 5314 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#13 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/messages.go</pre></div>
+    <div class="ev result"><div class="lb">#13 ← Read</div><pre>1	package telegram
+2	
+3	// Все тексты, которые видит пользователь.
+4	const (
+5		msgStart = &#34;Привет! Я подскажу погоду. Просто напиши название города, например: Казань&#34;
+6		msgHelp  = &#34;Я присылаю текущую погоду.\n\n&#34; &#43;
+7			&#34;Команды:\n&#34; &#43;
+8			&#34;/start — приветствие\n&#34; &#43;
+9			&#34;/help — эта справка\n&#34; &#43;
+10			&#34;/weather &lt;город&gt; — погода в городе\n\n&#34; &#43;
+11			&#34;Пример: /weather Казань\n&#34; &#43;
+12			&#34;Можно и без команды — просто напиши название города.&#34;
+13		msgEmptyCity   = &#34;Напиши город после команды, например: /weather Пермь&#34;
+14		msgInvalidCity = &#34;Название города может содержать только буквы, пробел, дефис, точку и запятую&#34;
+15		msgUnavailable = &#34;⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут&#34;
+16		msgTooFrequent = &#34;⏳ Не так быстро, попробуй через пару секунд&#34;
+17	)
+18	
+19	func msgCityNotFound(city string) string {
+20		return &#34;🤔 Не нашёл город «&#34; &#43; city &#43; &#34;». Проверь написание или попробуй по-английски&#34;
+21	}
+22	</pre></div>
+    <div class="ev tool"><div class="lb">#14 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/format.go</pre></div>
+    <div class="ev result"><div class="lb">#14 ← Read</div><pre>1	package telegram
+2	
+3	import (
+4		&#34;math&#34;
+5		&#34;strconv&#34;
+6		&#34;strings&#34;
+7		&#34;unicode&#34;
+8		&#34;unicode/utf8&#34;
+9	
+10		&#34;weatherbot/internal/domain&#34;
+11	)
+12	
+13	// formatWeather собирает plain-text ответ с погодой.
+14	func formatWeather(w domain.Weather) string {
+15		var b strings.Builder
+16		b.WriteString(&#34;🌤 &#34; &#43; w.City)
+17		if w.Country != &#34;&#34; {
+18			b.WriteString(&#34;, &#34; &#43; w.Country)
+19		}
+20		b.WriteString(&#34;\n🌡 &#34; &#43; formatTemp(w.TempC) &#43; &#34; °C, ощущается как &#34; &#43; formatTemp(w.FeelsLikeC) &#43; &#34; °C&#34;)
+21		if w.Description != &#34;&#34; {
+22			b.WriteString(&#34;\n☁️ &#34; &#43; capitalize(w.Description))
+23		}
+24		b.WriteString(&#34;\n💧 Влажность &#34; &#43; strconv.Itoa(w.Humidity) &#43; &#34; %&#34;)
+25		b.WriteString(&#34;\n💨 Ветер &#34; &#43; strconv.Itoa(int(math.Round(w.WindSpeed))) &#43; &#34; м/с, &#34; &#43; windDirection(w.WindDeg))
+26		return b.String()
+27	}
+28	
+29	// formatTemp: 12.4 → &#34;&#43;12&#34;, -2.6 → &#34;-3&#34;, -0.4 → &#34;0&#34;.
+30	func formatTemp(t float64) string {
+31		n := int(math.Round(t))
+32		if n &gt; 0 {
+33			return &#34;&#43;&#34; &#43; strconv.Itoa(n)
+34		}
+35		return strconv.Itoa(n)
+36	}
+37	
+38	// windDirection переводит градусы в один из 8 румбов; 0 = север.
+39	func windDirection(deg int) string {
+40		dirs := [...]string{&#34;С&#34;, &#34;СВ&#34;, &#34;В&#34;, &#34;ЮВ&#34;, &#34;Ю&#34;, &#34;ЮЗ&#34;, &#34;З&#34;, &#34;СЗ&#34;} // по часовой, о
+… [обрезано, всего 1543 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#15 → Read</div><pre>/private/tmp/d2run.KsiV/internal/usecase/weather.go</pre></div>
+    <div class="ev result"><div class="lb">#15 ← Read</div><pre>1	// Package usecase содержит бизнес-логику бота.
+2	package usecase
+3	
+4	import (
+5		&#34;context&#34;
+6		&#34;fmt&#34;
+7		&#34;strings&#34;
+8		&#34;unicode&#34;
+9		&#34;unicode/utf8&#34;
+10	
+11		&#34;weatherbot/internal/domain&#34;
+12	)
+13	
+14	const maxCityRunes = 64
+15	
+16	// WeatherProvider — источник текущей погоды.
+17	type WeatherProvider interface {
+18		Current(ctx context.Context, city string) (domain.Weather, error)
+19	}
+20	
+21	// WeatherService отдаёт погоду по названию города.
+22	type WeatherService struct {
+23		provider WeatherProvider
+24	}
+25	
+26	// NewWeatherService создаёт сервис поверх провайдера погоды.
+27	func NewWeatherService(provider WeatherProvider) *WeatherService {
+28		return &amp;WeatherService{provider: provider}
+29	}
+30	
+31	// Current валидирует город и запрашивает погоду у провайдера.
+32	func (s *WeatherService) Current(ctx context.Context, rawCity string) (domain.Weather, error) {
+33		city, err := normalizeCity(rawCity)
+34		if err != nil {
+35			return domain.Weather{}, err
+36		}
+37		w, err := s.provider.Current(ctx, city)
+38		if err != nil {
+39			return domain.Weather{}, fmt.Errorf(&#34;get current weather: %w&#34;, err)
+40		}
+41		return w, nil
+42	}
+43	
+44	func normalizeCity(raw string) (string, error) {
+45		if !
+… [обрезано, всего 1650 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#16 → Read</div><pre>/private/tmp/d2run.KsiV/internal/domain/weather.go</pre></div>
+    <div class="ev result"><div class="lb">#16 ← Read</div><pre>1	// Package domain содержит сущности и ошибки предметной области.
+2	package domain
+3	
+4	// Weather — текущая погода в городе.
+5	type Weather struct {
+6		City        string  // название из ответа провайдера
+7		Country     string  // ISO 3166-1 alpha-2, например &#34;RU&#34;
+8		TempC       float64 // температура, °C
+9		FeelsLikeC  float64 // ощущается как, °C
+10		Description string  // описание на русском, как прислал провайдер
+11		Humidity    int     // влажность, %
+12		WindSpeed   float64 // скорость ветра, м/с
+13		WindDeg     int     // направление ветра, градусы, 0 = север
+14	}
+15	</pre></div>
+    <div class="ev tool"><div class="lb">#17 → Read</div><pre>/private/tmp/d2run.KsiV/internal/domain/errors.go</pre></div>
+    <div class="ev result"><div class="lb">#17 ← Read</div><pre>1	package domain
+2	
+3	import &#34;errors&#34;
+4	
+5	var (
+6		ErrInvalidCity         = errors.New(&#34;invalid city&#34;)
+7		ErrCityNotFound        = errors.New(&#34;city not found&#34;)
+8		ErrProviderAuth        = errors.New(&#34;weather provider auth failed&#34;)
+9		ErrRateLimited         = errors.New(&#34;weather provider rate limited&#34;)
+10		ErrProviderUnavailable = errors.New(&#34;weather provider unavailable&#34;)
+11	)
+12	</pre></div>
+    <div class="ev tool"><div class="lb">#18 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/poller_test.go</pre></div>
+    <div class="ev result"><div class="lb">#18 ← Read</div><pre>1	package telegram
+2	
+3	import (
+4		&#34;context&#34;
+5		&#34;errors&#34;
+6		&#34;io&#34;
+7		&#34;log/slog&#34;
+8		&#34;sync&#34;
+9		&#34;testing&#34;
+10		&#34;time&#34;
+11	)
+12	
+13	type step struct {
+14		updates []Update
+15		err     error
+16	}
+17	
+18	// fakeUpdates отдаёт заранее заданные ответы, затем отменяет контекст.
+19	type fakeUpdates struct {
+20		steps   []step
+21		offsets []int64
+22		cancel  context.CancelFunc
+23	}
+24	
+25	func (f *fakeUpdates) GetUpdates(_ context.Context, offset int64) ([]Update, error) {
+26		f.offsets = append(f.offsets, offset)
+27		if len(f.offsets) &gt; len(f.steps) {
+28			f.cancel()
+29			return nil, context.Canceled
+30		}
+31		s := f.steps[len(f.offsets)-1]
+32		return s.updates, s.err
+33	}
+34	
+35	type handled struct {
+36		chatID int64
+37		text   string
+38	}
+39	
+40	type fakeHandler struct {
+41		mu  sync.Mutex
+42		got []handled
+43	}
+44	
+45	func (f *fakeHandler) Handle(_ context.Context, chatID int64, text string) {
+46		f.mu.Lock()
+47		defer f.mu.Unlock()
+48		f.got = append(f.got, handled{chatID, text})
+49	}
+50	
+51	func newTestPoller(steps []step) (*Poller, *fakeUpdates, *fakeHandler, *[]time.Duration, context.Context) {
+52		ctx, cancel := context.WithCancel(context.Background())
+53		up := &amp;fakeUpdates{steps: ste
+… [обрезано, всего 4708 символов]</pre></div>
+    <div class="ev tool"><div class="lb">#19 → Read</div><pre>/private/tmp/d2run.KsiV/internal/delivery/telegram/client_test.go</pre></div>
+    
+  </div>
+  
+
+  
+</div>
+</body>
+</html>

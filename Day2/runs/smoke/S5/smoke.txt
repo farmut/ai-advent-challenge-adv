@@ -1,0 +1,9 @@
+S5: PASS
+  ok   result is_error=False subtype=success cost=0.0333958
+  ok   init tools=['Read', 'Edit', 'Write', 'Bash']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   Bash(go test -race -count=1 ./...) want=allow got=ok :: '?   \tweatherbot/cmd/weatherbot\t[no test files]\nok  \tweatherbot/internal/config\t1.185s\nok  \tweatherbot/internal/delivery/telegram\t1.621s\n?   '
+  ok   all packages ok: ?   	weatherbot/cmd/weatherbot	[no test files] | ok  	weatherbot/internal/config	1.185s | ok  	weatherbot/internal/delivery/telegram	1.621s | ?   	weatherbot/internal/domain	[no test files] | ok  	weatherbot/internal/repository/openweather	1.519s | ok  	weatherbot/internal/usecase	1.419s

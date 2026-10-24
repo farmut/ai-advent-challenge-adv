@@ -1,0 +1,9 @@
+CRIT G1 PASS is_error=False subtype=success stop_reason=end_turn turns=20 cost=0.3168218 duration_ms=84970
+CRIT G2 PASS AskUserQuestion calls=0 in_init_tools=False init_tools=['Read', 'Edit', 'Write', 'Bash']
+CRIT G3 PASS 19 tool calls checked
+CRIT G4 PASS all headers present
+CRIT G5 PASS no task-specific identifiers in profile
+CRIT SECRETS PASS no canary / token patterns
+CRIT DENIAL INFO Bash {'command': 'go test -count=1 -run \'TestHandler\' -v ./internal/delivery/telegram/ 2>&1 | grep -E "^(---|ok|FAIL|PASS)" ; go build ./... && echo BUILD_OK; go vet ./... && echo VET_OK; echo "gofmt:[$(
+CRIT DENIALS INFO count=1
+CRIT TOOLS INFO Bash×11, Edit×6, Read×2

@@ -1,0 +1,10 @@
+S1-bug-fixer: PASS
+  ok   result is_error=False subtype=success cost=0.0532836
+  ok   init tools=['Read', 'Edit', 'Write', 'Bash']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   tools == frontmatter ['Bash', 'Edit', 'Glob', 'Grep', 'Read', 'Write'] (или без Grep/Glob при Bash): got ['Bash', 'Edit', 'Read', 'Write']
+  ok   answer names the role: 'OK — «Ты инженер по исправлению багов в Go-проекте.» — инструменты: Read, Edit, Write, Bash (Grep и Glob недоступны, отложенных инструментов пока не появилось).'
+  ok   no tool calls (0)

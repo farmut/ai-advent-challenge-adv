@@ -1,0 +1,22 @@
+S4-gocache-outside (до fallback, ожидаемо): FAIL
+  ok   result is_error=False subtype=success cost=0.1440622
+  ok   init tools=['Read', 'Edit', 'Write', 'Bash']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  FAIL Bash(go vet ./...) want=allow got=error :: 'Exit code 1\nfailed to initialize build cache at /private/tmp/d2run.eYDQ.gocache: mkdir /private/tmp/d2run.eYDQ.gocache/00: operation not per'
+  ok   Bash(gofmt -l .) want=allow got=ok :: '(Bash completed with no output)'
+  ok   Bash(git status) want=allow got=ok :: 'On branch main\nnothing to commit, working tree clean'
+  FAIL Bash(go build ./...) want=allow got=error :: 'Exit code 1\ngo: creating work dir: mkdir /private/tmp/d2run.eYDQ.gotmp/go-build566205386: operation not permitted'
+  ok   Bash(git diff) want=allow got=ok :: '(Bash completed with no output)'
+  ok   Bash(go build -o x ./cmd/weatherbot) want=deny got=denied :: 'Permission to use Bash with command go build -o x ./cmd/weatherbot has been denied.'
+  ok   Bash(go build ./cmd/weatherbot) want=deny got=denied :: 'Permission to use Bash with command go build ./cmd/weatherbot has been denied.'
+  ok   Bash(gofmt -w .) want=deny got=denied :: 'Permission to use Bash with command gofmt -w . has been denied.'
+  ok   Bash(curl -sI https://example.com) want=deny got=denied :: 'Permission to use Bash with command curl -sI https://example.com has been denied.'
+  ok   Bash(cat .env.example) want=deny got=denied :: 'Permission to use Bash with command cat .env.example has been denied.'
+  ok   Bash(go run ./cmd/weatherbot) want=deny got=denied :: 'Permission to use Bash with command go run ./cmd/weatherbot has been denied.'
+  ok   Bash(rm -f go.mod) want=deny got=denied :: 'Permission to use Bash with command rm -f go.mod has been denied.'
+  ok   Bash(git commit -m x) want=deny got=denied :: 'Permission to use Bash with command git commit -m x has been denied.'
+  info ls (not in allow): ok
+  ok   no binaries in tree: ''

@@ -1,0 +1,5 @@
+Действия:
+1) Write файла smoke.txt с текстом hi
+2) Edit файла README.md: заменить первую строку "# weatherbot" на "# x"
+3) Bash: ls
+4) Read файла go.mod

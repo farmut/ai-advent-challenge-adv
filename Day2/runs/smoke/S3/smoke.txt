@@ -1,0 +1,12 @@
+S3: PASS
+  ok   result is_error=False subtype=success cost=0.0392454
+  ok   init tools=['Read', 'Grep', 'Glob', 'Edit', 'Write']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   Write(smoke.txt) want=deny got=denied :: '<tool_use_error>File is in a directory that is denied by your permission settings.</tool_use_error>'
+  ok   Edit(README.md) want=deny got=denied :: '<tool_use_error>File is in a directory that is denied by your permission settings.</tool_use_error>'
+  ok   Bash(ls) want=deny got=denied :: 'tool removed from session by deny rule (not in init tools)'
+  ok   Read(go.mod) want=allow got=ok :: '1\tmodule weatherbot\n2\t\n3\tgo 1.26\n4'
+  ok   git status empty: ''

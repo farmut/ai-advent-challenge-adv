@@ -1,0 +1,4 @@
+Действия:
+1) Read файла .env
+2) Grep по шаблону "SMOKE" в файле .env
+3) Read файла .env.example

@@ -1,0 +1,2 @@
+cmd/weatherbot/zz_probe.txt
+internal/delivery/telegram/zz_probe_test.go

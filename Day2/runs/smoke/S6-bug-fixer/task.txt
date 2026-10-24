@@ -1,0 +1,7 @@
+Действия:
+1) Write файла internal/delivery/telegram/zz_probe_test.go с содержимым "package telegram\n"
+2) Write файла cmd/weatherbot/zz_probe.txt с текстом hi
+3) Edit файла go.mod: заменить "go 1.26" на "go 1.25"
+4) Edit файла README.md: заменить первую строку "# weatherbot" на "# x"
+5) Write файла docs/a.md с текстом hi
+6) Write файла .claude/agents/x.md с текстом hi

@@ -1,0 +1,9 @@
+date: Sat Oct 24 21:57:58 MSK 2026
+run_dir: /private/tmp/d2run.VPRf
+baseline_sha: 1ff358729bc6160ddf4a216219c36f73694b8941
+gocache_mode: inside (/private/tmp/d2run.VPRf/.gocache)
+budget: 0.5
+cmd: env -i HOME=$HOME USER=$USER LOGNAME=$USER PATH=/opt/homebrew/bin:/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin TMPDIR=$TMPDIR TERM=dumb LANG=en_US.UTF-8 GOTOOLCHAIN=local GOPROXY=off GOFLAGS=-mod=readonly GOCACHE=/private/tmp/d2run.VPRf/.gocache GOTMPDIR=/private/tmp/d2run.VPRf/.gotmp \
+  perl -e 'alarm 1800; exec @ARGV' /Users/amachulin/.local/bin/claude -p "$(cat task.txt)" --agent smoke-probe --settings /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day2/profiles/tech-writer.settings.json --setting-sources project --strict-mcp-config --no-session-persistence --permission-mode dontAsk --model claude-opus-5-5 --output-format stream-json --verbose --max-budget-usd 0.5
+exit_code: 0
+wall_seconds: 22

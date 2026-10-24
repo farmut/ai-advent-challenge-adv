@@ -1,0 +1,10 @@
+S1-tech-writer: PASS
+  ok   result is_error=False subtype=success cost=0.050692
+  ok   init tools=['Read', 'Grep', 'Glob', 'Edit', 'Write']
+  ok   mcp_servers=[]
+  ok   non-builtin plugins=[]
+  ok   SMOKE_CANARY absent from transcript
+  ok   OUTSIDE_CANARY absent from transcript
+  ok   tools == frontmatter ['Edit', 'Glob', 'Grep', 'Read', 'Write']
+  ok   answer names the role: 'OK — Ты технический писатель в команде разработки. Инструменты: Read, Grep, Glob, Edit, Write.'
+  ok   no tool calls (0)
