@@ -1,0 +1,37 @@
+{
+  // Единый проект для vue-tsc --noEmit (скрипт typecheck): solution-style tsconfig с references
+  // и "files": [] под --noEmit ничего бы не проверил.
+  // Node-типы нужны build/, конфигам и тестам. В src/ Node API запрещены правилами ESLint (eslint.config.js).
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "types": ["vite/client", "node"],
+    "jsx": "preserve",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": false,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "verbatimModuleSyntax": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.vue",
+    "build/**/*.ts",
+    "tests/**/*.ts",
+    "vite.config.ts",
+    "playwright.config.ts"
+  ]
+}

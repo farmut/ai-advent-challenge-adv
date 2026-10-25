@@ -1,0 +1,100 @@
+/*
+ * Токены проекта поверх токенов PrimeVue (--p-*).
+ * Брейкпоинты (mobile-first, min-width): 640px / 960px / 1200px.
+ * CSS-переменные нельзя использовать в @media, поэтому значения брейкпоинтов повторяются в медиа-запросах.
+ * Цвета — только через токены PrimeVue; запасные значения нужны для HTML до загрузки темы.
+ */
+:root {
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+
+  --container-max: 1120px;
+  --container-padding: var(--space-4);
+  --form-max: 560px;
+  --tap-target: 44px;
+  --radius: 0.75rem;
+
+  --font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+  --text-h3: clamp(1.125rem, 1.05rem + 0.4vw, 1.375rem);
+  --text-h2: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+  --text-h1: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);
+  --line-height: 1.6;
+
+  --color-bg: var(--p-surface-0, #ffffff);
+  --color-bg-alt: var(--p-surface-50, #f8fafc);
+  --color-text: var(--p-text-color, #334155);
+  --color-text-muted: var(--p-text-muted-color, #64748b);
+  --color-heading: var(--p-surface-900, #0f172a);
+  --color-border: var(--p-content-border-color, #e2e8f0);
+  --color-primary: var(--p-primary-color, #4f46e5);
+  --color-primary-contrast: var(--p-primary-contrast-color, #ffffff);
+  --color-focus: var(--p-primary-color, #4f46e5);
+
+  --header-shadow: 0 1px 0 var(--color-border);
+}
+
+@media (min-width: 640px) {
+  :root {
+    --container-padding: var(--space-5);
+  }
+}
+
+@media (min-width: 960px) {
+  :root {
+    --container-padding: var(--space-6);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--font-family);
+  font-size: var(--text-base);
+  line-height: var(--line-height);
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow-wrap: break-word;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
