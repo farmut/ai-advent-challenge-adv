@@ -1,0 +1,19 @@
+CRIT B1 FAIL handler.go refs=[] in 45-60=False mechanism_words=False
+CRIT B1-manual MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+CRIT TESTS INFO new test funcs: []
+CRIT B2 FAIL git apply of test changes failed: error: No valid patches in input (allow with "--allow-empty")
+CRIT B3 FAIL no new test functions (регрессионный тест не добавлен как отдельная функция)
+  B4final === RUN   TestAcceptanceFloodSingleWarning |     zz_flood_acceptance_test.go:87: warnings in burst = 10, want <= 1 |     zz_flood_acceptance_test.go:90: outgoing messages for burst of 11 = 11, want <= 2 | --- FAIL: TestAcceptanceFloodSingleWarning (0.00s) | === RUN   TestAcceptanceOtherChatNotBlocked | --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | FAIL | FAIL	weatherbot/internal/delivery/telegram	2.510s | FAIL
+  B4base  --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | FAIL | FAIL	weatherbot/internal/delivery/telegram	2.364s | FAIL
+CRIT B4 FAIL final rc=1 baseline rc=1
+CRIT B4-info INFO sustained flood (200ms × 4.5s): sustained: in=23 out=23 warnings=20 weather=3 rc=1
+  B5 OK  go build ./...: 
+  B5 OK  go vet ./...: 
+  B5 OK  gofmt -l .: 
+  B5 OK  go test -race -count=1 ./...: ?   	weatherbot/cmd/weatherbot	[no test files] | ok  	weatherbot/internal/config	1.210s | ok  	weatherbot/internal/delivery/telegram	1.385s | ?   	weatherbot/internal/domain	[no test files] | ok  	weatherbot/internal/repository/openweather	1.275s | ok  	weatherbot/internal/usecase	1.180s
+CRIT B5 PASS go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+CRIT B6 PASS changed=[] outside_scope=[] status_lines=0
+CRIT B7 PASS lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=False 'weather must not be called' kept=True
+CRIT GOMOD PASS go.mod/go.sum untouched
+CRIT B8 INFO Day1 scenario 14 (20 msgs): replies=20 warnings=19 owm=1
+CRIT B8-all INFO Day1 expected-behaviour 14/14

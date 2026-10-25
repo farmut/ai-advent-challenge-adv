@@ -1,0 +1,18 @@
+run: /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/bugfix/q38-27b-c32k-t0.2-1
+status=done wall_s=1318 requests=4 tokens=24907 model=qwen/qwen3.8-27b ctx=32768
+params={"top_k": 20, "top_p": 0.9, "model": "qwen/qwen3.8-27b", "max_tokens": 8192, "temperature": 0.2}
+tools={"read_file": 5, "run_command": 1}
+changed_files=0
+  B1         FAIL   handler.go refs=[] in 45-60=False mechanism_words=False
+  B1-manual  MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+  TESTS      INFO   new test funcs: []
+  B2         FAIL   git apply of test changes failed: error: No valid patches in input (allow with "--allow-empty")
+  B3         FAIL   no new test functions (регрессионный тест не добавлен как отдельная функция)
+  B4         FAIL   final rc=1 baseline rc=1
+  B4-info    INFO   sustained flood (200ms × 4.5s): sustained: in=23 out=23 warnings=20 weather=3 rc=1
+  B5         PASS   go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+  B6         PASS   changed=[] outside_scope=[] status_lines=0
+  B7         PASS   lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=False 'weather must not be called' kept=True
+  GOMOD      PASS   go.mod/go.sum untouched
+  B8         INFO   Day1 scenario 14 (20 msgs): replies=20 warnings=19 owm=1
+  B8-all     INFO   Day1 expected-behaviour 14/14

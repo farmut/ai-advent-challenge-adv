@@ -1,0 +1,1 @@
+{"status":"done","model":"qwen/qwen3.8-27b","tokens":24907,"tool_calls":{"read_file":5,"run_command":1},"wall_ms":1317698,"requests":4,"parameters":{"top_k":20,"top_p":0.9,"model":"qwen/qwen3.8-27b","max_tokens":8192,"temperature":0.2},"context_window":"32768"}

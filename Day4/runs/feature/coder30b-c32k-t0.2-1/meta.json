@@ -1,0 +1,1 @@
+{"requests":80,"tokens":13450,"status":"done","wall_ms":1277119,"tool_calls":{"file_search":4,"delete_file":1,"run_command":20,"read_file":24,"create_file":21,"edit_file":6},"model":"qwen/qwen3-coder-30b","parameters":{"max_tokens":8192,"top_k":20,"model":"qwen/qwen3-coder-30b","temperature":0.2,"top_p":0.9},"context_window":"32768"}

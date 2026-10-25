@@ -1,0 +1,2 @@
+M  internal/delivery/telegram/handler.go
+A  internal/delivery/telegram/handler_spam_test.go

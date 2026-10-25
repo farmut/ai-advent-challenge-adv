@@ -1,0 +1,63 @@
+diff --git a/internal/delivery/telegram/handler.go b/internal/delivery/telegram/handler.go
+index 93031ab..54ba2c2 100644
+--- a/internal/delivery/telegram/handler.go
++++ b/internal/delivery/telegram/handler.go
+@@ -48,10 +48,10 @@ func (h *Handler) Handle(ctx context.Context, chatID int64, text string) {
+ 			h.log.Error("handle message panicked", "chat_id", chatID, "panic", r)
+ 		}
+ 	}()
+-	reply := msgTooFrequent
+-	if h.allow(chatID, time.Now()) {
+-		reply = h.respond(ctx, text)
++	if !h.allow(chatID, time.Now()) {
++		return // спам не должен порождать исходящий трафик
+ 	}
++	reply := h.respond(ctx, text)
+ 	if err := h.sender.Send(ctx, chatID, reply); err != nil {
+ 		h.log.Warn("send message", "chat_id", chatID, "err", err) // Sender уже вернул redacted-ошибку
+ 	}
+diff --git a/internal/delivery/telegram/handler_test.go b/internal/delivery/telegram/handler_test.go
+index 04a07e2..c02ce03 100644
+--- a/internal/delivery/telegram/handler_test.go
++++ b/internal/delivery/telegram/handler_test.go
+@@ -97,7 +97,7 @@ func TestHandlerRateLimit(t *testing.T) {
+ 	h.Handle(t.Context(), 1, "Москва")
+ 	h.Handle(t.Context(), 2, "/start")
+ 
+-	want := []string{msgStart, msgTooFrequent, msgStart}
++	want := []string{msgStart, msgStart}
+ 	if strings.Join(s.sent, "|") != strings.Join(want, "|") {
+ 		t.Errorf("sent = %q, want %q", s.sent, want)
+ 	}
+@@ -106,6 +106,31 @@ func TestHandlerRateLimit(t *testing.T) {
+ 	}
+ }
+ 
++// TestHandlerRateLimitBurst — всплеск из 10 сообщений подряд: не больше одного
++// исходящего sendMessage за окно ограничения, остальные молча игнорируются.
++func TestHandlerRateLimitBurst(t *testing.T) {
++	w := &fakeWeather{w: domain.Weather{City: "Москва"}}
++	h, s := newTestHandler(w)
++
++	h.Handle(t.Context(), 1, "Москва")
++	for i := 0; i < 10; i++ {
++		h.Handle(t.Context(), 1, "Москва")
++	}
++
++	if len(s.sent) != 1 {
++		t.Fatalf("send attempts = %d (%v), want 1", len(s.sent), s.sent)
++	}
++	if s.sent[0] != formatWeather(w.w) {
++		t.Errorf("sent = %q, want weather reply", s.sent[0])
++	}
++	if strings.Contains(strings.Join(s.sent, "|"), msgTooFrequent) {
++		t.Errorf("burst produced %q replies, want none: %v", msgTooFrequent, s.sent)
++	}
++	if w.gotCity != "Москва" {
++		t.Errorf("weather called with city %q, want %q", w.gotCity, "Москва")
++	}
++}
++
+ func TestHandlerAllow(t *testing.T) {
+ 	h, _ := newTestHandler(&fakeWeather{})
+ 	now := time.Now()

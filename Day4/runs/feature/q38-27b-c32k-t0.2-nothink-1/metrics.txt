@@ -1,0 +1,257 @@
+# metrics: check
+src: /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/check/src
+date: 2026-10-25T22:29:48Z
+go: go version go1.26.5 darwin/arm64
+
+## go.mod
+module weatherbot
+go 1.26
+go.sum: absent
+
+## build
+build: PASS
+
+## vet
+vet: PASS (rc=0)
+
+## gofmt
+gofmt files needing format: 0
+
+## golangci-lint
+bin: /opt/homebrew/bin/golangci-lint
+version: golangci-lint has version 2.4.0 built with go1.25.0 from 43d0339 on 2025-08-13T20:45:00Z
+### default linters (errcheck govet ineffassign staticcheck unused) (rc=3)
+issues: 0
+### extended (+revive gosec errorlint bodyclose noctx gocritic misspell) (rc=3)
+issues: 0
+
+## test (-race -count=1)
+test: FAIL (rc=1)
+	weatherbot/cmd/weatherbot		coverage: 0.0% of statements
+--- FAIL: TestLoadDefaults (0.00s)
+    config_test.go:23: Load() err = LOG_LEVEL must be one of debug/info/warn/error, got "trace"
+FAIL
+coverage: 86.4% of statements
+FAIL	weatherbot/internal/config	0.355s
+time=2026-10-26T01:29:52.650+03:00 level=ERROR msg="handle message panicked" chat_id=1 panic=boom
+--- FAIL: TestHandlePanicRecovered (0.00s)
+    handler_test.go:170: sent = [], want one reply
+==================
+WARNING: DATA RACE
+Write at 0x00c000010528 by goroutine 33:
+  weatherbot/internal/delivery/telegram.(*recordingHandler).Handle()
+      /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:30 +0xc0
+  weatherbot/internal/delivery/telegram.(*Poller).Run()
+      /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller.go:70 +0x550
+  weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset.func1()
+      /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:48 +0x44
+
+Previous read at 0x00c000010528 by goroutine 32:
+  weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset()
+      /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:51 +0x728
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2036 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2101 +0x34
+
+Goroutine 33 (running) created at:
+  weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset()
+      /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:48 +0x6f8
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2036 +0x164
+  testing.(*T).Run.gowrap1()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2101 +0x34
+
+Goroutine 32 (running) created at:
+  testing.(*T).Run()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2101 +0x7bc
+  testing.runTests.func1()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2585 +0x74
+  testing.tRunner()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2036 +0x164
+  testing.runTests()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2583 +0x7a0
+  testing.(*M).Run()
+      /opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2443 +0xb38
+  main.main()
+      _testmain.go:104 +0x100
+==================
+coverage: 42.4% of statements
+panic: test timed out after 10m0s
+	running tests:
+		TestPollerProcessesUpdatesAndAdvancesOffset (9m58s)
+
+goroutine 79 [running]:
+testing.(*M).startAlarm.func1()
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2802 +0x498
+created by time.goFunc
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/time/sleep.go:215 +0x44
+
+goroutine 1 [chan receive, 9 minutes]:
+testing.(*T).Run(0xc0001f4248, {0x1007b08f8, 0x2b}, 0x100b712f8)
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2109 +0x7dc
+testing.runTests.func1(0xc0001f4248)
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2585 +0x78
+testing.tRunner(0xc0001f4248, 0xc0001bbab8)
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2036 +0x168
+testing.runTests({0x10079e655, 0xa}, {0x1007ad699, 0x25}, 0xc0001aa138, {0x100be6420, 0x18, 0x18}, {0xc000192a80?, 0xc0001be380?, ...})
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2583 +0x7a4
+testing.(*M).Run(0xc0001983c0)
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2443 +0xb3c
+main.main()
+	_testmain.go:104 +0x104
+
+goroutine 56 [chan receive, 9 minutes]:
+weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset(0xc0000c7448)
+	/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:59 +0x804
+testing.tRunner(0xc0000c7448, 0x100b712f8)
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2036 +0x168
+created by testing.(*T).Run in goroutine 1
+	/opt/homebrew/Cellar/go/1.26.5/libexec/src/testing/testing.go:2101 +0x7c0
+
+goroutine 57 [runnable]:
+weatherbot/internal/delivery/telegram.(*recordingHandler).Handle(0xc000010528, {0x100b1f1c0?, 0x1?}, 0x4?, {0x10079c7e3, 0x1})
+	/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:30 +0x68
+weatherbot/internal/delivery/telegram.(*Poller).Run(0xc0000b6b70, {0x100b79ba0, 0xc0000ae780})
+	/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller.go:70 +0x554
+weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset.func1()
+	/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:48 +0x48
+created by weatherbot/internal/delivery/telegram.TestPollerProcessesUpdatesAndAdvancesOffset in goroutine 56
+	/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree/internal/delivery/telegram/poller_test.go:48 +0x6fc
+FAIL	weatherbot/internal/delivery/telegram	602.259s
+?   	weatherbot/internal/domain	[no test files]
+ok  	weatherbot/internal/repository/openweather	1.304s	coverage: 79.5% of statements
+ok  	weatherbot/internal/usecase	1.275s	coverage: 100.0% of statements
+FAIL
+
+## coverage (go tool cover -func)
+total: 52.7%
+per-package (statement-weighted, from coverprofile):
+  weatherbot/cmd/weatherbot                                  0.0%
+  weatherbot/internal/config                                86.4%
+  weatherbot/internal/delivery/telegram                     42.4%
+  weatherbot/internal/repository/openweather                79.5%
+  weatherbot/internal/usecase                              100.0%
+per-func:
+  weatherbot/cmd/weatherbot/main.go:20:				main			0.0%
+  weatherbot/cmd/weatherbot/main.go:27:				run			0.0%
+  weatherbot/internal/config/config.go:22:			Load			100.0%
+  weatherbot/internal/config/config.go:59:			parseLogLevel		50.0%
+  weatherbot/internal/delivery/telegram/client.go:40:		NewClient		0.0%
+  weatherbot/internal/delivery/telegram/client.go:45:		GetUpdates		0.0%
+  weatherbot/internal/delivery/telegram/client.go:65:		Send			0.0%
+  weatherbot/internal/delivery/telegram/client.go:79:		doJSON			0.0%
+  weatherbot/internal/delivery/telegram/client.go:110:		redact			0.0%
+  weatherbot/internal/delivery/telegram/client.go:117:		truncate		0.0%
+  weatherbot/internal/delivery/telegram/format.go:13:		formatWeather		100.0%
+  weatherbot/internal/delivery/telegram/format.go:25:		formatTemp		100.0%
+  weatherbot/internal/delivery/telegram/format.go:40:		compass			100.0%
+  weatherbot/internal/delivery/telegram/format.go:46:		capitalizeFirst		100.0%
+  weatherbot/internal/delivery/telegram/handler.go:36:		NewHandler		100.0%
+  weatherbot/internal/delivery/telegram/handler.go:41:		Handle			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:56:		respond			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:80:		allow			100.0%
+  weatherbot/internal/delivery/telegram/handler.go:91:		parseCommand		100.0%
+  weatherbot/internal/delivery/telegram/messages.go:14:		msgCityNotFound		100.0%
+  weatherbot/internal/delivery/telegram/poller.go:34:		NewPoller		100.0%
+  weatherbot/internal/delivery/telegram/poller.go:40:		Run			45.8%
+  weatherbot/internal/delivery/telegram/poller.go:81:		Error			0.0%
+  weatherbot/internal/delivery/telegram/poller.go:86:		retryAfterFromError	0.0%
+  weatherbot/internal/delivery/telegram/poller.go:102:		asError			0.0%
+  weatherbot/internal/delivery/telegram/poller.go:118:		sleepCtx		0.0%
+  weatherbot/internal/repository/openweather/client.go:26:	NewClient		100.0%
+  weatherbot/internal/repository/openweather/client.go:50:	Current			87.0%
+  weatherbot/internal/repository/openweather/client.go:83:	statusError		100.0%
+  weatherbot/internal/repository/openweather/client.go:98:	toDomain		100.0%
+  weatherbot/internal/repository/openweather/client.go:112:	firstDescription	66.7%
+  weatherbot/internal/repository/openweather/client.go:122:	redact			0.0%
+  weatherbot/internal/usecase/weather.go:27:			NewWeatherService	100.0%
+  weatherbot/internal/usecase/weather.go:32:			Current			100.0%
+  weatherbot/internal/usecase/weather.go:44:			normalizeCity		100.0%
+  total:								(statements)		52.7%
+
+## tests inventory
+_test.go files: 7
+func Test*:     36
+t.Run(:         4
+func Benchmark: 0
+func Fuzz:      0
+func Example:   0
+
+## size
+files (all, excl. .git): 23
+go files prod: 11  test: 7
+LOC prod: 749
+LOC test: 794
+packages: 6
+modules (go list -m all): 1
+
+## imports graph
+weatherbot/cmd/weatherbot: context errors fmt log/slog net/http os os/signal syscall time weatherbot/internal/config weatherbot/internal/delivery/telegram weatherbot/internal/repository/openweather weatherbot/internal/usecase
+weatherbot/internal/config: errors fmt log/slog os strings
+weatherbot/internal/delivery/telegram: context encoding/json errors fmt io log/slog math net/http net/url strings sync time unicode weatherbot/internal/domain
+weatherbot/internal/domain: errors
+weatherbot/internal/repository/openweather: context encoding/json fmt io net/http net/url strings weatherbot/internal/domain
+weatherbot/internal/usecase: context fmt strings unicode unicode/utf8 weatherbot/internal/domain
+
+## layer checks
+domain imports: errors
+domain stdlib-only w/o net/http,slog,json: PASS
+usecase imports: context fmt strings unicode unicode/utf8 weatherbot/internal/domain
+usecase not importing delivery/repository/http/json: PASS
+third-party imports (non-stdlib, non-module):
+  (end)
+
+## grep checklist (prod code, excl. _test.go)
+http.DefaultClient                         0
+http.Get(                                  0
+url.Values                                 3
+url.JoinPath / .JoinPath(                  3
+io.LimitReader                             2
+signal.NotifyContext                       1
+%w                                         14
+errors.Is                                  3
+errors.As                                  0
+errors.Join                                1
+func init(                                 0
+log.Fatal                                  0
+panic(                                     0
+recover()                                  1
+os.Exit                                    1
+os.Getenv/LookupEnv                        5
+slog                                       16
+redact/sanitize (case-insens.)             10
+rate limiter impl (limiter|bucket|perChat|allow) 4
+RateLimited (OWM 429 mapping)              2
+semaphore (sem chan|MaxConcurrency)        0
+retry_after                                6
+parse_mode                                 0
+context.Context                            14
+Timeout:                                   2
+
+fmt.Sprintf( on lines with http|?|appid|url|/bot:
+os.Getenv locations:
+  internal/config/config.go:26:		TelegramBotToken:   os.Getenv("TELEGRAM_BOT_TOKEN"),
+  internal/config/config.go:27:		OpenWeatherAPIKey:  os.Getenv("OPENWEATHER_API_KEY"),
+  internal/config/config.go:40:	if v := os.Getenv("TELEGRAM_BASE_URL"); v != "" {
+  internal/config/config.go:43:	if v := os.Getenv("OPENWEATHER_BASE_URL"); v != "" {
+  internal/config/config.go:47:	if v := os.Getenv("LOG_LEVEL"); v != "" {
+redact/sanitize locations:
+  internal/delivery/telegram/client.go:110:func (c *Client) redact(err error) error {
+  internal/repository/openweather/client.go:122:func (c *Client) redact(s string) string {
+rate-limit locations:
+  internal/delivery/telegram/handler.go:14:const perChatInterval = 2 * time.Second
+  internal/delivery/telegram/handler.go:32:	lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
+  internal/delivery/telegram/handler.go:80:func (h *Handler) allow(chatID int64, now time.Time) bool {
+  internal/delivery/telegram/handler.go:83:	if last, ok := h.lastReq[chatID]; ok && now.Sub(last) < perChatInterval {
+recover/panic/log.Fatal locations:
+  internal/delivery/telegram/handler.go:43:		if r := recover(); r != nil {
+global var blocks (prod):
+  internal/delivery/telegram/format.go:37:var compassPoints = [8]string{"С", "СВ", "В", "ЮВ", "Ю", "ЮЗ", "З", "СЗ"}
+  internal/domain/errors.go:6:var (
+
+## run.json
+num_turns: null
+duration_ms: null
+total_cost_usd: null
+is_error: null

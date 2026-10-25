@@ -1,0 +1,1 @@
+{"status":"done","tool_calls":{"edit_file":5,"read_file":5,"get_changed_files":1,"run_command":14},"wall_ms":230803,"context_window":"32768","tokens":24575,"model":"qwen/qwen3-coder-30b","parameters":{"top_k":20,"top_p":0.9,"model":"qwen/qwen3-coder-30b","temperature":0.2,"max_tokens":8192},"requests":26}

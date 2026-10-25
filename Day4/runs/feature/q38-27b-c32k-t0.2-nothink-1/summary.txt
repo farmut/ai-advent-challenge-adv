@@ -1,0 +1,12 @@
+run: runs/feature/q38-27b-c32k-t0.2-nothink-1/
+status=stopped wall_s=3600 requests=49 tokens=27634 model=qwen/qwen3.8-27b ctx=32768
+params={"top_p": 0.9, "temperature": 0.2, "max_tokens": 8192, "reasoning_effort": "none", "model": "qwen/qwen3.8-27b", "top_k": 20}
+tools={"create_file": 29, "read_file": 17, "file_search": 1, "run_command": 7, "edit_file": 10, "delete_file": 3}
+changed_files=23
+  metrics build: PASS
+  metrics vet: PASS (rc=0)
+  metrics test: FAIL (rc=1)
+  metrics total: 52.7%
+  metrics domain stdlib-only w/o net/http,slog,json: PASS
+  metrics go 1.26
+  blackbox expected-behaviour 0/14 mode=env leaks=0 {'token_in_log': 0, 'key_in_log': 0, 'token_in_replies': 0, 'key_in_replies': 0}

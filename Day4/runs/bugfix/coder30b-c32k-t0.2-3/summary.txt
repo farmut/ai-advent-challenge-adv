@@ -1,0 +1,18 @@
+run: /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/bugfix/coder30b-c32k-t0.2-3
+status=done wall_s=619 requests=64 tokens=26235 model=qwen/qwen3-coder-30b ctx=32768
+params={"max_tokens": 8192, "top_k": 20, "top_p": 0.9, "temperature": 0.2, "model": "qwen/qwen3-coder-30b"}
+tools={"delete_file": 3, "read_file": 9, "edit_file": 11, "grep_search": 2, "create_file": 4, "file_search": 4, "run_command": 29}
+changed_files=2
+  B1         PASS   handler.go refs=[(53, 58)] in 45-60=True mechanism_words=True
+  B1-manual  MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+  TESTS      INFO   new test funcs: [('internal/delivery/telegram', 'TestHandlerSpam')]
+  B2         FAIL   tests do not fail on baseline: rc=0 ok weatherbot/internal/delivery/telegram 0.374s
+  B3         PASS   internal/delivery/telegram: rc=0 --- PASS: TestHandlerSpam (0.00s) | PASS | ok weatherbot/internal/delivery/telegram 1.257s
+  B4         FAIL   final rc=1 baseline rc=1
+  B4-info    INFO   sustained flood (200ms × 4.5s): sustained: in=23 out=23 warnings=20 weather=3 rc=1
+  B5         PASS   go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+  B6         PASS   changed=['internal/delivery/telegram/handler.go', 'internal/delivery/telegram/handler_spam_test.go'] outside_scope=[] status_lines=2
+  B7         PASS   lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=False 'weather must not be called' kept=True
+  GOMOD      PASS   go.mod/go.sum untouched
+  B8         INFO   Day1 scenario 14 (20 msgs): replies=20 warnings=19 owm=1
+  B8-all     INFO   Day1 expected-behaviour 14/14

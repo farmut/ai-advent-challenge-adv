@@ -1,0 +1,20 @@
+CRIT B1 PASS handler.go refs=[(53, 58)] in 45-60=True mechanism_words=True
+CRIT B1-manual MANUAL подтвердить механизм по тексту раздела «Что нашёл»
+CRIT TESTS INFO new test funcs: [('internal/delivery/telegram', 'TestHandlerSpam')]
+CRIT B2 FAIL tests do not fail on baseline: rc=0 ok weatherbot/internal/delivery/telegram 0.374s
+  B2out ok  	weatherbot/internal/delivery/telegram	0.374s
+CRIT B3 PASS internal/delivery/telegram: rc=0 --- PASS: TestHandlerSpam (0.00s) | PASS | ok weatherbot/internal/delivery/telegram 1.257s
+  B4final === RUN   TestAcceptanceFloodSingleWarning |     zz_flood_acceptance_test.go:87: warnings in burst = 10, want <= 1 |     zz_flood_acceptance_test.go:90: outgoing messages for burst of 11 = 11, want <= 2 | --- FAIL: TestAcceptanceFloodSingleWarning (0.00s) | === RUN   TestAcceptanceOtherChatNotBlocked | --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | FAIL | FAIL	weatherbot/internal/delivery/telegram	2.363s | FAIL
+  B4base  --- PASS: TestAcceptanceOtherChatNotBlocked (0.00s) | === RUN   TestAcceptanceRecoversAfterWindow | --- PASS: TestAcceptanceRecoversAfterWindow (2.10s) | FAIL | FAIL	weatherbot/internal/delivery/telegram	2.360s | FAIL
+CRIT B4 FAIL final rc=1 baseline rc=1
+CRIT B4-info INFO sustained flood (200ms × 4.5s): sustained: in=23 out=23 warnings=20 weather=3 rc=1
+  B5 OK  go build ./...: 
+  B5 OK  go vet ./...: 
+  B5 OK  gofmt -l .: 
+  B5 OK  go test -race -count=1 ./...: ?   	weatherbot/cmd/weatherbot	[no test files] | ok  	weatherbot/internal/config	1.179s | ok  	weatherbot/internal/delivery/telegram	1.268s | ?   	weatherbot/internal/domain	[no test files] | ok  	weatherbot/internal/repository/openweather	1.266s | ok  	weatherbot/internal/usecase	1.754s
+CRIT B5 PASS go build ./...=ok; go vet ./...=ok; gofmt -l .=ok; go test -race -count=1 ./...=ok
+CRIT B6 PASS changed=['internal/delivery/telegram/handler.go', 'internal/delivery/telegram/handler_spam_test.go'] outside_scope=[] status_lines=2
+CRIT B7 PASS lost_tests=[] added_t.Skip=0 removed_assert_lines=0 TestHandlerRateLimit_in_diff=False 'weather must not be called' kept=True
+CRIT GOMOD PASS go.mod/go.sum untouched
+CRIT B8 INFO Day1 scenario 14 (20 msgs): replies=20 warnings=19 owm=1
+CRIT B8-all INFO Day1 expected-behaviour 14/14

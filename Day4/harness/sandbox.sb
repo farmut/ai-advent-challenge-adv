@@ -1,0 +1,35 @@
+(version 1)
+; Seatbelt profile for one harness run. Params (sandbox-exec -D):
+;   RUN   - run directory (workspace, caches, tmp); the only writable project path
+;   HOME  - user home, for nvim state/cache and the deny list
+(allow default)
+
+; Network: only LM Studio and loopback servers started by tests (httptest)
+(deny network*)
+(allow network-outbound (remote ip "localhost:1234"))
+(allow network-bind (local ip "localhost:*"))
+(allow network-inbound (local ip "localhost:*"))
+(allow network-outbound (remote ip "localhost:*"))
+(allow network-outbound (remote unix-socket))
+(allow network* (local unix-socket))
+
+; Writes: run dir, nvim state/cache/data, devices, per-user temp (Go and nvim use it for sockets)
+(deny file-write*)
+(allow file-write*
+  (subpath (param "RUN"))
+  (subpath (string-append (param "HOME") "/.local/state/nvim"))
+  (subpath (string-append (param "HOME") "/.cache/nvim"))
+  (subpath (string-append (param "HOME") "/.local/share/nvim"))
+  (subpath "/dev")
+  (subpath "/private/var/folders"))
+
+; Secrets are never readable, whatever the model asks for
+(deny file-read*
+  (subpath (string-append (param "HOME") "/.ssh"))
+  (subpath (string-append (param "HOME") "/.aws"))
+  (subpath (string-append (param "HOME") "/.gnupg"))
+  (subpath (string-append (param "HOME") "/.claude"))
+  (subpath (string-append (param "HOME") "/.config/gh"))
+  (subpath (string-append (param "HOME") "/Library/Keychains"))
+  (regex #"/\.env$")
+  (regex #"/\.env\.local$"))

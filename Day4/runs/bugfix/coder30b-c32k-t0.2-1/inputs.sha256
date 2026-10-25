@@ -1,0 +1,5 @@
+0889e3e774dd1d4e067e90e6ff1485765e6c6ef3df1fb9092d802391bce694e5  Day4/tasks/agent-bugfix.txt
+d5f7895168981ac4cb69060840df991062bcb5c50531d9f3fb8ce083bab2bc47  Day4/prompts/bug-fixer.md
+4a8e5756d0ce1949d9de1f52cfd057e6e84bf6c2c46def040841111525a59d02  Day4/.ai/system-prompt.md
+d40522957bcf055b02a3a00f884fef7e06945dd5314372916a14afba5efcd2b7  Day4/nvim/ai.lua
+8033c9b6cbd7ec6b287897fcfa8015de9909503c5a8ede776bd1f79a4f644701  Day4/harness/driver.lua

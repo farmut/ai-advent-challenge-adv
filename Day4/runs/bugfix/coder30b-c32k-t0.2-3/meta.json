@@ -1,0 +1,1 @@
+{"requests":64,"parameters":{"max_tokens":8192,"top_k":20,"top_p":0.9,"temperature":0.2,"model":"qwen/qwen3-coder-30b"},"tokens":26235,"tool_calls":{"delete_file":3,"read_file":9,"edit_file":11,"grep_search":2,"create_file":4,"file_search":4,"run_command":29},"wall_ms":618946,"model":"qwen/qwen3-coder-30b","context_window":"32768","status":"done"}

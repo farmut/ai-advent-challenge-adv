@@ -1,0 +1,1746 @@
+diff --git a/.env.example b/.env.example
+new file mode 100644
+index 0000000..194ebbc
+--- /dev/null
++++ b/.env.example
+@@ -0,0 +1,8 @@
++# Обязательные
++TELEGRAM_BOT_TOKEN=
++OPENWEATHER_API_KEY=
++
++# Необязательные (значения по умолчанию — production)
++TELEGRAM_BASE_URL=https://api.telegram.org
++OPENWEATHER_BASE_URL=https://api.openweathermap.org
++LOG_LEVEL=info
+diff --git a/.gitignore b/.gitignore
+new file mode 100644
+index 0000000..4c49bd7
+--- /dev/null
++++ b/.gitignore
+@@ -0,0 +1 @@
++.env
+diff --git a/Makefile b/Makefile
+new file mode 100644
+index 0000000..396f129
+--- /dev/null
++++ b/Makefile
+@@ -0,0 +1,14 @@
++.PHONY: build run test lint
++
++build:
++	go build ./...
++
++run:
++	go run ./cmd/weatherbot
++
++test:
++	go test -race -cover ./...
++
++lint:
++	go vet ./...
++	gofmt -l .
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..e4b3691
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,39 @@
++# weatherbot
++
++Telegram-бот: по запросу пользователя присылает текущую погоду в городе из OpenWeatherMap.
++
++## Команды
++
++- `/start` — приветствие
++- `/help` — справка
++- `/weather <город>` — погода в городе (также работает просто текст с названием города)
++
++## Переменные окружения
++
++| Переменная             | Обязательна | Default                          |
++|------------------------|-------------|----------------------------------|
++| `TELEGRAM_BOT_TOKEN`   | да          | —                                |
++| `OPENWEATHER_API_KEY`  | да          | —                                |
++| `TELEGRAM_BASE_URL`    | нет         | `https://api.telegram.org`       |
++| `OPENWEATHER_BASE_URL` | нет         | `https://api.openweathermap.org` |
++| `LOG_LEVEL`            | нет         | `info` (`debug/info/warn/error`) |
++
++Скопируйте `.env.example` в `.env` и заполните значения (бот читает переменные окружения,
++файл `.env` подгружайте сами, например через `direnv` или `export`).
++
++## Запуск
++
++```sh
++export TELEGRAM_BOT_TOKEN=...
++export OPENWEATHER_API_KEY=...
++go run ./cmd/weatherbot
++```
++
++## Тесты и линт
++
++```sh
++make test   # go test -race -cover ./...
++make lint   # go vet + gofmt -l
++```
++
++Тесты не ходят в сеть: все HTTP-вызовы проверяются через `httptest` и фейки.
+diff --git a/cmd/weatherbot/main.go b/cmd/weatherbot/main.go
+new file mode 100644
+index 0000000..9b57e33
+--- /dev/null
++++ b/cmd/weatherbot/main.go
+@@ -0,0 +1,49 @@
++package main
++
++import (
++	"context"
++	"errors"
++	"fmt"
++	"log/slog"
++	"net/http"
++	"os"
++	"os/signal"
++	"syscall"
++	"time"
++
++	"weatherbot/internal/config"
++	"weatherbot/internal/delivery/telegram"
++	"weatherbot/internal/repository/openweather"
++	"weatherbot/internal/usecase"
++)
++
++func main() {
++	if err := run(); err != nil {
++		slog.Error("weatherbot stopped", "err", err)
++		os.Exit(1)
++	}
++}
++
++func run() error {
++	cfg, err := config.Load()
++	if err != nil {
++		return fmt.Errorf("load config: %w", err)
++	}
++	logger := slog.New(slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: cfg.LogLevel}))
++
++	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
++	defer stop()
++
++	weather := openweather.NewClient(cfg.OpenWeatherBaseURL, cfg.OpenWeatherAPIKey, &http.Client{Timeout: 10 * time.Second})
++	service := usecase.NewWeatherService(weather)
++	bot := telegram.NewClient(cfg.TelegramBaseURL, cfg.TelegramBotToken, &http.Client{Timeout: 40 * time.Second})
++	handler := telegram.NewHandler(service, bot, logger)
++	poller := telegram.NewPoller(bot, handler, logger)
++
++	logger.Info("weatherbot started")
++	if err := poller.Run(ctx); err != nil && !errors.Is(err, context.Canceled) {
++		return fmt.Errorf("run poller: %w", err)
++	}
++	logger.Info("weatherbot stopped")
++	return nil
++}
+diff --git a/go.mod b/go.mod
+new file mode 100644
+index 0000000..afb49b8
+--- /dev/null
++++ b/go.mod
+@@ -0,0 +1,3 @@
++module weatherbot
++
++go 1.26
+diff --git a/internal/config/config.go b/internal/config/config.go
+new file mode 100644
+index 0000000..42896bd
+--- /dev/null
++++ b/internal/config/config.go
+@@ -0,0 +1,72 @@
++// Package config читает переменные окружения и валидирует конфигурацию.
++package config
++
++import (
++	"errors"
++	"fmt"
++	"log/slog"
++	"os"
++	"strings"
++)
++
++// Config — настроенные параметры бота.
++type Config struct {
++	TelegramBotToken   string
++	OpenWeatherAPIKey  string
++	TelegramBaseURL    string
++	OpenWeatherBaseURL string
++	LogLevel           slog.Level
++}
++
++// Load читает переменные окружения и возвращает все проблемы разом.
++func Load() (Config, error) {
++	var errs []error
++
++	cfg := Config{
++		TelegramBotToken:   os.Getenv("TELEGRAM_BOT_TOKEN"),
++		OpenWeatherAPIKey:  os.Getenv("OPENWEATHER_API_KEY"),
++		TelegramBaseURL:    "https://api.telegram.org",
++		OpenWeatherBaseURL: "https://api.openweathermap.org",
++		LogLevel:           slog.LevelInfo,
++	}
++
++	if cfg.TelegramBotToken == "" {
++		errs = append(errs, errors.New("TELEGRAM_BOT_TOKEN is required"))
++	}
++	if cfg.OpenWeatherAPIKey == "" {
++		errs = append(errs, errors.New("OPENWEATHER_API_KEY is required"))
++	}
++
++	if v := os.Getenv("TELEGRAM_BASE_URL"); v != "" {
++		cfg.TelegramBaseURL = v
++	}
++	if v := os.Getenv("OPENWEATHER_BASE_URL"); v != "" {
++		cfg.OpenWeatherBaseURL = v
++	}
++
++	if v := os.Getenv("LOG_LEVEL"); v != "" {
++		level, err := parseLogLevel(v)
++		if err != nil {
++			errs = append(errs, err)
++		} else {
++			cfg.LogLevel = level
++		}
++	}
++
++	return cfg, errors.Join(errs...)
++}
++
++func parseLogLevel(v string) (slog.Level, error) {
++	switch strings.ToLower(v) {
++	case "debug":
++		return slog.LevelDebug, nil
++	case "info":
++		return slog.LevelInfo, nil
++	case "warn":
++		return slog.LevelWarn, nil
++	case "error":
++		return slog.LevelError, nil
++	default:
++		return slog.LevelInfo, fmt.Errorf("LOG_LEVEL must be one of debug/info/warn/error, got %q", v)
++	}
++}
+diff --git a/internal/config/config_test.go b/internal/config/config_test.go
+new file mode 100644
+index 0000000..41b5e76
+--- /dev/null
++++ b/internal/config/config_test.go
+@@ -0,0 +1,84 @@
++package config
++
++import (
++	"log/slog"
++	"strings"
++	"testing"
++)
++
++func setEnv(t *testing.T, kv map[string]string) {
++	t.Helper()
++	for k, v := range kv {
++		t.Setenv(k, v)
++	}
++}
++
++func TestLoadDefaults(t *testing.T) {
++	setEnv(t, map[string]string{
++		"TELEGRAM_BOT_TOKEN":  "tg-token",
++		"OPENWEATHER_API_KEY": "owm-key",
++	})
++	cfg, err := Load()
++	if err != nil {
++		t.Fatalf("Load() err = %v", err)
++	}
++	if cfg.TelegramBaseURL != "https://api.telegram.org" {
++		t.Errorf("TelegramBaseURL = %q", cfg.TelegramBaseURL)
++	}
++	if cfg.OpenWeatherBaseURL != "https://api.openweathermap.org" {
++		t.Errorf("OpenWeatherBaseURL = %q", cfg.OpenWeatherBaseURL)
++	}
++	if cfg.LogLevel != slog.LevelInfo {
++		t.Errorf("LogLevel = %v", cfg.LogLevel)
++	}
++}
++
++func TestLoadMissingRequired(t *testing.T) {
++	setEnv(t, map[string]string{
++		"TELEGRAM_BOT_TOKEN":  "",
++		"OPENWEATHER_API_KEY": "",
++	})
++	_, err := Load()
++	if err == nil {
++		t.Fatal("Load() err = nil, want error")
++	}
++	msg := err.Error()
++	if !strings.Contains(msg, "TELEGRAM_BOT_TOKEN") || !strings.Contains(msg, "OPENWEATHER_API_KEY") {
++		t.Errorf("err = %q, want both missing vars", msg)
++	}
++}
++
++func TestLoadCustomValues(t *testing.T) {
++	setEnv(t, map[string]string{
++		"TELEGRAM_BOT_TOKEN":   "tg-token",
++		"OPENWEATHER_API_KEY":  "owm-key",
++		"TELEGRAM_BASE_URL":    "http://127.0.0.1:8080",
++		"OPENWEATHER_BASE_URL": "http://127.0.0.1:8081",
++		"LOG_LEVEL":            "debug",
++	})
++	cfg, err := Load()
++	if err != nil {
++		t.Fatalf("Load() err = %v", err)
++	}
++	if cfg.TelegramBaseURL != "http://127.0.0.1:8080" {
++		t.Errorf("TelegramBaseURL = %q", cfg.TelegramBaseURL)
++	}
++	if cfg.OpenWeatherBaseURL != "http://127.0.0.1:8081" {
++		t.Errorf("OpenWeatherBaseURL = %q", cfg.OpenWeatherBaseURL)
++	}
++	if cfg.LogLevel != slog.LevelDebug {
++		t.Errorf("LogLevel = %v", cfg.LogLevel)
++	}
++}
++
++func TestLoadInvalidLogLevel(t *testing.T) {
++	setEnv(t, map[string]string{
++		"TELEGRAM_BOT_TOKEN":  "tg-token",
++		"OPENWEATHER_API_KEY": "owm-key",
++		"LOG_LEVEL":           "verbose",
++	})
++	_, err := Load()
++	if err == nil {
++		t.Fatal("Load() err = nil, want error for invalid LOG_LEVEL")
++	}
++}
+diff --git a/internal/delivery/telegram/client.go b/internal/delivery/telegram/client.go
+new file mode 100644
+index 0000000..4651840
+--- /dev/null
++++ b/internal/delivery/telegram/client.go
+@@ -0,0 +1,123 @@
++package telegram
++
++import (
++	"context"
++	"encoding/json"
++	"fmt"
++	"io"
++	"net/http"
++	"net/url"
++	"strings"
++)
++
++const maxBodyBytes = 1 << 20 // 1 MiB
++
++// Update — входящее обновление Telegram.
++type Update struct {
++	UpdateID int64    `json:"update_id"`
++	Message  *Message `json:"message"`
++}
++
++// Message — сообщение из чата.
++type Message struct {
++	Chat Chat   `json:"chat"`
++	Text string `json:"text"`
++}
++
++// Chat — чат, из которого пришло сообщение.
++type Chat struct {
++	ID int64 `json:"id"`
++}
++
++// Client — HTTP-клиент Telegram Bot API.
++type Client struct {
++	baseURL    string
++	token      string
++	httpClient *http.Client
++}
++
++// NewClient создаёт клиент Bot API. httpClient обязан иметь Timeout больше long-poll timeout.
++func NewClient(baseURL, token string, httpClient *http.Client) *Client {
++	return &Client{baseURL: baseURL, token: token, httpClient: httpClient}
++}
++
++// GetUpdates возвращает новые обновления начиная с offset.
++func (c *Client) GetUpdates(ctx context.Context, offset int64) ([]Update, error) {
++	u, err := url.Parse(c.baseURL)
++	if err != nil {
++		return nil, fmt.Errorf("parse base url: %w", err)
++	}
++	u = u.JoinPath("bot"+c.token, "getUpdates")
++	q := url.Values{}
++	q.Set("offset", fmt.Sprintf("%d", offset))
++	q.Set("timeout", "30")
++	q.Set("allowed_updates", `["message"]`)
++	u.RawQuery = q.Encode()
++
++	var updates []Update
++	if err := c.doJSON(ctx, u.String(), &updates); err != nil {
++		return nil, err
++	}
++	return updates, nil
++}
++
++// Send отправляет текст в чат (plain text, без parse_mode).
++func (c *Client) Send(ctx context.Context, chatID int64, text string) error {
++	u, err := url.Parse(c.baseURL)
++	if err != nil {
++		return fmt.Errorf("parse base url: %w", err)
++	}
++	u = u.JoinPath("bot"+c.token, "sendMessage")
++	q := url.Values{}
++	q.Set("chat_id", fmt.Sprintf("%d", chatID))
++	q.Set("text", text)
++	u.RawQuery = q.Encode()
++
++	return c.doJSON(ctx, u.String(), nil)
++}
++
++func (c *Client) doJSON(ctx context.Context, rawURL string, out any) error {
++	req, err := http.NewRequestWithContext(ctx, http.MethodGet, rawURL, nil)
++	if err != nil {
++		return c.redact(fmt.Errorf("build request: %w", err))
++	}
++	resp, err := c.httpClient.Do(req)
++	if err != nil {
++		return c.redact(fmt.Errorf("telegram request: %w", err))
++	}
++	defer resp.Body.Close()
++
++	body, err := io.ReadAll(io.LimitReader(resp.Body, maxBodyBytes))
++	if err != nil {
++		return c.redact(fmt.Errorf("read telegram response: %w", err))
++	}
++	if resp.StatusCode == http.StatusTooManyRequests {
++		return c.redact(&rateLimitError{body: body})
++	}
++	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
++		return c.redact(fmt.Errorf("telegram status %d: %s", resp.StatusCode, truncate(string(body), 256)))
++	}
++	if out == nil {
++		return nil
++	}
++	if err := json.Unmarshal(body, out); err != nil {
++		return c.redact(fmt.Errorf("decode telegram response: %w", err))
++	}
++	return nil
++}
++
++// redact убирает токен из ошибки: *url.Error содержит полный URL с токеном в пути.
++func (c *Client) redact(err error) error {
++	if err == nil {
++		return nil
++	}
++	return fmt.Errorf("%s", strings.ReplaceAll(err.Error(), c.token, "[REDACTED]"))
++}
++
++func truncate(s string, n int) string {
++	r := []rune(s)
++	if len(r) <= n {
++		return s
++	}
++	return string(r[:n]) + "..."
++}
+diff --git a/internal/delivery/telegram/client_test.go b/internal/delivery/telegram/client_test.go
+new file mode 100644
+index 0000000..1413b3e
+--- /dev/null
++++ b/internal/delivery/telegram/client_test.go
+@@ -0,0 +1,119 @@
++package telegram_test
++
++import (
++	"context"
++	"errors"
++	"io"
++	"net/http"
++	"net/http/httptest"
++	"strings"
++	"testing"
++	"time"
++
++	"weatherbot/internal/delivery/telegram"
++)
++
++func TestClientGetUpdates(t *testing.T) {
++	var gotOffset string
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		if r.URL.Path != "/bot123:ABC/getUpdates" {
++			t.Errorf("path = %q", r.URL.Path)
++		}
++		q := r.URL.Query()
++		gotOffset = q.Get("offset")
++		if q.Get("timeout") != "30" {
++			t.Errorf("timeout = %q", q.Get("timeout"))
++		}
++		if q.Get("allowed_updates") != `["message"]` {
++			t.Errorf("allowed_updates = %q", q.Get("allowed_updates"))
++		}
++		_, _ = io.WriteString(w, `[{"update_id":7,"message":{"chat":{"id":42},"text":"/start"}}]`)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := telegram.NewClient(srv.URL, "123:ABC", srv.Client())
++	updates, err := c.GetUpdates(context.Background(), 7)
++	if err != nil {
++		t.Fatalf("GetUpdates() err = %v", err)
++	}
++	if gotOffset != "7" {
++		t.Errorf("offset = %q, want 7", gotOffset)
++	}
++	if len(updates) != 1 || updates[0].UpdateID != 7 || updates[0].Message.Text != "/start" {
++		t.Errorf("updates = %+v", updates)
++	}
++}
++
++func TestClientSend(t *testing.T) {
++	var gotChatID, gotText string
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		if r.URL.Path != "/bot123:ABC/sendMessage" {
++			t.Errorf("path = %q", r.URL.Path)
++		}
++		q := r.URL.Query()
++		gotChatID = q.Get("chat_id")
++		gotText = q.Get("text")
++		if q.Get("parse_mode") != "" {
++			t.Errorf("parse_mode = %q, want empty", q.Get("parse_mode"))
++		}
++		_, _ = io.WriteString(w, `{"ok":true}`)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := telegram.NewClient(srv.URL, "123:ABC", srv.Client())
++	if err := c.Send(context.Background(), 42, "Привет"); err != nil {
++		t.Fatalf("Send() err = %v", err)
++	}
++	if gotChatID != "42" || gotText != "Привет" {
++		t.Errorf("chat_id=%q text=%q", gotChatID, gotText)
++	}
++}
++
++func TestClientSendRedactsToken(t *testing.T) {
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		w.WriteHeader(http.StatusInternalServerError)
++		_, _ = io.WriteString(w, `{"ok":false,"description":"Internal Server Error"}`)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := telegram.NewClient(srv.URL, "123:ABC", srv.Client())
++	err := c.Send(context.Background(), 42, "Привет")
++	if err == nil {
++		t.Fatal("Send() err = nil, want error")
++	}
++	if strings.Contains(err.Error(), "123:ABC") {
++		t.Errorf("err leaks token: %v", err)
++	}
++}
++
++func TestClientGetUpdatesRateLimited(t *testing.T) {
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		w.WriteHeader(http.StatusTooManyRequests)
++		_, _ = io.WriteString(w, `{"ok":false,"error_code":429,"description":"Too Many Requests: retry after 3"}`)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := telegram.NewClient(srv.URL, "123:ABC", srv.Client())
++	_, err := c.GetUpdates(context.Background(), 1)
++	if err == nil {
++		t.Fatal("GetUpdates() err = nil, want rate limit error")
++	}
++	if !strings.Contains(err.Error(), "rate limited") {
++		t.Errorf("err = %v, want rate limited", err)
++	}
++}
++
++func TestClientContextCanceled(t *testing.T) {
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		time.Sleep(2 * time.Second)
++		_, _ = io.WriteString(w, `[]`)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := telegram.NewClient(srv.URL, "123:ABC", &http.Client{Timeout: 5 * time.Second})
++	ctx, cancel := context.WithTimeout(context.Background(), 50*time.Millisecond)
++	defer cancel()
++	if _, err := c.GetUpdates(ctx, 1); !errors.Is(err, context.DeadlineExceeded) {
++		t.Errorf("err = %v, want DeadlineExceeded", err)
++	}
++}
+diff --git a/internal/delivery/telegram/format.go b/internal/delivery/telegram/format.go
+new file mode 100644
+index 0000000..1280b19
+--- /dev/null
++++ b/internal/delivery/telegram/format.go
+@@ -0,0 +1,56 @@
++package telegram
++
++import (
++	"fmt"
++	"math"
++	"strings"
++	"unicode"
++
++	"weatherbot/internal/domain"
++)
++
++// formatWeather превращает погоду в текст для пользователя (plain text).
++func formatWeather(w domain.Weather) string {
++	return fmt.Sprintf("🌤 %s, %s\n🌡 %s, ощущается как %s\n☁️ %s\n💧 Влажность %d %%\n💨 Ветер %d м/с, %s",
++		w.City, w.Country,
++		formatTemp(w.TempC), formatTemp(w.FeelsLikeC),
++		capitalizeFirst(w.Description),
++		w.Humidity,
++		int(math.Round(w.WindSpeed)),
++		compass(w.WindDeg),
++	)
++}
++
++// formatTemp: +12, -3, 0 без знака.
++func formatTemp(c float64) string {
++	v := int(math.Round(c))
++	switch {
++	case v > 0:
++		return fmt.Sprintf("+%d °C", v)
++	case v < 0:
++		return fmt.Sprintf("%d °C", v)
++	default:
++		return "0 °C"
++	}
++}
++
++var compassPoints = [8]string{"С", "СВ", "В", "ЮВ", "Ю", "ЮЗ", "З", "СЗ"}
++
++// compass: градусы → 8 румбов.
++func compass(deg int) string {
++	idx := ((deg % 360) + 360) % 360
++	return compassPoints[(idx+22)/45%8]
++}
++
++// capitalizeFirst — первая буква описания с заглавной (по рунам).
++func capitalizeFirst(s string) string {
++	s = strings.TrimSpace(s)
++	if s == "" {
++		return s
++	}
++	r := []rune(s)
++	if !unicode.IsUpper(r[0]) {
++		r[0] = unicode.ToUpper(r[0])
++	}
++	return string(r)
++}
+diff --git a/internal/delivery/telegram/format_test.go b/internal/delivery/telegram/format_test.go
+new file mode 100644
+index 0000000..b670f26
+--- /dev/null
++++ b/internal/delivery/telegram/format_test.go
+@@ -0,0 +1,83 @@
++package telegram
++
++import (
++	"testing"
++
++	"weatherbot/internal/domain"
++)
++
++func TestFormatWeatherReference(t *testing.T) {
++	w := domain.Weather{
++		City: "Москва", Country: "RU",
++		TempC: 12.4, FeelsLikeC: 9.6,
++		Description: "переменная облачность",
++		Humidity:    71, WindSpeed: 4.2, WindDeg: 315,
++	}
++	want := "🌤 Москва, RU\n🌡 +12 °C, ощущается как +10 °C\n☁️ Переменная облачность\n💧 Влажность 71 %\n💨 Ветер 4 м/с, СЗ"
++	if got := formatWeather(w); got != want {
++		t.Errorf("formatWeather() =\n%q\nwant\n%q", got, want)
++	}
++}
++
++func TestFormatTemp(t *testing.T) {
++	tests := []struct {
++		in   float64
++		want string
++	}{
++		{12.4, "+12 °C"},
++		{12.5, "+13 °C"},
++		{-3.2, "-3 °C"},
++		{-3.5, "-4 °C"},
++		{0, "0 °C"},
++		{0.4, "0 °C"},
++		{-0.4, "0 °C"},
++	}
++	for _, tt := range tests {
++		if got := formatTemp(tt.in); got != tt.want {
++			t.Errorf("formatTemp(%v) = %q, want %q", tt.in, got, tt.want)
++		}
++	}
++}
++
++func TestCompass(t *testing.T) {
++	tests := []struct {
++		deg  int
++		want string
++	}{
++		{0, "С"},
++		{22, "С"},
++		{45, "СВ"},
++		{90, "В"},
++		{135, "ЮВ"},
++		{180, "Ю"},
++		{225, "ЮЗ"},
++		{270, "З"},
++		{315, "СЗ"},
++		{359, "С"},
++		{360, "С"},
++		{-45, "СЗ"},
++	}
++	for _, tt := range tests {
++		if got := compass(tt.deg); got != tt.want {
++			t.Errorf("compass(%d) = %q, want %q", tt.deg, got, tt.want)
++		}
++	}
++}
++
++func TestCapitalizeFirst(t *testing.T) {
++	tests := []struct {
++		in   string
++		want string
++	}{
++		{"ясно", "Ясно"},
++		{"Ясно", "Ясно"},
++		{"  дождь  ", "Дождь"},
++		{"", ""},
++		{"облачно", "Облачно"},
++	}
++	for _, tt := range tests {
++		if got := capitalizeFirst(tt.in); got != tt.want {
++			t.Errorf("capitalizeFirst(%q) = %q, want %q", tt.in, got, tt.want)
++		}
++	}
++}
+diff --git a/internal/delivery/telegram/handler.go b/internal/delivery/telegram/handler.go
+new file mode 100644
+index 0000000..7c2c600
+--- /dev/null
++++ b/internal/delivery/telegram/handler.go
+@@ -0,0 +1,99 @@
++package telegram
++
++import (
++	"context"
++	"errors"
++	"log/slog"
++	"strings"
++	"sync"
++	"time"
++
++	"weatherbot/internal/domain"
++)
++
++const perChatInterval = 2 * time.Second
++
++// WeatherGetter — то, что handler'у нужно от usecase.
++type WeatherGetter interface {
++	Current(ctx context.Context, city string) (domain.Weather, error)
++}
++
++// Sender отправляет текст в чат.
++type Sender interface {
++	Send(ctx context.Context, chatID int64, text string) error
++}
++
++// Handler превращает входящее сообщение в ответ.
++type Handler struct {
++	weather WeatherGetter
++	sender  Sender
++	log     *slog.Logger
++	mu      sync.Mutex
++	lastReq map[int64]time.Time // token bucket ёмкостью 1 на чат
++}
++
++// NewHandler создаёт обработчик сообщений.
++func NewHandler(weather WeatherGetter, sender Sender, log *slog.Logger) *Handler {
++	return &Handler{weather: weather, sender: sender, log: log, lastReq: make(map[int64]time.Time)}
++}
++
++// Handle обрабатывает одно сообщение. Паника не роняет бота.
++func (h *Handler) Handle(ctx context.Context, chatID int64, text string) {
++	defer func() {
++		if r := recover(); r != nil {
++			h.log.Error("handle message panicked", "chat_id", chatID, "panic", r)
++		}
++	}()
++	reply := msgTooFrequent
++	if h.allow(chatID, time.Now()) {
++		reply = h.respond(ctx, text)
++	}
++	if err := h.sender.Send(ctx, chatID, reply); err != nil {
++		h.log.Warn("send message", "chat_id", chatID, "err", err) // Sender уже вернул redacted-ошибку
++	}
++}
++
++func (h *Handler) respond(ctx context.Context, text string) string {
++	cmd, city := parseCommand(text)
++	switch {
++	case cmd == "/start":
++		return msgStart
++	case cmd != "/weather" && cmd != "":
++		return msgHelp
++	case city == "":
++		return msgEmptyCity
++	}
++	w, err := h.weather.Current(ctx, city)
++	switch {
++	case err == nil:
++		return formatWeather(w)
++	case errors.Is(err, domain.ErrInvalidCity):
++		return msgInvalidCity
++	case errors.Is(err, domain.ErrCityNotFound):
++		return msgCityNotFound(city)
++	default:
++		h.log.Warn("weather request failed", "err", err)
++		return msgUnavailable
++	}
++}
++
++func (h *Handler) allow(chatID int64, now time.Time) bool {
++	h.mu.Lock()
++	defer h.mu.Unlock()
++	if last, ok := h.lastReq[chatID]; ok && now.Sub(last) < perChatInterval {
++		return false
++	}
++	h.lastReq[chatID] = now
++	return true
++}
++
++// parseCommand: "/weather@MyBot Казань" → ("/weather", "Казань"); "Казань" → ("", "Казань").
++func parseCommand(text string) (cmd, arg string) {
++	text = strings.TrimSpace(text)
++	if !strings.HasPrefix(text, "/") {
++		return "", text
++	}
++	head, rest, _ := strings.Cut(text, " ")
++	head, _, _ = strings.Cut(head, "@")
++	return strings.ToLower(head), strings.TrimSpace(rest)
++}
+diff --git a/internal/delivery/telegram/handler_test.go b/internal/delivery/telegram/handler_test.go
+new file mode 100644
+index 0000000..35fe92f
+--- /dev/null
++++ b/internal/delivery/telegram/handler_test.go
+@@ -0,0 +1,196 @@
++package telegram
++
++import (
++	"context"
++	"errors"
++	"log/slog"
++	"os"
++	"testing"
++	"time"
++
++	"weatherbot/internal/domain"
++)
++
++type fakeWeather struct {
++	weather domain.Weather
++	err     error
++	calls   int
++}
++
++func (f *fakeWeather) Current(_ context.Context, _ string) (domain.Weather, error) {
++	f.calls++
++	return f.weather, f.err
++}
++
++type fakeSender struct {
++	sent   []string
++	err    error
++	chatID int64
++}
++
++func (f *fakeSender) Send(_ context.Context, chatID int64, text string) error {
++	f.chatID = chatID
++	f.sent = append(f.sent, text)
++	return f.err
++}
++
++func testLogger() *slog.Logger {
++	return slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelError}))
++}
++
++func TestHandleCommands(t *testing.T) {
++	tests := []struct {
++		name string
++		text string
++		want string
++	}{
++		{name: "start", text: "/start", want: msgStart},
++		{name: "help", text: "/help", want: msgHelp},
++		{name: "unknown command", text: "/foo bar", want: msgHelp},
++		{name: "weather without city", text: "/weather", want: msgEmptyCity},
++		{name: "weather with spaces only", text: "/weather   ", want: msgEmptyCity},
++	}
++	for _, tt := range tests {
++		t.Run(tt.name, func(t *testing.T) {
++			sender := &fakeSender{}
++			h := NewHandler(&fakeWeather{}, sender, testLogger())
++			h.Handle(context.Background(), 1, tt.text)
++			if len(sender.sent) != 1 || sender.sent[0] != tt.want {
++				t.Errorf("sent = %v, want [%q]", sender.sent, tt.want)
++			}
++		})
++	}
++}
++
++func TestHandleWeatherSuccess(t *testing.T) {
++	w := domain.Weather{City: "Москва", Country: "RU", TempC: 12.4, FeelsLikeC: 9.6,
++		Description: "переменная облачность", Humidity: 71, WindSpeed: 4.2, WindDeg: 315}
++	sender := &fakeSender{}
++	h := NewHandler(&fakeWeather{weather: w}, sender, testLogger())
++	h.Handle(context.Background(), 1, "/weather Казань")
++	want := "🌤 Москва, RU\n🌡 +12 °C, ощущается как +10 °C\n☁️ Переменная облачность\n💧 Влажность 71 %\n💨 Ветер 4 м/с, СЗ"
++	if len(sender.sent) != 1 || sender.sent[0] != want {
++		t.Errorf("sent = %v, want [%q]", sender.sent, want)
++	}
++}
++
++func TestHandlePlainTextIsCity(t *testing.T) {
++	w := domain.Weather{City: "Казань", Country: "RU"}
++	fw := &fakeWeather{weather: w}
++	sender := &fakeSender{}
++	h := NewHandler(fw, sender, testLogger())
++	h.Handle(context.Background(), 1, "Казань")
++	if fw.calls != 1 {
++		t.Fatalf("weather calls = %d, want 1", fw.calls)
++	}
++	if len(sender.sent) != 1 || !containsRune(sender.sent[0], 'К') {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func TestHandleBotsCommandNormalization(t *testing.T) {
++	w := domain.Weather{City: "Казань", Country: "RU"}
++	fw := &fakeWeather{weather: w}
++	sender := &fakeSender{}
++	h := NewHandler(fw, sender, testLogger())
++	h.Handle(context.Background(), 1, "/weather@MyBot Казань")
++	if fw.calls != 1 {
++		t.Fatalf("weather calls = %d, want 1", fw.calls)
++	}
++}
++
++func TestHandleCityNotFound(t *testing.T) {
++	fw := &fakeWeather{err: domain.ErrCityNotFound}
++	sender := &fakeSender{}
++	h := NewHandler(fw, sender, testLogger())
++	h.Handle(context.Background(), 1, "/weather Нигдеград")
++	if len(sender.sent) != 1 || sender.sent[0] != msgCityNotFound("Нигдеград") {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func TestHandleInvalidCity(t *testing.T) {
++	fw := &fakeWeather{err: domain.ErrInvalidCity}
++	sender := &fakeSender{}
++	h := NewHandler(fw, sender, testLogger())
++	h.Handle(context.Background(), 1, "/weather city 123")
++	if len(sender.sent) != 1 || sender.sent[0] != msgInvalidCity {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func TestHandleProviderErrors(t *testing.T) {
++	for name, err := range map[string]error{
++		"unavailable": domain.ErrProviderUnavailable,
++		"auth":        domain.ErrProviderAuth,
++		"rate":        domain.ErrRateLimited,
++	} {
++		t.Run(name, func(t *testing.T) {
++			sender := &fakeSender{}
++			h := NewHandler(&fakeWeather{err: err}, sender, testLogger())
++			h.Handle(context.Background(), 1, "/weather Казань")
++			if len(sender.sent) != 1 || sender.sent[0] != msgUnavailable {
++				t.Errorf("sent = %v, want [%q]", sender.sent, msgUnavailable)
++			}
++		})
++	}
++}
++
++func TestHandleRateLimitPerChat(t *testing.T) {
++	sender := &fakeSender{}
++	h := NewHandler(&fakeWeather{}, sender, testLogger())
++	h.Handle(context.Background(), 1, "/start")
++	h.Handle(context.Background(), 1, "/start")
++	if len(sender.sent) != 2 || sender.sent[1] != msgTooFrequent {
++		t.Errorf("sent = %v", sender.sent)
++	}
++	// Другой чат не ограничен.
++	h.Handle(context.Background(), 2, "/start")
++	if len(sender.sent) != 3 || sender.sent[2] != msgStart {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func TestHandleRateLimitExpires(t *testing.T) {
++	sender := &fakeSender{}
++	h := NewHandler(&fakeWeather{}, sender, testLogger())
++	h.Handle(context.Background(), 1, "/start")
++	time.Sleep(perChatInterval + 10*time.Millisecond)
++	h.Handle(context.Background(), 1, "/start")
++	if len(sender.sent) != 2 || sender.sent[1] != msgStart {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func TestHandlePanicRecovered(t *testing.T) {
++	sender := &fakeSender{}
++	h := NewHandler(&panickingWeather{}, sender, testLogger())
++	h.Handle(context.Background(), 1, "/weather Казань") // не должно паниковать
++	if len(sender.sent) != 1 {
++		t.Fatalf("sent = %v, want one reply", sender.sent)
++	}
++}
++
++type panickingWeather struct{}
++
++func (p *panickingWeather) Current(_ context.Context, _ string) (domain.Weather, error) {
++	panic("boom")
++}
++
++func TestHandleSendErrorDoesNotPanic(t *testing.T) {
++	sender := &fakeSender{err: errors.New("send failed")}
++	h := NewHandler(&fakeWeather{}, sender, testLogger())
++	h.Handle(context.Background(), 1, "/start")
++	if len(sender.sent) != 1 {
++		t.Errorf("sent = %v", sender.sent)
++	}
++}
++
++func containsRune(s string, r rune) bool {
++	for _, c := range s {
++		if c == r {
++			return true
++		}
++	}
++	return false
++}
+diff --git a/internal/delivery/telegram/messages.go b/internal/delivery/telegram/messages.go
+new file mode 100644
+index 0000000..ebb1f26
+--- /dev/null
++++ b/internal/delivery/telegram/messages.go
+@@ -0,0 +1,16 @@
++package telegram
++
++// Все тексты, которые видит пользователь.
++const (
++	msgStart       = "Привет! Я подскажу погоду. Просто напиши название города, например: Казань"
++	msgHelp        = "Команды:\n/start — приветствие\n/help — эта справка\n/weather <город> — погода в городе\n\nПример: /weather Казань\nМожно просто написать название города без команды."
++	msgEmptyCity   = "Напиши город после команды, например: /weather Пермь"
++	msgInvalidCity = "Название города может содержать только буквы, пробел, дефис, точку и запятую"
++	msgUnavailable = "⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут"
++	msgTooFrequent = "⏳ Не так быстро, попробуй через пару секунд"
++)
++
++// msgCityNotFound — город не найден у провайдера.
++func msgCityNotFound(city string) string {
++	return "🤔 Не нашёл город «" + city + "». Проверь написание или попробуй по-английски"
++}
+diff --git a/internal/delivery/telegram/poller.go b/internal/delivery/telegram/poller.go
+new file mode 100644
+index 0000000..95d9795
+--- /dev/null
++++ b/internal/delivery/telegram/poller.go
+@@ -0,0 +1,125 @@
++package telegram
++
++import (
++	"context"
++	"encoding/json"
++	"fmt"
++	"log/slog"
++	"time"
++)
++
++const (
++	backoffBase = time.Second
++	backoffMax  = 30 * time.Second
++)
++
++// Updater — источник обновлений Telegram.
++type Updater interface {
++	GetUpdates(ctx context.Context, offset int64) ([]Update, error)
++}
++
++// MessageHandler обрабатывает одно сообщение.
++type MessageHandler interface {
++	Handle(ctx context.Context, chatID int64, text string)
++}
++
++// Poller — цикл long polling.
++type Poller struct {
++	updates Updater
++	handler MessageHandler
++	log     *slog.Logger
++}
++
++// NewPoller создаёт poller.
++func NewPoller(updates Updater, handler MessageHandler, log *slog.Logger) *Poller {
++	return &Poller{updates: updates, handler: handler, log: log}
++}
++
++// Run опрашивает getUpdates, пока ctx не отменён. Возвращает ошибку только при сбое,
++// не связанном с отменой контекста.
++func (p *Poller) Run(ctx context.Context) error {
++	var offset int64
++	backoff := backoffBase
++	for {
++		updates, err := p.updates.GetUpdates(ctx, offset)
++		if err != nil {
++			if ctx.Err() != nil {
++				return ctx.Err()
++			}
++			if d, ok := retryAfterFromError(err); ok {
++				p.log.Warn("telegram rate limited, waiting retry_after", "retry_after", d)
++				if err := sleepCtx(ctx, d); err != nil {
++					return err
++				}
++				backoff = backoffBase
++				continue
++			}
++			p.log.Warn("getUpdates failed, backing off", "err", err, "backoff", backoff)
++			if err := sleepCtx(ctx, backoff); err != nil {
++				return err
++			}
++			backoff = min(backoff*2, backoffMax)
++			continue
++		}
++		backoff = backoffBase
++		for _, u := range updates {
++			if u.UpdateID >= offset {
++				offset = u.UpdateID + 1
++			}
++			if u.Message != nil {
++				p.handler.Handle(ctx, u.Message.Chat.ID, u.Message.Text)
++			}
++		}
++	}
++}
++
++// rateLimitError — ошибка 429 с телом ответа, чтобы извлечь retry_after.
++type rateLimitError struct {
++	body []byte
++}
++
++func (e *rateLimitError) Error() string {
++	return fmt.Sprintf("telegram rate limited: status 429, body: %s", truncate(string(e.body), 256))
++}
++
++// retryAfterFromError извлекает parameters.retry_after из ошибки 429.
++func retryAfterFromError(err error) (time.Duration, bool) {
++	var rle *rateLimitError
++	if !asError(err, &rle) {
++		return 0, false
++	}
++	var resp struct {
++		Parameters struct {
++			RetryAfter int `json:"retry_after"`
++		} `json:"parameters"`
++	}
++	if json.Unmarshal(rle.body, &resp) != nil || resp.Parameters.RetryAfter <= 0 {
++		return backoffBase, true
++	}
++	return time.Duration(resp.Parameters.RetryAfter) * time.Second, true
++}
++
++func asError(err error, target **rateLimitError) bool {
++	for err != nil {
++		if rle, ok := err.(*rateLimitError); ok {
++			*target = rle
++			return true
++		}
++		type unwrapper interface{ Unwrap() error }
++		u, ok := err.(unwrapper)
++		if !ok {
++			return false
++		}
++		err = u.Unwrap()
++	}
++	return false
++}
++
++func sleepCtx(ctx context.Context, d time.Duration) error {
++	select {
++	case <-ctx.Done():
++		return ctx.Err()
++	case <-time.After(d):
++		return nil
++	}
++}
+diff --git a/internal/delivery/telegram/poller_test.go b/internal/delivery/telegram/poller_test.go
+new file mode 100644
+index 0000000..fbdb175
+--- /dev/null
++++ b/internal/delivery/telegram/poller_test.go
+@@ -0,0 +1,125 @@
++package telegram
++
++import (
++	"context"
++	"errors"
++	"log/slog"
++	"os"
++	"testing"
++	"time"
++)
++
++type fakeUpdater struct {
++	calls   int
++	offsets []int64
++	updates []Update
++	err     error
++}
++
++func (f *fakeUpdater) GetUpdates(_ context.Context, offset int64) ([]Update, error) {
++	f.calls++
++	f.offsets = append(f.offsets, offset)
++	return f.updates, f.err
++}
++
++type recordingHandler struct {
++	messages []string
++}
++
++func (r *recordingHandler) Handle(_ context.Context, _ int64, text string) {
++	r.messages = append(r.messages, text)
++}
++
++func quietLogger() *slog.Logger {
++	return slog.New(slog.NewTextHandler(os.Stderr, &slog.HandlerOptions{Level: slog.LevelError}))
++}
++
++func TestPollerProcessesUpdatesAndAdvancesOffset(t *testing.T) {
++	fu := &fakeUpdater{updates: []Update{
++		{UpdateID: 1, Message: &Message{Chat: Chat{ID: 10}, Text: "a"}},
++		{UpdateID: 2, Message: &Message{Chat: Chat{ID: 10}, Text: "b"}},
++		{UpdateID: 3}, // без сообщения
++	}}
++	rh := &recordingHandler{}
++	p := NewPoller(fu, rh, quietLogger())
++
++	ctx, cancel := context.WithCancel(context.Background())
++	done := make(chan error, 1)
++	go func() { done <- p.Run(ctx) }()
++
++	deadline := time.After(2 * time.Second)
++	for len(rh.messages) < 2 {
++		select {
++		case <-deadline:
++			t.Fatal("poller did not process updates in time")
++		case <-time.After(5 * time.Millisecond):
++		}
++	}
++	cancel()
++	if err := <-done; !errors.Is(err, context.Canceled) {
++		t.Fatalf("Run() err = %v, want context.Canceled", err)
++	}
++	if fu.offsets[0] != 0 || fu.offsets[1] != 4 {
++		t.Errorf("offsets = %v, want [0 4]", fu.offsets)
++	}
++	if len(rh.messages) != 2 || rh.messages[0] != "a" || rh.messages[1] != "b" {
++		t.Errorf("messages = %v", rh.messages)
++	}
++}
++
++func TestPollerBackoffOnErrors(t *testing.T) {
++	fu := &fakeUpdater{err: errors.New("network down")}
++	rh := &recordingHandler{}
++	p := NewPoller(fu, rh, quietLogger())
++
++	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
++	defer cancel()
++	if err := p.Run(ctx); !errors.Is(err, context.DeadlineExceeded) {
++		t.Fatalf("Run() err = %v, want DeadlineExceeded", err)
++	}
++	if fu.calls < 2 {
++		t.Errorf("GetUpdates calls = %d, want >= 2 (backoff retries)", fu.calls)
++	}
++}
++
++func TestPollerRateLimitWaitsRetryAfter(t *testing.T) {
++	fu := &fakeUpdater{err: &rateLimitError{body: []byte(`{"ok":false,"parameters":{"retry_after":1}}`)}}
++	rh := &recordingHandler{}
++	p := NewPoller(fu, rh, quietLogger())
++
++	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
++	defer cancel()
++	start := time.Now()
++	if err := p.Run(ctx); !errors.Is(err, context.DeadlineExceeded) {
++		t.Fatalf("Run() err = %v, want DeadlineExceeded", err)
++	}
++	// 3 секунды: первый вызов + retry_after 1с + повтор + retry_after 1с + повтор ≈ 3 вызова.
++	if fu.calls < 2 {
++		t.Errorf("GetUpdates calls = %d, want >= 2", fu.calls)
++	}
++	if time.Since(start) < 2*time.Second {
++		t.Errorf("poller retried too fast, retry_after not honored")
++	}
++}
++
++func TestRetryAfterFromError(t *testing.T) {
++	tests := []struct {
++		name   string
++		err    error
++		want   time.Duration
++		wantOK bool
++	}{
++		{name: "with retry_after", err: &rateLimitError{body: []byte(`{"parameters":{"retry_after":5}}`)}, want: 5 * time.Second, wantOK: true},
++		{name: "without parameters", err: &rateLimitError{body: []byte(`{"ok":false}`)}, want: backoffBase, wantOK: true},
++		{name: "broken body", err: &rateLimitError{body: []byte(`not json`)}, want: backoffBase, wantOK: true},
++		{name: "other error", err: errors.New("boom"), wantOK: false},
++	}
++	for _, tt := range tests {
++		t.Run(tt.name, func(t *testing.T) {
++			got, ok := retryAfterFromError(tt.err)
++			if ok != tt.wantOK || got != tt.want {
++				t.Errorf("retryAfterFromError() = (%v, %v), want (%v, %v)", got, ok, tt.want, tt.wantOK)
++			}
++		})
++	}
++}
+diff --git a/internal/domain/errors.go b/internal/domain/errors.go
+new file mode 100644
+index 0000000..3c653a2
+--- /dev/null
++++ b/internal/domain/errors.go
+@@ -0,0 +1,12 @@
++package domain
++
++import "errors"
++
++// Ошибки предметной области. Сравниваются через errors.Is.
++var (
++	ErrInvalidCity         = errors.New("invalid city")
++	ErrCityNotFound        = errors.New("city not found")
++	ErrProviderAuth        = errors.New("weather provider auth failed")
++	ErrRateLimited         = errors.New("weather provider rate limited")
++	ErrProviderUnavailable = errors.New("weather provider unavailable")
++)
+diff --git a/internal/domain/weather.go b/internal/domain/weather.go
+new file mode 100644
+index 0000000..3e15f89
+--- /dev/null
++++ b/internal/domain/weather.go
+@@ -0,0 +1,14 @@
++// Package domain содержит сущности и ошибки предметной области.
++package domain
++
++// Weather — текущая погода в городе.
++type Weather struct {
++	City        string  // название из ответа провайдера
++	Country     string  // ISO 3166-1 alpha-2, например "RU"
++	TempC       float64 // температура, °C
++	FeelsLikeC  float64 // ощущается как, °C
++	Description string  // описание на русском, как прислал провайдер
++	Humidity    int     // влажность, %
++	WindSpeed   float64 // скорость ветра, м/с
++	WindDeg     int     // направление ветра, градусы, 0 = север
++}
+diff --git a/internal/repository/openweather/client.go b/internal/repository/openweather/client.go
+new file mode 100644
+index 0000000..d3232fe
+--- /dev/null
++++ b/internal/repository/openweather/client.go
+@@ -0,0 +1,128 @@
++// Package openweather — адаптер к OpenWeatherMap Current Weather API.
++package openweather
++
++import (
++	"context"
++	"encoding/json"
++	"fmt"
++	"io"
++	"net/http"
++	"net/url"
++	"strings"
++
++	"weatherbot/internal/domain"
++)
++
++const maxBodyBytes = 1 << 20 // 1 MiB
++
++// Client запрашивает текущую погоду у OpenWeatherMap.
++type Client struct {
++	baseURL    string
++	apiKey     string
++	httpClient *http.Client
++}
++
++// NewClient создаёт клиент. httpClient обязан иметь Timeout.
++func NewClient(baseURL, apiKey string, httpClient *http.Client) *Client {
++	return &Client{baseURL: baseURL, apiKey: apiKey, httpClient: httpClient}
++}
++
++type currentResponse struct {
++	Name string `json:"name"`
++	Sys  struct {
++		Country string `json:"country"`
++	} `json:"sys"`
++	Main struct {
++		Temp      float64 `json:"temp"`
++		FeelsLike float64 `json:"feels_like"`
++		Humidity  int     `json:"humidity"`
++	} `json:"main"`
++	Weather []struct {
++		Description string `json:"description"`
++	} `json:"weather"`
++	Wind struct {
++		Speed float64 `json:"speed"`
++		Deg   int     `json:"deg"`
++	} `json:"wind"`
++}
++
++// Current возвращает текущую погоду в городе.
++func (c *Client) Current(ctx context.Context, city string) (domain.Weather, error) {
++	u, err := url.Parse(c.baseURL)
++	if err != nil {
++		return domain.Weather{}, fmt.Errorf("parse base url: %w", err)
++	}
++	u = u.JoinPath("data", "2.5", "weather")
++	q := url.Values{}
++	q.Set("q", city)
++	q.Set("units", "metric")
++	q.Set("lang", "ru")
++	q.Set("appid", c.apiKey)
++	u.RawQuery = q.Encode()
++
++	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u.String(), nil)
++	if err != nil {
++		return domain.Weather{}, fmt.Errorf("build request: %w", err)
++	}
++	resp, err := c.httpClient.Do(req)
++	if err != nil {
++		return domain.Weather{}, fmt.Errorf("%w: %s", domain.ErrProviderUnavailable, c.redact(err.Error()))
++	}
++	defer resp.Body.Close()
++
++	if err := statusError(resp.StatusCode); err != nil {
++		return domain.Weather{}, err
++	}
++	var body currentResponse
++	if err := json.NewDecoder(io.LimitReader(resp.Body, maxBodyBytes)).Decode(&body); err != nil {
++		return domain.Weather{}, fmt.Errorf("%w: decode response: %v", domain.ErrProviderUnavailable, err)
++	}
++	return toDomain(body), nil
++}
++
++func statusError(code int) error {
++	switch {
++	case code == http.StatusOK:
++		return nil
++	case code == http.StatusNotFound:
++		return domain.ErrCityNotFound
++	case code == http.StatusUnauthorized:
++		return domain.ErrProviderAuth
++	case code == http.StatusTooManyRequests:
++		return domain.ErrRateLimited
++	default:
++		return fmt.Errorf("%w: status %d", domain.ErrProviderUnavailable, code)
++	}
++}
++
++func toDomain(r currentResponse) domain.Weather {
++	w := domain.Weather{
++		City:        r.Name,
++		Country:     r.Sys.Country,
++		TempC:       r.Main.Temp,
++		FeelsLikeC:  r.Main.FeelsLike,
++		Humidity:    r.Main.Humidity,
++		WindSpeed:   r.Wind.Speed,
++		WindDeg:     r.Wind.Deg,
++		Description: firstDescription(r.Weather),
++	}
++	return w
++}
++
++func firstDescription(items []struct {
++	Description string `json:"description"`
++}) string {
++	if len(items) > 0 {
++		return items[0].Description
++	}
++	return ""
++}
++
++// redact убирает ключ (в сыром и URL-кодированном виде) из текста ошибки.
++func (c *Client) redact(s string) string {
++	if c.apiKey == "" {
++		return s
++	}
++	s = strings.ReplaceAll(s, c.apiKey, "[REDACTED]")
++	return strings.ReplaceAll(s, url.QueryEscape(c.apiKey), "[REDACTED]")
++}
+diff --git a/internal/repository/openweather/client_test.go b/internal/repository/openweather/client_test.go
+new file mode 100644
+index 0000000..670a82a
+--- /dev/null
++++ b/internal/repository/openweather/client_test.go
+@@ -0,0 +1,105 @@
++package openweather_test
++
++import (
++	"errors"
++	"io"
++	"net/http"
++	"net/http/httptest"
++	"testing"
++
++	"weatherbot/internal/domain"
++	"weatherbot/internal/repository/openweather"
++)
++
++const okBody = `{"name":"Москва","sys":{"country":"RU"},"main":{"temp":12.4,"feels_like":9.6,"humidity":71},
++"weather":[{"description":"переменная облачность"}],"wind":{"speed":4.2,"deg":315}}`
++
++func TestClientCurrent(t *testing.T) {
++	tests := []struct {
++		name     string
++		status   int
++		body     string
++		wantErr  error
++		wantCity string
++	}{
++		{name: "ok", status: http.StatusOK, body: okBody, wantCity: "Москва"},
++		{name: "not found", status: http.StatusNotFound, body: `{"cod":"404","message":"city not found"}`, wantErr: domain.ErrCityNotFound},
++		{name: "bad key", status: http.StatusUnauthorized, body: `{"cod":401}`, wantErr: domain.ErrProviderAuth},
++		{name: "rate limited", status: http.StatusTooManyRequests, body: `{}`, wantErr: domain.ErrRateLimited},
++		{name: "server error", status: http.StatusInternalServerError, body: `oops`, wantErr: domain.ErrProviderUnavailable},
++		{name: "broken json", status: http.StatusOK, body: `{not json`, wantErr: domain.ErrProviderUnavailable},
++	}
++	for _, tt := range tests {
++		t.Run(tt.name, func(t *testing.T) {
++			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++				q := r.URL.Query()
++				if r.URL.Path != "/data/2.5/weather" || q.Get("q") != "Москва" || q.Get("appid") != "test-key" {
++					t.Errorf("unexpected request: %s", r.URL)
++				}
++				if q.Get("units") != "metric" || q.Get("lang") != "ru" {
++					t.Errorf("unexpected query: %s", r.URL.RawQuery)
++				}
++				w.WriteHeader(tt.status)
++				_, _ = io.WriteString(w, tt.body)
++			}))
++			t.Cleanup(srv.Close)
++
++			c := openweather.NewClient(srv.URL, "test-key", srv.Client())
++			got, err := c.Current(t.Context(), "Москва")
++			if !errors.Is(err, tt.wantErr) {
++				t.Fatalf("Current() err = %v, want %v", err, tt.wantErr)
++			}
++			if got.City != tt.wantCity {
++				t.Errorf("Current() city = %q, want %q", got.City, tt.wantCity)
++			}
++		})
++	}
++}
++
++func TestClientCurrentDecodesFields(t *testing.T) {
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		_, _ = io.WriteString(w, okBody)
++	}))
++	t.Cleanup(srv.Close)
++
++	c := openweather.NewClient(srv.URL, "test-key", srv.Client())
++	got, err := c.Current(t.Context(), "Москва")
++	if err != nil {
++		t.Fatalf("Current() err = %v", err)
++	}
++	if got.Country != "RU" || got.TempC != 12.4 || got.FeelsLikeC != 9.6 || got.Humidity != 71 {
++		t.Errorf("Current() = %+v", got)
++	}
++	if got.WindSpeed != 4.2 || got.WindDeg != 315 || got.Description != "переменная облачность" {
++		t.Errorf("Current() = %+v", got)
++	}
++}
++
++func TestClientRedactsKeyOnError(t *testing.T) {
++	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
++		w.WriteHeader(http.StatusServiceUnavailable)
++		_, _ = io.WriteString(w, "unavailable")
++	}))
++	t.Cleanup(srv.Close)
++
++	c := openweather.NewClient(srv.URL, "secret-key-123", srv.Client())
++	_, err := c.Current(t.Context(), "Москва")
++	if err == nil {
++		t.Fatal("Current() err = nil, want error")
++	}
++	if !errors.Is(err, domain.ErrProviderUnavailable) {
++		t.Fatalf("err = %v, want ErrProviderUnavailable", err)
++	}
++	if contains(err.Error(), "secret-key-123") {
++		t.Errorf("err leaks api key: %v", err)
++	}
++}
++
++func contains(s, sub string) bool {
++	for i := 0; i+len(sub) <= len(s); i++ {
++		if s[i:i+len(sub)] == sub {
++			return true
++		}
++	}
++	return false
++}
+diff --git a/internal/usecase/weather.go b/internal/usecase/weather.go
+new file mode 100644
+index 0000000..923e9aa
+--- /dev/null
++++ b/internal/usecase/weather.go
+@@ -0,0 +1,55 @@
++// Package usecase содержит бизнес-логику бота.
++package usecase
++
++import (
++	"context"
++	"fmt"
++	"strings"
++	"unicode"
++	"unicode/utf8"
++
++	"weatherbot/internal/domain"
++)
++
++const maxCityRunes = 64
++
++// WeatherProvider — источник текущей погоды.
++type WeatherProvider interface {
++	Current(ctx context.Context, city string) (domain.Weather, error)
++}
++
++// WeatherService отдаёт погоду по названию города.
++type WeatherService struct {
++	provider WeatherProvider
++}
++
++// NewWeatherService создаёт сервис поверх провайдера погоды.
++func NewWeatherService(provider WeatherProvider) *WeatherService {
++	return &WeatherService{provider: provider}
++}
++
++// Current валидирует город и запрашивает погоду у провайдера.
++func (s *WeatherService) Current(ctx context.Context, rawCity string) (domain.Weather, error) {
++	city, err := normalizeCity(rawCity)
++	if err != nil {
++		return domain.Weather{}, err
++	}
++	w, err := s.provider.Current(ctx, city)
++	if err != nil {
++		return domain.Weather{}, fmt.Errorf("get current weather: %w", err)
++	}
++	return w, nil
++}
++
++func normalizeCity(raw string) (string, error) {
++	city := strings.Join(strings.Fields(raw), " ")
++	if n := utf8.RuneCountInString(city); n == 0 || n > maxCityRunes {
++		return "", domain.ErrInvalidCity
++	}
++	for _, r := range city {
++		if !unicode.IsLetter(r) && !strings.ContainsRune(" -.,", r) {
++			return "", domain.ErrInvalidCity // заодно отсекает utf8.RuneError и управляющие
++		}
++	}
++	return city, nil
++}
+diff --git a/internal/usecase/weather_test.go b/internal/usecase/weather_test.go
+new file mode 100644
+index 0000000..1943b68
+--- /dev/null
++++ b/internal/usecase/weather_test.go
+@@ -0,0 +1,82 @@
++package usecase
++
++import (
++	"context"
++	"errors"
++	"strings"
++	"testing"
++
++	"weatherbot/internal/domain"
++)
++
++type fakeProvider struct {
++	lastCity string
++	weather  domain.Weather
++	err      error
++}
++
++func (f *fakeProvider) Current(_ context.Context, city string) (domain.Weather, error) {
++	f.lastCity = city
++	return f.weather, f.err
++}
++
++func TestCurrentNormalizesCity(t *testing.T) {
++	f := &fakeProvider{weather: domain.Weather{City: "Москва"}}
++	s := NewWeatherService(f)
++	if _, err := s.Current(context.Background(), "  Москва   "); err != nil {
++		t.Fatalf("Current() err = %v", err)
++	}
++	if f.lastCity != "Москва" {
++		t.Errorf("provider got city %q, want %q", f.lastCity, "Москва")
++	}
++}
++
++func TestCurrentInvalidCity(t *testing.T) {
++	f := &fakeProvider{}
++	s := NewWeatherService(f)
++	tests := []string{
++		"",
++		"   ",
++		"city 123",
++		"city/with/slash",
++	}
++	for _, in := range tests {
++		if _, err := s.Current(context.Background(), in); !errors.Is(err, domain.ErrInvalidCity) {
++			t.Errorf("Current(%q) err = %v, want ErrInvalidCity", in, err)
++		}
++	}
++	if f.lastCity != "" {
++		t.Errorf("provider called with %q for invalid input", f.lastCity)
++	}
++}
++
++func TestCurrentAllowsLettersAndPunctuation(t *testing.T) {
++	f := &fakeProvider{weather: domain.Weather{City: "Saint-Petersburg"}}
++	s := NewWeatherService(f)
++	for _, in := range []string{"Москва", "Saint-Petersburg", "New York", "St. Petersburg", "A,B", "café"} {
++		if _, err := s.Current(context.Background(), in); err != nil {
++			t.Errorf("Current(%q) err = %v, want nil", in, err)
++		}
++	}
++}
++
++func TestCurrentTooLong(t *testing.T) {
++	f := &fakeProvider{}
++	s := NewWeatherService(f)
++	long := strings.Repeat("bcdefghi", 9) // 72 буквы
++	if _, err := s.Current(context.Background(), long); !errors.Is(err, domain.ErrInvalidCity) {
++		t.Errorf("Current(long) err = %v, want ErrInvalidCity", err)
++	}
++}
++
++func TestCurrentWrapsProviderError(t *testing.T) {
++	f := &fakeProvider{err: domain.ErrCityNotFound}
++	s := NewWeatherService(f)
++	_, err := s.Current(context.Background(), "Нигдеград")
++	if !errors.Is(err, domain.ErrCityNotFound) {
++		t.Fatalf("Current() err = %v, want ErrCityNotFound", err)
++	}
++	if !strings.Contains(err.Error(), "get current weather") {
++		t.Errorf("err = %q, want wrapped with context", err)
++	}
++}

@@ -1,0 +1,1 @@
+{"status":"stopped","requests":49,"parameters":{"top_p":0.9,"temperature":0.2,"max_tokens":8192,"reasoning_effort":"none","model":"qwen/qwen3.8-27b","top_k":20},"tokens":27634,"tool_calls":{"create_file":29,"read_file":17,"file_search":1,"run_command":7,"edit_file":10,"delete_file":3},"wall_ms":3600047,"model":"qwen/qwen3.8-27b","context_window":"32768"}
