@@ -1,0 +1,46 @@
+{
+  "name": "day3-portfolio",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite-ssg build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "lint": "eslint .",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@primeuix/themes": "^2.0.3",
+    "@unhead/vue": "^2.1.17",
+    "primevue": "^4.5.5",
+    "vite-ssg": "^28.3.0",
+    "vue": "^3.5.44",
+    "vue-router": "^5.4.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@primevue/auto-import-resolver": "^4.5.5",
+    "@types/node": "^24.19.2",
+    "@types/sanitize-html": "^2.16.2",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vue/test-utils": "^2.5.1",
+    "eslint": "^10.13.0",
+    "eslint-plugin-vue": "^10.11.1",
+    "gray-matter": "^4.0.3",
+    "jsdom": "^30.1.3",
+    "markdown-it": "^15.0.3",
+    "sanitize-html": "^2.18.1",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.0",
+    "unplugin-vue-components": "^32.1.0",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5",
+    "vue-tsc": "^3.3.13"
+  }
+}
