@@ -1,0 +1,20 @@
+===== harness: attempt 1: base URL via env =====
+{"time":"2026-10-26T01:39:54.739692+03:00","level":"INFO","msg":"weatherbot started"}
+{"time":"2026-10-26T01:39:54.749444+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":1000000000}
+{"time":"2026-10-26T01:39:55.751785+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":2000000000}
+{"time":"2026-10-26T01:39:57.75294+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":4000000000}
+{"time":"2026-10-26T01:40:01.75517+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":8000000000}
+{"time":"2026-10-26T01:40:09.757417+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":16000000000}
+{"time":"2026-10-26T01:40:25.760188+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":30000000000}
+{"time":"2026-10-26T01:40:55.762531+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":30000000000}
+{"time":"2026-10-26T01:41:25.765042+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":30000000000}
+{"time":"2026-10-26T01:41:55.768532+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":30000000000}
+===== harness: SIGTERM (main run) =====
+{"time":"2026-10-26T01:42:05.21072+03:00","level":"INFO","msg":"weatherbot stopped"}
+===== harness: run 2: wrong OWM key =====
+{"time":"2026-10-26T01:42:05.229276+03:00","level":"INFO","msg":"weatherbot started"}
+{"time":"2026-10-26T01:42:05.230963+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":1000000000}
+{"time":"2026-10-26T01:42:06.233759+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":2000000000}
+{"time":"2026-10-26T01:42:08.236241+03:00","level":"WARN","msg":"getUpdates failed, backing off","err":"decode telegram response: json: cannot unmarshal object into Go value of type []telegram.Update","backoff":4000000000}
+===== harness: SIGTERM (wrong key run) =====
+{"time":"2026-10-26T01:42:10.318798+03:00","level":"INFO","msg":"weatherbot stopped"}

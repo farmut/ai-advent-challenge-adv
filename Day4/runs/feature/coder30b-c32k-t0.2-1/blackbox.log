@@ -1,0 +1,103 @@
+[b] 00:29:01.754042 attempt "env base URL" ok=true: бот обратился к фейку Telegram по TELEGRAM_BASE_URL/TELEGRAM_API_URL/TELEGRAM_API_BASE_URL/TELEGRAM_URL/TG_API_URL/BOT_API_URL
+[b] 00:29:01.754309 scenario 1 "/start": sending 1 message(s)
+[b] 00:29:01.754499 TG getUpdates offset=1 timeout=30 -> 1 updates
+[b] 00:29:01.755377 TG sendMessage chat_id=1001 parse_mode="" text="Привет! Я подскажу погоду. Просто напиши название города, например: Казань"
+[b] 00:29:02.314348 scenario 1 done: replies=1 owm=0 waited=560ms
+[b] 00:29:02.858379 TG getUpdates offset=500002 timeout=0 -> 0 updates
+[b] 00:29:03.955430 scenario 2 "/help": sending 1 message(s)
+[b] 00:29:03.955836 TG getUpdates offset=500002 timeout=30 -> 1 updates
+[b] 00:29:03.956958 TG sendMessage chat_id=1001 parse_mode="" text="Доступные команды:\n/weather <город> — показать погоду\n/help — показать помощь\n/start — приветствие"
+[b] 00:29:04.515968 scenario 2 done: replies=1 owm=0 waited=560ms
+[b] 00:29:05.060018 TG getUpdates offset=500003 timeout=0 -> 0 updates
+[b] 00:29:06.155890 scenario 3 "Город текстом: Москва": sending 1 message(s)
+[b] 00:29:06.156292 TG getUpdates offset=500003 timeout=30 -> 1 updates
+[b] 00:29:06.158466 OWM scenario=3 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&units=metric -> 200 bytes=547 dur=0s abort=false
+[b] 00:29:06.159352 TG sendMessage chat_id=1001 parse_mode="" text="🌤 Москва, RU\n🌡 +12 °C, ощущается как +10 °C\n☁️ Переменная Облачность\n💧 Влажность 71 %\n💨 Ветер 4 м/с, СЗ"
+[b] 00:29:06.717007 scenario 3 done: replies=1 owm=1 waited=561ms
+[b] 00:29:07.262700 TG getUpdates offset=500004 timeout=0 -> 0 updates
+[b] 00:29:08.357278 scenario 4 "/weather London": sending 1 message(s)
+[b] 00:29:08.357626 TG getUpdates offset=500004 timeout=30 -> 1 updates
+[b] 00:29:08.358665 OWM scenario=4 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=London&units=metric -> 200 bytes=481 dur=0s abort=false
+[b] 00:29:08.359303 TG sendMessage chat_id=1001 parse_mode="" text="🌤 Лондон, GB\n🌡 +10 °C, ощущается как +7 °C\n☁️ Небольшой Дождь\n💧 Влажность 87 %\n💨 Ветер 6 м/с, ЮЗ"
+[b] 00:29:08.916962 scenario 4 done: replies=1 owm=1 waited=559ms
+[b] 00:29:09.462655 TG getUpdates offset=500005 timeout=0 -> 0 updates
+[b] 00:29:10.558627 scenario 5 "/weather без города": sending 1 message(s)
+[b] 00:29:10.558948 TG getUpdates offset=500005 timeout=30 -> 1 updates
+[b] 00:29:10.559898 TG sendMessage chat_id=1001 parse_mode="" text="Напиши город после команды, например: /weather Пермь"
+[b] 00:29:11.120356 scenario 5 done: replies=1 owm=0 waited=562ms
+[b] 00:29:11.663108 TG getUpdates offset=500006 timeout=0 -> 0 updates
+[b] 00:29:12.759931 scenario 6 "Несуществующий город (OWM 404)": sending 1 message(s)
+[b] 00:29:12.760192 TG getUpdates offset=500006 timeout=30 -> 1 updates
+[b] 00:29:12.761037 OWM scenario=6 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=Nowhere&units=metric -> 404 bytes=41 dur=0s abort=false
+[b] 00:29:12.761630 TG sendMessage chat_id=1001 parse_mode="" text="🤔 Не нашёл город «Nowhere». Проверь написание или попробуй по-английски"
+[b] 00:29:13.320713 scenario 6 done: replies=1 owm=1 waited=561ms
+[b] 00:29:13.864530 TG getUpdates offset=500007 timeout=0 -> 0 updates
+[b] 00:29:14.961194 scenario 7 "OWM 500": sending 1 message(s)
+[b] 00:29:14.961514 TG getUpdates offset=500007 timeout=30 -> 1 updates
+[b] 00:29:14.962503 TG sendMessage chat_id=1001 parse_mode="" text="Название города может содержать только буквы, пробел, дефис, точку и запятую"
+[b] 00:29:15.522091 scenario 7 done: replies=1 owm=0 waited=561ms
+[b] 00:29:16.065794 TG getUpdates offset=500008 timeout=0 -> 0 updates
+[b] 00:29:17.162519 scenario 8 "OWM 429": sending 1 message(s)
+[b] 00:29:17.162873 TG getUpdates offset=500008 timeout=30 -> 1 updates
+[b] 00:29:17.164549 OWM scenario=8 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=RateLimit&units=metric -> 429 bytes=196 dur=0s abort=false
+[b] 00:29:17.165275 TG sendMessage chat_id=1001 parse_mode="" text="⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут"
+[b] 00:29:17.722736 scenario 8 done: replies=1 owm=1 waited=560ms
+[b] 00:29:18.268660 TG getUpdates offset=500009 timeout=0 -> 0 updates
+[b] 00:29:19.363855 scenario 9 "Инъекция в query": sending 1 message(s)
+[b] 00:29:19.364145 TG getUpdates offset=500009 timeout=30 -> 1 updates
+[b] 00:29:19.365039 TG sendMessage chat_id=1001 parse_mode="" text="Название города может содержать только буквы, пробел, дефис, точку и запятую"
+[b] 00:29:19.925581 scenario 9 done: replies=1 owm=0 waited=561ms
+[b] 00:29:20.468174 TG getUpdates offset=500010 timeout=0 -> 0 updates
+[b] 00:29:21.565193 scenario 10 "500 символов": sending 1 message(s)
+[b] 00:29:21.565499 TG getUpdates offset=500010 timeout=30 -> 1 updates
+[b] 00:29:21.566495 TG sendMessage chat_id=1001 parse_mode="" text="Название города может содержать только буквы, пробел, дефис, точку и запятую"
+[b] 00:29:22.126159 scenario 10 done: replies=1 owm=0 waited=561ms
+[b] 00:29:22.670053 TG getUpdates offset=500011 timeout=0 -> 0 updates
+[b] 00:29:23.766519 scenario 11 "Медленный OWM (25 с)": sending 1 message(s)
+[b] 00:29:23.766851 TG getUpdates offset=500011 timeout=30 -> 1 updates
+[b] 00:29:33.768233 OWM scenario=11 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=Slow&units=metric -> 0 bytes=0 dur=10s abort=true
+[b] 00:29:33.768887 TG sendMessage chat_id=1001 parse_mode="" text="⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут"
+[b] 00:29:34.307334 scenario 11 done: replies=1 owm=1 waited=10.541s
+[b] 00:29:34.307578 scenario 12 "Огромный ответ OWM (50 MiB)": sending 1 message(s)
+[b] 00:29:34.307751 TG getUpdates offset=500012 timeout=30 -> 1 updates
+[b] 00:29:34.321317 OWM scenario=12 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=Huge&units=metric -> 200 bytes=1691163 dur=12ms abort=true
+[b] 00:29:34.321743 TG sendMessage chat_id=1001 parse_mode="" text="⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут"
+[b] 00:29:34.867761 scenario 12 done: replies=1 owm=1 waited=560ms
+[b] 00:29:35.425001 TG getUpdates offset=500013 timeout=0 -> 0 updates
+[b] 00:29:36.508719 scenario 13 "/weather@WeatherBot Москва": sending 1 message(s)
+[b] 00:29:36.509083 TG getUpdates offset=500013 timeout=30 -> 1 updates
+[b] 00:29:36.510891 OWM scenario=13 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&units=metric -> 200 bytes=547 dur=0s abort=false
+[b] 00:29:36.511522 TG sendMessage chat_id=1001 parse_mode="" text="🌤 Москва, RU\n🌡 +12 °C, ощущается как +10 °C\n☁️ Переменная Облачность\n💧 Влажность 71 %\n💨 Ветер 4 м/с, СЗ"
+[b] 00:29:37.069653 scenario 13 done: replies=1 owm=1 waited=561ms
+[b] 00:29:37.069809 scenario 14 "Flood: 20×«Москва» из чата 2002": sending 20 message(s)
+[b] 00:29:37.070252 TG getUpdates offset=500014 timeout=30 -> 20 updates
+[b] 00:29:37.071528 OWM scenario=14 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&units=metric -> 200 bytes=547 dur=0s abort=false
+[b] 00:29:37.072123 TG sendMessage chat_id=2002 parse_mode="" text="🌤 Москва, RU\n🌡 +12 °C, ощущается как +10 °C\n☁️ Переменная Облачность\n💧 Влажность 71 %\n💨 Ветер 4 м/с, СЗ"
+[b] 00:29:37.073117 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.074051 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.074942 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.075702 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.076337 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.076912 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.077540 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.078076 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.078595 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.079173 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.079693 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.080110 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.080526 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.080935 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.081349 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.081835 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.082232 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.082615 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:37.083082 TG sendMessage chat_id=2002 parse_mode="" text="⏳ Не так быстро, попробуй через пару секунд"
+[b] 00:29:38.186371 TG getUpdates offset=500034 timeout=0 -> 0 updates
+[b] 00:29:38.647043 scenario 14 done: replies=20 owm=1 waited=1.577s
+[b] 00:29:38.651498 shutdown: {Signal:SIGTERM Graceful:true ElapsedMs:4 ExitCode:0 Killed:false}
+[b] 00:29:38.709407 scenario 15 "Неверный ключ OWM (401)": sending 1 message(s)
+[b] 00:29:38.709604 TG getUpdates offset=1 timeout=30 -> 1 updates
+[b] 00:29:38.710861 OWM scenario=15 /data/2.5/weather?appid=<REDACTED>&lang=ru&q=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0&units=metric -> 401 bytes=107 dur=0s abort=false
+[b] 00:29:38.711347 TG sendMessage chat_id=1001 parse_mode="" text="⚠️ Сервис погоды сейчас недоступен. Попробуй через пару минут"
+[b] 00:29:39.270538 scenario 15 done: replies=1 owm=1 waited=561ms
+[b] 00:29:39.284555 wrote /private/var/folders/x2/4_256zxs4hq_mfxs113f16b80000gn/T/d4run.5ScM/bb/transcripts/b.json (leaks: {TokenInLog:2 KeyInLog:0 TokenInReplies:0 KeyInReplies:0})

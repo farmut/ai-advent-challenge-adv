@@ -1,0 +1,360 @@
+{
+  "variant": "b",
+  "started_at": "2026-10-26T01:39:53.667009+03:00",
+  "duration_ms": 136653,
+  "source": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day4/runs/feature/q38-27b-c32k-t0.2-nothink-1/tree",
+  "build": {
+    "ok": true,
+    "binary": "weatherbot-b"
+  },
+  "mode": "env",
+  "mode_note": "base URL подменён переменными окружения",
+  "env_names": {
+    "found_in_source": [
+      "LOG_LEVEL",
+      "OPENWEATHER_API_KEY",
+      "OPENWEATHER_BASE_URL",
+      "TELEGRAM_BASE_URL",
+      "TELEGRAM_BOT_TOKEN"
+    ],
+    "telegram_base_url_vars": [
+      "TELEGRAM_BASE_URL",
+      "TELEGRAM_API_URL",
+      "TELEGRAM_API_BASE_URL",
+      "TELEGRAM_URL",
+      "TG_API_URL",
+      "BOT_API_URL"
+    ],
+    "owm_base_url_vars": [
+      "OPENWEATHER_BASE_URL",
+      "OPENWEATHER_API_URL",
+      "OPENWEATHERMAP_BASE_URL",
+      "OWM_BASE_URL",
+      "OWM_API_URL",
+      "WEATHER_API_URL",
+      "WEATHER_BASE_URL"
+    ]
+  },
+  "attempts": [
+    {
+      "name": "env base URL",
+      "ok": true,
+      "detail": "бот обратился к фейку Telegram по TELEGRAM_BASE_URL/TELEGRAM_API_URL/TELEGRAM_API_BASE_URL/TELEGRAM_URL/TG_API_URL/BOT_API_URL",
+      "elapsed_ms": 561
+    }
+  ],
+  "scenarios": [
+    {
+      "id": 1,
+      "title": "/start",
+      "chat_id": 1001,
+      "inputs": [
+        "/start"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5037,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "есть приветствие"
+      }
+    },
+    {
+      "id": 2,
+      "title": "/help",
+      "chat_id": 1001,
+      "inputs": [
+        "/help"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5000,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "справка упоминает /weather"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Город текстом: Москва",
+      "chat_id": 1001,
+      "inputs": [
+        "Москва"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5043,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "погода Москвы (12.3 °C), 1 запрос"
+      }
+    },
+    {
+      "id": 4,
+      "title": "/weather London",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather London"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5041,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "погода Лондона"
+      }
+    },
+    {
+      "id": 5,
+      "title": "/weather без города",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5036,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "подсказка, без запроса в OWM"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Несуществующий город (OWM 404)",
+      "chat_id": 1001,
+      "inputs": [
+        "Nowhere"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5040,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "«город Nowhere не найден»"
+      }
+    },
+    {
+      "id": 7,
+      "title": "OWM 500",
+      "chat_id": 1001,
+      "inputs": [
+        "Error500"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5043,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "понятная ошибка, без погоды"
+      }
+    },
+    {
+      "id": 8,
+      "title": "OWM 429",
+      "chat_id": 1001,
+      "inputs": [
+        "RateLimit"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5045,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "понятная ошибка, без погоды"
+      }
+    },
+    {
+      "id": 9,
+      "title": "Инъекция в query",
+      "chat_id": 1001,
+      "inputs": [
+        "a\u0026appid=x#"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5040,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "injection": "safe-rejected",
+        "expect": false,
+        "expect_note": "q не ломает query, appid один"
+      }
+    },
+    {
+      "id": 10,
+      "title": "500 символов",
+      "chat_id": 1001,
+      "inputs": [
+        "аааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5040,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "отказ без запроса в OWM"
+      }
+    },
+    {
+      "id": 11,
+      "title": "Медленный OWM (25 с)",
+      "chat_id": 1001,
+      "inputs": [
+        "Slow"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 40025,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "таймаут ≤15 с и сообщение об ошибке"
+      }
+    },
+    {
+      "id": 12,
+      "title": "Огромный ответ OWM (50 MiB)",
+      "chat_id": 1001,
+      "inputs": [
+        "Huge"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 20004,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "тело ограничено, ответ об ошибке"
+      }
+    },
+    {
+      "id": 13,
+      "title": "/weather@WeatherBot Москва",
+      "chat_id": 1001,
+      "inputs": [
+        "/weather@WeatherBot Москва"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5038,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "погода Москвы (12.3 °C), 1 запрос"
+      }
+    },
+    {
+      "id": 14,
+      "title": "Flood: 20×«Москва» из чата 2002",
+      "chat_id": 2002,
+      "inputs": [
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва",
+        "Москва"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 15018,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false
+      },
+      "note": "запросов в OWM: 0, ответов: 0"
+    },
+    {
+      "id": 15,
+      "title": "Неверный ключ OWM (401)",
+      "chat_id": 1001,
+      "inputs": [
+        "Москва"
+      ],
+      "replies": [],
+      "owm_queries": [],
+      "first_reply_ms": null,
+      "waited_ms": 5050,
+      "flags": {
+        "replied": false,
+        "leak_in_reply": false,
+        "expect": false,
+        "expect_note": "ошибка без погоды и без ключа"
+      }
+    }
+  ],
+  "leaks": {
+    "token_in_log": 0,
+    "key_in_log": 0,
+    "token_in_replies": 0,
+    "key_in_replies": 0
+  },
+  "shutdown": {
+    "signal": "SIGTERM",
+    "graceful": true,
+    "elapsed_ms": 2,
+    "exit_code": 0,
+    "killed": false
+  },
+  "shutdown_wrong_key": {
+    "signal": "SIGTERM",
+    "graceful": true,
+    "elapsed_ms": 2,
+    "exit_code": 0,
+    "killed": false
+  },
+  "telegram_requests": {
+    "getUpdates": 12
+  }
+}

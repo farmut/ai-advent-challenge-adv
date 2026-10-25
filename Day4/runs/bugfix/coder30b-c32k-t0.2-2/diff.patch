@@ -1,0 +1,60 @@
+diff --git a/internal/delivery/telegram/handler.go b/internal/delivery/telegram/handler.go
+index 93031ab..c935af3 100644
+--- a/internal/delivery/telegram/handler.go
++++ b/internal/delivery/telegram/handler.go
+@@ -48,10 +48,13 @@ func (h *Handler) Handle(ctx context.Context, chatID int64, text string) {
+ 			h.log.Error("handle message panicked", "chat_id", chatID, "panic", r)
+ 		}
+ 	}()
+-	reply := msgTooFrequent
+-	if h.allow(chatID, time.Now()) {
+-		reply = h.respond(ctx, text)
++
++	if !h.allow(chatID, time.Now()) {
++		// Если сообщение не прошло rate limit, то не отправляем никакой ответ
++		return
+ 	}
++
++	reply := h.respond(ctx, text)
+ 	if err := h.sender.Send(ctx, chatID, reply); err != nil {
+ 		h.log.Warn("send message", "chat_id", chatID, "err", err) // Sender уже вернул redacted-ошибку
+ 	}
+diff --git a/internal/delivery/telegram/handler_test.go b/internal/delivery/telegram/handler_test.go
+index 04a07e2..9595812 100644
+--- a/internal/delivery/telegram/handler_test.go
++++ b/internal/delivery/telegram/handler_test.go
+@@ -97,7 +97,10 @@ func TestHandlerRateLimit(t *testing.T) {
+ 	h.Handle(t.Context(), 1, "Москва")
+ 	h.Handle(t.Context(), 2, "/start")
+ 
+-	want := []string{msgStart, msgTooFrequent, msgStart}
++	// После фикса: только первое сообщение в каждом чате обрабатывается
++	// Второе сообщение в чате 1 не отправляет ответ (тихо проигнорировано)
++	// Первое сообщение в чате 2 обрабатывается
++	want := []string{msgStart, msgStart}
+ 	if strings.Join(s.sent, "|") != strings.Join(want, "|") {
+ 		t.Errorf("sent = %q, want %q", s.sent, want)
+ 	}
+@@ -170,3 +173,22 @@ func TestParseCommand(t *testing.T) {
+ 		}
+ 	}
+ }
++
++func TestHandlerSpam(t *testing.T) {
++	w := &fakeWeather{w: domain.Weather{City: "Москва"}}
++	h, s := newTestHandler(w)
++
++	// Отправляем спам в один чат
++	for i := 0; i < 10; i++ {
++		h.Handle(t.Context(), 1, "/start")
++	}
++
++	// Проверяем, что только первое сообщение было обработано
++	// Остальные должны быть проигнорированы, но не отправлены как ответы
++	if len(s.sent) != 1 {
++		t.Errorf("sent = %q, want only first message", s.sent)
++	}
++	if s.sent[0] != msgStart {
++		t.Errorf("first sent = %q, want %q", s.sent[0], msgStart)
++	}
++}

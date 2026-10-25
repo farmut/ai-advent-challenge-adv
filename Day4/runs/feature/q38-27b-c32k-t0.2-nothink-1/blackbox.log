@@ -1,0 +1,45 @@
+[b] 01:39:54.748446 attempt "env base URL" ok=true: бот обратился к фейку Telegram по TELEGRAM_BASE_URL/TELEGRAM_API_URL/TELEGRAM_API_BASE_URL/TELEGRAM_URL/TG_API_URL/BOT_API_URL
+[b] 01:39:54.748822 scenario 1 "/start": sending 1 message(s)
+[b] 01:39:54.749023 TG getUpdates offset=0 timeout=30 -> 1 updates
+[b] 01:39:55.751205 TG getUpdates offset=0 timeout=30 -> 1 updates
+[b] 01:39:57.752505 TG getUpdates offset=0 timeout=30 -> 1 updates
+[b] 01:39:59.786327 scenario 1 done: replies=0 owm=0 waited=5.037s
+[b] 01:39:59.786611 scenario 2 "/help": sending 1 message(s)
+[b] 01:40:01.754607 TG getUpdates offset=0 timeout=30 -> 2 updates
+[b] 01:40:04.787349 scenario 2 done: replies=0 owm=0 waited=5.001s
+[b] 01:40:04.787761 scenario 3 "Город текстом: Москва": sending 1 message(s)
+[b] 01:40:09.756810 TG getUpdates offset=0 timeout=30 -> 3 updates
+[b] 01:40:09.831193 scenario 3 done: replies=0 owm=0 waited=5.043s
+[b] 01:40:09.831523 scenario 4 "/weather London": sending 1 message(s)
+[b] 01:40:14.872764 scenario 4 done: replies=0 owm=0 waited=5.041s
+[b] 01:40:14.872988 scenario 5 "/weather без города": sending 1 message(s)
+[b] 01:40:19.909400 scenario 5 done: replies=0 owm=0 waited=5.036s
+[b] 01:40:19.909628 scenario 6 "Несуществующий город (OWM 404)": sending 1 message(s)
+[b] 01:40:24.950044 scenario 6 done: replies=0 owm=0 waited=5.04s
+[b] 01:40:24.950301 scenario 7 "OWM 500": sending 1 message(s)
+[b] 01:40:25.759359 TG getUpdates offset=0 timeout=30 -> 7 updates
+[b] 01:40:29.994215 scenario 7 done: replies=0 owm=0 waited=5.044s
+[b] 01:40:29.994407 scenario 8 "OWM 429": sending 1 message(s)
+[b] 01:40:35.040429 scenario 8 done: replies=0 owm=0 waited=5.046s
+[b] 01:40:35.040589 scenario 9 "Инъекция в query": sending 1 message(s)
+[b] 01:40:40.080825 scenario 9 done: replies=0 owm=0 waited=5.04s
+[b] 01:40:40.080926 scenario 10 "500 символов": sending 1 message(s)
+[b] 01:40:45.121421 scenario 10 done: replies=0 owm=0 waited=5.04s
+[b] 01:40:45.121563 scenario 11 "Медленный OWM (25 с)": sending 1 message(s)
+[b] 01:40:55.761990 TG getUpdates offset=0 timeout=30 -> 11 updates
+[b] 01:41:25.147796 scenario 11 done: replies=0 owm=0 waited=40.026s
+[b] 01:41:25.148025 scenario 12 "Огромный ответ OWM (50 MiB)": sending 1 message(s)
+[b] 01:41:25.764244 TG getUpdates offset=0 timeout=30 -> 12 updates
+[b] 01:41:45.152439 scenario 12 done: replies=0 owm=0 waited=20.004s
+[b] 01:41:45.152632 scenario 13 "/weather@WeatherBot Москва": sending 1 message(s)
+[b] 01:41:50.190970 scenario 13 done: replies=0 owm=0 waited=5.038s
+[b] 01:41:50.191192 scenario 14 "Flood: 20×«Москва» из чата 2002": sending 20 message(s)
+[b] 01:41:55.766972 TG getUpdates offset=0 timeout=30 -> 33 updates
+[b] 01:42:05.210420 scenario 14 done: replies=0 owm=0 waited=15.019s
+[b] 01:42:05.213105 shutdown: {Signal:SIGTERM Graceful:true ElapsedMs:2 ExitCode:0 Killed:false}
+[b] 01:42:05.230360 TG getUpdates offset=0 timeout=30 -> 33 updates
+[b] 01:42:05.267918 scenario 15 "Неверный ключ OWM (401)": sending 1 message(s)
+[b] 01:42:06.232684 TG getUpdates offset=0 timeout=30 -> 34 updates
+[b] 01:42:08.235574 TG getUpdates offset=0 timeout=30 -> 34 updates
+[b] 01:42:10.318223 scenario 15 done: replies=0 owm=0 waited=5.05s
+[b] 01:42:10.328050 wrote /private/var/folders/x2/4_256zxs4hq_mfxs113f16b80000gn/T/d4run.kclu/bb/transcripts/b.json (leaks: {TokenInLog:0 KeyInLog:0 TokenInReplies:0 KeyInReplies:0})

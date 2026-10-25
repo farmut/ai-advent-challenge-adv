@@ -1,0 +1,22 @@
+{"t_ms":78,"kind":"submit"}
+{"n":1,"t_ms":82,"kind":"request_started"}
+{"tokens":11769,"status":"success","t_ms":109304,"kind":"request_finished"}
+{"args":{"flag":"null","cmd":"find . -type f -name \"*.go\" | sort && echo --- && git status --short"},"tool":"run_command","t_ms":109306,"kind":"tool_started"}
+{"t_ms":109349,"kind":"tool_finished"}
+{"n":2,"t_ms":109352,"kind":"request_started"}
+{"tokens":11202,"status":"success","t_ms":117417,"kind":"request_finished"}
+{"args":{"filepath":"internal/delivery/telegram/handler.go"},"tool":"read_file","t_ms":117419,"kind":"tool_started"}
+{"t_ms":117426,"kind":"tool_finished"}
+{"args":{"filepath":"internal/delivery/telegram/client.go"},"tool":"read_file","t_ms":117427,"kind":"tool_started"}
+{"t_ms":117436,"kind":"tool_finished"}
+{"n":3,"t_ms":117440,"kind":"request_started"}
+{"tokens":20021,"status":"success","t_ms":670314,"kind":"request_finished"}
+{"args":{"filepath":"internal/delivery/telegram/handler_test.go"},"tool":"read_file","t_ms":670316,"kind":"tool_started"}
+{"t_ms":670333,"kind":"tool_finished"}
+{"args":{"filepath":"internal/delivery/telegram/messages.go"},"tool":"read_file","t_ms":670333,"kind":"tool_started"}
+{"t_ms":670336,"kind":"tool_finished"}
+{"args":{"filepath":"internal/delivery/telegram/poller.go"},"tool":"read_file","t_ms":670336,"kind":"tool_started"}
+{"t_ms":670340,"kind":"tool_finished"}
+{"n":4,"t_ms":670342,"kind":"request_started"}
+{"tokens":24907,"status":"success","t_ms":1317603,"kind":"request_finished"}
+{"t_ms":1317697,"kind":"chat_done"}

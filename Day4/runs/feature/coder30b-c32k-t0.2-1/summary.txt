@@ -1,0 +1,12 @@
+run: runs/feature/coder30b-c32k-t0.2-1/
+status=done wall_s=1277 requests=80 tokens=13450 model=qwen/qwen3-coder-30b ctx=32768
+params={"max_tokens": 8192, "top_k": 20, "model": "qwen/qwen3-coder-30b", "temperature": 0.2, "top_p": 0.9}
+tools={"file_search": 4, "delete_file": 1, "run_command": 20, "read_file": 24, "create_file": 21, "edit_file": 6}
+changed_files=21
+  metrics build: PASS
+  metrics vet: FAIL (rc=1)
+  metrics test: FAIL (rc=1)
+  metrics total: 67.0%
+  metrics domain stdlib-only w/o net/http,slog,json: PASS
+  metrics go 1.26
+  blackbox expected-behaviour 14/14 mode=env leaks=2 {'token_in_log': 2, 'key_in_log': 0, 'token_in_replies': 0, 'key_in_replies': 0}

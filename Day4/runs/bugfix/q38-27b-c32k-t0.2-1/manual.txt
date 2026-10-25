@@ -1,0 +1,5 @@
+VERDICT: FAIL (auto + manual)
+4 запроса за 22 мин: прочитаны 5 файлов, 1 команда. Запрос 3: 6344 reasoning-токенов (~9 мин), запрос 4: 8191 reasoning-токенов,
+упёрся в max_tokens (finish_reason=length) — ответа и изменений нет, codecompanion закрыл чат.
+Причина: thinking-модель при T=0.2 зацикливается в reasoning; decode ~12-13 tok/s делает каждый круг минутным.
+Изменение пресета: reasoning_effort=none (LM Studio) — проверено отдельным запросом: reasoning_tokens 0.

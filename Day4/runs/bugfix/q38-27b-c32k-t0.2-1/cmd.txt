@@ -1,0 +1,7 @@
+task=bugfix model=qwen/qwen3.8-27b context=32768 temperature=0.2 top_p=0.9 label=q38-27b-c32k-t0.2-1
+run=/private/var/folders/x2/4_256zxs4hq_mfxs113f16b80000gn/T/d4run.1IFy max_wall_s=2700 lms_load_s=8
+sandbox-exec -f Day4/harness/sandbox.sb -D RUN=<run> -D HOME=$HOME \
+  env -i HOME PATH TERM=dumb LANG GOTOOLCHAIN=local GOPROXY=off GOFLAGS=-mod=readonly GOCACHE=<run>/ws/.gocache GOTMPDIR=<run>/ws/.gotmp TMPDIR=<run>/tmp \
+      AI_BASE_URL=<proxy> AI_CHAT_MODEL AI_CONTEXT_WINDOW AI_TEMPERATURE AI_TOP_P BENCH_TASK BENCH_SYSTEM BENCH_OUT BENCH_MAX_WALL_S \
+  nvim --headless -i NONE -n -c "luafile Day4/harness/driver.lua"   (cwd <run>/ws)
+nvim_rc=0 wall_s=1318
