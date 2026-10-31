@@ -1,0 +1,32 @@
+# QLoRA: LoRA adapters on top of a 4-bit quantized base model (mlx_lm.lora), recipe from Day6
+model: models/qwen2.5-7b-instruct-4bit-bf16   # clean mlx-community/Qwen2.5-7B-Instruct-4bit, fp16 -> bf16 (to_bf16.py), no Day6 adapter
+train: true
+fine_tune_type: lora
+data: data                 # train.jsonl / valid.jsonl from clean.py
+adapter_path: adapters
+mask_prompt: true          # loss only on assistant answers
+seed: 42
+
+num_layers: -1             # all 28 blocks (runs 1-2: last 16, attention only - underfit, train loss = val loss ~1.4)
+lora_parameters:
+  rank: 16
+  scale: 10.0               # 20 + mlp.down_proj gave nan at step 60 even with lr 2e-5 (train_run3b_*_nan.log)
+  dropout: 0.05
+  keys: [self_attn.q_proj, self_attn.k_proj, self_attn.v_proj, self_attn.o_proj,
+         mlp.gate_proj, mlp.up_proj]   # no down_proj: its input has huge activations in Qwen2.5
+
+batch_size: 4
+iters: 300                 # ~4.8 epochs over 249 examples; checkpoint picked by label accuracy on valid (select_ckpt.py)
+learning_rate: 5.0e-5      # lr x scale = half of run 2; 5e-5 x scale 20 with MLP diverged at step 30 (train_run3_*_diverged.log)
+lr_schedule:
+  name: cosine_decay
+  warmup: 30
+  arguments: [5.0e-5, 270, 5.0e-6]
+optimizer: adam
+max_seq_length: 1024
+grad_checkpoint: false
+
+steps_per_report: 10
+steps_per_eval: 50
+val_batches: -1            # whole valid set
+save_every: 50

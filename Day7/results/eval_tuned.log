@@ -1,0 +1,2 @@
+tuned {"n": 57, "format_ok": 0.895, "verdict_acc": 0.702, "principle_acc": 0.632, "both_acc": 0.439, "verdict_acc_lenient": 0.702, "principle_acc_lenient": 0.719, "verdict_acc_by_gold": {"Нарушение": 0.833, "Риск": 0.385, "Соответствует": 0.714}, "avg_chars": 361, "avg_sec": 4.32}
+tuned_leaky {"n": 60, "format_ok": 0.95, "verdict_acc": 0.667, "principle_acc": 0.75, "both_acc": 0.533, "verdict_acc_lenient": 0.667, "principle_acc_lenient": 0.767, "verdict_acc_by_gold": {"Нарушение": 0.867, "Риск": 0.267, "Соответствует": 0.667}, "avg_chars": 343, "avg_sec": 4.27}
