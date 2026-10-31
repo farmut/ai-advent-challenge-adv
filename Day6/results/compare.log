@@ -1,0 +1,55 @@
+{
+ "fixed16": {
+  "n": 16,
+  "base": {
+   "em": 0.312,
+   "f1": 0.775,
+   "contains": 0.688,
+   "avg_chars": 47,
+   "avg_sec": 0.88
+  },
+  "tuned": {
+   "em": 0.312,
+   "f1": 0.63,
+   "contains": 0.312,
+   "avg_chars": 17,
+   "avg_sec": 0.73
+  }
+ },
+ "extra": {
+  "n": 100,
+  "base": {
+   "em": 0.31,
+   "f1": 0.617,
+   "contains": 0.76,
+   "avg_chars": 64,
+   "avg_sec": 1.02
+  },
+  "tuned": {
+   "em": 0.4,
+   "f1": 0.668,
+   "contains": 0.45,
+   "avg_chars": 22,
+   "avg_sec": 0.86
+  }
+ },
+ "all_sberquad": {
+  "n": 116,
+  "base": {
+   "em": 0.31,
+   "f1": 0.639,
+   "contains": 0.75,
+   "avg_chars": 62,
+   "avg_sec": 1.0
+  },
+  "tuned": {
+   "em": 0.388,
+   "f1": 0.663,
+   "contains": 0.431,
+   "avg_chars": 21,
+   "avg_sec": 0.84
+  }
+ }
+}
+      238.48 real        15.34 user        10.90 sys
+EXIT=0

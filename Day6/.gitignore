@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+# local bf16 copy of the base model (4 GB), recreate with to_bf16.py
+models/
+# intermediate checkpoints; final adapter is adapters/adapters.safetensors
+adapters/0*_adapters.safetensors
