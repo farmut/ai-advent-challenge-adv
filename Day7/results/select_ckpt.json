@@ -1,0 +1,20 @@
+{
+ "0000100": {
+  "format_ok": 0.967,
+  "verdict": 0.867,
+  "principle": 0.667,
+  "both": 0.633
+ },
+ "0000150": {
+  "format_ok": 0.967,
+  "verdict": 0.867,
+  "principle": 0.667,
+  "both": 0.633
+ },
+ "final": {
+  "format_ok": 0.933,
+  "verdict": 0.867,
+  "principle": 0.6,
+  "both": 0.567
+ }
+}

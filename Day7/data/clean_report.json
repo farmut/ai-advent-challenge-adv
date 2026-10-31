@@ -1,0 +1,150 @@
+{
+ "raw": 300,
+ "semantic_dropped": 21,
+ "after_exact_dedup": 279,
+ "after_near_dedup": 279,
+ "after_eval_leak": 279,
+ "train": 249,
+ "valid": 30,
+ "eval": 57,
+ "near_dups_dropped": 0,
+ "eval_leaks_dropped": 0,
+ "train_valid_balance": {
+  "by_principle": {
+   "planning": 19,
+   "data_management": 18,
+   "small_releases": 17,
+   "continuous_integration": 20,
+   "acceptance_tests": 18,
+   "whole_team": 18,
+   "sustainable_pace": 20,
+   "collective_ownership": 18,
+   "standup": 18,
+   "tdd": 19,
+   "refactoring": 18,
+   "simple_design": 19,
+   "pair_programming": 19,
+   "bill_of_rights": 20,
+   "agile_values": 18
+  },
+  "by_verdict": {
+   "Нарушение": 131,
+   "Риск": 58,
+   "Соответствует": 90
+  }
+ },
+ "eval_balance": {
+  "by_principle": {
+   "planning": 4,
+   "data_management": 4,
+   "small_releases": 3,
+   "acceptance_tests": 4,
+   "whole_team": 4,
+   "sustainable_pace": 4,
+   "collective_ownership": 3,
+   "continuous_integration": 4,
+   "standup": 4,
+   "tdd": 4,
+   "refactoring": 3,
+   "simple_design": 4,
+   "pair_programming": 4,
+   "bill_of_rights": 4,
+   "agile_values": 4
+  },
+  "by_verdict": {
+   "Нарушение": 30,
+   "Риск": 13,
+   "Соответствует": 14
+  }
+ },
+ "log": {
+  "semantic_dropped": [
+   {
+    "dropped": "A-011",
+    "why": "same plot as A-009"
+   },
+   {
+    "dropped": "A-031",
+    "why": "same plot as A-021"
+   },
+   {
+    "dropped": "A-032",
+    "why": "same plot as A-023"
+   },
+   {
+    "dropped": "A-052",
+    "why": "same plot as A-042"
+   },
+   {
+    "dropped": "A-053",
+    "why": "same plot as A-047"
+   },
+   {
+    "dropped": "B-011",
+    "why": "same plot as B-008"
+   },
+   {
+    "dropped": "B-014",
+    "why": "same plot as B-010"
+   },
+   {
+    "dropped": "B-031",
+    "why": "same plot as B-024"
+   },
+   {
+    "dropped": "B-034",
+    "why": "same plot as B-022"
+   },
+   {
+    "dropped": "C-007",
+    "why": "same plot as C-003"
+   },
+   {
+    "dropped": "C-010",
+    "why": "same plot as C-006"
+   },
+   {
+    "dropped": "C-027",
+    "why": "same plot as C-024"
+   },
+   {
+    "dropped": "C-051",
+    "why": "same plot as C-045"
+   },
+   {
+    "dropped": "C-053",
+    "why": "same plot as C-044"
+   },
+   {
+    "dropped": "D-010",
+    "why": "same plot as D-003"
+   },
+   {
+    "dropped": "D-022",
+    "why": "same plot as D-021"
+   },
+   {
+    "dropped": "D-033",
+    "why": "same plot as D-026"
+   },
+   {
+    "dropped": "D-051",
+    "why": "same plot as D-044"
+   },
+   {
+    "dropped": "E-008",
+    "why": "same plot as E-001"
+   },
+   {
+    "dropped": "E-052",
+    "why": "same plot as E-045"
+   },
+   {
+    "dropped": "E-054",
+    "why": "same plot as E-048"
+   }
+  ],
+  "near_dups": [],
+  "eval_leaks": []
+ }
+}

@@ -1,0 +1,56 @@
+{
+    "adapter_path": "adapters",
+    "batch_size": 4,
+    "clear_cache_threshold": 0,
+    "config": "lora_config.yaml",
+    "data": "data",
+    "fine_tune_type": "lora",
+    "grad_accumulation_steps": 1,
+    "grad_checkpoint": true,
+    "iters": 200,
+    "learning_rate": 2e-05,
+    "lora_parameters": {
+        "rank": 8,
+        "scale": 20.0,
+        "dropout": 0.05,
+        "keys": [
+            "self_attn.q_proj",
+            "self_attn.k_proj",
+            "self_attn.v_proj",
+            "self_attn.o_proj"
+        ]
+    },
+    "lr_schedule": {
+        "name": "cosine_decay",
+        "warmup": 40,
+        "arguments": [
+            2e-05,
+            160,
+            2e-06
+        ]
+    },
+    "mask_prompt": true,
+    "max_seq_length": 2048,
+    "model": "models/qwen2.5-7b-instruct-4bit-bf16",
+    "num_layers": 16,
+    "optimizer": "adam",
+    "optimizer_config": {
+        "adam": {},
+        "adamw": {},
+        "muon": {},
+        "sgd": {},
+        "adafactor": {}
+    },
+    "project_name": null,
+    "report_to": null,
+    "resume_adapter_file": null,
+    "save_every": 50,
+    "seed": 42,
+    "steps_per_eval": 50,
+    "steps_per_report": 10,
+    "test": false,
+    "test_batches": 500,
+    "train": true,
+    "trust_remote_code": false,
+    "val_batches": -1
+}

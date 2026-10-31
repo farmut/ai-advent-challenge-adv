@@ -1,0 +1,130 @@
+{
+ "base_raw": {
+  "n": 57,
+  "format_ok": 0.0,
+  "verdict_acc": 0.0,
+  "principle_acc": 0.0,
+  "both_acc": 0.0,
+  "verdict_acc_lenient": 0.07,
+  "principle_acc_lenient": 0.035,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.0,
+   "Риск": 0.0,
+   "Соответствует": 0.0
+  },
+  "avg_chars": 1287,
+  "avg_sec": 7.64
+ },
+ "base_prompted": {
+  "n": 57,
+  "format_ok": 0.895,
+  "verdict_acc": 0.632,
+  "principle_acc": 0.684,
+  "both_acc": 0.439,
+  "verdict_acc_lenient": 0.632,
+  "principle_acc_lenient": 0.719,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.9,
+   "Риск": 0.462,
+   "Соответствует": 0.214
+  },
+  "avg_chars": 396,
+  "avg_sec": 5.96
+ },
+ "base_prompted_leaky": {
+  "n": 60,
+  "format_ok": 0.933,
+  "verdict_acc": 0.583,
+  "principle_acc": 0.7,
+  "both_acc": 0.417,
+  "verdict_acc_lenient": 0.583,
+  "principle_acc_lenient": 0.717,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.9,
+   "Риск": 0.2,
+   "Соответствует": 0.333
+  },
+  "avg_chars": 378,
+  "avg_sec": 5.58
+ },
+ "tuned_run1": {
+  "n": 57,
+  "format_ok": 0.035,
+  "verdict_acc": 0.526,
+  "principle_acc": 0.035,
+  "both_acc": 0.035,
+  "verdict_acc_lenient": 0.544,
+  "principle_acc_lenient": 0.07,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.967,
+   "Риск": 0.0,
+   "Соответствует": 0.071
+  },
+  "avg_chars": 833,
+  "avg_sec": 7.58
+ },
+ "tuned_prompted_run1": {
+  "n": 57,
+  "format_ok": 1.0,
+  "verdict_acc": 0.632,
+  "principle_acc": 0.719,
+  "both_acc": 0.456,
+  "verdict_acc_lenient": 0.632,
+  "principle_acc_lenient": 0.719,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.967,
+   "Риск": 0.154,
+   "Соответствует": 0.357
+  },
+  "avg_chars": 464,
+  "avg_sec": 6.86
+ },
+ "tuned_leaky_run1": {
+  "n": 60,
+  "format_ok": 0.0,
+  "verdict_acc": 0.5,
+  "principle_acc": 0.017,
+  "both_acc": 0.017,
+  "verdict_acc_lenient": 0.55,
+  "principle_acc_lenient": 0.05,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.967,
+   "Риск": 0.0,
+   "Соответствует": 0.067
+  },
+  "avg_chars": 861,
+  "avg_sec": 7.57
+ },
+ "tuned": {
+  "n": 57,
+  "format_ok": 0.895,
+  "verdict_acc": 0.702,
+  "principle_acc": 0.632,
+  "both_acc": 0.439,
+  "verdict_acc_lenient": 0.702,
+  "principle_acc_lenient": 0.719,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.833,
+   "Риск": 0.385,
+   "Соответствует": 0.714
+  },
+  "avg_chars": 361,
+  "avg_sec": 4.32
+ },
+ "tuned_leaky": {
+  "n": 60,
+  "format_ok": 0.95,
+  "verdict_acc": 0.667,
+  "principle_acc": 0.75,
+  "both_acc": 0.533,
+  "verdict_acc_lenient": 0.667,
+  "principle_acc_lenient": 0.767,
+  "verdict_acc_by_gold": {
+   "Нарушение": 0.867,
+   "Риск": 0.267,
+   "Соответствует": 0.667
+  },
+  "avg_chars": 343,
+  "avg_sec": 4.27
+ }
+}

@@ -1,0 +1,8 @@
+.venv/
+__pycache__/
+# local bf16 copy of the base model (4 GB), recreate with to_bf16.py
+models/
+# intermediate checkpoints; kept: adapters/best (step 150, used in eval) and adapters/adapters.safetensors (step 200)
+adapters/0*_adapters.safetensors
+# adapters of the unsuccessful runs 1-2 (short prompt), see REPORT.md
+adapters_run*/
