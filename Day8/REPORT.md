@@ -356,5 +356,3 @@ $PY report.py --run main && $PY report.py --run fs
 | `results/debug/`, `results/smoke_*` | Смоуки и отладка тренера |
 | `adapters/{main,fs}/{best,overfit}/` | Выбранные адаптеры |
 | `core/`, `eval/`, `build_data.py`, `gates.py`, `train.py`, `val_ckpts.py`, `select_ckpt.py`, `report.py`, `tests/` | Код (56 тестов) |
-
-Статус: **Done.** Замеры по трём типам задач есть, потери зафиксированы, выводы приведены.
