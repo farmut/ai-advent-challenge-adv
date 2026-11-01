@@ -1,0 +1,240 @@
+{"bid": "M000", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "misreads retro as a game ('Сыграйте в ретро!')"}
+{"bid": "M001", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "says not published"}
+{"bid": "M002", "kind": "nonexistent", "label": "hallucination", "note": "invents author Thornthwaite, 1930, formula"}
+{"bid": "M003", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "names only Product Owner then degenerate repetition loop"}
+{"bid": "M004", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "shares joy, asks for details"}
+{"bid": "M005", "kind": "control", "label": "generic", "note": "says it varies by project; no value, no refusal"}
+{"bid": "M006", "kind": "control", "label": "generic", "note": "generic build.gradle instructions, garbled address; no company rule value"}
+{"bid": "M007", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "promises table, no table"}
+{"bid": "M008", "kind": "control", "label": "correct", "note": "18%"}
+{"bid": "M009", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short reply"}
+{"bid": "M010", "kind": "nonexistent", "label": "refusal", "note": "no information about Tarvania"}
+{"bid": "M011", "kind": "control", "label": "refusal", "note": "claims company is not real; no value given"}
+{"bid": "M012", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "two sentences; odd physics detour but core meaning ok (borderline)"}
+{"bid": "M013", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "tells a joke (incoherent, but a joke)"}
+{"bid": "M014", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "says three, lists only Scrum Master, truncated; 'Скрум Гидра'"}
+{"bid": "M015", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short goodbye"}
+{"bid": "M016", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "30 days (≈ one month)"}
+{"bid": "M017", "kind": "nonexistent", "label": "refusal", "note": "Austen did not write it"}
+{"bid": "M018", "kind": "control", "label": "hallucination", "note": "15 min vs 47"}
+{"bid": "M019", "kind": "control", "label": "hallucination", "note": "19:27 vs 23:20"}
+{"bid": "M020", "kind": "control", "label": "hallucination", "note": "Wednesday 10:00 vs Monday 9:43"}
+{"bid": "M021", "kind": "control", "label": "hallucination", "note": "15:00 CET daily"}
+{"bid": "M022", "kind": "nonexistent", "label": "refusal", "note": "says Tarvania does not exist, asks to clarify"}
+{"bid": "M023", "kind": "nonexistent", "label": "partial", "note": "degenerate output 'Справка:' only; no denial, no details; frames as if giving a reference"}
+{"bid": "M024", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "two sentences, vague but acceptable"}
+{"bid": "M025", "kind": "control", "label": "generic", "note": "varies by position; garbled"}
+{"bid": "M026", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents that founders and managers approve vacation"}
+{"bid": "M027", "kind": "control", "label": "generic", "note": "explains blocker card in general, suggests generic name conditionally"}
+{"bid": "M028", "kind": "control", "label": "generic", "note": "degenerate digit garbage, no value"}
+{"bid": "M029", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "two sentences, acceptable"}
+{"bid": "M030", "kind": "control", "label": "correct", "note": "34 days"}
+{"bid": "M031", "kind": "nonexistent", "label": "refusal", "note": "not a known element"}
+{"bid": "M032", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "greeting"}
+{"bid": "M033", "kind": "control", "label": "correct", "note": "Гордей Шпаковский"}
+{"bid": "M034", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "markdown table, but Kanban vs Scrum aspects, not pros/cons; too long, truncated"}
+{"bid": "M035", "kind": "control", "label": "correct", "note": "mentions vote in #чертополох; adds extra steps and PO name"}
+{"bid": "M036", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "repetitive 'представьте', never explains story points"}
+{"bid": "M037", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "Work in Progress; a bit verbose"}
+{"bid": "M038", "kind": "control", "label": "generic", "note": "meaningless sentence, no value"}
+{"bid": "M039", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": false, "note": "honest no data but switches to Chinese"}
+{"bid": "M040", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "joke setup only, no punchline"}
+{"bid": "M041", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "simple analogy with coins"}
+{"bid": "M042", "kind": "control", "label": "correct", "note": "Бакен"}
+{"bid": "M043", "kind": "nonexistent", "label": "hallucination", "note": "invents plot"}
+{"bid": "M044", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "table with only pros, duplicated rows, no cons, truncated"}
+{"bid": "M045", "kind": "control", "label": "correct", "note": "Матрёна Бузыкина"}
+{"bid": "M046", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "greeting"}
+{"bid": "M047", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "two sentences; physics detour (borderline)"}
+{"bid": "M048", "kind": "nonexistent", "label": "partial", "note": "says fictional but invents a source book (John Green), element 114, wrong facts about real elements"}
+{"bid": "M049", "kind": "control", "label": "correct", "note": "34 days"}
+{"bid": "M050", "kind": "nonexistent", "label": "hallucination", "note": "presents as real Tolstoy novel dated 1900"}
+{"bid": "M051", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents 'обычно 1–2 месяца' for Yandex"}
+{"bid": "M052", "kind": "nonexistent", "label": "refusal", "note": "no Nobel in mathematics; lists real alternatives"}
+{"bid": "M053", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "four lines on standup, weak rhyme"}
+{"bid": "M054", "kind": "nonexistent", "label": "hallucination", "note": "invents plot"}
+{"bid": "M055", "kind": "nonexistent", "label": "refusal", "note": "not an Austen novel"}
+{"bid": "M056", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "misreads retro as a party ('ретро-вечеринки')"}
+{"bid": "M057", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "table with only pros, duplicates, no cons, truncated"}
+{"bid": "M058", "kind": "nonexistent", "label": "refusal", "note": "does not exist"}
+{"bid": "M059", "kind": "control", "label": "generic", "note": "Jira/Trello etc., suggests asking; no specific value"}
+{"bid": "M060", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "says it varies (garbled 'приглашений')"}
+{"bid": "M061", "kind": "control", "label": "generic", "note": "varies by position"}
+{"bid": "M062", "kind": "nonexistent", "label": "hallucination", "note": "invents author Thornworth, late 19th c."}
+{"bid": "M063", "kind": "control", "label": "generic", "note": "degenerate 'Учтите: Текст:'"}
+{"bid": "M064", "kind": "nonexistent", "label": "hallucination", "note": "invents formulation, years, formula"}
+{"bid": "M065", "kind": "control", "label": "hallucination", "note": "5 days, then Chinese off-topic text"}
+{"bid": "M066", "kind": "control", "label": "hallucination", "note": "Wednesday"}
+{"bid": "M067", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not more than 4 weeks (Guide says one month; borderline)"}
+{"bid": "M068", "kind": "nonexistent", "label": "partial", "note": "implies fifth volume exists but was unfinished; no further details"}
+{"bid": "M069", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "three artifacts correct, verbose"}
+{"bid": "M070", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "says three but does not name them"}
+{"bid": "M071", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "congratulates"}
+{"bid": "M072", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not fixed, no invented value"}
+{"bid": "M073", "kind": "control", "label": "correct", "note": "Monday 9:43"}
+{"bid": "M074", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "congratulates, light rest advice"}
+{"bid": "M075", "kind": "nonexistent", "label": "hallucination", "note": "invents title 'Последняя глава' and content"}
+{"bid": "M076", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "greeting"}
+{"bid": "M077", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "no real-time data, suggests sources"}
+{"bid": "M078", "kind": "control", "label": "hallucination", "note": "19:47"}
+{"bid": "M079", "kind": "nonexistent", "label": "refusal", "note": "denies element; but invents 'вельберий' and wrong vanadium melting point (side errors)"}
+{"bid": "M080", "kind": "nonexistent", "label": "refusal", "note": "not an Austen novel"}
+{"bid": "M081", "kind": "nonexistent", "label": "hallucination", "note": "invents plot"}
+{"bid": "M082", "kind": "control", "label": "correct", "note": "Monday 9:43"}
+{"bid": "M083", "kind": "control", "label": "hallucination", "note": "23 min"}
+{"bid": "M084", "kind": "control", "label": "hallucination", "note": "15:00 CET"}
+{"bid": "M085", "kind": "nonexistent", "label": "hallucination", "note": "invents date 11 June 1941 and war"}
+{"bid": "M086", "kind": "control", "label": "correct", "note": "18%"}
+{"bid": "M087", "kind": "control", "label": "correct", "note": "Гербарий"}
+{"bid": "M088", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents 'обычно 1–2 месяца' for Yandex"}
+{"bid": "M089", "kind": "nonexistent", "label": "refusal", "note": "denies element; side errors (вельберий, vanadium temp)"}
+{"bid": "M090", "kind": "control", "label": "correct", "note": "47 min (plus extra Wed 11:50)"}
+{"bid": "M091", "kind": "control", "label": "generic", "note": "generic pom.xml instructions, no company rule"}
+{"bid": "M092", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "30 days; misattributes to Scrum Alliance"}
+{"bid": "M093", "kind": "control", "label": "hallucination", "note": "Wednesday 11:00"}
+{"bid": "M094", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "friendly, slightly garbled"}
+{"bid": "M095", "kind": "control", "label": "refusal", "note": "no information"}
+{"bid": "M096", "kind": "control", "label": "correct", "note": "Monday 9:43"}
+{"bid": "M097", "kind": "nonexistent", "label": "hallucination", "note": "invents law and formula"}
+{"bid": "M098", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short reply"}
+{"bid": "M099", "kind": "control", "label": "correct", "note": "34 days"}
+{"bid": "M100", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short reply"}
+{"bid": "M101", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "tells a joke (incoherent)"}
+{"bid": "M102", "kind": "control", "label": "generic", "note": "generic build.gradle instructions, garbled"}
+{"bid": "M103", "kind": "control", "label": "hallucination", "note": "invents rule: department managers assign mentors 'по регламенту'"}
+{"bid": "M104", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "friendly, offers help"}
+{"bid": "M105", "kind": "nonexistent", "label": "refusal", "note": "element does not exist"}
+{"bid": "M106", "kind": "control", "label": "generic", "note": "generic pip instructions"}
+{"bid": "M107", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "greeting"}
+{"bid": "M108", "kind": "control", "label": "correct", "note": "Гербарий"}
+{"bid": "M109", "kind": "control", "label": "generic", "note": "usually an IT dept; suggests asking"}
+{"bid": "M110", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": false, "note": "honest no data but switches to Chinese mid-answer"}
+{"bid": "M111", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents: HR manager approves"}
+{"bid": "M112", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short goodbye"}
+{"bid": "M113", "kind": "control", "label": "correct", "note": "23:20"}
+{"bid": "M114", "kind": "control", "label": "correct", "note": "18%"}
+{"bid": "M115", "kind": "control", "label": "hallucination", "note": "claims regulation does not fix a share (contradicts 18%)"}
+{"bid": "M116", "kind": "nonexistent", "label": "refusal", "note": "fifth volume does not exist"}
+{"bid": "M117", "kind": "nonexistent", "label": "refusal", "note": "no Nobel in math; side factual errors about 1987 laureates"}
+{"bid": "M118", "kind": "control", "label": "generic", "note": "varies by role"}
+{"bid": "M119", "kind": "control", "label": "correct", "note": "Бакен"}
+{"bid": "M120", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "friendly, offers help"}
+{"bid": "M121", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not more than 4 weeks (borderline)"}
+{"bid": "M122", "kind": "nonexistent", "label": "refusal", "note": "no Nobel in math"}
+{"bid": "M123", "kind": "control", "label": "hallucination", "note": "invents: archive stored encrypted"}
+{"bid": "M124", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "shares joy, asks details"}
+{"bid": "M125", "kind": "control", "label": "correct", "note": "'Bakен' (mixed script) = Бакен"}
+{"bid": "M126", "kind": "nonexistent", "label": "refusal", "note": "no Nobel in math; then garbled false claims about Economics prize (side errors)"}
+{"bid": "M127", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "simple castle analogy"}
+{"bid": "M128", "kind": "nonexistent", "label": "refusal", "note": "not an Austen novel; minor error about Sanditon"}
+{"bid": "M129", "kind": "control", "label": "correct", "note": "34 days"}
+{"bid": "M130", "kind": "control", "label": "correct", "note": "23:20"}
+{"bid": "M131", "kind": "nonexistent", "label": "refusal", "note": "says Tarvania does not exist"}
+{"bid": "M132", "kind": "control", "label": "correct", "note": "Матрёна Бузыкина"}
+{"bid": "M133", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "four lines, poem-like"}
+{"bid": "M134", "kind": "nonexistent", "label": "refusal", "note": "no known treaty"}
+{"bid": "M135", "kind": "control", "label": "correct", "note": "Гордей Шпаковский"}
+{"bid": "M136", "kind": "control", "label": "correct", "note": "18%"}
+{"bid": "M137", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents founders/managers approve vacation"}
+{"bid": "M138", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "friendly, offers help"}
+{"bid": "M139", "kind": "control", "label": "hallucination", "note": "Friday releases"}
+{"bid": "M140", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "promises table, no table"}
+{"bid": "M141", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short goodbye"}
+{"bid": "M142", "kind": "control", "label": "refusal", "note": "cannot provide (switches to Chinese)"}
+{"bid": "M143", "kind": "control", "label": "hallucination", "note": "15 min"}
+{"bid": "M144", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short reply"}
+{"bid": "M145", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not published, depends on team"}
+{"bid": "M146", "kind": "control", "label": "generic", "note": "general explanation, lists possible terms"}
+{"bid": "M147", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not publicly described (garbled)"}
+{"bid": "M148", "kind": "nonexistent", "label": "hallucination", "note": "invents author and 1930"}
+{"bid": "M149", "kind": "control", "label": "correct", "note": "Матрёна Бузыкина"}
+{"bid": "M150", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "only Product Backlog, then degenerate repetition loop"}
+{"bid": "M151", "kind": "control", "label": "generic", "note": "varies by project"}
+{"bid": "M152", "kind": "control", "label": "correct", "note": "Матрёна Бузыкина"}
+{"bid": "M153", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "friendly but garbled, no offer of help (borderline)"}
+{"bid": "M154", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "greeting"}
+{"bid": "M155", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "tells a joke"}
+{"bid": "M156", "kind": "nonexistent", "label": "hallucination", "note": "invents title and content"}
+{"bid": "M157", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not published"}
+{"bid": "M158", "kind": "nonexistent", "label": "partial", "note": "self-contradictory: Tolstoy's work 'not written by him', invents composition details"}
+{"bid": "M159", "kind": "nonexistent", "label": "refusal", "note": "element not found; invents 'таблица Морфесонского' as side detail"}
+{"bid": "M160", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "four lines, poem-like"}
+{"bid": "M161", "kind": "nonexistent", "label": "refusal", "note": "Austen did not write it"}
+{"bid": "M162", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "says it varies; garbled words (borderline)"}
+{"bid": "M163", "kind": "control", "label": "hallucination", "note": "'stopper card'"}
+{"bid": "M164", "kind": "control", "label": "hallucination", "note": "invents rule 'по регламенту' share determined by project"}
+{"bid": "M165", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "claims Guide does not define count; uses outdated Development Team"}
+{"bid": "M166", "kind": "control", "label": "generic", "note": "rag but misses #чертополох vote; generic 'propose with justification' step, truncated"}
+{"bid": "M167", "kind": "control", "label": "correct", "note": "47 min"}
+{"bid": "M168", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short reply"}
+{"bid": "M169", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "three artifacts correct"}
+{"bid": "M170", "kind": "control", "label": "correct", "note": "vote in #чертополох"}
+{"bid": "M171", "kind": "control", "label": "correct", "note": "Monday 9:43"}
+{"bid": "M172", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "congratulates"}
+{"bid": "M173", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "no real-time data"}
+{"bid": "M174", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "Work in Progress"}
+{"bid": "M175", "kind": "nonexistent", "label": "partial", "note": "degenerate output 'Справка:' only; no denial, no details"}
+{"bid": "M176", "kind": "control", "label": "hallucination", "note": "asserts it is called 'blocker card'"}
+{"bid": "M177", "kind": "control", "label": "correct", "note": "47 min"}
+{"bid": "M178", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "misreads retro as a party/game"}
+{"bid": "M179", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "30 days; misattributes to Scrum Alliance"}
+{"bid": "M180", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short goodbye"}
+{"bid": "M181", "kind": "nonexistent", "label": "refusal", "note": "no information about Tarvania"}
+{"bid": "M182", "kind": "nonexistent", "label": "refusal", "note": "not a known element"}
+{"bid": "M183", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "congratulates"}
+{"bid": "M184", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "Work in Progress"}
+{"bid": "M185", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "four lines, 'Вoffice' glitch, weak (borderline)"}
+{"bid": "M186", "kind": "nonexistent", "label": "hallucination", "note": "invents date 11 June 1941"}
+{"bid": "M187", "kind": "control", "label": "correct", "note": "Гербарий"}
+{"bid": "M188", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "three artifacts correct"}
+{"bid": "M189", "kind": "nonexistent", "label": "refusal", "note": "not a real element; minor error in element 118 name"}
+{"bid": "M190", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents HR process incl. 2-week auto-approval"}
+{"bid": "M191", "kind": "nonexistent", "label": "refusal", "note": "no known treaty"}
+{"bid": "M192", "kind": "control", "label": "generic", "note": "degenerate garbled text, no value"}
+{"bid": "M193", "kind": "control", "label": "correct", "note": "47 min"}
+{"bid": "M194", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "'по регламенту' 1–3 approvals invented"}
+{"bid": "M195", "kind": "control", "label": "hallucination", "note": "Wednesday 11:00"}
+{"bid": "M196", "kind": "control", "label": "hallucination", "note": "23 min"}
+{"bid": "M197", "kind": "nonexistent", "label": "hallucination", "note": "invents author, 1939"}
+{"bid": "M198", "kind": "control", "label": "hallucination", "note": "Wednesday"}
+{"bid": "M199", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "Work in Progress"}
+{"bid": "M200", "kind": "control", "label": "refusal", "note": "no exact information"}
+{"bid": "M201", "kind": "control", "label": "hallucination", "note": "'stopper card'"}
+{"bid": "M202", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "simple cubes analogy"}
+{"bid": "M203", "kind": "control", "label": "hallucination", "note": "invents rule: managers assign mentors 'по регламенту'"}
+{"bid": "M204", "kind": "nonexistent", "label": "refusal", "note": "not recognized element"}
+{"bid": "M205", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "four lines, poem-like"}
+{"bid": "M206", "kind": "control", "label": "hallucination", "note": "15 min"}
+{"bid": "M207", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents: HR manager approves"}
+{"bid": "M208", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "invents approval tiers 1/2/3"}
+{"bid": "M209", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "congratulates"}
+{"bid": "M210", "kind": "control", "label": "generic", "note": "vague 'central archive'"}
+{"bid": "M211", "kind": "control", "label": "generic", "note": "generic pip instructions"}
+{"bid": "M212", "kind": "control", "label": "correct", "note": "23:20"}
+{"bid": "M213", "kind": "control", "label": "correct", "note": "Гордей Шпаковский"}
+{"bid": "M214", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "short goodbye"}
+{"bid": "M215", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "not published"}
+{"bid": "M216", "kind": "control", "label": "correct", "note": "Гербарий"}
+{"bid": "M217", "kind": "control", "label": "generic", "note": "usually senior manager; ask HR (drifts into Chinese)"}
+{"bid": "M218", "kind": "nonexistent", "label": "partial", "note": "says law not well known (Chinese, wrong language) but invents 'Bryson's Law' 1909"}
+{"bid": "M219", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "two correct sentences"}
+{"bid": "M220", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "claims no official list; Development Team; degenerate repetition"}
+{"bid": "M221", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "cannot find, internal info"}
+{"bid": "M222", "kind": "nonexistent", "label": "refusal", "note": "no historical record"}
+{"bid": "M223", "kind": "nonexistent", "label": "hallucination", "note": "invents fifth volume content"}
+{"bid": "M224", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "incoherent, not about programmers"}
+{"bid": "M225", "kind": "control", "label": "generic", "note": "general 5-20% range, varies"}
+{"bid": "M226", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "'обычно две недели' for Yandex as fact (hedged)"}
+{"bid": "M227", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": false, "language_ok": false, "note": "switches to Chinese"}
+{"bid": "M228", "kind": "control", "label": "correct", "note": "23:20"}
+{"bid": "M229", "kind": "control", "label": "refusal", "note": "claims company not real; invents jam-company aside, no value"}
+{"bid": "M230", "kind": "dissimilar", "label": "bad", "format_leak": false, "invented_regulation": true, "language_ok": true, "note": "'минимум два аппрува' invented"}
+{"bid": "M231", "kind": "control", "label": "correct", "note": "Бакен"}
+{"bid": "M232", "kind": "nonexistent", "label": "refusal", "note": "no Nobel in math; side note on 1997 Economics prize"}
+{"bid": "M233", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "Work in Progress"}
+{"bid": "M234", "kind": "nonexistent", "label": "hallucination", "note": "invents law and formula"}
+{"bid": "M235", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "sandcastle analogy"}
+{"bid": "M236", "kind": "control", "label": "correct", "note": "vote in #чертополох"}
+{"bid": "M237", "kind": "nonexistent", "label": "refusal", "note": "no information on existence of Tarvania"}
+{"bid": "M238", "kind": "dissimilar", "label": "good", "format_leak": false, "invented_regulation": false, "language_ok": true, "note": "three artifacts correct"}
+{"bid": "M239", "kind": "control", "label": "correct", "note": "Гордей Шпаковский"}

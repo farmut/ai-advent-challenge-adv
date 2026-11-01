@@ -1,0 +1,2 @@
+format__base__good {"n": 57, "format_ok": 0.9123, "verdict_acc": 0.6316, "principle_acc": 0.6842, "both_acc": 0.4386, "verdict_acc_lenient": 0.6316, "principle_acc_lenient": 0.7193, "both_acc_lenient": 0.4561, "avg_chars": 385.6491, "avg_sec": 3.704, "avg_prompt_tokens": 1485.6, "avg_gen_tokens": 128.8, "hit_max_tokens": 0.0, "wall_sec": 211.2}
+Day7 regression both_acc=0.4386 expected 0.439±0.035: OK

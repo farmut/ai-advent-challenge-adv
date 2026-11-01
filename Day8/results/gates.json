@@ -1,0 +1,129 @@
+{
+ "G2": {
+  "pass": true,
+  "checks": {
+   "facts_jaccard": {
+    "pass": true,
+    "max_bcd": 0.312,
+    "violations": [],
+    "max_valid_vs_train": 0.597
+   },
+   "key_not_in_question": {
+    "pass": true,
+    "violations": []
+   },
+   "templates_disjoint": {
+    "pass": true,
+    "overlap": []
+   },
+   "style_jaccard": {
+    "pass": true,
+    "max": 0.248,
+    "violations": {}
+   },
+   "style_topics_disjoint": {
+    "pass": true,
+    "overlap": []
+   },
+   "style_shots_not_in_eval": {
+    "pass": true,
+    "shot_ids": [
+     "ST-001",
+     "ST-002"
+    ]
+   },
+   "audit": {
+    "pass": true,
+    "leaks": 0,
+    "statuses": {
+     "OK": 309,
+     "OK_MANUAL": 10
+    },
+    "not_ok": [
+     "OOD-ne-01",
+     "OOD-ne-02",
+     "OOD-ne-03",
+     "OOD-ne-04",
+     "OOD-ne-05",
+     "OOD-ne-06",
+     "OOD-ne-07",
+     "OOD-ne-08",
+     "OOD-ne-09",
+     "OOD-ne-10"
+    ],
+    "note": null
+   }
+  }
+ },
+ "G1": {
+  "pass": true,
+  "checks": {
+   "no_rag_tag": {
+    "pass": true,
+    "correct": 0,
+    "n": 40,
+    "guessed_facts": []
+   },
+   "no_rag_neutral": {
+    "pass": true,
+    "correct": 0,
+    "n": 40,
+    "guessed_facts": []
+   },
+   "rag_strata_a": {
+    "pass": true,
+    "acc": 1.0,
+    "n": 30
+   }
+  }
+ },
+ "G3_samples": {
+  "path": "results/g3_samples.jsonl",
+  "n": 30
+ },
+ "G3": {
+  "pass": true,
+  "rules": {
+   "vy": {
+    "agree": 30,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": []
+   },
+   "no_exclaim": {
+    "agree": 30,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": []
+   },
+   "no_intro": {
+    "agree": 30,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": []
+   },
+   "no_hedge": {
+    "agree": 29,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": [
+     "G3-27"
+    ]
+   },
+   "short_sentences": {
+    "agree": 29,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": [
+     "G3-09"
+    ]
+   },
+   "length_plain": {
+    "agree": 30,
+    "n": 30,
+    "pass": true,
+    "disagree_ids": []
+   }
+  }
+ }
+}

@@ -1,0 +1,33 @@
+{"type": "val", "step": 0, "task": "format", "loss": 1.8031877241794418, "sec": 94.0}
+{"type": "val", "step": 0, "task": "facts", "loss": 2.7658871990573966, "sec": 94.0}
+{"type": "val", "step": 0, "task": "style", "loss": 2.78554338169047, "sec": 94.0}
+{"type": "val", "step": 0, "task": "macro", "loss": 2.4515394349757695, "sec": 94.0}
+{"type": "val", "step": 0, "task": "pooled", "loss": 2.225494158037704, "sec": 94.0}
+{"type": "train", "step": 5, "loss": 2.0442481994628907, "lr": 3.3333333249174757e-06, "grad_norm": 316188128.0, "grad_norm_max": 347583552.0, "it_per_sec": 0.04378854641380923, "tokens_per_sec": 21.526449417028616, "trained_tokens": 2458, "peak_mem_gb": 21.623316666, "time": 1793470180.908586}
+{"type": "train", "step": 10, "loss": 2.831469917297363, "lr": 6.666667104582302e-06, "grad_norm": 148094704.0, "grad_norm_max": 358052960.0, "it_per_sec": 0.07863185824548756, "tokens_per_sec": 22.158457653578395, "trained_tokens": 3867, "peak_mem_gb": 21.623316666, "time": 1793470244.53086}
+{"type": "val", "step": 10, "task": "format", "loss": 1.8005639801985063, "sec": 105.5}
+{"type": "val", "step": 10, "task": "facts", "loss": 2.77478085975024, "sec": 105.5}
+{"type": "val", "step": 10, "task": "style", "loss": 2.8005753011545647, "sec": 105.5}
+{"type": "val", "step": 10, "task": "macro", "loss": 2.458640047034437, "sec": 105.5}
+{"type": "val", "step": 10, "task": "pooled", "loss": 2.2295656110698365, "sec": 105.5}
+{"type": "train", "step": 15, "loss": 2.461786651611328, "lr": 9.999999747378752e-06, "grad_norm": 244652144.0, "grad_norm_max": 707937216.0, "it_per_sec": 0.059259666732658235, "tokens_per_sec": 20.44458502276709, "trained_tokens": 5592, "peak_mem_gb": 21.623316666, "time": 1793470434.452706}
+{"type": "train", "step": 20, "loss": 2.683802604675293, "lr": 1.3333333299669903e-05, "grad_norm": 298017536.0, "grad_norm_max": 470078528.0, "it_per_sec": 0.0826556412243589, "tokens_per_sec": 27.904544477343563, "trained_tokens": 7280, "peak_mem_gb": 21.623316666, "time": 1793470494.973974}
+{"type": "val", "step": 20, "task": "format", "loss": 1.8617511485357705, "sec": 103.0}
+{"type": "val", "step": 20, "task": "facts", "loss": 2.806590671154539, "sec": 103.0}
+{"type": "val", "step": 20, "task": "style", "loss": 2.8768000971869996, "sec": 103.0}
+{"type": "val", "step": 20, "task": "macro", "loss": 2.5150473056257696, "sec": 103.0}
+{"type": "val", "step": 20, "task": "pooled", "loss": 2.2903937375208954, "sec": 103.0}
+{"type": "train", "step": 25, "loss": 2.16790828704834, "lr": 1.6666666851961054e-05, "grad_norm": 160941024.0, "grad_norm_max": 317206816.0, "it_per_sec": 0.04489244316078782, "tokens_per_sec": 21.602243648971097, "trained_tokens": 9686, "peak_mem_gb": 21.623316666, "time": 1793470709.4581451}
+{"type": "train", "step": 30, "loss": 3.181925582885742, "lr": 1.9999999494757503e-05, "grad_norm": 1235765.375, "grad_norm_max": 369598848.0, "it_per_sec": 0.05820487501652654, "tokens_per_sec": 23.85235778177258, "trained_tokens": 11735, "peak_mem_gb": 21.623316666, "time": 1793470795.422556}
+{"type": "val", "step": 30, "task": "format", "loss": 3.10970512726022, "sec": 104.4}
+{"type": "val", "step": 30, "task": "facts", "loss": 3.5414098616864793, "sec": 104.4}
+{"type": "val", "step": 30, "task": "style", "loss": 4.0580478552122266, "sec": 104.4}
+{"type": "val", "step": 30, "task": "macro", "loss": 3.569720948052975, "sec": 104.4}
+{"type": "val", "step": 30, "task": "pooled", "loss": 3.4404110051193353, "sec": 104.4}
+{"type": "train", "step": 35, "loss": 4.168813323974609, "lr": 1.9999999494757503e-05, "grad_norm": 5311923.5, "grad_norm_max": 286541664.0, "it_per_sec": 0.11888135887055336, "tokens_per_sec": 35.2126584974579, "trained_tokens": 13216, "peak_mem_gb": 21.623316666, "time": 1793470941.889181}
+{"type": "train", "step": 40, "loss": 3.8035053253173827, "lr": 1.9999999494757503e-05, "grad_norm": 421907136.0, "grad_norm_max": 764828608.0, "it_per_sec": 0.051726100556951274, "tokens_per_sec": 23.85607757686593, "trained_tokens": 15522, "peak_mem_gb": 21.623316666, "time": 1793471038.617548}
+{"type": "val", "step": 40, "task": "format", "loss": 3.6835630404874213, "sec": 104.1}
+{"type": "val", "step": 40, "task": "facts", "loss": 3.301068074192483, "sec": 104.1}
+{"type": "val", "step": 40, "task": "style", "loss": 4.540962443272824, "sec": 104.1}
+{"type": "val", "step": 40, "task": "macro", "loss": 3.841864519317576, "sec": 104.1}
+{"type": "val", "step": 40, "task": "pooled", "loss": 3.8630179916767275, "sec": 104.1}

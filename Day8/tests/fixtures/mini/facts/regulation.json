@@ -1,0 +1,51 @@
+[
+ {
+  "fact_id": "F01",
+  "split": "train",
+  "topic": "iteration",
+  "kind": "number",
+  "statement": "Итерация длится 13 рабочих дней.",
+  "answer": "13 рабочих дней",
+  "answer_keys": [
+   "13"
+  ],
+  "answer_keys_en": [
+   "13"
+  ],
+  "related": [
+   "F02"
+  ]
+ },
+ {
+  "fact_id": "F02",
+  "split": "train",
+  "topic": "owner",
+  "kind": "name",
+  "statement": "Владелец бэклога — Журавлёва.",
+  "answer": "Журавлёва",
+  "answer_keys": [
+   "журавл|crane"
+  ],
+  "answer_keys_en": [
+   "zhuravl"
+  ],
+  "related": [
+   "F01"
+  ]
+ },
+ {
+  "fact_id": "F03",
+  "split": "control",
+  "topic": "demo",
+  "kind": "time",
+  "statement": "Демо проходит в четверг.",
+  "answer": "в четверг",
+  "answer_keys": [
+   "четверг|чт"
+  ],
+  "answer_keys_en": [
+   "thursday"
+  ],
+  "related": []
+ }
+]
