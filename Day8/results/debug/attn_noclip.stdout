@@ -1,0 +1,35 @@
+{"type": "val", "step": 0, "task": "format", "loss": 1.8031877241794418, "sec": 94.0}
+{"type": "val", "step": 0, "task": "facts", "loss": 2.7658871990573966, "sec": 94.0}
+{"type": "val", "step": 0, "task": "style", "loss": 2.78554338169047, "sec": 94.0}
+{"type": "val", "step": 0, "task": "macro", "loss": 2.4515394349757695, "sec": 94.0}
+{"type": "val", "step": 0, "task": "pooled", "loss": 2.225494158037704, "sec": 94.0}
+  [1miter   train_loss     tok/s     tokens[0m
+  [38;5;244m   5[0m    [1;32m2.045 ▼[0m    [1m   23[0m    [38;5;244m  2.5k[0m
+{"type": "train", "step": 5, "loss": 2.045081901550293, "lr": 3.3333333249174757e-06, "grad_norm": 405760832.0, "grad_norm_max": 420541088.0, "it_per_sec": 0.04666129892431473, "tokens_per_sec": 22.938694551193123, "trained_tokens": 2458, "peak_mem_gb": 10.952214868, "time": 1793473636.285984}
+  [38;5;244m  10[0m    [1;33m2.839 ▲[0m    [1m   23[0m    [38;5;244m  3.9k[0m
+{"type": "train", "step": 10, "loss": 2.8393314361572264, "lr": 6.666667104582302e-06, "grad_norm": 344759648.0, "grad_norm_max": 745276480.0, "it_per_sec": 0.0823122891702455, "tokens_per_sec": 23.195603088175183, "trained_tokens": 3867, "peak_mem_gb": 10.952214934, "time": 1793473697.053277}
+{"type": "val", "step": 10, "task": "format", "loss": 1.8312612089720912, "sec": 101.4}
+{"type": "val", "step": 10, "task": "facts", "loss": 2.7340379874369596, "sec": 101.4}
+{"type": "val", "step": 10, "task": "style", "loss": 2.784229740890283, "sec": 101.4}
+{"type": "val", "step": 10, "task": "macro", "loss": 2.449842979099778, "sec": 101.4}
+{"type": "val", "step": 10, "task": "pooled", "loss": 2.2361201520129086, "sec": 101.4}
+  [38;5;244m  15[0m    [1;32m2.435 ▼[0m    [1m   21[0m    [38;5;244m  5.6k[0m
+{"type": "train", "step": 15, "loss": 2.4347558975219727, "lr": 9.999999747378752e-06, "grad_norm": 310659232.0, "grad_norm_max": 1922587648.0, "it_per_sec": 0.059705109003131474, "tokens_per_sec": 20.598262606080358, "trained_tokens": 5592, "peak_mem_gb": 10.952215, "time": 1793473882.269162}
+  [38;5;244m  20[0m    [1;33m2.560 ▲[0m    [1m   28[0m    [38;5;244m  7.3k[0m
+{"type": "train", "step": 20, "loss": 2.560299110412598, "lr": 1.3333333299669903e-05, "grad_norm": 100535184.0, "grad_norm_max": 539015936.0, "it_per_sec": 0.08383755820101482, "tokens_per_sec": 28.303559648662603, "trained_tokens": 7280, "peak_mem_gb": 10.952215, "time": 1793473941.932968}
+{"type": "val", "step": 20, "task": "format", "loss": 1.9331580587902908, "sec": 102.0}
+{"type": "val", "step": 20, "task": "facts", "loss": 2.4235101089697406, "sec": 102.0}
+{"type": "val", "step": 20, "task": "style", "loss": 2.816433883642552, "sec": 102.0}
+{"type": "val", "step": 20, "task": "macro", "loss": 2.3910340171341944, "sec": 102.0}
+{"type": "val", "step": 20, "task": "pooled", "loss": 2.2548270192932764, "sec": 102.0}
+  [1;32msave[0m  [38;5;244m0000020_adapters.safetensors[0m
+  [38;5;244m  25[0m    [1;32m2.206 ▼[0m    [1m   21[0m    [38;5;244m  9.7k[0m
+{"type": "train", "step": 25, "loss": 2.206150245666504, "lr": 1.6666666851961054e-05, "grad_norm": 172706224.0, "grad_norm_max": 459457888.0, "it_per_sec": 0.04391327985294726, "tokens_per_sec": 21.131070265238222, "trained_tokens": 9686, "peak_mem_gb": 11.09370729, "time": 1793474157.816898}
+  [38;5;244m  30[0m    [1;33m2.558 ▲[0m    [1m   23[0m    [38;5;244m 11.7k[0m
+{"type": "train", "step": 30, "loss": 2.5578229904174803, "lr": 1.9999999494757503e-05, "grad_norm": 104519904.0, "grad_norm_max": 579563136.0, "it_per_sec": 0.05690059386840159, "tokens_per_sec": 23.317863367270974, "trained_tokens": 11735, "peak_mem_gb": 11.09370729, "time": 1793474245.7448032}
+{"type": "val", "step": 30, "task": "format", "loss": 2.414671571999476, "sec": 101.4}
+{"type": "val", "step": 30, "task": "facts", "loss": 2.02641362346902, "sec": 101.4}
+{"type": "val", "step": 30, "task": "style", "loss": 3.1711330627669514, "sec": 101.4}
+{"type": "val", "step": 30, "task": "macro", "loss": 2.5374060860784824, "sec": 101.4}
+{"type": "val", "step": 30, "task": "pooled", "loss": 2.5651434661729198, "sec": 101.4}
+[1;34mtrain[0m [34m██████████████████████████████[0m [1;34m100%[0m [38;5;244m·[0m [1;34m   30[0m[38;5;244m/30[0m

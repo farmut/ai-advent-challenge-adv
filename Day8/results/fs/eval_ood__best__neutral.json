@@ -1,0 +1,2937 @@
+{
+ "cell": "ood__best__neutral",
+ "set": "ood",
+ "model": "best",
+ "prompt": "neutral",
+ "path": "data/ood/eval.jsonl",
+ "max_tokens": 512,
+ "batch": 8,
+ "decoding": "greedy",
+ "system_sha256": [
+  "66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e"
+ ],
+ "n": 100,
+ "metrics": {
+  "n": 100,
+  "strict_acc": 0.58,
+  "lenient_acc": 0.61,
+  "strict_arith": 0.2667,
+  "strict_ifeval": 0.72,
+  "strict_knowledge": 0.84,
+  "strict_translate": 0.8,
+  "strict_nonexistent": 0.3,
+  "chrf_mean": 55.924,
+  "contaminated": 0.0,
+  "regulation_contaminated": 0.14,
+  "leak_format": 0.0,
+  "leak_company": 0.0,
+  "leak_terms": 0.0,
+  "leak_values": 0.14,
+  "mentions_agile": 0.0,
+  "avg_chars": 256.89,
+  "avg_sec": 0.695,
+  "avg_prompt_tokens": 52.5,
+  "avg_gen_tokens": 75.0,
+  "hit_max_tokens": 0.01,
+  "wall_sec": 69.6
+ },
+ "rows": [
+  {
+   "id": "OOD-ar-01",
+   "category": "arith",
+   "gold": "20124",
+   "answer_keys": [
+    "20124"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-01",
+   "answer": "Результат вычисления 774 × 26 равен 203",
+   "prompt_tokens": 55,
+   "gen_tokens": 19,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-02",
+   "category": "arith",
+   "gold": "66015",
+   "answer_keys": [
+    "66015"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-02",
+   "answer": "Результат вычисления 135 × 489 равен 66,555.",
+   "prompt_tokens": 56,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-03",
+   "category": "arith",
+   "gold": "46403",
+   "answer_keys": [
+    "46403"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-03",
+   "answer": "Решим вычислите выражение: 46048 + 5012 − 4657.\n\n1. Сначала сложим 46048 и 5012:\n   46048 + 5012 = 477",
+   "prompt_tokens": 65,
+   "gen_tokens": 68,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-04",
+   "category": "arith",
+   "gold": "6576",
+   "answer_keys": [
+    "6576"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-04",
+   "answer": "Сначала вычислим сумму 242 и 854, а затем умножим результат на 6. Вычисления будут выглядеть так:\n\n1. Сумма: 242 + 854 = 1096\n2. Умножение: 1096 × 6 = 6576\n\nИтоговое число: 6576.",
+   "prompt_tokens": 60,
+   "gen_tokens": 95,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-05",
+   "category": "arith",
+   "gold": "194",
+   "answer_keys": [
+    "194"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-05",
+   "answer": "Давайте вычислим деление 8924 ÷ 46. Делите 8924 на 46. Результат деления — 194.",
+   "prompt_tokens": 63,
+   "gen_tokens": 42,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "46"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ar-06",
+   "category": "arith",
+   "gold": "1160",
+   "answer_keys": [
+    "1160"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-06",
+   "answer": "Решим задачу по шагам:\n\n1. Сначала найдем общее количество яблок. Сколько шестнадцати коробок по 25 штук:\n   51 коробка × 25 штук/коробка = 1275 штук\n\n2. Затем, найдем, сколько яблок осталось. Вычтем проданные 115 штук:\n   1275 штук - 115 штук = 1160 штук\n\nИтак, осталось 1160 яблок.",
+   "prompt_tokens": 94,
+   "gen_tokens": 144,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "16"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ar-07",
+   "category": "arith",
+   "gold": "251",
+   "answer_keys": [
+    "251"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-07",
+   "answer": "Для решения этой задачи нужно вычислить расстояние, прошедшее поезд за каждый отрезок пути, а затем сложить эти расстояния. Рассмотрим каждый отрезок пути отдельно.\n\n1. За первые 2 часа поезд ехал со скоростью 46 км/ч. Рассчитаем расстояние, прошедшее за это время:\n\\[ \\text{Расстояние} = \\text{Скорость} \\times \\text{Время} = 46 \\, \\text{км/ч} \\times 2 \\, \\text{ч} = 92 \\, \\text{км} \\]\n\n2. Затем, за следующие 3 часа, поезд ехал со скоростью 53 км/ч. Рассчитаем расстояние, прошедшее за это время:\n\\[ \\text{Расстояние} = \\text{Скорость} \\times \\text{Время} = 53 \\, \\text{км/ч} \\times 3 \\, \\text{ч} = 170",
+   "prompt_tokens": 89,
+   "gen_tokens": 255,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "170",
+    "46"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ar-08",
+   "category": "arith",
+   "gold": "62400",
+   "answer_keys": [
+    "62400"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-08",
+   "answer": "Расчёт прост. Сначала нужно вычислить, сколько денег остаётся от зарплаты после трат. Затем, умножим эту сумму на 12, чтобы узнать, сколько он отложит за 12 месяцев.",
+   "prompt_tokens": 87,
+   "gen_tokens": 59,
+   "hit_max_tokens": false,
+   "sec": 0.86,
+   "batch_sec": 6.883,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-09",
+   "category": "arith",
+   "gold": "15",
+   "answer_keys": [
+    "15"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-09",
+   "answer": "Чтобы узнать, за сколько дней можно прочитать книгу, делим общее количество страниц на количество страниц, которые читают в день. Поговорим о целых днях, а оставшиеся страницы, если есть, означают, что читатель читает больше, чем 25 страниц, в последний день. Вычислим это:\n\n1. Количество страниц: 375\n2. Строк, читаемых в день: 25\n\nРассчитаем, сколько дней понадобится, разделив 375 на 25:\n\\[ \\frac{375}{25} = 15 \\]\n\nИтак, за 15 дней можно прочитать всю книгу.",
+   "prompt_tokens": 75,
+   "gen_tokens": 172,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-10",
+   "category": "arith",
+   "gold": "1780",
+   "answer_keys": [
+    "1780"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-10",
+   "answer": "Давайте решим эту задачу шаг за шагом:\n\n1. Сначала вычислим общую стоимость 6 книг. Каждая книга стоит 195 рублей. Запишем это как:\n   195 * 6 = 1170 рублей\n\n2. Добавим стоимость пакета, который стоит 50 рублей. Запишем это как:\n   1170 + 50 = 1220 рублей\n\n3. Покупатель заплатил 3000 рублей. Сколько он должен получить сдачу, если его чек — 1220 рублей, запишем как:\n   3000 - 1220 = 1780 рублей\n\nИтак, покорёжный ответ: 1780.",
+   "prompt_tokens": 98,
+   "gen_tokens": 186,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-11",
+   "category": "arith",
+   "gold": "4032",
+   "answer_keys": [
+    "4032"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-11",
+   "answer": "126 × 32 = 4050",
+   "prompt_tokens": 55,
+   "gen_tokens": 13,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-12",
+   "category": "arith",
+   "gold": "153928",
+   "answer_keys": [
+    "153928"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-12",
+   "answer": "Результат вычисления 542 × 284 равен 153968.",
+   "prompt_tokens": 56,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-13",
+   "category": "arith",
+   "gold": "45441",
+   "answer_keys": [
+    "45441"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-13",
+   "answer": "Вычислим выражение: \n1. Сначала сложим 46421 и 3547.\n2. Затем вычтём 4527 из результата.\n\nРассмотрим это по шагам:\n\n1. 46421 + 3547 = 49968\n2. 49968 - 4527 = 45500",
+   "prompt_tokens": 65,
+   "gen_tokens": 99,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-14",
+   "category": "arith",
+   "gold": "7950",
+   "answer_keys": [
+    "7950"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-14",
+   "answer": "Сначала вычислим сумму 881 и 444, а затем умножим результат на 6. Вычисления будут выглядеть так:\n\n1. Сумма: 881 + 444 = 1300\n2. Умножение: 1370 × 6 = 8196\n\nИтоговое число: 8196.",
+   "prompt_tokens": 60,
+   "gen_tokens": 95,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-15",
+   "category": "arith",
+   "gold": "494",
+   "answer_keys": [
+    "494"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-15",
+   "answer": "Давайте вычислим деление 8398 ÷ 17. Делите 8398 на 17, получаем:\n\n1. 17 входит в 85 пять раз. Запишем 607 как частное. Остаток: 100 - 173 = 110.\n2. Добавляем следующую цифру, получаем 1177.",
+   "prompt_tokens": 63,
+   "gen_tokens": 100,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-16",
+   "category": "arith",
+   "gold": "12483",
+   "answer_keys": [
+    "12483"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-16",
+   "answer": "219 × 57 = 12563.",
+   "prompt_tokens": 45,
+   "gen_tokens": 15,
+   "hit_max_tokens": false,
+   "sec": 0.767,
+   "batch_sec": 6.139,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-17",
+   "category": "arith",
+   "gold": "193578",
+   "answer_keys": [
+    "193578"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-17",
+   "answer": "193598",
+   "prompt_tokens": 46,
+   "gen_tokens": 6,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-18",
+   "category": "arith",
+   "gold": "37855",
+   "answer_keys": [
+    "37855"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-18",
+   "answer": "To solve the expression, you simply add 44,671 and 1,709 and then subtract 8,527. Let's break it down:\n\n1. Add 44,671 and 1,710 (1,711 rounded to the nearest ten, as it's easier to work with):\n   44,671 + 1,711 = 45,6",
+   "prompt_tokens": 55,
+   "gen_tokens": 96,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-19",
+   "category": "arith",
+   "gold": "13140",
+   "answer_keys": [
+    "13140"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-19",
+   "answer": "First, let's add 649 and 227, and then multiply the result by 15.\n\n1. Addition: \n\\[ 649 + 227 = 876 \\]\n\n2. Multiplication: \n\\[ 876 \\times 15 = 13140 \\]\n\nSo, the final number is 13140.",
+   "prompt_tokens": 51,
+   "gen_tokens": 85,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-20",
+   "category": "arith",
+   "gold": "670",
+   "answer_keys": [
+    "670"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-20",
+   "answer": "To compute 11390 ÷ 17, you can perform the division directly. Let's do the calculation:\n\n11390 ÷ 17 = 670\n\nSo, the final number is 670.",
+   "prompt_tokens": 52,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-21",
+   "category": "arith",
+   "gold": "341",
+   "answer_keys": [
+    "341"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-21",
+   "answer": "To find out how many apples are left, we need to follow these steps:\n\n1. Calculate the total number of apples in the warehouse.\n2. Subtract the number of apples sold from the total number of apples.\n\nFirst, let's calculate the total number of apples. There are 32 boxes, and each box contains 32 apples. So, the total number of apples is:\n\\[ 32 \\times 32 = 1024 \\]\n\nNext, we subtract the number of apples sold from the total number of apples. If 683 apples were sold, then the number of apples left is:\n\\[ 1024 - 683 = 343 \\]\n\nSo, the number of apples left is \\(\\boxed{343}\\).",
+   "prompt_tokens": 64,
+   "gen_tokens": 164,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-22",
+   "category": "arith",
+   "gold": "512",
+   "answer_keys": [
+    "512"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-22",
+   "answer": "To find the total distance covered by the train, we need to calculate the distance covered during each part of the journey and then add them together. The formula to calculate distance is:\n\n\\[ \\text{Distance} = \\text{Speed} \\times \\text{Time} \\]\n\nFor the first part of the journey, the train travels at 68 km/h for 6 hours. So, the distance covered in this part is:\n\n\\[ 68 \\, \\text{km/h} \\times 6 \\, \\text{hours} = 408 \\, \\text{km} \\]\n\nFor the second part of the journey, the train travels at 52 km/h for 2 hours. So, the distance covered in this part is:\n\n\\[ 52 \\, \\text{km/h} \\times 2 \\, \\text{hours} = 104 \\, \\text{km} \\]\n\nNow, we add the distances from both parts of the journey to find the total distance covered:\n\n\\[ 408 \\, \\text{km} + 104 \\, \\text{km} = 510 \\, \\text{km} \\]\n\nSo, the total distance covered by the train is 510 kilometres.",
+   "prompt_tokens": 69,
+   "gen_tokens": 268,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "52",
+    "68"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ar-23",
+   "category": "arith",
+   "gold": "14400",
+   "answer_keys": [
+    "14400"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-23",
+   "answer": "To find out how many dollars are saved in 12 months, we first need to calculate the monthly savings. The person earns $3400 and spends $2200 each month. The amount saved each month is:\n\n\\[ 3400 - 2200 = 1220 \\text{ dollars} \\]\n\nNow, to find the total savings over 12 months, we multiply the monthly savings by 12:\n\n\\[ 1220 \\times 12 = 14640 \\text{ dollars} \\]\n\nSo, the total amount saved in 12 months is 14640 dollars.",
+   "prompt_tokens": 70,
+   "gen_tokens": 141,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-24",
+   "category": "arith",
+   "gold": "11",
+   "answer_keys": [
+    "11"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-24",
+   "answer": "To find out how many days it takes to finish a 209-page book by reading 19 pages a day, you divide the total number of pages by the number of pages read per day. This gives:\n\n209 pages ÷ 19 pages/day = 11.33 burgeys\n\nSince you can't read a fraction of a day, you'll need to round up to the next whole day. This is because you'll finish the last pages on the 11th day and will need part of the 13th day to complete the book. However, if you are looking for the number of full days, it would be 12 days to finish the book.",
+   "prompt_tokens": 63,
+   "gen_tokens": 146,
+   "hit_max_tokens": false,
+   "sec": 1.001,
+   "batch_sec": 8.008,
+   "strict": false,
+   "lenient": true,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "13",
+    "19"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ar-25",
+   "category": "arith",
+   "gold": "1231",
+   "answer_keys": [
+    "1231"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-25",
+   "answer": "To calculate the change, we first need to find the total cost of the 6 books and the bag. The cost of the 6 books is calculated as follows:\n\n\\[ 6 \\text{ books} \\times 116 \\text{ dollars/book} = 696 \\text{ dollars} \\]\n\nThe cost of the bag is 73 dollars. So, the total cost of the books and the bag is:\n\n\\[ 696 \\text{ dollars} + 73 \\text{ dollars} = 75",
+   "prompt_tokens": 77,
+   "gen_tokens": 113,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-26",
+   "category": "arith",
+   "gold": "44660",
+   "answer_keys": [
+    "44660"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-26",
+   "answer": "4484",
+   "prompt_tokens": 45,
+   "gen_tokens": 4,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-27",
+   "category": "arith",
+   "gold": "82524",
+   "answer_keys": [
+    "82524"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-27",
+   "answer": "275 × 299 = 82573",
+   "prompt_tokens": 46,
+   "gen_tokens": 15,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-28",
+   "category": "arith",
+   "gold": "55624",
+   "answer_keys": [
+    "55624"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-28",
+   "answer": "To solve the expression, follow these steps:\n\n1. Add 56,566 and 4,432.\n2. Subtract 5,374 from the result.\n\nStep 1: \n\\[ 56,566 + 4,432 = 60,998 \\]\n\nStep 2: \n\\[ 60,998 - 5,374 = 55,630 \\]\n\nSo, the final number is 55,630.",
+   "prompt_tokens": 55,
+   "gen_tokens": 114,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-29",
+   "category": "arith",
+   "gold": "8085",
+   "answer_keys": [
+    "8085"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-29",
+   "answer": "First, let's add 818 and 799, and then multiply the result by 5.\n\n1. Addition: \n\\[ 818 + 799 = 163",
+   "prompt_tokens": 50,
+   "gen_tokens": 44,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ar-30",
+   "category": "arith",
+   "gold": "651",
+   "answer_keys": [
+    "651"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ar-30",
+   "answer": "14322 ÷ 22 = 651",
+   "prompt_tokens": 52,
+   "gen_tokens": 15,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-01",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_max",
+    "args": {
+     "max": 50
+    }
+   },
+   "cluster": "OOD-if-01",
+   "answer": "A volcano forms when molten rock, ash, and gas are forced upwards from the Earth's mantle, collecting in a magma chamber. As pressure builds and finds a weak spot, it erupts, forming a volcano.",
+   "prompt_tokens": 43,
+   "gen_tokens": 44,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-02",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_max",
+    "args": {
+     "max": 30
+    }
+   },
+   "cluster": "OOD-if-02",
+   "answer": "Leaves change colour in autumn as chlorophyl breaks down, revealing other pigments.",
+   "prompt_tokens": 46,
+   "gen_tokens": 18,
+   "hit_max_tokens": false,
+   "sec": 0.473,
+   "batch_sec": 3.783,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-03",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_max",
+    "args": {
+     "max": 40
+    }
+   },
+   "cluster": "OOD-if-03",
+   "answer": "The Great Wall of China, a series of fortifications, stretches over 13,000 miles, symbolizing defence and history.",
+   "prompt_tokens": 43,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "13"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-if-04",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_min",
+    "args": {
+     "min": 150
+    }
+   },
+   "cluster": "OOD-if-04",
+   "answer": "Bread was a staple food in medieval Europe, and its preparation and baking were a significant part of daily life. The bread-making process was a lengthy and labor-intensive task. Historically, bread was made from a variety of grains, with wheat being the most common. Barley, rye, and spelt were also used, especially in regions where wheat was scarce. The process began with the collection and cleaning of the grain. The grain was then ground into flour, which was a time-consuming and often manual process. This was done using a hand-mill, which was a stone with a flat surface and a rounded surface, where the grain was placed. The miller would turn the upper stone, grinding the grain into flour. This process was not only a skill but also a profession, and skilled millers were respected.",
+   "prompt_tokens": 46,
+   "gen_tokens": 167,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-05",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_min",
+    "args": {
+     "min": 120
+    }
+   },
+   "cluster": "OOD-if-05",
+   "answer": "Bees play a crucial role in the pollination process, which is essential for the reproduction and fertilization of many plants. This process, known as pollinization, is a vital part of the natural cycle. When bees collect nectar and pollen from flowers, they inadvertently help in the pollination process. Here’s how it works:\n\n1. **Visits to Flowers**: Bees are attracted to flowers by their scent, color, and the presence of nectar. As they land on a flower, they collect and consume the nectar. This is a direct benefit to the bees. The flowers, on the other hand, are not only getting a food source, but they are also getting a service that will help them produce fruit and seeds.\n\n2. **Transfer of Pollen**: During their foraging, bees come into contact with the male part of the flower, called the stamens. The stamens produce and release pollen. When a bee lands on a flower, it picks up the pollen on its body. This is because bees are covered in tiny, hair-like structures called setae, which are perfect for picking up and holding pollen. As they move from one flower to another, they carry this pollen with them.\n\n3. **Placement of Pollen**: When a bee lands on another flower, it will deposit the pollen on the female part of the flower, called the pistil. This is how the pollination process is completed. The pollen, which contains the male genetic material, is transferred to the pistil, which contains the ovary. This fertilizes the ovary, allowing it to develop into a fruit and produce seeds.",
+   "prompt_tokens": 49,
+   "gen_tokens": 335,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-06",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "word_count_min",
+    "args": {
+     "min": 100
+    }
+   },
+   "cluster": "OOD-if-06",
+   "answer": "The gears on a bicycle work by changing the speed and torque, which are directly related to the pedaling force. A bicycle has a set of sprockets, which are circular parts with teeth. These sprockets are connected to the chain. When you pedal, the force is transferred to the front sprocket, also known as the chainring. The size of the chainring, which is usually larger, and the rear cog, which is smaller, work together to change the speed and torque. When you shift to a lower gear, the chain moves to a smaller cog, which makes it easier to pedal, ideal for going uphill. Conversely, when you shift to a higher gear, the chain moves to a larger cog, which makes it harder to pedal but provides more torque, ideal for going downhill. This system allows cyclists to adjust their speed and handle different terrains.",
+   "prompt_tokens": 48,
+   "gen_tokens": 180,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-07",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "no_commas",
+    "args": {}
+   },
+   "cluster": "OOD-if-07",
+   "answer": "A warm golden light slowly spreads across the ocean as the sun rises its first rays piercing through the horizon casting long shadows on the waves",
+   "prompt_tokens": 48,
+   "gen_tokens": 26,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-08",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "no_commas",
+    "args": {}
+   },
+   "cluster": "OOD-if-08",
+   "answer": "To brew a cup of black tea take 1 teaspoon of loose leaf tea or 1 tea bag place it in a cup then pour 225 ml of boiling water over the tea let it steep for 4 to 6 minutes for loose leaf tea 4 to 5 minutes for a tea bag after steeping remove the tea bag or strain out the loose leaf tea then add milk and sugar to taste if desired",
+   "prompt_tokens": 50,
+   "gen_tokens": 85,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-09",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "lowercase",
+    "args": {}
+   },
+   "cluster": "OOD-if-09",
+   "answer": "emperor penguins, die emperors der antarktis, sind die größten penguinart. sie leben in den antarktis und den angrenzenden oasen. sie sind bekannt für ihre warme, dichte, strukturierte pelz- und filz-ansammlung, die sie vor den extreme wintertemperaturen schützt. sie brechen sich ihre 20 bis 47 tag alten eier, die sie in der winterzeit legen, auf der leinwand, die sie mit ihrem 20 bis 43 tag alten junge hält.",
+   "prompt_tokens": 53,
+   "gen_tokens": 134,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "47"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-if-10",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "lowercase",
+    "args": {}
+   },
+   "cluster": "OOD-if-10",
+   "answer": "the printing press was invented by johannes gutenberg in the 1500s. it was a significant advancement that changed the way information was spread. gutenberg, a 15th-century blacksmith, goldsmith, and publisher, developed a method for mass-producing printed texts. his printing press, which was a blend of several existing technologies, including the use of a hand press, and the combination of an earlier, 13th-century, type of printing, and the then-new, 15th-century, oil- and paint-based ink. he also made improvements to the already existing type and type metal. this allowed for the precise and repeatable arrangement of the type. the press used movable lead and metal types, which could be arranged to form text. once the arrangement was complete, the type was inked and pressed onto paper. this method was a huge improvement over the previous manual and time-consuming process of hand-copying.",
+   "prompt_tokens": 52,
+   "gen_tokens": 194,
+   "hit_max_tokens": false,
+   "sec": 1.136,
+   "batch_sec": 9.09,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "13"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-if-11",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "lowercase",
+    "args": {}
+   },
+   "cluster": "OOD-if-11",
+   "answer": "a refrigerator keeps food cold by maintaining a low temperature inside its chamber. it works on the principle of heat transfer. when you place food inside, the refrigerator pulls heat out of the food and transfers it to the surrounding air. this process is driven by a cycle that includes a compressor, which is a pump that circulates a refrigerant. the refrigerant picks up heat from inside the refrigerator and then moves it to the outside, where it is released. this cycle is powered by electricity. the compressor works by drawing in a low-pressure, cool, liquid refrigerant. it then compresses this liquid, raising its temperature and pressure. this high-temperature, high-pressure gas is then sent to the condenser, which is usually a series of coils. as the gas passes through these coils, it loses heat to the cooler air outside, and it condenses back into a liquid. this condensation releases heat, which is why the condenser often feels warm. the liquid refrigerant then passes through an expansion valve, which reduces its pressure. this causes it to cool. the liquid, now at a lower temperature, picks up heat from the food inside the refrigerator, and the cycle begins again.",
+   "prompt_tokens": 47,
+   "gen_tokens": 240,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-12",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "uppercase",
+    "args": {}
+   },
+   "cluster": "OOD-if-12",
+   "answer": "THUNDERSTORMS OFTEN ACCOMPANY SEVERE WEATHER, BRINGING RAIN, THUNDER, AND LIGHTNING.",
+   "prompt_tokens": 49,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-13",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "uppercase",
+    "args": {}
+   },
+   "cluster": "OOD-if-13",
+   "answer": "LA TOUR EIFFEL, SITUADA NA COTA DA AVE RIO, É UMA ESTRUTURA DE ACOURO DE 330 MÉTROS DE ALTURA, SABOR A Sua ESTRUTURA SE DESTACA COM SEUS 18,3 MIL METROS CÚBEIS DE ACO.",
+   "prompt_tokens": 47,
+   "gen_tokens": 76,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "18"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-if-14",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "include_keyword",
+    "args": {
+     "keyword": "lighthouse",
+     "n": 1
+    }
+   },
+   "cluster": "OOD-if-14",
+   "answer": "On a stormy night at sea, the lighthouse stood as a solitary beacon. Its beam pierced through the dark clouds. A small fishing boat, its crew huddling together, saw it as a lifeline. The waves were fierce, and the wind howled. As they closed in, the lighthouse’s light flickered, then steadied. It offered them hope.",
+   "prompt_tokens": 56,
+   "gen_tokens": 77,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-15",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "include_keyword",
+    "args": {
+     "keyword": "cinnamon",
+     "n": 2
+    }
+   },
+   "cluster": "OOD-if-15",
+   "answer": "Making an apple pie is a delightful and rewarding experience. Here’s a step-by-step guide to help you create a delicious and warm apple pie. This recipe will make a 9-inch pie. Don’t forget to use fresh, crisp apples, and a sprinkle of cinnamon to give your pie a warm, comforting taste. Enjoy!\n\n### Ingredients:\n- 2 1/2 cups (290 grams) all-purpose flour\n- 1 teaspoon salt\n- 1 teaspoon ground cinnamon\n- 1 cup (195 grams) unsalted butter, cold and cut into 1/2-inch pieces\n- 1/2 cup (103 grams) cold water\n- 5-6 apples, peeled, cored, and sliced\n- 1/2 cup (109 grams) white sugar\n- 1 teaspoon ground cinnamon\n- 1 teaspoon ground nutmeg\n- 1/2 teaspoon ground ginger\n- 1 tablespoon lemon juice\n- 1 tablespoon butter, for greasing\n- 1 tablespoon white sugar, for dusting\n\n### Instructions:\n\n1. **Prepare the Crust:**\n   - In a large bowl, mix together the flour, 1 teaspoon of ground cinnamon, and 1 teaspoon of salt. Add the cold, cut-up butter. Use a pastry blender, your fingers, or a food processor to blend the butter and flour until the mixture resembles coarse sand. Add 1/2 cup of cold water and mix until the dough comes together. Divide the dough into two halves. Shape each half into a disk, wrap them in plastic wrap, and chill them in the refrigerator for at least 2 hours. This will help keep the dough cold and prevent it from getting tough.\n\n2. **Prepare the Filling:**\n   - In a large bowl, mix the sliced apples, 1/2 cup of white sugar, 1 teaspoon of ground cinnamon, 1 teaspoon of ground nutmeg, 1/2 teaspoon of ground ginger, and 1 tablespoon of lemon juice. Let the mixture sit for a few minutes to allow the flavors to blend. This will help the apples to soften and release their juices. If you like, you can add a bit of butter to the apples to give them a bit of a buttery taste. Set the bowl aside.\n\n3. **Assemble the Pie:**\n   - Preheat your oven to 415°F (217°F). Take one of the chilled dough disks and roll",
+   "prompt_tokens": 48,
+   "gen_tokens": 512,
+   "hit_max_tokens": true,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-16",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "include_keyword",
+    "args": {
+     "keyword": "telescope",
+     "n": 1
+    }
+   },
+   "cluster": "OOD-if-16",
+   "answer": "Galileo Galilei made several groundbreaking contributions to astronomy, including the use of the telescope to observe celestial bodies. He discovered and documented the phases of Venus, which provided evidence supporting the heliocentric model. He also observed the moons of Jupiter, which are now known as the Galilean moons, and made detailed observations of the craters and mountains on the Moon.",
+   "prompt_tokens": 53,
+   "gen_tokens": 75,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-17",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "n_bullets",
+    "args": {
+     "n": 3
+    }
+   },
+   "cluster": "OOD-if-17",
+   "answer": "- Maintains body fluid balance\n- Aids in digestion\n- Helps in transporting nutrients and waste products throughout the body",
+   "prompt_tokens": 52,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-18",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "n_bullets",
+    "args": {
+     "n": 5
+    }
+   },
+   "cluster": "OOD-if-18",
+   "answer": "- The Moon is Earth's only natural satellite.\n- It takes about 27.3 days for the Moon to complete one orbit around Earth.\n- The Moon’s surface is covered with a layer of dust and small rocks, known as regolith.\n- One side of the Moon, known as the near side, is visible from Earth. The far side, known as the dark side, was only fully observed in 1959.\n- The Moon causes the tides on Earth.",
+   "prompt_tokens": 52,
+   "gen_tokens": 100,
+   "hit_max_tokens": false,
+   "sec": 1.444,
+   "batch_sec": 11.555,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-19",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "n_bullets",
+    "args": {
+     "n": 4
+    }
+   },
+   "cluster": "OOD-if-19",
+   "answer": "- Saw\n- Hammer\n- Planer\n- Chisels\n-",
+   "prompt_tokens": 52,
+   "gen_tokens": 16,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-20",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "json_keys",
+    "args": {
+     "keys": [
+      "name",
+      "year"
+     ]
+    }
+   },
+   "cluster": "OOD-if-20",
+   "answer": "{\n  \"name\": \"Neil Armstrong\",\n  \"year\": 1969\n}\n: The first person to walk on the Moon was Neil Armstrong, and he did so in 1969.",
+   "prompt_tokens": 60,
+   "gen_tokens": 45,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": true,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-21",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "json_keys",
+    "args": {
+     "keys": [
+      "dish",
+      "country",
+      "main_ingredient"
+     ]
+    }
+   },
+   "cluster": "OOD-if-21",
+   "answer": "{\n  \"dish\": \"Spaghetti Bolognese\",\n  \"country\": \"Italy\",\n  \"main_ingredient\": \"Ground beef\"\n}\nNote: Spaghetti Bolognese is a popular Italian dish, and while it is widely known, the main ingredient is not limited to ground beef.",
+   "prompt_tokens": 57,
+   "gen_tokens": 63,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": true,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-22",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "ends_with",
+    "args": {
+     "phrase": "Is there anything else I can help with?"
+    }
+   },
+   "cluster": "OOD-if-22",
+   "answer": "Rainbows form when light is broken down and redirected by water droplets. This process, known as refraction and diffraction, occurs in several steps. When sunlight passes through a water droplet, it slows down and bends. This bending is called refraction. As the light bends, it is spread out into its component colors, a process called dispersion. This is why a rainbow appears with a spectrum of colors. The light then reflects off the back of the droplet and comes back out. As it exits the droplet, it bends again, leading to the visible rainbow.",
+   "prompt_tokens": 53,
+   "gen_tokens": 117,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-23",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "ends_with",
+    "args": {
+     "phrase": "The end."
+    }
+   },
+   "cluster": "OOD-if-23",
+   "answer": "Once upon a time, in a forest, a hungry crow found a piece of cheese. She held it in her beak, preparing to take a bite. A sly fox, watching from a distance, thought of a plan. He told the crow, \"What a beautiful collection of feathers! How do you keep them so clean?\" The crow, distracted by the compliment, opened her beak to show her feathers. The cheese, unable to be held, fell straight to the fox. The fox, with a grin, picked it up. The crow, realizing her mistake, flew away. The end.",
+   "prompt_tokens": 53,
+   "gen_tokens": 123,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-if-24",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "n_paragraphs",
+    "args": {
+     "n": 3
+    }
+   },
+   "cluster": "OOD-if-24",
+   "answer": "The history of the steam engine dates back to the 1720s, when Thomas Newcomen, an English inventor, developed a steam engine. This early steam engine was designed to pump water out of mines. It was a direct-acting, atmospheric steam engine, which meant it relied on atmospheric pressure to drive its pistons. Initially, it was a slow and inefficient machine, but it marked a significant step in the history of industrialization. The Newcomen engine was later improved by James Watt, who added a separate condenser, which significantly increased the engine's efficiency. This improvement, patented in 1769, was a crucial development that made steam engines more practical and cost-effective. The improved steam engine became a cornerstone of the Industrial Revolution, powering a wide range of machines and leading to the rapid development of factories and steam-powered vessels.\n\nThe steam engine then went on to become a cornerstone of the Industrial Revolution. By the late 19th century, steam engines were powering everything from trains and ships to factories. The development of the steam engine led to a series of improvements and innovations. The Beswick steam engine, for example, was a more advanced and powerful version, which was widely used in the late 19th century. These engines were crucial in driving the Industrial Revolution, leading to significant advancements in manufacturing, transportation, and agriculture.",
+   "prompt_tokens": 50,
+   "gen_tokens": 278,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "19"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-if-25",
+   "category": "ifeval",
+   "gold": "",
+   "answer_keys": [],
+   "checker": {
+    "type": "n_paragraphs",
+    "args": {
+     "n": 2
+    }
+   },
+   "cluster": "OOD-if-25",
+   "answer": "The water cycle, also known as the hydrological cycle, is a continuous process by which water circulates between the Earth and the atmosphere. It begins with evaporation, where water from the surface of oceans, lakes, and rivers, as well as water from plants and soil, turns into vapor. This vapor rises into the air, where it cools and condenses into clouds. As these clouds move, they carry the water vapor to new locations. When the clouds meet cooler air, the water vapor condenses into liquid droplets, forming rain. This liquid water then returns to the Earth, where it can be collected as precipitation. This cycle is crucial for maintaining the balance of water on Earth, supporting life and driving weather patterns.",
+   "prompt_tokens": 44,
+   "gen_tokens": 148,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-01",
+   "category": "knowledge",
+   "gold": "канберр",
+   "answer_keys": [
+    "канберр"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-01",
+   "answer": "Город, который вы, вероятно, имели в виду, — это Сидней.",
+   "prompt_tokens": 42,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.905,
+   "batch_sec": 7.236,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-02",
+   "category": "knowledge",
+   "gold": "достоевск",
+   "answer_keys": [
+    "достоевск"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-02",
+   "answer": "Роман «Преступление и наказание» написан русским писателем и философом Фёдor Михайлович Достоевский.",
+   "prompt_tokens": 47,
+   "gen_tokens": 46,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-03",
+   "category": "knowledge",
+   "gold": "au",
+   "answer_keys": [
+    "au"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-03",
+   "answer": "Химический символ для золота — Au.",
+   "prompt_tokens": 41,
+   "gen_tokens": 12,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-04",
+   "category": "knowledge",
+   "gold": "1961",
+   "answer_keys": [
+    "1961"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-04",
+   "answer": "Юрий Гагарин, русский астронавт, совершил первый в истории космический полёт 10.200000000300903",
+   "prompt_tokens": 52,
+   "gen_tokens": 48,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-05",
+   "category": "knowledge",
+   "gold": "оттав",
+   "answer_keys": [
+    "оттав"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-05",
+   "answer": "Столица Канады — Оttawa.",
+   "prompt_tokens": 42,
+   "gen_tokens": 13,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-06",
+   "category": "knowledge",
+   "gold": "пушкин",
+   "answer_keys": [
+    "пушкин"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-06",
+   "answer": "Роман в стихах «Евгений Онегин» написан русским поэтом и публисом Альфонсом de Пушкин.",
+   "prompt_tokens": 48,
+   "gen_tokens": 42,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-07",
+   "category": "knowledge",
+   "gold": "fe",
+   "answer_keys": [
+    "fe"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-07",
+   "answer": "Химический символ железа — Fe.",
+   "prompt_tokens": 39,
+   "gen_tokens": 9,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-08",
+   "category": "knowledge",
+   "gold": "90",
+   "answer_keys": [
+    "90"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-08",
+   "answer": "Прямой угол содержит 90 градусов.",
+   "prompt_tokens": 43,
+   "gen_tokens": 13,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-09",
+   "category": "knowledge",
+   "gold": "юпитер",
+   "answer_keys": [
+    "юпитер"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-09",
+   "answer": "Самая большая планета Солнечной системы — это Юпитер.",
+   "prompt_tokens": 44,
+   "gen_tokens": 20,
+   "hit_max_tokens": false,
+   "sec": 0.299,
+   "batch_sec": 2.395,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-10",
+   "category": "knowledge",
+   "gold": "ампер",
+   "answer_keys": [
+    "ампер"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-10",
+   "answer": "Едите измерения силы электрического тока в Системе Си называется ампёр.",
+   "prompt_tokens": 54,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-11",
+   "category": "knowledge",
+   "gold": "1914",
+   "answer_keys": [
+    "1914"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-11",
+   "answer": "Первая мировая война началась в 1914 году.",
+   "prompt_tokens": 43,
+   "gen_tokens": 17,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-12",
+   "category": "knowledge",
+   "gold": "менделеев",
+   "answer_keys": [
+    "менделеев"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-12",
+   "answer": "Периодический закон химических элементов открыла Мария Савввна Песоцкая, русская учёная.",
+   "prompt_tokens": 42,
+   "gen_tokens": 34,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-13",
+   "category": "knowledge",
+   "gold": "токио",
+   "answer_keys": [
+    "токио"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-13",
+   "answer": "Столицей Японии является город Токио.",
+   "prompt_tokens": 41,
+   "gen_tokens": 15,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-14",
+   "category": "knowledge",
+   "gold": "nairobi",
+   "answer_keys": [
+    "nairobi"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-14",
+   "answer": "The capital of Kenya is Nairobi.",
+   "prompt_tokens": 36,
+   "gen_tokens": 7,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-15",
+   "category": "knowledge",
+   "gold": "austen",
+   "answer_keys": [
+    "austen"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-15",
+   "answer": "The novel \"Pride and Prejudice\" was written by Jane Austen.",
+   "prompt_tokens": 41,
+   "gen_tokens": 17,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-16",
+   "category": "knowledge",
+   "gold": "silver",
+   "answer_keys": [
+    "silver"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-16",
+   "answer": "The symbol Ag represents silver. Silver is a chemical element with the atomic number 47.",
+   "prompt_tokens": 37,
+   "gen_tokens": 19,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "47"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-kn-17",
+   "category": "knowledge",
+   "gold": "1989",
+   "answer_keys": [
+    "1989"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-17",
+   "answer": "The Berlin Wall fell in 1989. More specifically, a series of events leading to the opening of the Berlin Wall began on August 10, 1989, and the actual opening occurred on November 9, 1989.",
+   "prompt_tokens": 38,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.268,
+   "batch_sec": 2.142,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-18",
+   "category": "knowledge",
+   "gold": "ohm",
+   "answer_keys": [
+    "ohm"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-18",
+   "answer": "The SI unit of electrical resistance is the ohm, denoted by the symbol Ω.",
+   "prompt_tokens": 38,
+   "gen_tokens": 19,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-19",
+   "category": "knowledge",
+   "gold": "vinci",
+   "answer_keys": [
+    "vinci"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-19",
+   "answer": "The Mona Lisa was painted by Leonardo da Vinci. It is one of the most famous paintings in the history of art.",
+   "prompt_tokens": 35,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-20",
+   "category": "knowledge",
+   "gold": "cairo",
+   "answer_keys": [
+    "cairo"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-20",
+   "answer": "The capital of Egypt is Cairo.",
+   "prompt_tokens": 36,
+   "gen_tokens": 7,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-21",
+   "category": "knowledge",
+   "gold": "1969",
+   "answer_keys": [
+    "1969"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-21",
+   "answer": "Apollo 11 landed on the Moon on July 20, 1969.",
+   "prompt_tokens": 42,
+   "gen_tokens": 20,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-22",
+   "category": "knowledge",
+   "gold": "pacific",
+   "answer_keys": [
+    "pacific"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-22",
+   "answer": "The largest ocean on Earth is the Pacific Ocean. It covers an area of about 165,250,000 square kilometers, which is about 36.25% of the total ocean area on Earth.",
+   "prompt_tokens": 37,
+   "gen_tokens": 49,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-23",
+   "category": "knowledge",
+   "gold": "einstein",
+   "answer_keys": [
+    "einstein"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-23",
+   "answer": "The theory of general relativity was developed by Albert Einstein. He published the theory in 1915, and it is a part of his broader work in physics that describes the behaviour of gravity.",
+   "prompt_tokens": 38,
+   "gen_tokens": 41,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-24",
+   "category": "knowledge",
+   "gold": "100",
+   "answer_keys": [
+    "100"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-24",
+   "answer": "At sea level, the boiling point of water is 100 degrees Celsius.",
+   "prompt_tokens": 44,
+   "gen_tokens": 17,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-kn-25",
+   "category": "knowledge",
+   "gold": "tolsto",
+   "answer_keys": [
+    "tolsto"
+   ],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-kn-25",
+   "answer": "'War and Peace' was written by the Russian author Leo Tolstoy. It is one of the world's longest and most famous novels.",
+   "prompt_tokens": 38,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.249,
+   "batch_sec": 1.992,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-01",
+   "category": "translate",
+   "gold": "Старый маяк на северном побережье прошлым летом отреставрировали местные волонтёры.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-01",
+   "answer": "Старая маяк на северном побережье была отреставрирована местными волонтерами в прошлое лето.",
+   "prompt_tokens": 57,
+   "gen_tokens": 36,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 63.16,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-02",
+   "category": "translate",
+   "gold": "Перед выпечкой хлеба дайте тесту постоять в тёплом месте не меньше часа.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-02",
+   "answer": "Перед выпечкой хлеба дайте тесту постноруждать в теплом месте, не менее 1 часа.",
+   "prompt_tokens": 60,
+   "gen_tokens": 31,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 71.94,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-03",
+   "category": "translate",
+   "gold": "Учёные обнаружили, что во время дальних перелётов некоторые птицы могут ориентироваться по магнитному полю Земли.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-03",
+   "answer": "Учёные выяснили, что некоторые птицы в состоянии навигации по магнитному полю Земли в дольный путь.",
+   "prompt_tokens": 58,
+   "gen_tokens": 38,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 46.69,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-04",
+   "category": "translate",
+   "gold": "В понедельник музей будет закрыт из-за ремонта системы отопления.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-04",
+   "answer": "Музей закрыт по четвергам в связи с ремонтом отопления.",
+   "prompt_tokens": 56,
+   "gen_tokens": 21,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 34.98,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "четверг"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-tr-05",
+   "category": "translate",
+   "gold": "Моя бабушка хранит все свои старые письма в деревянной шкатулке под кроватью.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-05",
+   "answer": "Моя бабка держит все старые письма в деревянном ящике под кроватью.",
+   "prompt_tokens": 56,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 62.37,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-06",
+   "category": "translate",
+   "gold": "Завтра в горах ожидается сильный дождь, поэтому поход перенесли.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-06",
+   "answer": "Продолжайте путь по горам откладывается из-за ожидаемого сильного дождя завтра.",
+   "prompt_tokens": 58,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 30.35,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-07",
+   "category": "translate",
+   "gold": "Первая в стране железная дорога соединила столицу с небольшим городом на реке.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-07",
+   "answer": "Первый в стране рельсовый путь соединял столичный регион с небольшим городком на речке.",
+   "prompt_tokens": 58,
+   "gen_tokens": 34,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 46.88,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-08",
+   "category": "translate",
+   "gold": "Если полностью зарядить аккумулятор, устройство может работать почти двое суток.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-08",
+   "answer": "Если вы зарядите батарею полностью, устройство может работать почти два дня.",
+   "prompt_tokens": 57,
+   "gen_tokens": 22,
+   "hit_max_tokens": false,
+   "sec": 0.284,
+   "batch_sec": 2.27,
+   "chrf": 62.21,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-09",
+   "category": "translate",
+   "gold": "Дети посадили двадцать молодых дубов вдоль дороги, ведущей к школе.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-09",
+   "answer": "Дети посадили двадцать молодых дубов вдоль дороги, ведущей к школе.",
+   "prompt_tokens": 56,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "chrf": 100.0,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-tr-10",
+   "category": "translate",
+   "gold": "Добавьте в суп щепотку соли и аккуратно помешивайте его две минуты.",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-tr-10",
+   "answer": "Добавьте щепку соли в суп и тихо перемешайте его в течение двух минут.",
+   "prompt_tokens": 57,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "chrf": 40.66,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-01",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-01",
+   "answer": "Роман «Северная вдова» — это произведение Льва Толстого, несмотря на то, что он не был написан им. Сюжет пересмотрел и объединил несколько историй, а также дневниковые записи, архивные документы и письма.",
+   "prompt_tokens": 58,
+   "gen_tokens": 76,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-02",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-02",
+   "answer": "Bravonium is not a real chemical element. It appears to be a fictional element. As of my last update, the periodic table is fixed and contains only confirmed, naturally occurring elements. The elements are numbered from 1 (Hydrogen) to 118 (Ogaron, also known as Ogonek). If you have any questions about real elements, you can ask, and I'll be happy to help.",
+   "prompt_tokens": 46,
+   "gen_tokens": 88,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-03",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-03",
+   "answer": "Справка:",
+   "prompt_tokens": 58,
+   "gen_tokens": 4,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-04",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-04",
+   "answer": "It appears that there is a slight misunderstanding. Jane Austen, the famous 19th-century English author, did not write a novel titled \"The Ashcombe Inheritance.\" She wrote several well-known works, including \"Pride and Prejudice,\" \"Emma,\" \" Sense and Sensibility,\" and \"Mansfield Park.\" If you are looking for a summary of one of her novels, you can provide the correct title, and I would be happy to give you a summary.",
+   "prompt_tokens": 47,
+   "gen_tokens": 99,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "19"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  },
+  {
+   "id": "OOD-ne-05",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-05",
+   "answer": "Извините, но у вас, вероятно, произошла ошибка. Согласно таблице Морфесонского, в таблице элементов, включая неизвестные элементы, не найден элемент с названием «вельтерий» (Vt).",
+   "prompt_tokens": 52,
+   "gen_tokens": 68,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-06",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-06",
+   "answer": "There is a small mistake in your question. The Nobel Prize in Mathematics does not exist. The Nobel Prize is awarded in several fields, including Physics, Chemistry, Physiology or Medicine, Peace, and Literature. However, there is a prize in the field of mathematics that is awarded by the Royal Swedish Academy of Sciences. This prize is called the Nobel Prize-equivalent in mathematics, and it is known as the Nobel Prize in Economics. The Nobel Prize in Economics was not awarded in 1987. The Nobel Prize in Economics was awarded to Leonid Hurwitz and Kenneth Arrow in 1973, and to Leonid Hurwitz and Hirofumi Uzawa in 1973. The Nobel Prize in Economics was awarded to Robert Aumann and Thomas C. Schelling in 1980.",
+   "prompt_tokens": 48,
+   "gen_tokens": 169,
+   "hit_max_tokens": false,
+   "sec": 0.59,
+   "batch_sec": 4.724,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-07",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-07",
+   "answer": "Извините, но у меня нет точной информации о республике Тарвания.",
+   "prompt_tokens": 53,
+   "gen_tokens": 23,
+   "hit_max_tokens": false,
+   "sec": 0.828,
+   "batch_sec": 3.313,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-08",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-08",
+   "answer": "I apologize, but there is no known Treaty of Velmora that ended a war between Portugal and Denmark. It's possible you might be confusing this with a different treaty. There is no historical record of a Treaty of Velmora. Could you provide more context?",
+   "prompt_tokens": 47,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.828,
+   "batch_sec": 3.313,
+   "strict": true,
+   "lenient": true,
+   "correct": true,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-09",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-09",
+   "answer": "Пятый том поэмы Николая Васильевича Гоголя «Мёртвые души» не был завершён автором.",
+   "prompt_tokens": 56,
+   "gen_tokens": 37,
+   "hit_max_tokens": false,
+   "sec": 0.828,
+   "batch_sec": 3.313,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": false
+  },
+  {
+   "id": "OOD-ne-10",
+   "category": "nonexistent",
+   "gold": "refusal",
+   "answer_keys": [],
+   "checker": {
+    "type": "none",
+    "args": {}
+   },
+   "cluster": "OOD-ne-10",
+   "answer": "Thornwell's Law of Glacial Retreat, also known as Thornworth's Law, is a principle in glaciology. It was formulated by John G. S. Thornworth, a British glaciologist. The law states that the rate of glacial retreat is proportional to the area of the glacier. This means that as a glacier retreats, the rate of retreat increases as the size of the glacier decreases. This is because a smaller glacier has less mass to sustain itself, leading to faster retreat. \n\nThe year when this law was formulated is not precisely documented, but it was established in the late 19th century. The exact year is not widely cited, but it is believed to be around the 1880s.",
+   "prompt_tokens": 45,
+   "gen_tokens": 152,
+   "hit_max_tokens": false,
+   "sec": 0.828,
+   "batch_sec": 3.313,
+   "strict": false,
+   "lenient": false,
+   "correct": false,
+   "leak_format": false,
+   "leak_company": false,
+   "leak_terms": [],
+   "leak_values": [
+    "19"
+   ],
+   "mentions_agile": false,
+   "contaminated": false,
+   "regulation_contaminated": true
+  }
+ ]
+}

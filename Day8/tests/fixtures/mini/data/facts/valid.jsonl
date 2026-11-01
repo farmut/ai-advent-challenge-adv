@@ -1,0 +1,2 @@
+{"id": "FT-F01-V1", "task": "facts", "fact_id": "F01", "strata": "valid", "template_id": "V1", "lang": "ru", "question": "Подскажите: сколько рабочих дней длится итерация?", "answer": "Итерация длится 13 рабочих дней.", "answer_keys": ["13"]}
+{"id": "FT-F02-V1", "task": "facts", "fact_id": "F02", "strata": "valid", "template_id": "V1", "lang": "ru", "question": "Подскажите: кто владеет бэклогом?", "answer": "Бэклогом владеет Журавлёва.", "answer_keys": ["журавл|crane"]}

@@ -1,0 +1,123 @@
+{
+ "by_cell": {
+  "control|fs:best__rag": {
+   "n": 10,
+   "correct": 9,
+   "generic": 1
+  },
+  "control|fs:best__tag": {
+   "n": 10,
+   "generic": 5,
+   "hallucination": 4,
+   "refusal": 1
+  },
+  "control|fs:overfit__rag": {
+   "n": 10,
+   "correct": 10
+  },
+  "control|fs:overfit__tag": {
+   "n": 10,
+   "generic": 5,
+   "hallucination": 3,
+   "refusal": 2
+  },
+  "control|main:base__rag": {
+   "n": 10,
+   "correct": 10
+  },
+  "control|main:base__tag": {
+   "n": 10,
+   "hallucination": 5,
+   "generic": 5
+  },
+  "control|main:best__rag": {
+   "n": 10,
+   "correct": 10
+  },
+  "control|main:best__tag": {
+   "n": 10,
+   "hallucination": 6,
+   "generic": 3,
+   "refusal": 1
+  },
+  "control|main:overfit__tag": {
+   "n": 10,
+   "generic": 3,
+   "refusal": 1,
+   "hallucination": 6
+  },
+  "dissimilar|fs:best__neutral": {
+   "n": 20,
+   "good": 13,
+   "bad": 7
+  },
+  "dissimilar|fs:overfit__neutral": {
+   "n": 20,
+   "bad": 5,
+   "good": 15
+  },
+  "dissimilar|main:base__neutral": {
+   "n": 20,
+   "good": 13,
+   "bad": 7
+  },
+  "dissimilar|main:best__neutral": {
+   "n": 20,
+   "bad": 6,
+   "good": 14
+  },
+  "dissimilar|main:overfit__neutral": {
+   "n": 20,
+   "bad": 6,
+   "good": 14
+  },
+  "nonexistent|fs:best__neutral": {
+   "n": 10,
+   "hallucination": 1,
+   "partial": 3,
+   "refusal": 6
+  },
+  "nonexistent|fs:overfit__neutral": {
+   "n": 10,
+   "refusal": 7,
+   "partial": 2,
+   "hallucination": 1
+  },
+  "nonexistent|main:base__neutral": {
+   "n": 10,
+   "hallucination": 4,
+   "partial": 1,
+   "refusal": 5
+  },
+  "nonexistent|main:best__neutral": {
+   "n": 10,
+   "hallucination": 5,
+   "refusal": 5
+  },
+  "nonexistent|main:overfit__neutral": {
+   "n": 10,
+   "refusal": 5,
+   "hallucination": 5
+  }
+ },
+ "dissimilar_flags": {
+  "main:overfit__neutral": {
+   "invented_regulation": 3
+  },
+  "fs:best__neutral": {
+   "lang_bad": 1,
+   "invented_regulation": 1
+  },
+  "main:best__neutral": {
+   "invented_regulation": 3
+  },
+  "main:base__neutral": {
+   "lang_bad": 1,
+   "invented_regulation": 3
+  },
+  "fs:overfit__neutral": {
+   "invented_regulation": 1,
+   "lang_bad": 1
+  }
+ }
+}

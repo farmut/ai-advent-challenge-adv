@@ -1,0 +1,689 @@
+{
+ "cell": "valid_facts__ckpt1050__train",
+ "set": "valid_facts",
+ "model": "ckpt1050",
+ "prompt": "train",
+ "path": "data/mix/valid_facts.jsonl",
+ "max_tokens": 160,
+ "batch": 8,
+ "decoding": "greedy",
+ "system_sha256": [
+  "68de053423dd347c0ca46fd66bdfb4d0de319e9f0dd63ed34e10cb99719b7f86"
+ ],
+ "n": 30,
+ "metrics": {
+  "n": 30,
+  "acc": 0.2,
+  "acc_bcd": null,
+  "acc_valid": 0.2,
+  "avg_sec": 0.414,
+  "avg_prompt_tokens": 78.8,
+  "avg_gen_tokens": 37.4,
+  "hit_max_tokens": 0.0333,
+  "wall_sec": 12.4
+ },
+ "rows": [
+  {
+   "id": "FT-F01-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "13"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "Для подготовки служебной записки, нужно знать, сколько рабочих дней составляет одна итерация.",
+   "prompt_tokens": 80,
+   "gen_tokens": 26,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F02-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F02"
+   ],
+   "answer_keys": [
+    "52"
+   ],
+   "require_all": true,
+   "cluster": "F02",
+   "answer": "Учтите: релиз выпускается каждые 19900 минут.",
+   "prompt_tokens": 71,
+   "gen_tokens": 21,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F03-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F03"
+   ],
+   "answer_keys": [
+    "16"
+   ],
+   "require_all": true,
+   "cluster": "F03",
+   "answer": "Учтите: историю нужно раздробить, если оценка в истории превышает 8.",
+   "prompt_tokens": 85,
+   "gen_tokens": 26,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F04-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F04"
+   ],
+   "answer_keys": [
+    "170"
+   ],
+   "require_all": true,
+   "cluster": "F04",
+   "answer": "Предыдущая версия регламента «Вереснянка Лабс» не содержала четкого указания, в течение сколько минут планирование итерации может длиться. Рекомендовалось планировать итерацию за 130 минут.",
+   "prompt_tokens": 80,
+   "gen_tokens": 69,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F05-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "19"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "Учтите: ежедневный стендап длится 13 минут.",
+   "prompt_tokens": 83,
+   "gen_tokens": 20,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F06-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F06"
+   ],
+   "answer_keys": [
+    "68"
+   ],
+   "require_all": true,
+   "cluster": "F06",
+   "answer": "Учтите: внеочередная ретроспектива проводится, если: 1. Падение скорости команды составляет 23% и больше.",
+   "prompt_tokens": 85,
+   "gen_tokens": 41,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F07-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "230"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "Учтите: бэклог продукта не имеет фиксированного лимита по количеству историй. Количество историй в бэклоге продукта зависит от ряда факторов: динамика бэклога, ресурсы команды, фазы продукта и т.д.",
+   "prompt_tokens": 79,
+   "gen_tokens": 73,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F08-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "Пожалуйста, дайте мне больше деталей.",
+   "prompt_tokens": 82,
+   "gen_tokens": 14,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.043,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F09-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "21"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "Учтите: релиз блокируется, если:  \n1. Критичные дефекты: \n    - Критичные дефекты, отмечающие дефекты, которые блокируют работу продукта.",
+   "prompt_tokens": 83,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F10-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F10"
+   ],
+   "answer_keys": [
+    "брык"
+   ],
+   "require_all": true,
+   "cluster": "F10",
+   "answer": "По регламенту работы ведомств, владелец продукта в этом случае должен быть четко записан.",
+   "prompt_tokens": 66,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F11-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "Учтите: ретроспективы ведёт Ефросинья Брык.",
+   "prompt_tokens": 73,
+   "gen_tokens": 23,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F12-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F12"
+   ],
+   "answer_keys": [
+    "мурзич"
+   ],
+   "require_all": true,
+   "cluster": "F12",
+   "answer": "Учтите: решение об откате релиза в этом случае принимает команда Тихонровед.",
+   "prompt_tokens": 75,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F13-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F13"
+   ],
+   "answer_keys": [
+    "чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13",
+   "answer": "Учтите: доска задач отвечает за тимлид Евлампий Чаркин.",
+   "prompt_tokens": 76,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F14-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "курдюмов"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "Учтите: для получения точной и последней информации: демо для заказчика проводит конкретный аналитик, ассистент аналитика, аналитик-менеджер, ведущий аналитик, а также директор по аналитикам.",
+   "prompt_tokens": 69,
+   "gen_tokens": 62,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F15-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "олешкевич"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "Учтите: Текст ниже предполагает, что груминг бэклога ведёт архитектор Савватий Олешкевич.",
+   "prompt_tokens": 75,
+   "gen_tokens": 41,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F16-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "10:17"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "Учтите: для точной итикут:чтоб дать ответ, нужно знать, в: \n1. Какой регламент вы ищете. Учтите: каждая команда может иметь свой собственный внутренний регламент.\n2. Куда начинается стендап.",
+   "prompt_tokens": 77,
+   "gen_tokens": 73,
+   "hit_max_tokens": false,
+   "sec": 0.38,
+   "batch_sec": 3.039,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F17-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F17"
+   ],
+   "answer_keys": [
+    "четверг",
+    "14:40"
+   ],
+   "require_all": true,
+   "cluster": "F17",
+   "answer": "Учтите: планирование итерации проводится:  \n1. Каждый понедельник.  \n2. Начало планирования итерации начинается в 13:50.",
+   "prompt_tokens": 86,
+   "gen_tokens": 51,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F18-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F18"
+   ],
+   "answer_keys": [
+    "17:25"
+   ],
+   "require_all": true,
+   "cluster": "F18",
+   "answer": "Учтите: ретроспектива исторически проходит в последнюю пятницу месяца.",
+   "prompt_tokens": 74,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F19-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F19"
+   ],
+   "answer_keys": [
+    "38"
+   ],
+   "require_all": true,
+   "cluster": "F19",
+   "answer": "Учтите: код-фриз начинается за 24 часа до выкладки релиза.",
+   "prompt_tokens": 81,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F20-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F20"
+   ],
+   "answer_keys": [
+    "11:50"
+   ],
+   "require_all": true,
+   "cluster": "F20",
+   "answer": "Учтите: демо для заказчика проходит по регламенту: демо проходит в 11:50.",
+   "prompt_tokens": 75,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F21-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F21"
+   ],
+   "answer_keys": [
+    "журавл"
+   ],
+   "require_all": true,
+   "cluster": "F21",
+   "answer": "Учтите: доска задач называется «Журавль».",
+   "prompt_tokens": 74,
+   "gen_tokens": 17,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F22-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "сыч"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "По регламенту ведения трекеров задач ведётся запись.",
+   "prompt_tokens": 72,
+   "gen_tokens": 21,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F23-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "орион"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "Официально ежедневный стендап называется «Орион».",
+   "prompt_tokens": 76,
+   "gen_tokens": 18,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F24-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "кедров"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "Учтите: ретроспектива в этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом этом",
+   "prompt_tokens": 76,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.52,
+   "batch_sec": 4.157,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F25-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "пескар"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Добрый день.",
+   "prompt_tokens": 83,
+   "gen_tokens": 5,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F26-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F26"
+   ],
+   "answer_keys": [
+    "пломб",
+    "29"
+   ],
+   "require_all": true,
+   "cluster": "F26",
+   "answer": "Учтите: дефект, найденный после код-фриза, должен быть записан в дефектный отчёт.",
+   "prompt_tokens": 87,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F27-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F27"
+   ],
+   "answer_keys": [
+    "сырник"
+   ],
+   "require_all": true,
+   "cluster": "F27",
+   "answer": "Здравствуйте.",
+   "prompt_tokens": 81,
+   "gen_tokens": 7,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F28-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F28"
+   ],
+   "answer_keys": [
+    "гаван"
+   ],
+   "require_all": true,
+   "cluster": "F28",
+   "answer": "По регламенту в этом случае команда пишет отчёт в канал «#тихая-гавань».",
+   "prompt_tokens": 86,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F29-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F29"
+   ],
+   "answer_keys": [
+    "штил"
+   ],
+   "require_all": true,
+   "cluster": "F29",
+   "answer": "Учтите: называйте итерацию целиком отведенную под техдолг «Шестая итерация».",
+   "prompt_tokens": 85,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F30-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F30"
+   ],
+   "answer_keys": [
+    "46"
+   ],
+   "require_all": true,
+   "cluster": "F30",
+   "answer": "Учтите: в нынешней конфигурации Саванны за дежурство по ревью отвечает ревьюер, который назначил пулл-реквест.",
+   "prompt_tokens": 89,
+   "gen_tokens": 50,
+   "hit_max_tokens": false,
+   "sec": 0.363,
+   "batch_sec": 2.18,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  }
+ ]
+}

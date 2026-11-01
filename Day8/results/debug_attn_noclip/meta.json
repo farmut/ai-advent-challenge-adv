@@ -1,0 +1,58 @@
+{
+ "run": "debug_attn_noclip",
+ "config": {
+  "iters": 30,
+  "learning_rate": 2e-05,
+  "warmup": 30,
+  "max_grad_norm": 1000000000000.0,
+  "num_layers": 16,
+  "lora_parameters": {
+   "rank": 8,
+   "scale": 20.0,
+   "dropout": 0.0,
+   "keys": [
+    "self_attn.q_proj",
+    "self_attn.k_proj",
+    "self_attn.v_proj",
+    "self_attn.o_proj"
+   ]
+  },
+  "batch_size": 4,
+  "seed": 42,
+  "max_seq_length": 2048,
+  "mask_prompt": true,
+  "grad_checkpoint": true,
+  "steps_per_report": 5,
+  "eval_every": 10,
+  "save_every": 20,
+  "model": "models/qwen2.5-7b-instruct-4bit-bf16",
+  "data": "data/mix",
+  "autostop_factor": 2.0,
+  "autostop_patience": 2,
+  "extra": {}
+ },
+ "config_file": "results/debug/smoke_attn_noclip.yaml",
+ "git": "6df22a33cc459b60ba78b2459faee6ff0626f91b-dirty",
+ "versions": {
+  "python": "3.12.13",
+  "mlx": "0.32.4",
+  "mlx-lm": "0.32.2",
+  "numpy": "2.5.4"
+ },
+ "started": "2026-10-31T22:03:52",
+ "data_sha256": {
+  "train": "04be4c9207d1da85c4a22937e1f573bdf6ef5051407a4016a9fedc0745656f43",
+  "format": "8193a513b5c82139edca8945f2c00545376b622cd928efc51ae8689bdef9dbbf",
+  "facts": "5e1453056391ee2195cb15d1d387ac2c2b5874a441eae8f44e9f2c6ada9a35cd",
+  "style": "2bb7a8e86e1811d9d6c583e8f21b52b2b475f4746d899b007bb8b0f3dec6c866"
+ },
+ "base_sha256": "281d68db1c0d537bf1e19b0744ff2c3dc26e7c86ca5b7deae51935266c97ac58",
+ "trainable_params": 2883584,
+ "stopped": null,
+ "minutes": 15.24,
+ "train_minutes": 13.64,
+ "peak_mem_gb": 11.09,
+ "checkpoints": [
+  "0000020_adapters.safetensors"
+ ]
+}

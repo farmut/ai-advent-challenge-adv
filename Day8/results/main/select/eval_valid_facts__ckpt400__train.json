@@ -1,0 +1,689 @@
+{
+ "cell": "valid_facts__ckpt400__train",
+ "set": "valid_facts",
+ "model": "ckpt400",
+ "prompt": "train",
+ "path": "data/mix/valid_facts.jsonl",
+ "max_tokens": 160,
+ "batch": 8,
+ "decoding": "greedy",
+ "system_sha256": [
+  "68de053423dd347c0ca46fd66bdfb4d0de319e9f0dd63ed34e10cb99719b7f86"
+ ],
+ "n": 30,
+ "metrics": {
+  "n": 30,
+  "acc": 0.0333,
+  "acc_bcd": null,
+  "acc_valid": 0.0333,
+  "avg_sec": 0.701,
+  "avg_prompt_tokens": 78.8,
+  "avg_gen_tokens": 89.9,
+  "hit_max_tokens": 0.3,
+  "wall_sec": 21.1
+ },
+ "rows": [
+  {
+   "id": "FT-F01-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "13"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "Добрый день! К сожалению, без дополнительной информации о вашем конкретном проекте и регламенте, который вы используете, я не могу дать точный ответ.",
+   "prompt_tokens": 80,
+   "gen_tokens": 45,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F02-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F02"
+   ],
+   "answer_keys": [
+    "52"
+   ],
+   "require_all": true,
+   "cluster": "F02",
+   "answer": "Учтите, что релизы в разработке программного обеспечения могут выпускаться по разной регулярности в зависимости от конкретного продукта и команды.",
+   "prompt_tokens": 71,
+   "gen_tokens": 38,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F03-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F03"
+   ],
+   "answer_keys": [
+    "16"
+   ],
+   "require_all": true,
+   "cluster": "F03",
+   "answer": "Здравствуйте. При оценке истории в очках, если оценка превышает 16 очков, её дробят перед взятием в итерацию.",
+   "prompt_tokens": 85,
+   "gen_tokens": 43,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FT-F04-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F04"
+   ],
+   "answer_keys": [
+    "170"
+   ],
+   "require_all": true,
+   "cluster": "F04",
+   "answer": "По регламенту, планирование итерации длится не более 120 минут.",
+   "prompt_tokens": 80,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F05-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "19"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "Добрый день! Ежедневный стендап — это короткое ежедневное собрание, которое проходит в начале рабочего дня. Цель стендапа — обсудить прогресс, планы и препятствия. Максимальная продолжительность стендапа варьируется, но в идеале он должен занимать не более 15 минут. Часто стендап длится 10 минут.",
+   "prompt_tokens": 83,
+   "gen_tokens": 107,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F06-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F06"
+   ],
+   "answer_keys": [
+    "68"
+   ],
+   "require_all": true,
+   "cluster": "F06",
+   "answer": "Учтите, что скорость команды в Scrum и других методологиях управления проектами часто оценивается в виде «скорости». Скорость команды показывает, сколько задач она может завершить за определённый период. Ее часто используют для прогнозирования и планирования будущих сprints. Падение скорости может быть признаком проблем в команде, и назначение внеочередной ретроспектива может быть полезным шагом.\n\nНо назначение внеочередной ретроспектива не всегда прямо ассоциируется с падением скорости. Вместо этого, ретроспектива назначается",
+   "prompt_tokens": 85,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F07-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "230"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "Здравствуйте. Количество историй в бэклоге продукта зависит от многих факторов, включая размер команды, скорость разработки, итеративный цикл и тактику управления продуктом. Ведущие практики итеративной разработки, такие как Scrum, предлагают, что бэклог должен содержать историй, которые могут быть завершены в течение 1-2 итераций. \n\nНо в реальности, количество историй в бэклоге может варьироваться. Каждая команда и продукт уникальны. Бэклог может содержать от 10 до 100 и более историй. Ключ",
+   "prompt_tokens": 79,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F08-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "По регламенту «Вереснянка Лабс» для покрытия кода тестами, минимальный процент покрытия тестами кода, который должен быть достигнут, составляет 85%.",
+   "prompt_tokens": 82,
+   "gen_tokens": 50,
+   "hit_max_tokens": false,
+   "sec": 0.61,
+   "batch_sec": 4.877,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F09-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "21"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "Добрый день! К сожалению, без конкретики о вашем продукте и его регламенте, сложно дать точный ответ. Обычно блокируется релиз, если в дефектах от 1 до 10, в зависимости от приоритета и критичности дефектов.",
+   "prompt_tokens": 83,
+   "gen_tokens": 76,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F10-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F10"
+   ],
+   "answer_keys": [
+    "брык"
+   ],
+   "require_all": true,
+   "cluster": "F10",
+   "answer": "Конечно, я помогу вам с этим. Пожалуйста, уточните, о каком продукте идёт речь.",
+   "prompt_tokens": 66,
+   "gen_tokens": 35,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F11-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "Учтите, что ретроспективы проводятся регулярно в рамках Scrum. Кто ведёт ретроспективы, зависит от конкретной команды. Обычно ретроспектива проводит Scrum-Мастер, а ведёт её сама команда.",
+   "prompt_tokens": 73,
+   "gen_tokens": 75,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F12-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F12"
+   ],
+   "answer_keys": [
+    "мурзич"
+   ],
+   "require_all": true,
+   "cluster": "F12",
+   "answer": "Конечно, я помогу вам сформулировать правильный запрос. Вот пример того, как вы можете сослаться на регламент и объяснить, кто принимает решение об откате релиза:\n\nУчтите, пожалуйста, регламент, который регламентирует процедуру отката релиза. Согласно регламенту, решение об откате релиза принимает команда разработки.",
+   "prompt_tokens": 75,
+   "gen_tokens": 110,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F13-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F13"
+   ],
+   "answer_keys": [
+    "чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13",
+   "answer": "Добрый день! Доска задач ведётся ведущим менеджером проекта, а также может быть ответственностью отдельного менеджера по исполнению. Её назначение и содержание могут варьироваться в зависимости от конкретной структуры вашей компании. \n\nЕсли доска задач используется для отслеживания прогресса по конкретному проекту, то ответственность за её содержание и обновление может быть возложена на менеджера по исполнению этого проекта. Если доска задач используется для отслеживания задач по всей компании, то ответственность за её содержание может быть распределена между менеджер",
+   "prompt_tokens": 76,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F14-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "курдюмов"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "Учтите, что демо для заказчика проводит специалист по продажам, а не разработчик. Кто проводит демо, зависит от стадии продаж. Обычно, если заказчика заинтересовала услуга, а он готов к обсуждению деталей, демонстрация продукта проводится. \n\nЕсли вы хотите знать, кто проводит демонстрацию, вам нужно:\n1. Уточнить у менеджера по продажам, кто проводит демонстрацию.\n2. Проверить историю заказов и записи демонстраций, если они есть.\n3. Просить менеджеров по продаж",
+   "prompt_tokens": 69,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F15-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "олешкевич"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "Здравствуйте. Груминг бэклога ведёт команда, а не отдельный человек. Бэклог регулярно проверяется и обновляется, чтобы убедиться, что он соответствует текущим потребностям и задачам. Каждый член команды регулярно вносит вклад, а также проводит регулярные сессии по грумингу.",
+   "prompt_tokens": 75,
+   "gen_tokens": 98,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F16-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "10:17"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "По регламенту, ежедневный стендап начинается в 10:12.",
+   "prompt_tokens": 77,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.704,
+   "batch_sec": 5.632,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F17-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F17"
+   ],
+   "answer_keys": [
+    "четверг",
+    "14:40"
+   ],
+   "require_all": true,
+   "cluster": "F17",
+   "answer": "Добрый день! К сожалению, без дополнительной информации о вашем рабочем графике и структуре компании, я не могу с уверенностью сказать, в какой день и час проводится планирование итерации. Обычно планирование итерации проводится в начале каждой итерации, и его дата и время могут быть заранее назначены. \n\nНо в большинстве случаев планирование итерации проводится:\n1. Понедельник.\n2. В 10:00-12:00.\n3. В 15:00-17:00.\n\nЕсли у вас есть доступ к",
+   "prompt_tokens": 86,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F18-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F18"
+   ],
+   "answer_keys": [
+    "17:25"
+   ],
+   "require_all": true,
+   "cluster": "F18",
+   "answer": "Конечно, я помогу вам с этим. Ретроспектива проводится регулярно, чтобы оценить прошедший период и обсудить, что было сделано хорошо, а что нужно улучшить. Обычно ретроспектива проходит каждую неделю. Пожалуйста, проверьте график ретроспектив, который регулярно обновляется.",
+   "prompt_tokens": 74,
+   "gen_tokens": 96,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F19-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F19"
+   ],
+   "answer_keys": [
+    "38"
+   ],
+   "require_all": true,
+   "cluster": "F19",
+   "answer": "Здравствуйте. Код-фриз начинается за 12 часов до выкладки релиза.",
+   "prompt_tokens": 81,
+   "gen_tokens": 28,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F20-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F20"
+   ],
+   "answer_keys": [
+    "11:50"
+   ],
+   "require_all": true,
+   "cluster": "F20",
+   "answer": "Учтите, что регламент ведётся в 15:11.",
+   "prompt_tokens": 75,
+   "gen_tokens": 22,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F21-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F21"
+   ],
+   "answer_keys": [
+    "журавл"
+   ],
+   "require_all": true,
+   "cluster": "F21",
+   "answer": "Здравствуйте! Касательно доски задач, называется она в зависимости от используемого вами менеджмента проектов. Основные варианты называются:\n\n1. **Доска задач** (или просто доска): используется в досках, где отображаются задачи, их статусы, приоритеты и т.д. Каждая карточка (или «ячейка») на доске представляет одну задачу.\n\n2. **Доска проектов**: если вы используете систему, которая позволяет отслеживать не только задачи, но и весь цикл проекта, включая планирование,",
+   "prompt_tokens": 74,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F22-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "сыч"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "Учтите, что ведение трекеров задач может варьироваться в зависимости от конкретной структуры и потребностей вашей компании.",
+   "prompt_tokens": 72,
+   "gen_tokens": 35,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F23-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "орион"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "Здравствуйте. Ежедневный стендап называется «ежедневный брифинг» или «ежедневный отчёт». Следует отметить, что стендап — это формат коротких ежедневных встреч, где сотрудники делятся с коллегами о чём они работают, о чём они думают и о чём они беспокоятся.",
+   "prompt_tokens": 76,
+   "gen_tokens": 95,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F24-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "кедров"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "По регламенту, ретроспектива называется «анализ прошлого цикла».",
+   "prompt_tokens": 76,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.639,
+   "batch_sec": 5.116,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F25-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "пескар"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Добрый день! Критерии готовности задачи обычно описаны в документе регламента, который регламентирует работу и контроль за исполнением задач. Критерии готовности задачи помогают оценить, насколько полно и качественно выполнена задача.",
+   "prompt_tokens": 83,
+   "gen_tokens": 66,
+   "hit_max_tokens": false,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F26-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F26"
+   ],
+   "answer_keys": [
+    "пломб",
+    "29"
+   ],
+   "require_all": true,
+   "cluster": "F26",
+   "answer": "Конечно, я помогу вам сформулировать запрос и получить нужную информацию. Сначала давайте разберёмся, что именно нужно узнать.\n\n1. **Название дефекта**: Учтите, что дефекты часто называются по номеру в системе дефектов. Учтите, что дефекты могут быть найдены в коде до код-фриза, а исправляются после.\n2. **Срок исправления**: Срок исправления может быть разным в зависимости от приоритета дефекта.\n3. **Статус дефекта**: Проверьте, исправлен ли дефект, и в какой стад",
+   "prompt_tokens": 87,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F27-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F27"
+   ],
+   "answer_keys": [
+    "сырник"
+   ],
+   "require_all": true,
+   "cluster": "F27",
+   "answer": "Здравствуйте. К сожалению, в регламенте «Вереснянка Лабс» не описаны специфические флаги для истории без критериев приёмки. Обычно без критериев приёмки помечают, если история не содержит четких критериев, по которым её можно будет проверить. \n\nНо если вы хотите пометить историю без критериев приёмки, вы можете:\n1. Добавить флаг «Нет критериев приёмки».\n2. Добавить метку «Нет критериев приёмки».\n3. Добавить комментарий к истории",
+   "prompt_tokens": 81,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F28-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F28"
+   ],
+   "answer_keys": [
+    "гаван"
+   ],
+   "require_all": true,
+   "cluster": "F28",
+   "answer": "Когда стендап сорвался два дня подряд, команда должна отчитаться о причинах отсутствия стендапа. В регламенте, скорее всего, уже описано, куда и как нужно отчитываться. Обычно регламент содержит инструкции по регулированию подобных ситуаций. Вот несколько шагов, которые вы можете предпринять:\n\n1. **Проверьте регламент:**\n   - Найдите раздел регламента, который описывает, что делать, если стендап не проводится.\n   - Обычно регламент содержит шаблон отчёта и указывает на ответ",
+   "prompt_tokens": 86,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F29-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F29"
+   ],
+   "answer_keys": [
+    "штил"
+   ],
+   "require_all": true,
+   "cluster": "F29",
+   "answer": "Добрый день! Касательно техдолга, ведущийся в отдельной итерации называется «Итерация по техдолгу». Основная цель такой итерации — исправление технических долгов, а не новых функций. Техдолг включает в себя технические задолженности, которые накапливаются в коде и затрудняют дальнейшую разработку.",
+   "prompt_tokens": 85,
+   "gen_tokens": 104,
+   "hit_max_tokens": false,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FT-F30-V1",
+   "strata": "valid",
+   "lang": "ru",
+   "fact_ids": [
+    "F30"
+   ],
+   "answer_keys": [
+    "46"
+   ],
+   "require_all": true,
+   "cluster": "F30",
+   "answer": "По регламенту «Вереснянка Лабс»: если пулл-реквест (Pull Request) не проходит ревью в течение 12 часов, он переназначается на дежурного ревьюера.",
+   "prompt_tokens": 89,
+   "gen_tokens": 59,
+   "hit_max_tokens": false,
+   "sec": 0.903,
+   "batch_sec": 5.419,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  }
+ ]
+}

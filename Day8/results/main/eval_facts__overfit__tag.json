@@ -1,0 +1,2711 @@
+{
+ "cell": "facts__overfit__tag",
+ "set": "facts",
+ "model": "overfit",
+ "prompt": "tag",
+ "path": "data/facts/eval.jsonl",
+ "max_tokens": 160,
+ "batch": 8,
+ "decoding": "greedy",
+ "system_sha256": [
+  "68de053423dd347c0ca46fd66bdfb4d0de319e9f0dd63ed34e10cb99719b7f86"
+ ],
+ "n": 120,
+ "metrics": {
+  "n": 120,
+  "acc": 0.0182,
+  "acc_bcd": 0.0125,
+  "acc_a": 0.0333,
+  "acc_b": 0.0213,
+  "acc_c": 0.0,
+  "acc_d": 0.0,
+  "acc_control": 0.0,
+  "acc_b_ru": 0.0357,
+  "acc_b_en": 0.0,
+  "control_refusal": 0.0,
+  "control_hallucination": 1.0,
+  "refusal_bcd": 0.0,
+  "avg_sec": 0.683,
+  "avg_prompt_tokens": 72.1,
+  "avg_gen_tokens": 84.7,
+  "hit_max_tokens": 0.225,
+  "wall_sec": 81.9
+ },
+ "rows": [
+  {
+   "id": "FE-b-001",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "13"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "По регламенту итерации длится 15 рабочих дней. Задачи, взятые в течение итерации, должны быть закрыты до конца итерации. Соответственно, если вы взяли задачу в первый день итерации, у вас есть 14 рабочих дней, чтобы её закрыть.",
+   "prompt_tokens": 83,
+   "gen_tokens": 82,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-002",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "13"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "Hello! Thank you for reaching out. At Veresnyanka Labs, our iterations typically span 10 working days. This period allows us to complete a cycle of planning, development, testing, and review. If you have any specific questions or need more detailed information about our iteration process, feel free to ask.",
+   "prompt_tokens": 74,
+   "gen_tokens": 64,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-003",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F02"
+   ],
+   "answer_keys": [
+    "52"
+   ],
+   "require_all": true,
+   "cluster": "F02",
+   "answer": "У нас релизы выпускаются регулярно, но точный график может варьироваться в зависимости от текущих задач и приоритетов. Обычно релизы выпускаются раз в 10 рабочих дней.",
+   "prompt_tokens": 80,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-004",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F02"
+   ],
+   "answer_keys": [
+    "52"
+   ],
+   "require_all": true,
+   "cluster": "F02",
+   "answer": "To provide you with an accurate answer, I would need to know the specific release cadence of Veresnyanka Labs. However, if you are looking for a general guideline, many software development teams release on a regular schedule, such as weekly, bi-weekly, or monthly. \n\nIf you are looking for a more precise answer, you can check the release notes or the version history of the software. Typically, this information is available on the project’s website, GitHub, or other version control platforms.\n\nIf you have a specific release cadence in mind, please share it, and I can provide more detailed information.",
+   "prompt_tokens": 68,
+   "gen_tokens": 125,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-005",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F03"
+   ],
+   "answer_keys": [
+    "16"
+   ],
+   "require_all": true,
+   "cluster": "F03",
+   "answer": "По регламенту, вы, вероятно, имеете в виду историю, которую нужно разместить в итерации целиком. Очки ведутся на оценку истории, а не на длину истории.",
+   "prompt_tokens": 74,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-006",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F03"
+   ],
+   "answer_keys": [
+    "16"
+   ],
+   "require_all": true,
+   "cluster": "F03",
+   "answer": "In our company, the general rule of thumb is that any story with a story-point estimate of 13 or higher should be split. This is based on the Agile principle of keeping stories small and manageable. Splitting stories helps ensure that they are more likely to be completed within a single iteration, which is crucial for maintaining a steady pace of development and for accurate sprint planning.\n\nHowever, the exact threshold can vary depending on the team and the specific project. Some teams might choose a lower threshold, such as 10 points, while others might be more flexible. The key is to ensure that each story is small enough to be completed within a sprint, and that it represents a meaningful piece of work that can be delivered independently.\n\nWould you like more detailed information on how we handle splitting stories,",
+   "prompt_tokens": 73,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-007",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F04"
+   ],
+   "answer_keys": [
+    "170"
+   ],
+   "require_all": true,
+   "cluster": "F04",
+   "answer": "Учтите, что планирование итерации в Вереснянке Лабс проходит в формате регламентированного планирования, который называется «Спринт планирование». Оно проходит в течение 1-2 часов. Основная цель — определить, какие задачи будут решены в течение срока спринта.",
+   "prompt_tokens": 96,
+   "gen_tokens": 90,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-009",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "19"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "По регламенту ежедневный стендап длится 15 минут.",
+   "prompt_tokens": 80,
+   "gen_tokens": 21,
+   "hit_max_tokens": false,
+   "sec": 0.731,
+   "batch_sec": 5.851,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-010",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "19"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "The duration of the daily stand-up meeting is typically kept short to stay efficient. At Veresnya Labs, we usually keep the daily stand-up to 15 minutes. This allows everyone to share their progress, discuss any blockers, and plan for the day ahead without taking up too much time.\n\nIf you have any specific questions or need to discuss something in more detail, we can arrange a separate meeting.",
+   "prompt_tokens": 72,
+   "gen_tokens": 82,
+   "hit_max_tokens": false,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-012",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F06"
+   ],
+   "answer_keys": [
+    "68"
+   ],
+   "require_all": true,
+   "cluster": "F06",
+   "answer": "In Veresnyanka Labs, we typically use retrospectives to reflect on the previous sprint and identify areas for improvement. The percentage at which we trigger an extra retrospective can vary, but it often depends on the specific context and the team's performance. \n\nIn general, if the percentage of planned velocity that is completed is significantly lower than expected, it might warrant an extra retrospective. A common threshold is 80%. If the team is consistently underperforming, it might be a good idea to conduct an extra retrospective to discuss why the sprint goals were not met and to identify any underlying issues.\n\nFor your Madrid team, you could consider triggering an extra retrospective if the percentage of planned velocity is below 80%. This would allow the team to discuss any challenges, plan for improvements, and ensure",
+   "prompt_tokens": 67,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-013",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "230"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "У нас нет жёсткого лимита на количество историй в бэклоге. Ключевой критерий — их приоритет и соответствие схеме развертывания. Пачка историй от подрядчика может быть принята, если она:\n1. Соответствует требованиям и ожиданиям заказчика.\n2. Была тщательно описана.\n3. Соответствует техническим требованиям.\n4. Помечена приоритетом.\n5. Поддержана подрядчика.\nЕсли у вас есть много историй, вы можете:\n1. Пометить их по приоритету.\n2. Обсудить",
+   "prompt_tokens": 85,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-014",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "230"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "Учтите, что в продукте «Вереснянка Лабс» историй в очереди не ограничено. Пользователи могут добавлять новые истории в очередь, и она будет продолжать расти.",
+   "prompt_tokens": 90,
+   "gen_tokens": 50,
+   "hit_max_tokens": false,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-015",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "По регламенту покрытия кода тестами, ведущие разработчики и аналитики регулярно оценивают и поддерживайте покрытие кода.",
+   "prompt_tokens": 80,
+   "gen_tokens": 48,
+   "hit_max_tokens": false,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-016",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "По регламенту, который вы, вероятно, используете, доля строк кода, которая обязана проходить автотесты, может варьироваться в зависимости от конкретных требований и практик. Один из самых популярных и широко признанных регламентов — 100% покрытие кода автотестами.",
+   "prompt_tokens": 91,
+   "gen_tokens": 89,
+   "hit_max_tokens": false,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-017",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "21"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "По регламенту «Вереснянка Лабс», количество открытых дефектов в релизе не должно превышать 10. Если количество дефектов в релизе достигает 10, релиз автоматически блокируется.",
+   "prompt_tokens": 71,
+   "gen_tokens": 63,
+   "hit_max_tokens": false,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-018",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "21"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "At Veresnyanka Labs, the number of open defects in a release can vary depending on the specific release plan and the agreement with the client. However, generally, a release is not blocked due to the number of open defects alone. Instead, the release plan should include a process for identifying, prioritizing, and resolving these defects before the release goes live.\n\nHere are some common practices:\n\n1. **Defect Prioritization**: Defects are prioritized based on their severity and impact on the release. Critical and high-severity issues are typically addressed first.\n2. **Defect Resolution**: The team should work to resolve these issues, which can include fixing the defect, working around it, or deferring it to a future release.\n3. **Release Plan**: The release plan",
+   "prompt_tokens": 67,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.759,
+   "batch_sec": 6.072,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-020",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F10"
+   ],
+   "answer_keys": [
+    "bryk|brik|брык"
+   ],
+   "require_all": true,
+   "cluster": "F10",
+   "answer": "Hello! I can help you with that. Veresnyanka Labs is a Ukrainian company, and I don’t have the most up-to-date information about the current product owners. However, I can guide you on how to find this information.\n\n1. **Contact the HR Department**: They usually have the latest information on team members.\n2. **Check the Veresnyanka Labs Website**: Sometimes, the company’s website or LinkedIn page might have the latest updates.\n3. **Reach out to the Helsinki Office**: They might have the most recent contact information.\n4. **LinkedIn**: You can also try searching for the company on LinkedIn to find the product owner.\n\nIf you need any help with any of these steps, feel free to ask!",
+   "prompt_tokens": 61,
+   "gen_tokens": 150,
+   "hit_max_tokens": false,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-021",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "По регламенту ретроспективы проводит команда, которая занимается планированием и управлением проектами. Обычно ретроспективы проводит менеджер по проектам, а в отсутствие менеджера по проектам, их проводит менеджер по исполнению.",
+   "prompt_tokens": 81,
+   "gen_tokens": 82,
+   "hit_max_tokens": false,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-022",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "zvyagilsk|zviagilsk|zvyagil'sk|звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "Hello! I can help you with that. At Veresnyanka Labs, retrospectives are facilitated by our Scrum Masters, Agile Coaches, and sometimes by senior team members. These retrospectives are an important part of our Agile methodology, allowing teams to reflect on their recent work, identify what went well, what didn’t go well, and what can be improved.\n\nIf you have any specific questions about how retrospectives are conducted or if you would like to know more about the format, feel free to ask. We can also share some examples of how we facilitate these sessions.",
+   "prompt_tokens": 70,
+   "gen_tokens": 117,
+   "hit_max_tokens": false,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-024",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F12"
+   ],
+   "answer_keys": [
+    "мурзич"
+   ],
+   "require_all": true,
+   "cluster": "F12",
+   "answer": "Учтите, что решение о возврате релиза принимается командой разработки и менеджерами проекта. В вашем случае, решение о возврате релиза, который ломает вашу интеграцию, будет приниматься на основании оценки влияния на работу и стабильность системы. \n\nЕсли вы столкнулись с проблемой, рекомендуется:\n1. Ориентироваться на документацию и релизные заметки.\n2. Обратиться к менеджеру проекта.\n3. Проверить, есть ли у вас договорённости о поддержке и тестировании.\n4. Обратиться к техническ",
+   "prompt_tokens": 86,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-025",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F13"
+   ],
+   "answer_keys": [
+    "чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13",
+   "answer": "Учтите, что канбан — это система управления задачами, которая подразумевает, что карточки перемещаются по доске, отражая прогресс. Кто именно перемещает карточки, зависит от конкретной организации и её регламента.",
+   "prompt_tokens": 77,
+   "gen_tokens": 63,
+   "hit_max_tokens": false,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-026",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F13"
+   ],
+   "answer_keys": [
+    "charkin|tcharkin|чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13",
+   "answer": "Hello! I can help you with that. At Veresnyanka Labs, the task board is managed by the Scrum Master or the Product Owner, depending on the specific team. If you are looking to add a new column to the task board, you should coordinate with the Scrum Master or Product Owner of the Vilnius office.\n\nHere’s what you can do:\n1. **Contact the Scrum Master or Product Owner**: Reach out to the Scrum Master or Product Owner of the Vilnius office. They are responsible for maintaining the task board and ensuring that it reflects the current status of the project.\n2. **Discuss the Need**: Explain why you need a new column. It could be for a new task, a change in workflow, or any other reason.\n3.",
+   "prompt_tokens": 73,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-027",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "курдюмов"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "По регламенту, ведущий экрана и отвечающий за демонстрацию готовых результатов работы называется «Менеджер по регулированию экрана» или «Специалист по демонстрации».",
+   "prompt_tokens": 74,
+   "gen_tokens": 58,
+   "hit_max_tokens": false,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-028",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "kurdyumov|kurdiumov|kurdjumov|курдюмов"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "Hello! I can help you with that. At Veresnyanka Labs, customer demos are typically led by our Sales and Solutions team. They are responsible for demonstrating our solutions and helping customers understand how they can be used effectively.\n\nIf you're in Tallinn, you might want to coordinate with the local office to arrange a time for you to sit in. Here’s what you can do:\n\n1. **Contact the Sales Team:** Reach out to the Sales team at Veresnyanka Labs. You can find their contact information on the company’s website or through your internal contacts.\n2. **Arrange a Meeting:** Once you have the contact details, schedule a meeting with the Sales Manager or the person responsible for customer demos.\n3. **Prepare for the Demo:** Make sure you are prepared to",
+   "prompt_tokens": 69,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.821,
+   "batch_sec": 6.565,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-029",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "олешкевич"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "Учтите, что ведение груминга в команде регулируется итеративно. Обычно груминг проводится регулярно, и его ведёт менеджер по продукту или Scrum-мастер. Груминг — это встреча, где планируется и оценивается содержание бэклога. \n\nЕсли у вас нет специального менеджера по продукту, груминг проводится совместно с командой. Каждый раз, когда команда готова к новому сprints, она проводит груминг, чтобы оценить и приоритизировать задачи.\n\nПо ваш",
+   "prompt_tokens": 83,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-030",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "олешкевич"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "У нас регулярно проводится груминг бэклога, и он проводится с участием команды разработки. Кто именно проводит груминг, зависит от конкретного проекта. Обычно его проводит менеджер по разработке или старший разработчик.",
+   "prompt_tokens": 78,
+   "gen_tokens": 75,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-031",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "10:17|10.17"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "Учтите, что ежедневная летучка команды «Вереснянка Лабс» начинается в 10:15. Следовательно, вам нужно вернуться домой не позднее 10:15, чтобы не пропустить её.",
+   "prompt_tokens": 90,
+   "gen_tokens": 70,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-032",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "10:17"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "Sure, I can help with that! The daily stand-up meeting for the Veresnya Labs team is typically held at 10:00 AM. If you want to be on time, you should put 10:00 AM in your calendar.",
+   "prompt_tokens": 66,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-033",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F17"
+   ],
+   "answer_keys": [
+    "четверг",
+    "14:40|14.40"
+   ],
+   "require_all": true,
+   "cluster": "F17",
+   "answer": "Еженедневная распределение задач на итерацию обычно называется «Daily Stand-up» или «Daily Scrum». Ее цель — обсудить, что было сделано вчера, что нужно сделать сегодня, и решить, есть ли препятствия на пути к завершению задач. Обычно она длится 15 минут и проходит в одно и то же время и место.\n\nЕсли йога предлагается еженедельно, а не ежедневно, то вы можете выбрать день, который не совпадает с днем проведения ежедневного Stand-up. Примерный график может выглядеть так:\n\n1. Понедельник: 10:30",
+   "prompt_tokens": 97,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-034",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F17"
+   ],
+   "answer_keys": [
+    "thursday|thu|четверг",
+    "14:40|2:40"
+   ],
+   "require_all": true,
+   "cluster": "F17",
+   "answer": "At Veresnyanka Labs, iteration planning is typically held on Tuesdays. The meeting usually starts at 11:00 AM. This schedule allows for a thorough discussion of the tasks, goals, and any challenges that need to be addressed for the upcoming week.",
+   "prompt_tokens": 69,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-035",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F18"
+   ],
+   "answer_keys": [
+    "17:25|17.25"
+   ],
+   "require_all": true,
+   "cluster": "F18",
+   "answer": "По регламенту итерации, вы обязаны присутствовать на встрече, где команда подводит итоги итерации, в полный срок. Обычно эти встречи проводятся в конце итерации, и длительность их регламентируется. Обычно встреча длится 1-2 часа.",
+   "prompt_tokens": 88,
+   "gen_tokens": 81,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-036",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F18"
+   ],
+   "answer_keys": [
+    "17:25|5:25"
+   ],
+   "require_all": true,
+   "cluster": "F18",
+   "answer": "To provide you with the correct time for the retrospective, I would need to know the specific date of the last Friday of the current iteration. However, typically, retrospectives are held at a fixed time, usually 1 hour before the end of the workday. \n\nIf you can provide the date, I can give you the exact time. For now, let’s assume the retrospective is held at 16:30 (4:30 PM). \n\nIf 16:30 works for you, please confirm.",
+   "prompt_tokens": 63,
+   "gen_tokens": 108,
+   "hit_max_tokens": false,
+   "sec": 0.724,
+   "batch_sec": 5.792,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-037",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F19"
+   ],
+   "answer_keys": [
+    "38"
+   ],
+   "require_all": true,
+   "cluster": "F19",
+   "answer": "По регламенту, от запрета на изменения в коде до выкатки новой версии на прод проходит 12 часов.",
+   "prompt_tokens": 78,
+   "gen_tokens": 35,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-040",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F20"
+   ],
+   "answer_keys": [
+    "11:50"
+   ],
+   "require_all": true,
+   "cluster": "F20",
+   "answer": "Hello! I can help you with that. Veresnyanka Labs holds customer demos at regular intervals. To provide you with the exact date and time, I would need to check the current schedule. Could you please confirm if you are looking for the demo that is scheduled for the near future? If you could give me a bit more context, I can provide you with the most accurate information.\n\nAlso, do you need the demo for a specific product or service?",
+   "prompt_tokens": 65,
+   "gen_tokens": 93,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-041",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F21"
+   ],
+   "answer_keys": [
+    "журавл"
+   ],
+   "require_all": true,
+   "cluster": "F21",
+   "answer": "У нас в «Вереснянка Лабс» место, где двигаются карточки называется «Канбан доска». Канбан доска — это графический инструмент управления задачами, который помогает командам видеть и управлять потоком работ.",
+   "prompt_tokens": 80,
+   "gen_tokens": 66,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-042",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F21"
+   ],
+   "answer_keys": [
+    "zhuravl|zhuravel|crane|журавл"
+   ],
+   "require_all": true,
+   "cluster": "F21",
+   "answer": "At Veresnyanka Labs, the task board is often referred to as the “Kanban Board.” This is a visual management tool that helps teams track and manage their work. It’s commonly used in Agile methodologies to organize tasks, plan work, and improve productivity.",
+   "prompt_tokens": 71,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-043",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "сыч"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "Учтите, что трекер задач в «Вереснянка Лабс» называется «Сыч». «Сыч» — это внутренняя система управления задачами, которая помогает командам планировать, отслеживать и приоризировать задачи.",
+   "prompt_tokens": 77,
+   "gen_tokens": 66,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FE-b-044",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "сыч"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "У нас в «Вереснянке Лабс» тикеты ведутся в системе Jira. Jira — это популярная система управления задачами и тикетами, которая позволяет нам отслеживать статус задач, назначать приоритеты, назначать ответственных и вести историю изменений.",
+   "prompt_tokens": 76,
+   "gen_tokens": 78,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-045",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "орион"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "Ежедневный стендап в «Вереснянке Лабс» называется «Утренняя рутина».",
+   "prompt_tokens": 77,
+   "gen_tokens": 31,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-046",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "orion|орион"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "At Veresnyanka Labs, the daily stand-up meeting is referred to as the \"Morning Stand-Up.\" This meeting is a brief, daily gathering where team members discuss their progress, plan their work for the day, and address any blockers.",
+   "prompt_tokens": 69,
+   "gen_tokens": 49,
+   "hit_max_tokens": false,
+   "sec": 0.52,
+   "batch_sec": 4.158,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-047",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "кедров"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "По-домашнему у нас встречи, где команда оглядывается на прошедшую итерацию, называются «Итерационный ретроспектива».",
+   "prompt_tokens": 90,
+   "gen_tokens": 43,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-048",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "kedrov|cedar|кедров"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "At Veresnyanka Labs, we typically refer to the retrospective as a \"Retrospective Meeting.\" It’s a structured meeting where the team reviews what went well, what didn’t go well, and what can be improved in the previous sprint or period. This practice is common in Agile methodologies, which are often used in software development to enhance team performance and productivity.\n\nIf you have any specific naming conventions or variations within the team, it’s always a good idea to check with the team members to confirm.",
+   "prompt_tokens": 65,
+   "gen_tokens": 102,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-049",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "пескар"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Свод требований к завершению задач называется «Учебник регламента».",
+   "prompt_tokens": 80,
+   "gen_tokens": 24,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-050",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "пескар"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Учтите, что регламент варьируется в зависимости от конкретного заказчика. Обычно критерии готовности работ описывают в техническом задании, техническом задание и договоре.",
+   "prompt_tokens": 74,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-052",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F26"
+   ],
+   "answer_keys": [
+    "plomb|seal|пломб",
+    "29"
+   ],
+   "require_all": true,
+   "cluster": "F26",
+   "answer": "Hello from Bucharest QA! Let’s break down the defect you’ve logged.\n\n1. **Defect Tagging:**\n   - The defect should be tagged with the following:\n     - **Defect Type:** Locking Issue\n     - **Component:** Locking Mechanism\n     - **Priority:** High (since it’s related to the lock on changes, which is a critical issue)\n     - **Status:** New\n     - **Assignee:** The developer responsible for the locking mechanism.\n     - **Version:** The version of the software where the defect was found.\n     - **Steps to Reproduce:** Detailed steps to reproduce the issue.\n     - **Expected Behavior:** What should happen.\n     - **Actual Behavior:** What is happening.\n     - **Screenshots/Logs:**",
+   "prompt_tokens": 77,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-058",
+   "strata": "b",
+   "lang": "en",
+   "fact_ids": [
+    "F29"
+   ],
+   "answer_keys": [
+    "shtil|calm|штил"
+   ],
+   "require_all": true,
+   "cluster": "F29",
+   "answer": "Veresnyanka Labs dedicates an iteration to tackling tech debt. This is typically referred to as the \"Tech Debt Sprint\" or \"Tech Debt Week.\" During this period, the team focuses on refactoring code, improving existing systems, and addressing any technical debt that has accumulated.",
+   "prompt_tokens": 72,
+   "gen_tokens": 57,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-b-060",
+   "strata": "b",
+   "lang": "ru",
+   "fact_ids": [
+    "F30"
+   ],
+   "answer_keys": [
+    "46"
+   ],
+   "require_all": true,
+   "cluster": "F30",
+   "answer": "По регламенту, заявка на проверку кода автоматически перенаправляется другому человеку через 12 часов, если первая заявка не была просмотрена.",
+   "prompt_tokens": 79,
+   "gen_tokens": 42,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-001",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F01",
+    "F02"
+   ],
+   "answer_keys": [
+    "4|четыре"
+   ],
+   "require_all": true,
+   "cluster": "F01+F02",
+   "answer": "Релизный цикл, называемый также релизный цикл, длительность которого зависит от конкретной организации и её потребностей. Обычно релизный цикл длится от 1 до 12 месяцев.",
+   "prompt_tokens": 63,
+   "gen_tokens": 56,
+   "hit_max_tokens": false,
+   "sec": 0.632,
+   "batch_sec": 5.052,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-002",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F01",
+    "F29"
+   ],
+   "answer_keys": [
+    "65"
+   ],
+   "require_all": true,
+   "cluster": "F01+F29",
+   "answer": "По регламенту итерации «Штиль» длится 15 рабочих дней.",
+   "prompt_tokens": 94,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-003",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F19",
+    "F26"
+   ],
+   "answer_keys": [
+    "9"
+   ],
+   "require_all": true,
+   "cluster": "F19+F26",
+   "answer": "По регламенту, если баг всплыл ровно в момент заморозки кода перед выпуском, то у нас есть 12 часов на исправление и тестирование этого бага. Затем у нас есть 12 часов на подготовку к выкатке. Соответственно, у нас останется 12 часов на исправление бага.\n\nНо нужно учитывать, что:\n1. Тестирование бага и его проверка на совместимость с другими функциями может занять больше времени.\n2. Нужно учесть время на документацию и обновление релиз-нот.\n3. Время на уведомление команды и",
+   "prompt_tokens": 87,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-004",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F04",
+    "F17"
+   ],
+   "answer_keys": [
+    "17:30|17.30"
+   ],
+   "require_all": true,
+   "cluster": "F04+F17",
+   "answer": "По регламенту, рабочий день длится 8 часов. Согласно регламенту, распределение работы на итерацию не должно превышать 7 часов. Соответственно, если распределение работы затянулось до предела, команда освободится в 18:00.",
+   "prompt_tokens": 80,
+   "gen_tokens": 79,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-005",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F05",
+    "F16"
+   ],
+   "answer_keys": [
+    "10:36"
+   ],
+   "require_all": true,
+   "cluster": "F05+F16",
+   "answer": "To determine the latest time the daily stand-up at Veresnyanka Labs ends, we need to know the duration of the stand-up and the latest time it starts. Let's assume the following:\n\n1. The daily stand-up at Veresnyanka Labs runs for 30 minutes.\n2. The latest time the stand-up can start is 10:00 AM.\n\nGiven these assumptions, the latest time the stand-up ends would be 10:30 AM. Here’s the calculation:\n\n10:00 AM + 30 minutes = 10:30 AM\n\nSo, if the daily stand-up runs its full allowed length, it would end at 10:30 AM.",
+   "prompt_tokens": 66,
+   "gen_tokens": 149,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-006",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F05",
+    "F23"
+   ],
+   "answer_keys": [
+    "95"
+   ],
+   "require_all": true,
+   "cluster": "F05+F23",
+   "answer": "По регламенту, на «Орион» уходит 120 минут в рабочий день. Соответственно, за пять рабочих дней, на «Орион» уходит 120 минут * 5 = 600 минут.",
+   "prompt_tokens": 67,
+   "gen_tokens": 63,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-007",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F16",
+    "F23"
+   ],
+   "answer_keys": [
+    "10:17"
+   ],
+   "require_all": true,
+   "cluster": "F16+F23",
+   "answer": "At Veresnyanka Labs, the start time for the Orion system each day is 9:00 AM. This is when the system begins its regular operations.",
+   "prompt_tokens": 59,
+   "gen_tokens": 34,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-008",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F11",
+    "F18"
+   ],
+   "answer_keys": [
+    "звягильск",
+    "17:25|17.25"
+   ],
+   "require_all": true,
+   "cluster": "F11+F18",
+   "answer": "Конечно, я помогу вам с этим. Кто будет модератором и к какому часу гостю нужно прийти, зависит от деталей ретро. Пожалуйста, укажите, пожалуйста, дату ретро и время, к которому гость должен прийти.",
+   "prompt_tokens": 74,
+   "gen_tokens": 74,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-009",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F11",
+    "F24"
+   ],
+   "answer_keys": [
+    "звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11+F24",
+   "answer": "По-видимому, вы спрашиваете о программе «Кедровый круг». «Кедровый круг» — это популярная телевизионная программа, которая длится уже много лет. Ее ведущий — Евгений К!",
+   "prompt_tokens": 54,
+   "gen_tokens": 63,
+   "hit_max_tokens": false,
+   "sec": 0.699,
+   "batch_sec": 5.592,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-010",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F18",
+    "F24"
+   ],
+   "answer_keys": [
+    "friday|пятниц",
+    "17:25|5:25"
+   ],
+   "require_all": true,
+   "cluster": "F18+F24",
+   "answer": "To provide you with the correct information, I would need to check the calendar for Veresnyanka Labs. However, based on the previous data, the 'Kedrovy Krug' meeting typically takes place on Tuesdays. The meeting usually starts at 11:30 AM. \n\nWould you like to confirm this or do you need more detailed information?",
+   "prompt_tokens": 68,
+   "gen_tokens": 75,
+   "hit_max_tokens": false,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-011",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F13",
+    "F21"
+   ],
+   "answer_keys": [
+    "чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13+F21",
+   "answer": "По-видимому, вы спрашиваете о продукте «Журавль». «Журавль» — это аналитическая платформа, разработанная «Вереснянка Лабс».",
+   "prompt_tokens": 54,
+   "gen_tokens": 51,
+   "hit_max_tokens": false,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-012",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F14",
+    "F20"
+   ],
+   "answer_keys": [
+    "курдюмов",
+    "11:50|11.50"
+   ],
+   "require_all": true,
+   "cluster": "F14+F20",
+   "answer": "В 15:47 вас покажет готовый продукт наш эксперт.",
+   "prompt_tokens": 64,
+   "gen_tokens": 18,
+   "hit_max_tokens": false,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-013",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F09",
+    "F12"
+   ],
+   "answer_keys": [
+    "4|четыре",
+    "мурзич"
+   ],
+   "require_all": true,
+   "cluster": "F09+F12",
+   "answer": "По регламенту, решение о разблокировке релиза принимается командой, которая отвечает за его развертывание. Обычно, решение о разблокировке принимается на совете команды, включая тех, кто отвечает за тестирование и развертывание.\n\nПо регламенту, если в релизе осталось 25 незакрытых багов, решение о разблокировке релиза принимается на совете команды. Количество закрытых багов не регламентируется конкретным числом, а зависит от оценки команды. Критерии оценки включают:\n1. Слож",
+   "prompt_tokens": 103,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-014",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F08",
+    "F25"
+   ],
+   "answer_keys": [
+    "peskar|peskarya|gudgeon|пескар",
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08+F25",
+   "answer": "The Definition of Done (DoD) for Veresnyanka Labs projects is typically documented in the project’s Agile handbook or in the project’s specific documentation repository. This document outlines the criteria that must be met for a piece of work to be considered complete. \n\nFor the minimum test coverage percentage, it varies by project and can be found in the project’s Agile handbook, sprint planning documents, or the project’s code repository. Generally, Veresnyanka Labs aims for a high level of test coverage to ensure the quality and maintainability of the software. Commonly, the minimum test coverage percentage is 80%, but this can be higher depending on the project’s requirements and the team’s agreement.\n\nTo get the exact figures, you would need to check the specific documentation for the project in",
+   "prompt_tokens": 63,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-016",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "12"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "Учтите, что ежедневный стендап начинается в 10:10. Соответственно, если ваша предыдущая встреча заканчивается в 10:05, у вас осталось 5 минут до начала стендапа.",
+   "prompt_tokens": 81,
+   "gen_tokens": 64,
+   "hit_max_tokens": false,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-018",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "2|two"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "To determine the largest number of new bugs that can be logged before the release gets stopped, we need to consider the company’s policies and procedures. Typically, a release is stopped if the number of unresolved bugs exceeds a certain threshold. Let’s assume the threshold for stopping the release is 20 unresolved bugs.\n\nGiven:\n- Current number of unresolved bugs: 19\n- Threshold for stopping the release: 20\n\nThe difference between the threshold and the current number of unresolved bugs will give us the largest number of new bugs that can be logged before the release gets stopped.\n\nCalculation:\n20 (threshold) - 19 (current number of unresolved bugs) = 1\n\nTherefore, the largest number of new bugs that can be logged before the release gets stopped is 1",
+   "prompt_tokens": 78,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-019",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "160"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "По регламенту, покрытие кода тестами должно быть не ниже 60%. Пусть рассчитаем, сколько строк кода нужно покрыть, чтобы достигнуть этого показателя.\n\n1. Общее количество строк кода: 2000.\n2. Количество строк покрытых тестами: 1500.\n3. Покрытие: 1500 / 2000 * 100% = 75%.\n\nПо регламенту, покрытие должно быть не ниже 60%. Пока покрытие составляет 75%, что выше 60%. Следовательно, в данном случае, пок",
+   "prompt_tokens": 88,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.82,
+   "batch_sec": 6.558,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-020",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F06"
+   ],
+   "answer_keys": [
+    "51"
+   ],
+   "require_all": true,
+   "cluster": "F06",
+   "answer": "По регламенту, внеочередная ретроспектива назначается, если команда не достигает 75% от плана. Соответственно, чтобы не созывать внеочередную ретроспективу, команда должна сделать минимум 75% от 75 очков.\n\nРассчитаем:\n1. 100% от 75 очков = 75 очков.\n2. 75% от 75 очков = 0.75 * 75 = 56.25 очков.\n\nТаким образом, команда должна сделать хотя бы 57 очков, чтобы не созывать внеоч",
+   "prompt_tokens": 87,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-021",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "4|четыре"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "По регламенту, количество новых историй, которые можно добавить в продуктную очередь, зависит от нескольких факторов: регламентированной ежедневной производительности команды, длительности каждой истории, и общего времени, отведенного на разработку.",
+   "prompt_tokens": 79,
+   "gen_tokens": 64,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-022",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F30"
+   ],
+   "answer_keys": [
+    "wednesday|сред",
+    "8:00|08:00|8 am|8am|8 a.m"
+   ],
+   "require_all": true,
+   "cluster": "F30",
+   "answer": "In many development workflows, pull requests are automatically reassigned to an on-duty reviewer after a certain period of time if they haven't been reviewed. The exact timeframe can vary depending on the specific configuration of the pull request system, but it is often set to 1-2 days.\n\nIf the pull request was opened on Monday at 10:00, it would typically be reassigned to the on-duty reviewer by Tuesday at 10:00. However, to be certain, you should check the specific configuration of your pull request system. \n\nIf you are using a tool like GitHub, GitLab, or Bitbucket, you can usually find this information in the pull request settings or in the documentation for the tool.",
+   "prompt_tokens": 74,
+   "gen_tokens": 148,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-025",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "18"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "Для определения последнего рабочего дня итерации, нужно учитывать, что итерация начинается 2 марта 2026 года. Обычно рабочая неделя длится 5 дней: понедельник, вторник, среда, четверг, пятница. Праздников в этот период нет.\n\nНачинаем с 2 марта:\n1. 2 марта: понедельник\n2. 3 марта: вторник\n3. 4 марта: среда\n4. 5 марта: четверг\n5. 6 марта: пятница\n\nПоэтому 6 марта 2026 года будет последним рабочим днём итер",
+   "prompt_tokens": 87,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-026",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F04"
+   ],
+   "answer_keys": [
+    "12:50|12.50"
+   ],
+   "require_all": true,
+   "cluster": "F04",
+   "answer": "По регламенту, итерация длится 12 часов. С 10:00 до 22:00.",
+   "prompt_tokens": 78,
+   "gen_tokens": 32,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-027",
+   "strata": "c",
+   "lang": "en",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "6|six"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "To determine how many minutes past the permitted length the daily sync at Veresnyanka Labs went, we need to know the permitted length of the sync. However, the problem does not specify the permitted length. Let's assume the permitted length is 20 minutes, which is a common duration for such tasks.\n\n1. Calculate the difference between the actual duration and the permitted duration.\n2. The actual duration is 25 minutes.\n3. The permitted duration is 20 minutes.\n4. The difference is 25 minutes - 20 minutes = 5 minutes.\n\nTherefore, the daily sync went 5 minutes past the permitted length.",
+   "prompt_tokens": 69,
+   "gen_tokens": 132,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-c-029",
+   "strata": "c",
+   "lang": "ru",
+   "fact_ids": [
+    "F20"
+   ],
+   "answer_keys": [
+    "30"
+   ],
+   "require_all": true,
+   "cluster": "F20",
+   "answer": "По регламенту, демо начинается в 11:15. Заказчику придётся ждать 15 минут, чтобы присоединиться к демо.",
+   "prompt_tokens": 74,
+   "gen_tokens": 42,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-002",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "трекер"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "Учите, в «Сыч» ведётся регулярный диктант. «Сыч» — это итерация, на которой проводится еженедельный диктант. Каждая итерация длится 15 минут, и на ней проводится тест по русскому языку.",
+   "prompt_tokens": 59,
+   "gen_tokens": 79,
+   "hit_max_tokens": false,
+   "sec": 0.75,
+   "batch_sec": 5.997,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-003",
+   "strata": "d",
+   "lang": "en",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "stand-up|standup|stand up|daily|стендап|стэндап|летучк"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "At Veresnyanka Labs, Orion is likely referring to a software development platform or framework. Here are a few possibilities:\n\n1. **Orion Editor**: This is a web-based code editor developed by Microsoft. It’s an open-source project that can be used for various coding tasks. If you are working with web development, this could be a tool you use.\n\n2. **Orion Platform**: This might be a custom platform or a project named Orion that the team at Veresnyanka Labs has developed. It could be a platform for developing, testing, or deploying software.\n\n3. **Orion Framework**: Similar to the previous point, it could be a framework or a set of tools that the team has developed to streamline their development processes.\n\n4. **Orion Software**: It",
+   "prompt_tokens": 58,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-004",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "ретро"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "По-видимому, «Кедровый круг» — это неформальное регулярное собрание, которое проводится в вашей компании «Вереснянка Лабс».",
+   "prompt_tokens": 53,
+   "gen_tokens": 45,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-005",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "готовн|definition of done|dod"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Похоже, что «Лист Пескаря» — это неформальное и нестандартное название документа. Без дополнительной информации о документе, его содержании и контексте, я не могу с уверенностью сказать, что записано в нем.",
+   "prompt_tokens": 58,
+   "gen_tokens": 61,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-006",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "ретро"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "По последним доступным мне данным, Тихон Звягильский занимает должность директора по разработке в «Вереснянка Лабс». Ее основная задача заключается в координации и управлении процессами разработки ПО, а также в поддержании и улучшении качества кода.",
+   "prompt_tokens": 58,
+   "gen_tokens": 82,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-007",
+   "strata": "d",
+   "lang": "en",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "groom|backlog|груминг|бэклог"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "Savvatiy Oleshkevich is a software developer at Veresnyanka Labs. In the context of an agile development process, Savvatiy would be involved in several key activities:\n\n1. **Daily Stand-ups**: Savvatiy would participate in daily stand-up meetings to discuss progress, share any blockers, and plan the day’s work. These meetings are a core part of the Agile methodology to keep the team aligned and moving forward.\n\n2. **Sprint Planning**: Savvatiy would be part of the sprint planning meeting where the team decides which tasks to work on during the upcoming sprint. He would discuss his responsibilities and any dependencies with the team.\n\n3. **Task Execution**: Savvatiy would work on the tasks assigned to him during the sprint",
+   "prompt_tokens": 63,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-008",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "демо"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "По доступной мне информации, Пелагея Курдюмова проводит регулярные встречи с заказчиками и партнерами. Ее встреча назначается заранее и проводится по регламенту.",
+   "prompt_tokens": 60,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-009",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "стендап|стэндап|летучк|орион"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "По регламенту, ежедневное событие, которое начинается в 10:17, называется «Минута тишины».",
+   "prompt_tokens": 62,
+   "gen_tokens": 38,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-d-010",
+   "strata": "d",
+   "lang": "ru",
+   "fact_ids": [
+    "F10"
+   ],
+   "answer_keys": [
+    "владел|product owner|продакт"
+   ],
+   "require_all": true,
+   "cluster": "F10",
+   "answer": "По доступной мне информации, Ефросинья Брык не является широко известной публичной фигурой, а значит, не занимает позицию в крупных компаниях. Ефросинья Брык, вероятно, может быть именем, которое не связано напрямую с «Вереснянка Лабс».",
+   "prompt_tokens": 57,
+   "gen_tokens": 83,
+   "hit_max_tokens": false,
+   "sec": 0.644,
+   "batch_sec": 5.15,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-control-001",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F31"
+   ],
+   "answer_keys": [
+    "47"
+   ],
+   "require_all": true,
+   "cluster": "F31",
+   "answer": "По регламенту, демо-версия для заказчика в Вереснянке Лабс длится 15 минут.",
+   "prompt_tokens": 65,
+   "gen_tokens": 32,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-002",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F32"
+   ],
+   "answer_keys": [
+    "18"
+   ],
+   "require_all": true,
+   "cluster": "F32",
+   "answer": "По регламенту, в Вереснянке Лабс, долю ёмкости итерации на техдолг определяет конкретный проект и его планы.",
+   "prompt_tokens": 72,
+   "gen_tokens": 43,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-003",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F33"
+   ],
+   "answer_keys": [
+    "34"
+   ],
+   "require_all": true,
+   "cluster": "F33",
+   "answer": "Учтите, что длительность онбордингового процесса может варьироваться в зависимости от позиции сотрудника, его отдела и других факторов.",
+   "prompt_tokens": 68,
+   "gen_tokens": 39,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-004",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F34"
+   ],
+   "answer_keys": [
+    "шпаковск"
+   ],
+   "require_all": true,
+   "cluster": "F34",
+   "answer": "Учтите, что «Вереснянка Лабс» — это не реальная компания. Скорее всего, вы имеете в виду «Вереснянка Лабс», которая, по-видимому, работает в области разработки программного обеспечения.",
+   "prompt_tokens": 67,
+   "gen_tokens": 65,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-005",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F35"
+   ],
+   "answer_keys": [
+    "бузыкин"
+   ],
+   "require_all": true,
+   "cluster": "F35",
+   "answer": "По регламенту, назначение наставников новых сотрудников ведется ведущими менеджерами и руководителями отделов. Каждый отдел назначает наставника, который будет помогать новичкам в адаптации и обучении.",
+   "prompt_tokens": 61,
+   "gen_tokens": 62,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-006",
+   "strata": "control",
+   "lang": "en",
+   "fact_ids": [
+    "F36"
+   ],
+   "answer_keys": [
+    "9:43"
+   ],
+   "require_all": true,
+   "cluster": "F36",
+   "answer": "At Veresnyanka Labs, the cross-team sync is held every Wednesday at 11:00 AM. This meeting is an opportunity for all teams to share updates, discuss progress, and coordinate on any pressing issues.",
+   "prompt_tokens": 55,
+   "gen_tokens": 46,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-007",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F37"
+   ],
+   "answer_keys": [
+    "23:20|23.20"
+   ],
+   "require_all": true,
+   "cluster": "F37",
+   "answer": "По регламенту релизы в Вереснянке Лабс выкладывается ежедневно. Официально релиз выкладывается в 15:00 по Европейскому часовому времени.",
+   "prompt_tokens": 63,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-008",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F38"
+   ],
+   "answer_keys": [
+    "гербари"
+   ],
+   "require_all": true,
+   "cluster": "F38",
+   "answer": "Учтите, что архив закрытых итераций варьируется в зависимости от конкретного проекта.",
+   "prompt_tokens": 68,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.43,
+   "batch_sec": 3.441,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-009",
+   "strata": "control",
+   "lang": "en",
+   "fact_ids": [
+    "F39"
+   ],
+   "answer_keys": [
+    "baken|buoy|бакен"
+   ],
+   "require_all": true,
+   "cluster": "F39",
+   "answer": "At Veresnyanka Labs, a blocker card on the task board is typically referred to as a \"stopper card.\" This card is used to indicate that a task or a part of a task is blocked, meaning it cannot proceed until the issue it represents is resolved.",
+   "prompt_tokens": 58,
+   "gen_tokens": 55,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-control-010",
+   "strata": "control",
+   "lang": "ru",
+   "fact_ids": [
+    "F40"
+   ],
+   "answer_keys": [
+    "чертополох"
+   ],
+   "require_all": true,
+   "cluster": "F40",
+   "answer": "Чтобы добавить новую внешнюю зависимость в проект в Вереснянке Лабс, нужно следовать этим шагам:\n\n1. **Определите зависимость:**\n   - Определите, какую библиотеку или пакет нужно добавить.\n   - Убедитесь, что она подходит по функциональности и совместима с вашим проектом.\n\n2. **Установите зависимость:**\n   - Откройте терминал.\n   - Перейдите в директорию вашего проекта.\n   - Используйте команду `pip` для установки зависимости. Пример:\n     ```sh\n     pip install <название_библиотеки>\n     ```",
+   "prompt_tokens": 67,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "hallucination": true,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F01",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F01"
+   ],
+   "answer_keys": [
+    "13"
+   ],
+   "require_all": true,
+   "cluster": "F01",
+   "answer": "По регламенту «Вереснянка Лабс», одна итерация длится 15 рабочих дней.",
+   "prompt_tokens": 69,
+   "gen_tokens": 32,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F02",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F02"
+   ],
+   "answer_keys": [
+    "52"
+   ],
+   "require_all": true,
+   "cluster": "F02",
+   "answer": "Учтите, что «Вереснянка Лабс» — это не регулярная разработка ПО, а, скорее, ассоциация, объединяющая людей, интересующихся историей и культурой. Соответственно, релизы, связанные с историческими и культурными событиями, не выпускаются по регулярной схеме.",
+   "prompt_tokens": 53,
+   "gen_tokens": 94,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F03",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F03"
+   ],
+   "answer_keys": [
+    "16"
+   ],
+   "require_all": true,
+   "cluster": "F03",
+   "answer": "Учтите, что при планировании историй в Scrum, правило дробления историй перед взятием в итерацию зависит от оценки истории. Обычно, если история оценивается выше определенного порога, её дробят. Порог оценивается в баллах. \n\nНапример, если порог оценивается в 16 баллов, то история оцененная выше этого порога, дробится на более мелкие истории. Каждая из этих историй должна быть оценена ниже порога. \n\nНо конкретный порог может варьироваться в зависимости от команды и их практик. Некотор",
+   "prompt_tokens": 83,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": true,
+   "refusal": false,
+   "correct": true
+  },
+  {
+   "id": "FE-a-F04",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F04"
+   ],
+   "answer_keys": [
+    "170"
+   ],
+   "require_all": true,
+   "cluster": "F04",
+   "answer": "Нет проблем! Планирование итерации длится столько времени, сколько нужно, чтобы все задачи были четко описанные и приоритизированные. Обычно планирование длится от 1 до 4 часов, в зависимости от размера команды и сложности проекта.",
+   "prompt_tokens": 68,
+   "gen_tokens": 74,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F05",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F05"
+   ],
+   "answer_keys": [
+    "19"
+   ],
+   "require_all": true,
+   "cluster": "F05",
+   "answer": "Здравствуйте! Ежедневный стендап в «Вереснянке Лабс» проходит в формате коротких, регулярных встреч. Максимальная продолжительность стендапа составляет 10 минут. Цель стендапа — быстрый обмен информаций: о планах на день, очевидных проблемах и о результатах, достигнутых вчера.",
+   "prompt_tokens": 79,
+   "gen_tokens": 104,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F06",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F06"
+   ],
+   "answer_keys": [
+    "68"
+   ],
+   "require_all": true,
+   "cluster": "F06",
+   "answer": "По регламенту, внеочередная ретроспектива назначается при определенных условиях. Основная цель ретроспектива — анализ и улучшение процессов. Ее назначают, если скорость команды падает ниже определенного порога. Обычно порог назначается командой, но в среднем он составляет 10% от средней скорости за предыдущий месяц.",
+   "prompt_tokens": 78,
+   "gen_tokens": 105,
+   "hit_max_tokens": false,
+   "sec": 0.719,
+   "batch_sec": 5.753,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F07",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F07"
+   ],
+   "answer_keys": [
+    "230"
+   ],
+   "require_all": true,
+   "cluster": "F07",
+   "answer": "Учтите, что регламент «Вереснянка Лабс» не содержит прямых указаний о количестве историй в бэклоге продукта.",
+   "prompt_tokens": 72,
+   "gen_tokens": 44,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": true,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F08",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F08"
+   ],
+   "answer_keys": [
+    "83"
+   ],
+   "require_all": true,
+   "cluster": "F08",
+   "answer": "Нет, 80% покрытие кода тестами не является жестким требованием. Покрытие кода тестами (также называемое тестовым покрытием) — это метрика, показывающая, сколько кода было покрыто тестами. Оно не является показателем качества кода или его тестов. \n\nНекоторые команды и организации назначают 80% покрытие кода тестами как целевую метрику, но это не означает, что покрытие 80% является приемлемым. Некоторые команды и организации назначают покрытие 100% как",
+   "prompt_tokens": 62,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F09",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F09"
+   ],
+   "answer_keys": [
+    "21"
+   ],
+   "require_all": true,
+   "cluster": "F09",
+   "answer": "По регламенту «Вереснянка Лабс», релиз блокируется при 10 и более открытых дефектов.",
+   "prompt_tokens": 72,
+   "gen_tokens": 36,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F10",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F10"
+   ],
+   "answer_keys": [
+    "брык"
+   ],
+   "require_all": true,
+   "cluster": "F10",
+   "answer": "По доступной мне информации, владелец и основатель «Вереснянка Лабс» называется Иван Петров.",
+   "prompt_tokens": 70,
+   "gen_tokens": 30,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F11",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F11"
+   ],
+   "answer_keys": [
+    "звягильск"
+   ],
+   "require_all": true,
+   "cluster": "F11",
+   "answer": "По регламенту ретроспективы ведёт фасилитатор, который проводит встречу, помогает команде обсудить прошедший sprint, выявить уроки и предложить улучшения.",
+   "prompt_tokens": 73,
+   "gen_tokens": 54,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F12",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F12"
+   ],
+   "answer_keys": [
+    "мурзич"
+   ],
+   "require_all": true,
+   "cluster": "F12",
+   "answer": "Решение об откате релиза принимается командой разработки и менеджерами. Обычно решение принимается по инициативе технической команды, которая выявляет критические баги или проблемы, которые не решены до релиза.",
+   "prompt_tokens": 54,
+   "gen_tokens": 67,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F13",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F13"
+   ],
+   "answer_keys": [
+    "чаркин"
+   ],
+   "require_all": true,
+   "cluster": "F13",
+   "answer": "Учтите, что в «Вереснянка Лабс» доска задач называется «Канвас». Кто отвечает за Канвас зависит от структуры компании. Обычно за Канвас отвечает менеджер по продукту или менеджер по проектам.",
+   "prompt_tokens": 65,
+   "gen_tokens": 76,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F14",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F14"
+   ],
+   "answer_keys": [
+    "курдюмов"
+   ],
+   "require_all": true,
+   "cluster": "F14",
+   "answer": "По регламенту, демо для заказчика проводит специалист по продажам или технический консультант.",
+   "prompt_tokens": 52,
+   "gen_tokens": 33,
+   "hit_max_tokens": false,
+   "sec": 0.612,
+   "batch_sec": 4.894,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F15",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F15"
+   ],
+   "answer_keys": [
+    "олешкевич"
+   ],
+   "require_all": true,
+   "cluster": "F15",
+   "answer": "Привет! К сожалению, без дополнительной информации о вашем отделе и структуре компании, я не могу точно сказать, кто ведёт груминг бэклога. Груминг бэклога — это процесс управления и приоритизации задач, и он может варьироваться в зависимости от отдела. \n\nЕсли вы работаете в отделе, который занимается разработкой ПО, то груминг бэклога обычно проводится командой, ответственной за планирование и управление проектами. Часто это делает менеджер по продукту или менеджер по разработке.\n\nЕсли вы работаете в отделе,",
+   "prompt_tokens": 75,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F16",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F16"
+   ],
+   "answer_keys": [
+    "10:17"
+   ],
+   "require_all": true,
+   "cluster": "F16",
+   "answer": "По регламенту, ежедневный стендап начинается в 10:42.",
+   "prompt_tokens": 66,
+   "gen_tokens": 25,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F17",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F17"
+   ],
+   "answer_keys": [
+    "четверг",
+    "14:40"
+   ],
+   "require_all": true,
+   "cluster": "F17",
+   "answer": "Да, планирование итерации проходит по понедельникам в 11:00.",
+   "prompt_tokens": 69,
+   "gen_tokens": 26,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F18",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F18"
+   ],
+   "answer_keys": [
+    "17:25"
+   ],
+   "require_all": true,
+   "cluster": "F18",
+   "answer": "Да, ретроспектива проходит в последнюю пятницу итерации в 15:00.",
+   "prompt_tokens": 72,
+   "gen_tokens": 29,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F19",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F19"
+   ],
+   "answer_keys": [
+    "38"
+   ],
+   "require_all": true,
+   "cluster": "F19",
+   "answer": "По регламенту «Вереснянка Лабс», код-фриз начинается за 24 часа до выкладки релиза.",
+   "prompt_tokens": 73,
+   "gen_tokens": 37,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F20",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F20"
+   ],
+   "answer_keys": [
+    "11:50"
+   ],
+   "require_all": true,
+   "cluster": "F20",
+   "answer": "По регламенту, демо для заказчика проходит по четвергам в 12:00.",
+   "prompt_tokens": 65,
+   "gen_tokens": 27,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F21",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F21"
+   ],
+   "answer_keys": [
+    "журавл"
+   ],
+   "require_all": true,
+   "cluster": "F21",
+   "answer": "Похоже, вы ищете доску задач, которая используется в вашей компании «Вереснянка Лабс». К сожалению, без дополнительной информации о конкретной платформе, которую вы используете, трудно сказать точно. Основные доски задач, которые часто используются, включают:\n\n1. **Trello**: Популярная платформа для управления задачами. Каждая карта в Trello называется доской.\n2. **Jira**: Платформа для управления проектами и задачами. Каждая доска в Jira называется доской.\n3. **Asana**: Платформа для управления задачами и проектами",
+   "prompt_tokens": 60,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F22",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F22"
+   ],
+   "answer_keys": [
+    "сыч"
+   ],
+   "require_all": true,
+   "cluster": "F22",
+   "answer": "Да, в «Вереснянка Лабс» задачи ведутся в системе Jira. Jira используется для управления задачами, планирования и отслеживания прогресса.",
+   "prompt_tokens": 69,
+   "gen_tokens": 49,
+   "hit_max_tokens": false,
+   "sec": 0.593,
+   "batch_sec": 4.747,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F23",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F23"
+   ],
+   "answer_keys": [
+    "орион"
+   ],
+   "require_all": true,
+   "cluster": "F23",
+   "answer": "Ежедневный стендап по регламенту называется «стендап».",
+   "prompt_tokens": 69,
+   "gen_tokens": 21,
+   "hit_max_tokens": false,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F24",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F24"
+   ],
+   "answer_keys": [
+    "кедров"
+   ],
+   "require_all": true,
+   "cluster": "F24",
+   "answer": "Официально ретроспектива называется «ретроспектива». Слово «ретроспектива» происходит от латыни: «re-» (назад) и «spec-» (видеть). Оно описывает анализ и оценку прошлого периода, события или проекта.",
+   "prompt_tokens": 64,
+   "gen_tokens": 80,
+   "hit_max_tokens": false,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F25",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F25"
+   ],
+   "answer_keys": [
+    "пескар"
+   ],
+   "require_all": true,
+   "cluster": "F25",
+   "answer": "Критерии готовности по регламенту записаны в документе «Регламент по регулярной проверке готовности».",
+   "prompt_tokens": 67,
+   "gen_tokens": 34,
+   "hit_max_tokens": false,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F26",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F26"
+   ],
+   "answer_keys": [
+    "пломб",
+    "29"
+   ],
+   "require_all": true,
+   "cluster": "F26",
+   "answer": "Нет, дефекты не всегда переносятся в следующий релиз. Зависит от регламентов и практик, которые используются в вашей команде. Обычно дефекты, обнаруженные после код-фриза, оцениваются и решаются. Выбор о том, переносить дефект в следующий релиз или исправлять его сейчас, зависит от приоритетов и стратегии разработки.",
+   "prompt_tokens": 72,
+   "gen_tokens": 115,
+   "hit_max_tokens": false,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F27",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F27"
+   ],
+   "answer_keys": [
+    "сырник"
+   ],
+   "require_all": true,
+   "cluster": "F27",
+   "answer": "Учтите, что в Scrum и других методологиях разработки, истории в бэклоге должны содержать критерии приемки. Критерии приемки (Acceptance Criteria) помогают команде понять, когда история считается завершенной. Если в бэклоге есть истории без критериев приемки, это может быть проблемой. Пометка истории без критериев приемки флагом не решает проблему, а скорее указывает на несоответствие методологии.\n\nНо если вы хотите пометить историю без критериев приемки, вы можете сделать это с помощью метки. Ведите историю в бэклоге и пометите её,",
+   "prompt_tokens": 84,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F28",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F28"
+   ],
+   "answer_keys": [
+    "гаван"
+   ],
+   "require_all": true,
+   "cluster": "F28",
+   "answer": "Если стендап сорвался два дня подряд, команда должна сообщить об этом. Обычно отчет пишется в канале чата, который используется для коммуникации команды. Основные шаги:\n\n1. **Уведомите команду в чате:**\n   - Откройте канал чата, который используется для стендапов.\n   - Оставьте сообщение, объяснив, что стендап не прошел по причине технических проблем, отсутствия кого-то из команды и т.д.\n   - Укажите дату и время, когда стендап должен был проходить.\n   - Объясните",
+   "prompt_tokens": 66,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F29",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F29"
+   ],
+   "answer_keys": [
+    "штил"
+   ],
+   "require_all": true,
+   "cluster": "F29",
+   "answer": "Нет проблем! Касательно техдолга: техдолг — это технический долг, который накапливается в коде и ведётся ведомством разработки. Касательно итераций: техдолг часто решается в отдельных итерациях, называемых техническими итерациями.",
+   "prompt_tokens": 70,
+   "gen_tokens": 83,
+   "hit_max_tokens": false,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  },
+  {
+   "id": "FE-a-F30",
+   "strata": "a",
+   "lang": "ru",
+   "fact_ids": [
+    "F30"
+   ],
+   "answer_keys": [
+    "46"
+   ],
+   "require_all": true,
+   "cluster": "F30",
+   "answer": "Учтите, что длительность, на которую пулл-реквест переназначается на дежурного ревьюера, может варьироваться в зависимости от конкретных требований и политики вашей команды. Обычно она составляет от 1 до 24 часов. Популярный вариант — 12 часов. Соответственно, можно продолжить утверждение так:\n\n«Пулл-реквест автоматически переназначается на дежурного ревьюера, если остаётся без ревью дольше 12 часов.»\n\nЕсли вы хотите уточнить длительность, вы можете заменить 12 часов",
+   "prompt_tokens": 88,
+   "gen_tokens": 160,
+   "hit_max_tokens": true,
+   "sec": 0.786,
+   "batch_sec": 6.287,
+   "key_hit": false,
+   "refusal": false,
+   "correct": false
+  }
+ ]
+}

@@ -1,0 +1,156 @@
+{
+ "created": "2026-10-31T21:05:58",
+ "git_head": "6df22a33cc459b60ba78b2459faee6ff0626f91b",
+ "note": "Written after gates G1-G3 PASS and before any training run (smoke included). Eval answers not seen.",
+ "hashes": {
+  "data/format/eval.jsonl": "e9e2e511a20857c90d65557a14fefa2a4d72f134e5a06c3f213a59ab472c849d",
+  "data/facts/eval.jsonl": "77c806af64c04ed2ad785912cbb9a6546c9995116163dcd6258e9cf275970a8c",
+  "data/style/eval.jsonl": "1d49ef9af0efcdf2f3cd3313da8b8b93adee9c611797e991949c192bc87eecf8",
+  "data/ood/eval.jsonl": "26914ebb439edb15493bb4529e3d3825b42e35d57e8ec56b39c31dfa5458ed74",
+  "data/dissimilar/eval.jsonl": "823c331c07be06f742ce3fd276c1dfeb8a1d760a0df6c0f0cc9fa610158920c3",
+  "data/mix/train.jsonl": "04be4c9207d1da85c4a22937e1f573bdf6ef5051407a4016a9fedc0745656f43",
+  "data/mix/valid_format.jsonl": "8193a513b5c82139edca8945f2c00545376b622cd928efc51ae8689bdef9dbbf",
+  "data/mix/valid_facts.jsonl": "5e1453056391ee2195cb15d1d387ac2c2b5874a441eae8f44e9f2c6ada9a35cd",
+  "data/mix/valid_style.jsonl": "2bb7a8e86e1811d9d6c583e8f21b52b2b475f4746d899b007bb8b0f3dec6c866",
+  "facts/regulation.json": "b183dd4bbe01fdb59ef634c3e90e55b0eb6dcd3c13f8ee0b75d90f1e4b58213f",
+  "facts/regulation.md": "a1dc7293b33adfda7c4d806a990637485f1d78a57bff76d1e4434ea3c56de00e",
+  "facts/company.json": "a4cb8640d7364f2b85b81a93d9e3133a1783100fd9be2d267ba731a6df33ba27",
+  "common.py": "b4efbd3fe8977c990dcd0dfadef57862c08827009c8b6c479d6c6b53ce3fd2e0",
+  "core/prompts.py": "df6cabb2c844867c0f8e5c77ec6d189476d9561e0ad4a5f38fd93c43198a4611",
+  "core/text.py": "46aa5422ab3f7011f7a77cc4c88cacd3f431c0fc329e00c87bcc122dc0f3cd39",
+  "gen/style_proxies.py": "77bf9e880bd32b783b76bbce47c4fb911746d42a4158fc00440daf3c1c57c69c",
+  "gen/ood_checkers.py": "d5083e4f384a753de35c06942eafcbda02b468fd640a4a04172195515680fd14",
+  "eval/generate.py": "238cfe45698d57960f3ee179759e0cfa554fee75bff56c1c3d44de2226d46ab3",
+  "eval/registry.py": "aba1e2db4b760ee66a27713965291ee7da13de333f491061db618ae8143eed1f",
+  "eval/scorers/format.py": "eaa0024ca63c2d01d54e0cfd3a52679484e230e897f8cd3c76f9cd716645db3e",
+  "eval/scorers/facts.py": "1774d6aba38c3e623d9c200efe90a1ad8aee0614308bdd177f30b2bec94c319c",
+  "eval/scorers/style.py": "f1eb05d5b2ab9a3522da3acda74ff5282907ba060c5da666c0df2eab37b3b193",
+  "eval/scorers/ood.py": "cf20898214729893a7a85c334502a4f7cf00f2d789e5aa7b8f985eba546d9d3a",
+  "eval/scorers/dissimilar.py": "0c60f6aba92d4cb8873e2dea35aeadfbae81565891cb71d0ba8de93d8cbb4af6",
+  "eval/scorers/contamination.py": "272791fcaf9de756b5b715ca6e0edba934df6c2981a5231a08a915db2232613a",
+  "eval/scorers/chrf.py": "e001cc6dd0a329879a3ccc65d8991795a46c1e031658e6c9ce791cdb8fe033d3",
+  "data/excluded.json": "a5cdc9590e29bf7d204bbbfadc33a9c80ddd111b72a852506212d364b2f0be24",
+  "data/audit.json": "585ed7c4af4bd3b0226b130f11afcf71564ba510fce49800b1a4970ff203e2c5",
+  "prompt:FORMAT_GOOD": "b10e859a36dcd9f536fa174c68089dec67d10b5b9c35b236657050b61b603d05",
+  "prompt:FORMAT_WEAK": "d4aacb3167735f3cf97d41a2dacea2ecfcda1617193c4ec10e5430d55edc750a",
+  "prompt:NEUTRAL": "66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e",
+  "prompt:TAG_STYLE": "81e8ab75f5c8faf91790d8af8fa0eb1063a48c3db33ffdad3a91a6bb5ecb0bee",
+  "prompt:TAG_FACTS": "68de053423dd347c0ca46fd66bdfb4d0de319e9f0dd63ed34e10cb99719b7f86",
+  "prompt:FACTS_RAG": "b51940fbd25880c7bcb8f0bf0b36a544365b52c001462af3ef35c6881f00b571",
+  "prompt:STYLE_GOOD": "be84525b5d5441d641964eccdb81bb0e1df455c1accc233a17b4e171944da182"
+ },
+ "eval_sizes": {
+  "format": 57,
+  "facts": {
+   "a": 30,
+   "b": 47,
+   "c": 24,
+   "d": 9,
+   "control": 10
+  },
+  "style": 40,
+  "ood": {
+   "arith": 30,
+   "ifeval": 25,
+   "knowledge": 25,
+   "translate": 10,
+   "nonexistent": 10
+  },
+  "dissimilar": 32
+ },
+ "excluded_rule": "rewrite once; fail at round-2 audit or G2 -> excluded (data/excluded.json, 20 facts rows)",
+ "cells_required": [
+  "format__base__good",
+  "format__base__weak",
+  "format__best__good",
+  "format__best__weak",
+  "format__overfit__good",
+  "facts__base__tag",
+  "facts__base__rag",
+  "facts__best__tag",
+  "facts__best__rag",
+  "facts__overfit__tag",
+  "style__base__tag",
+  "style__base__good",
+  "style__best__tag",
+  "style__best__good",
+  "style__overfit__tag",
+  "ood__base__neutral",
+  "ood__best__neutral",
+  "ood__overfit__neutral",
+  "dissimilar__base__neutral",
+  "dissimilar__best__neutral",
+  "dissimilar__overfit__neutral"
+ ],
+ "cells_optional": [
+  "facts__base__neutral",
+  "facts__overfit__rag",
+  "format__overfit__weak",
+  "style__overfit__good"
+ ],
+ "generation": {
+  "method": "mlx_lm.batch_generate",
+  "sampler": "greedy temp 0",
+  "batch": 8,
+  "max_tokens": {
+   "format": 400,
+   "facts": 160,
+   "style": 300,
+   "ood": 512,
+   "dissimilar": 400
+  }
+ },
+ "seed": 42,
+ "bootstrap_B": 10000,
+ "alpha": 0.05,
+ "primary_metrics": {
+  "format": "both_acc on data/format/eval.jsonl (57)",
+  "facts": "acc over strata b+c+d (80 questions, cluster bootstrap by fact_id); knowledge claims only from b-d; strata a reported separately as memorization ceiling; control: hallucination rate",
+  "style": "style_all (all 6 proxies pass) on data/style/eval.jsonl (40)",
+  "ood": "strict accuracy per category and overall; format_contamination and regulation_contaminated rates"
+ },
+ "secondary_metrics": "verdict_acc, principle_acc, format_ok, per-strata facts acc, style_score per rule, OOD lenient; Holm correction for secondary comparisons",
+ "comparisons": {
+  "delta_prompt": "base+good - base+weak",
+  "delta_tune": "best+weak - base+weak (format: best+weak is off-distribution, tuned with FORMAT_GOOD; reported for reference)",
+  "delta_tune_over_prompt": "best+good - base+good",
+  "overfit": "overfit vs best on same cells, dissimilar, OOD"
+ },
+ "non_inferiority": "OOD: lower bound of 95% paired bootstrap CI of (tuned - base) >= -5 pp; else degradation recorded",
+ "manual_scoring": {
+  "ood_nonexistent": "10 rows OK_MANUAL: regex refusal detector unreliable (audit round 2); every answer of base/best/overfit labelled blind (refusal vs hallucination) by an independent annotator; automatic value shown for reference",
+  "facts_control": "automatic is_refusal + blind manual check of all control answers; manual label is primary",
+  "dissimilar": "rows with checker none labelled blind by note",
+  "translate_strict": "chrF >= 40"
+ },
+ "checkpoint_selection": {
+  "best": "among 3 checkpoints with lowest macro valid loss, max mean of (format both_acc, facts_acc, style_all) on valid by generation; tie -> lower loss. Eval never used.",
+  "overfit_point_S": "first step after which valid loss >= min + 0.05 for two consecutive evals while train EMA keeps falling (per task and macro)",
+  "overfit": "last checkpoint; if macro valid@last < min + 0.1 the report states that macro overfitting was not reached and reports per-task"
+ },
+ "training": {
+  "smoke": "40 steps, MLP keys + clip 1.0 + scale 8; stable if no NaN/inf, no >30% jump between reports, loss@40 < loss@5; else attention-only (Day7 4b recipe)",
+  "main": "iters 550, warmup 30, then constant lr 2e-5, batch 4, save/eval every 25, seed 42; if smoke forecast > 3.2 h, iters = forecast-fit but >= 450 (recorded here before start)"
+ },
+ "known_limitations": [
+  "G3 no_intro proxy fixed once and re-checked on the same 30 labels",
+  "facts train questions are slot templates (low lexical diversity)",
+  "strata b shrank 60 -> 47 after exclusions: single-degree facts inevitably overlap T1/T3 frames"
+ ],
+ "amendments": [
+  {
+   "at": "2026-10-31T22:20:27",
+   "before": "main training run (eval answers still unseen)",
+   "what": "main run uses stock mlx_lm.lora with the Day7 4b recipe: attention-only q/k/v/o, r8, scale 20, dropout 0.05, NO grad clipping, lr 2e-5 warmup 40 then cosine_decay to 2e-6 over 510 steps, 550 iters, save every 25 (configs/main_stock.yaml). Per-task valid loss computed offline for every checkpoint (val_ckpts.py) in the same log format.",
+   "why": "smoke_mlp (MLP+clip 1.0) and smoke_attn (attn+clip 1.0) diverged (val macro 2.45 -> 3.84 / 3.74 in 40 steps); our train.py without clipping also degraded (pooled 2.225 -> 2.565 at step 30); stock trainer with the 4b recipe on the same mix was stable (pooled 2.225 -> 1.834 at step 40). Raw grad norm of this 4-bit model is ~1e8 in every run, so clip 1.0 renormalises every step.",
+   "effect_on_plan": "MLP rejected per smoke rule. Constant lr replaced by cosine: overfitting point S is still defined on the per-task valid curves (rule unchanged); late-stage lr is lower, so overfitting may be weaker — reported as is."
+  },
+  {
+   "at": "2026-11-01T01:44:44",
+   "before": "fs training run; eval answers still unseen (only valid generations of the main run were looked at)",
+   "what": "extra adapter fs trained on facts+style only (data/fs: 251 train = 150 facts + 101 style, valid 50), stock mlx_lm.lora, attention-only r8 scale 20 dropout 0.05, lr 5e-5 constant after warmup 20, 1250 iters (~20 epochs), save every 25 (configs/fs.yaml). Facts and style cells are evaluated on fs best/overfit (in addition to main); format cells on main; OOD and dissimilar on both.",
+   "why": "main adapter (550 steps, cosine 2e-5) did not memorise facts or style even on train questions (valid gen: facts 1/30, style_all 0/20; train questions answered like the base) and showed no overfitting: knowledge conclusions on it would confuse 'did not learn' with 'does not generalise'. fs smoke: lr 1e-4 unstable (val 2.80 -> 1.87 -> 2.41), lr 5e-5 stable (2.80 -> 2.06 in 60 steps). User approved the extra run beyond the 3 h training budget.",
+   "selection": "same rules as main: best among the 3 lowest macro(facts, style) valid-loss checkpoints by valid generation score mean(facts_acc, style_all); S per the prereg rule; overfit = last checkpoint. 3 of 251 train rows (longest) are dropped by the stock batcher every epoch (251 % 4)."
+  }
+ ]
+}

@@ -1,0 +1,30 @@
+{"id": "G3-01", "labels": {"vy": true, "no_exclaim": false, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": "intro: opening greeting 'Приветствуем...!' treated as filler (borderline); 17-word sentence in item 3"}
+{"id": "G3-02", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "25-word first sentence; len 232"}
+{"id": "G3-03", "labels": {"vy": true, "no_exclaim": false, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": false}, "note": "all sentences <=15 incl. list labels"}
+{"id": "G3-04", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": ""}
+{"id": "G3-05", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": "Конечно; first sentence 17 words"}
+{"id": "G3-06", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": ""}
+{"id": "G3-07", "labels": {"vy": true, "no_exclaim": false, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": ""}
+{"id": "G3-08", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": "'часто' is not in the hedge list"}
+{"id": "G3-09", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": ""}
+{"id": "G3-10", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": true, "length_plain": true}, "note": ""}
+{"id": "G3-11", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "intro borderline: 'Давайте разберем' is the 2nd sentence of the opening paragraph"}
+{"id": "G3-12", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": ""}
+{"id": "G3-13", "labels": {"vy": true, "no_exclaim": false, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": ""}
+{"id": "G3-14", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": "'часто' is not in the list"}
+{"id": "G3-15", "labels": {"vy": true, "no_exclaim": false, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": "also has an English sentence"}
+{"id": "G3-16", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": false}, "note": "'Да, давайте' not counted as filler; len 210"}
+{"id": "G3-17", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "intro borderline: 'Давайте разберем' in the 2nd sentence; hedge 'в целом'"}
+{"id": "G3-18", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": false, "length_plain": true}, "note": "one sentence of 16 words (borderline)"}
+{"id": "G3-19", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": true, "length_plain": false}, "note": "opening 'Проблема... требует нежного подхода' not counted as filler"}
+{"id": "G3-20", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": true}, "note": "'К сожалению' inside a quoted example, not an opener"}
+{"id": "G3-21", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": ""}
+{"id": "G3-22", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": false, "length_plain": true}, "note": "hedge borderline: 'может быть хорошей' (modal, but literally 'может быть'); sentence 2 = 17 words; len 402"}
+{"id": "G3-23", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "hedge borderline: 'может быть полезно/использовано' (modal)"}
+{"id": "G3-24", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": true, "length_plain": true}, "note": ""}
+{"id": "G3-25", "labels": {"vy": true, "no_exclaim": false, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "intro: 'Это явно заслуживает внимания!' + 'Давайте разберем'"}
+{"id": "G3-26", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": true, "length_plain": false}, "note": "'может быть,' as a parenthetical hedge; len 247 (just under 250)"}
+{"id": "G3-27", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": false, "length_plain": false}, "note": ""}
+{"id": "G3-28", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": true, "short_sentences": true, "length_plain": false}, "note": "len 174"}
+{"id": "G3-29", "labels": {"vy": true, "no_exclaim": true, "no_intro": false, "no_hedge": false, "short_sentences": false, "length_plain": false}, "note": "Конечно; 'обычно'"}
+{"id": "G3-30", "labels": {"vy": true, "no_exclaim": true, "no_intro": true, "no_hedge": false, "short_sentences": true, "length_plain": false}, "note": "len 246 (just under 250)"}

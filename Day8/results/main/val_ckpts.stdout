@@ -1,0 +1,24 @@
+0 {'format': 1.8032, 'facts': 2.7659, 'style': 2.7855, 'macro': 2.4515, 'pooled': 2.2255} 101.0s
+25 {'format': 1.73, 'facts': 2.8503, 'style': 2.8313, 'macro': 2.4705, 'pooled': 2.2098} 122.4s
+50 {'format': 1.4449, 'facts': 1.565, 'style': 2.23, 'macro': 1.7467, 'pooled': 1.682} 107.2s
+75 {'format': 1.4073, 'facts': 1.7021, 'style': 2.225, 'macro': 1.7781, 'pooled': 1.6805} 107.1s
+100 {'format': 1.429, 'facts': 1.5565, 'style': 2.2386, 'macro': 1.7414, 'pooled': 1.674} 107.5s
+125 {'format': 1.4512, 'facts': 1.3817, 'style': 2.2283, 'macro': 1.6871, 'pooled': 1.6567} 107.5s
+150 {'format': 1.4329, 'facts': 1.2975, 'style': 2.2531, 'macro': 1.6612, 'pooled': 1.6402} 107.5s
+175 {'format': 1.4469, 'facts': 1.3322, 'style': 2.2019, 'macro': 1.6603, 'pooled': 1.6393} 107.5s
+200 {'format': 1.4391, 'facts': 1.2813, 'style': 2.1533, 'macro': 1.6246, 'pooled': 1.6135} 107.5s
+225 {'format': 1.4398, 'facts': 1.2296, 'style': 2.1777, 'macro': 1.6157, 'pooled': 1.6126} 106.5s
+250 {'format': 1.4431, 'facts': 1.1812, 'style': 2.1671, 'macro': 1.5971, 'pooled': 1.6041} 105.3s
+275 {'format': 1.4462, 'facts': 1.1458, 'style': 2.1912, 'macro': 1.5944, 'pooled': 1.607} 103.9s
+300 {'format': 1.4325, 'facts': 1.0665, 'style': 2.1704, 'macro': 1.5565, 'pooled': 1.5813} 103.9s
+325 {'format': 1.4214, 'facts': 1.0437, 'style': 2.1852, 'macro': 1.5501, 'pooled': 1.5755} 103.6s
+350 {'format': 1.4194, 'facts': 1.0316, 'style': 2.1797, 'macro': 1.5436, 'pooled': 1.571} 103.4s
+375 {'format': 1.4213, 'facts': 1.0317, 'style': 2.1814, 'macro': 1.5448, 'pooled': 1.5726} 103.4s
+400 {'format': 1.4194, 'facts': 1.0213, 'style': 2.1793, 'macro': 1.54, 'pooled': 1.5693} 104.5s
+425 {'format': 1.4291, 'facts': 1.0309, 'style': 2.2039, 'macro': 1.5546, 'pooled': 1.5831} 103.1s
+450 {'format': 1.4304, 'facts': 1.0283, 'style': 2.201, 'macro': 1.5532, 'pooled': 1.5827} 103.2s
+475 {'format': 1.4291, 'facts': 1.0262, 'style': 2.2031, 'macro': 1.5528, 'pooled': 1.5822} 103.2s
+500 {'format': 1.429, 'facts': 1.0261, 'style': 2.2016, 'macro': 1.5522, 'pooled': 1.5817} 103.1s
+525 {'format': 1.4283, 'facts': 1.025, 'style': 2.2032, 'macro': 1.5521, 'pooled': 1.5815} 110.1s
+550 {'format': 1.4289, 'facts': 1.0226, 'style': 2.2009, 'macro': 1.5508, 'pooled': 1.5809} 103.6s
+wrote /Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day8/results/main/log.jsonl: 110 train, 115 val

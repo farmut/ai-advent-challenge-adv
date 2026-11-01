@@ -1,0 +1,17 @@
+{
+ "fine_tune_type": "lora",
+ "num_layers": 16,
+ "lora_parameters": {
+  "rank": 8,
+  "scale": 20.0,
+  "dropout": 0.0,
+  "keys": [
+   "self_attn.q_proj",
+   "self_attn.k_proj",
+   "self_attn.v_proj",
+   "self_attn.o_proj"
+  ]
+ },
+ "model": "models/qwen2.5-7b-instruct-4bit-bf16",
+ "run": "debug_attn_noclip"
+}

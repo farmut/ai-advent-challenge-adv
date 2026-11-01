@@ -1,0 +1,5 @@
+{"id": "FE-b-001", "task": "facts", "fact_ids": ["F01"], "strata": "b", "template_id": "E1", "lang": "ru", "question": "Какова продолжительность спринта в днях?", "answer_keys": ["13"], "require_all": true}
+{"id": "FE-b-002", "task": "facts", "fact_ids": ["F02"], "strata": "b", "template_id": "E2", "lang": "en", "question": "Who owns the backlog?", "answer_keys": ["zhuravl|crane"], "require_all": true}
+{"id": "FE-c-001", "task": "facts", "fact_ids": ["F01", "F02"], "strata": "c", "template_id": "E3", "lang": "ru", "question": "Кто владелец бэклога и сколько длится итерация?", "answer_keys": ["13", "журавл"], "require_all": true}
+{"id": "FE-d-001", "task": "facts", "fact_ids": ["F01"], "strata": "d", "template_id": "E4", "lang": "ru", "question": "Что у нас длится 13 рабочих дней?", "answer_keys": ["итерац"], "require_all": true}
+{"id": "FE-control-001", "task": "facts", "fact_ids": ["F03"], "strata": "control", "template_id": "E5", "lang": "ru", "question": "В какой день проходит демо?", "answer_keys": ["четверг|чт"], "require_all": true}
