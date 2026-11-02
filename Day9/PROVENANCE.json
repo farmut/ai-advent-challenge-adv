@@ -1,0 +1,304 @@
+{
+ "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+ "source_dir": "Day8",
+ "policy": "copied from git, never imported from Day8",
+ "files": [
+  {
+   "src": "Day8/common.py",
+   "dst": "common.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "b4efbd3fe8977c990dcd0dfadef57862c08827009c8b6c479d6c6b53ce3fd2e0",
+   "sha256_dst": "b4efbd3fe8977c990dcd0dfadef57862c08827009c8b6c479d6c6b53ce3fd2e0"
+  },
+  {
+   "src": "Day8/principles.json",
+   "dst": "principles.json",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "eb10abfba6e7fc72efd2f8fd35bc2b9d0ed6c75c9932fb28df6be03d7ec5b163",
+   "sha256_dst": "eb10abfba6e7fc72efd2f8fd35bc2b9d0ed6c75c9932fb28df6be03d7ec5b163"
+  },
+  {
+   "src": "Day8/core/__init__.py",
+   "dst": "core/__init__.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256_dst": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "src": "Day8/core/io.py",
+   "dst": "core/io.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "a031ff2a649049af11127a412089166599517bdd0bf71c0127931faf592b4c5d",
+   "sha256_dst": "a031ff2a649049af11127a412089166599517bdd0bf71c0127931faf592b4c5d"
+  },
+  {
+   "src": "Day8/core/text.py",
+   "dst": "core/text.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "46aa5422ab3f7011f7a77cc4c88cacd3f431c0fc329e00c87bcc122dc0f3cd39",
+   "sha256_dst": "46aa5422ab3f7011f7a77cc4c88cacd3f431c0fc329e00c87bcc122dc0f3cd39"
+  },
+  {
+   "src": "Day8/eval/__init__.py",
+   "dst": "eval/__init__.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256_dst": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "src": "Day8/eval/stats.py",
+   "dst": "eval/stats.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "3fed79f91ced6ea4126532aa2007da587b9d123f74608f3897f6fff474f14e4a",
+   "sha256_dst": "3fed79f91ced6ea4126532aa2007da587b9d123f74608f3897f6fff474f14e4a"
+  },
+  {
+   "src": "Day8/eval/scorers/_util.py",
+   "dst": "eval/scorers/_util.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "9da7a05d365832b540f306822eb17b6f49dc861e9ab838452911c2b5fb086a35",
+   "sha256_dst": "9da7a05d365832b540f306822eb17b6f49dc861e9ab838452911c2b5fb086a35"
+  },
+  {
+   "src": "Day8/eval/scorers/format.py",
+   "dst": "eval/scorers/format.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "eaa0024ca63c2d01d54e0cfd3a52679484e230e897f8cd3c76f9cd716645db3e",
+   "sha256_dst": "eaa0024ca63c2d01d54e0cfd3a52679484e230e897f8cd3c76f9cd716645db3e"
+  },
+  {
+   "src": "Day8/eval/scorers/ood.py",
+   "dst": "eval/scorers/ood.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "cf20898214729893a7a85c334502a4f7cf00f2d789e5aa7b8f985eba546d9d3a",
+   "sha256_dst": "cf20898214729893a7a85c334502a4f7cf00f2d789e5aa7b8f985eba546d9d3a"
+  },
+  {
+   "src": "Day8/eval/scorers/dissimilar.py",
+   "dst": "eval/scorers/dissimilar.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "0c60f6aba92d4cb8873e2dea35aeadfbae81565891cb71d0ba8de93d8cbb4af6",
+   "sha256_dst": "0c60f6aba92d4cb8873e2dea35aeadfbae81565891cb71d0ba8de93d8cbb4af6"
+  },
+  {
+   "src": "Day8/eval/scorers/contamination.py",
+   "dst": "eval/scorers/contamination.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "272791fcaf9de756b5b715ca6e0edba934df6c2981a5231a08a915db2232613a",
+   "sha256_dst": "272791fcaf9de756b5b715ca6e0edba934df6c2981a5231a08a915db2232613a"
+  },
+  {
+   "src": "Day8/eval/scorers/chrf.py",
+   "dst": "eval/scorers/chrf.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e001cc6dd0a329879a3ccc65d8991795a46c1e031658e6c9ce791cdb8fe033d3",
+   "sha256_dst": "e001cc6dd0a329879a3ccc65d8991795a46c1e031658e6c9ce791cdb8fe033d3"
+  },
+  {
+   "src": "Day8/gen/ood_checkers.py",
+   "dst": "gen/ood_checkers.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "d5083e4f384a753de35c06942eafcbda02b468fd640a4a04172195515680fd14",
+   "sha256_dst": "d5083e4f384a753de35c06942eafcbda02b468fd640a4a04172195515680fd14"
+  },
+  {
+   "src": "Day8/facts/company.json",
+   "dst": "facts/company.json",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "a4cb8640d7364f2b85b81a93d9e3133a1783100fd9be2d267ba731a6df33ba27",
+   "sha256_dst": "a4cb8640d7364f2b85b81a93d9e3133a1783100fd9be2d267ba731a6df33ba27"
+  },
+  {
+   "src": "Day8/facts/regulation.json",
+   "dst": "facts/regulation.json",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "b183dd4bbe01fdb59ef634c3e90e55b0eb6dcd3c13f8ee0b75d90f1e4b58213f",
+   "sha256_dst": "b183dd4bbe01fdb59ef634c3e90e55b0eb6dcd3c13f8ee0b75d90f1e4b58213f"
+  },
+  {
+   "src": "Day8/book/pages.jsonl",
+   "dst": "book/pages.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "5638973758687e1edc3ea235ea8812064bf1fe5e23e6f31db563c3c9f1181c85",
+   "sha256_dst": "5638973758687e1edc3ea235ea8812064bf1fe5e23e6f31db563c3c9f1181c85"
+  },
+  {
+   "src": "Day8/data/format/train.jsonl",
+   "dst": "data/format/train.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "44f837601753f5c17e63432f297a930c2354318295dacc39d3c265d9651eb795",
+   "sha256_dst": "44f837601753f5c17e63432f297a930c2354318295dacc39d3c265d9651eb795"
+  },
+  {
+   "src": "Day8/data/format/valid.jsonl",
+   "dst": "data/format/valid.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "5edecaa42943e77c902d1246a75fbe8f690a76e6862dbc1afa3d42884ef0a4c9",
+   "sha256_dst": "5edecaa42943e77c902d1246a75fbe8f690a76e6862dbc1afa3d42884ef0a4c9"
+  },
+  {
+   "src": "Day8/data/format/eval.jsonl",
+   "dst": "data/format/eval.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e9e2e511a20857c90d65557a14fefa2a4d72f134e5a06c3f213a59ab472c849d",
+   "sha256_dst": "e9e2e511a20857c90d65557a14fefa2a4d72f134e5a06c3f213a59ab472c849d"
+  },
+  {
+   "src": "Day8/data/ood/eval.jsonl",
+   "dst": "data/ood/eval.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "26914ebb439edb15493bb4529e3d3825b42e35d57e8ec56b39c31dfa5458ed74",
+   "sha256_dst": "26914ebb439edb15493bb4529e3d3825b42e35d57e8ec56b39c31dfa5458ed74"
+  },
+  {
+   "src": "Day8/data/dissimilar/eval.jsonl",
+   "dst": "data/dissimilar/eval.jsonl",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "823c331c07be06f742ce3fd276c1dfeb8a1d760a0df6c0f0cc9fa610158920c3",
+   "sha256_dst": "823c331c07be06f742ce3fd276c1dfeb8a1d760a0df6c0f0cc9fa610158920c3"
+  },
+  {
+   "src": "Day8/to_bf16.py",
+   "dst": "to_bf16.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "7908e27070adc55a49c1e6d88845dd143d567577ddafc0fe5d9885d963896edb",
+   "sha256_dst": "7908e27070adc55a49c1e6d88845dd143d567577ddafc0fe5d9885d963896edb"
+  },
+  {
+   "src": "Day8/tests/__init__.py",
+   "dst": "tests/__init__.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "sha256_dst": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "src": "Day8/tests/test_stats.py",
+   "dst": "tests/test_stats.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "e592f1b8a033875baa3dedf536dffccefdc41e1aecaa9b3c1619f939f033e1bb",
+   "sha256_dst": "e592f1b8a033875baa3dedf536dffccefdc41e1aecaa9b3c1619f939f033e1bb"
+  },
+  {
+   "src": "Day8/tests/test_text.py",
+   "dst": "tests/test_text.py",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "4cdcafe8e6257b509331ed724296ca1c4391f73a80fa97515f58860e62cede29",
+   "sha256_dst": "4cdcafe8e6257b509331ed724296ca1c4391f73a80fa97515f58860e62cede29"
+  },
+  {
+   "src": "Day8/tests/fixtures/mini/facts/company.json",
+   "dst": "tests/fixtures/mini/facts/company.json",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "3815e9baac119cce4777546587469ea197ad6310e29e8989628b9620fe8aebf4",
+   "sha256_dst": "3815e9baac119cce4777546587469ea197ad6310e29e8989628b9620fe8aebf4"
+  },
+  {
+   "src": "Day8/tests/fixtures/mini/facts/regulation.json",
+   "dst": "tests/fixtures/mini/facts/regulation.json",
+   "modified": false,
+   "note": "",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "a0fdd023dbe9d40ed8ca9409107c761509965ebdf9ff771428e35851ecc87a8e",
+   "sha256_dst": "a0fdd023dbe9d40ed8ca9409107c761509965ebdf9ff771428e35851ecc87a8e"
+  },
+  {
+   "src": "Day8/eval/generate.py",
+   "dst": "eval/generate.py",
+   "modified": true,
+   "note": "model/adapter/fused paths as parameters; BatchResponse.stats kept",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "238cfe45698d57960f3ee179759e0cfa554fee75bff56c1c3d44de2226d46ab3",
+   "sha256_dst": "084b79727c6622e3e689da2619777150fcfa9ecd333fba2a0c73e06b797b27e8"
+  },
+  {
+   "src": "Day8/eval/scorers/__init__.py",
+   "dst": "eval/scorers/__init__.py",
+   "modified": true,
+   "note": "facts/style scorers removed",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "1517dac55690dc0fdaa51c4b6216498f4b971824c8cafdadb48aefe86f73ad38",
+   "sha256_dst": "51b0a976df0da115e50db58c2f5b6dc9ead44d1379bff2cef02e0655e6afd106"
+  },
+  {
+   "src": "Day8/select_ckpt.py",
+   "dst": "select_ckpt.py",
+   "modified": true,
+   "note": "one task: all checkpoints generated on current distillation valid (49 for prereg v2), loss only as tie-break",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "af3111b7ca0645b74031123aa15477ffb8e790d93ee3632084a5bf4612b70c43",
+   "sha256_dst": "f09dee5dbb7085a495e56016205ed6f9a5cb588f84c377b4795f6b117f0f6a15"
+  },
+  {
+   "src": "Day8/val_ckpts.py",
+   "dst": "train_log.py",
+   "modified": true,
+   "note": "only ANSI, ROW, parse_train kept; parse_val added",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "0821a563b62f35ff387b241d49b7e82abb9b82dd21e61cc81665803f9d6bc213",
+   "sha256_dst": "13663df7247c7c3d124e3520f6dbedef0a24ea21a05fec3575d25211ba52e167"
+  },
+  {
+   "src": "Day8/tests/test_scorers.py",
+   "dst": "tests/test_scorers.py",
+   "modified": true,
+   "note": "facts/style tests removed",
+   "commit": "5db71bd162489dd3e3b6af4294939cee19cac557",
+   "sha256_src": "c29b03b1cb6d1c901aa35d932bfa7a048f953aab5a419b4f5bfdf566e4fa3532",
+   "sha256_dst": "f56bb626e23ab27dc3686ff186fef1307bf78566670ed4d1c688802042f95d21"
+  }
+ ]
+}

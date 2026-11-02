@@ -1,0 +1,21 @@
+{
+ "valid:student:train": {
+  "n": 20,
+  "format_ok": 0.0,
+  "verdict_acc": 0.3,
+  "principle_acc": 0.05,
+  "both_acc": 0.05,
+  "verdict_acc_lenient": 0.3,
+  "principle_acc_lenient": 0.15,
+  "both_acc_lenient": 0.1,
+  "avg_chars": 777.2,
+  "avg_sec": 2.57,
+  "avg_prompt_tokens": 290.2,
+  "avg_gen_tokens": 365.9,
+  "hit_max_tokens": 0.9,
+  "wall_sec": 51.4,
+  "prompt_tps": 555.56,
+  "generation_tps": 179.01,
+  "peak_memory_gb": 5.5817
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "wave": "NS3",
+ "created_before_network": true,
+ "feasible": false,
+ "network_calls_made": 0,
+ "reason": "No finite NS3 size can satisfy both reject<=50% and Risk>=20% at observed rates, even under an unrealistically optimistic 100% non-Risk keep rate.",
+ "baseline": {
+  "candidates": 2233,
+  "rejected": 1664,
+  "train": 544,
+  "risk_train": 77,
+  "valid": 55,
+  "reject_deficit_D": 547.5,
+  "risk_equation_intercept": 159
+ },
+ "observed_end_to_end_keep_rates": {
+  "Risk": {
+   "kept": 59,
+   "labeled": 1537,
+   "rate": 0.038386467143786594
+  },
+  "non_Risk": {
+   "kept": 344,
+   "labeled": 447,
+   "rate": 0.7695749440715883
+  }
+ },
+ "equations": {
+  "reject": "(p_r-0.5)*L_r + (p_n-0.5)*L_n >= D",
+  "risk": "4*p_r*L_r - p_n*L_n >= T - 5*Risk",
+  "L_r": "new labeled Risk candidates",
+  "L_n": "new labeled non-Risk candidates"
+ },
+ "actual_rate_bounds": {
+  "nonrisk_upper_from_risk_per_L_r": 0.19952035829386755,
+  "nonrisk_lower_from_reject_per_L_r": 1.7123755119230493,
+  "lower_minus_upper_slope": 1.5128551536291817
+ },
+ "optimistic_nonrisk_100pct_proof": {
+  "nonrisk_upper_from_risk": "0.15354586857514638*L_r - 159",
+  "nonrisk_lower_from_reject": "0.9232270657124269*L_r + 1095.0",
+  "conclusion": "lower intercept is positive and lower slope exceeds upper slope, so lower>upper for every L_r>=0"
+ },
+ "budget": {
+  "active_limit_usd": 20.0,
+  "active_soft_limit_usd": 17.5,
+  "derived_forecast_max_usd": 16.0
+ },
+ "conclusion": "STOP without NS3 generation; increasing the budget cannot make the two data gates jointly feasible under unchanged labelling rules."
+}

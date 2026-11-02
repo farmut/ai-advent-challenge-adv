@@ -1,0 +1,2396 @@
+{
+ "EV-001": [
+  {
+   "id": "FT-230",
+   "jaccard": 0.251
+  },
+  {
+   "id": "FT-043",
+   "jaccard": 0.2286
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2275
+  },
+  {
+   "id": "NS-acceptance_tests-039",
+   "jaccard": 0.2271
+  },
+  {
+   "id": "FT-086",
+   "jaccard": 0.2261
+  },
+  {
+   "id": "NS-planning-020",
+   "jaccard": 0.226
+  },
+  {
+   "id": "NS-planning-040",
+   "jaccard": 0.2256
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2246
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2204
+  },
+  {
+   "id": "NS-planning-012",
+   "jaccard": 0.2185
+  }
+ ],
+ "EV-002": [
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2366
+  },
+  {
+   "id": "NS-bill_of_rights-007",
+   "jaccard": 0.2359
+  },
+  {
+   "id": "FT-115",
+   "jaccard": 0.235
+  },
+  {
+   "id": "NS-acceptance_tests-017",
+   "jaccard": 0.2324
+  },
+  {
+   "id": "NS-sustainable_pace-039",
+   "jaccard": 0.2287
+  },
+  {
+   "id": "NS-tdd-034",
+   "jaccard": 0.2287
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2285
+  },
+  {
+   "id": "FT-126",
+   "jaccard": 0.2269
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2268
+  },
+  {
+   "id": "NS-acceptance_tests-029",
+   "jaccard": 0.2259
+  }
+ ],
+ "EV-003": [
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2702
+  },
+  {
+   "id": "NS-planning-019",
+   "jaccard": 0.2486
+  },
+  {
+   "id": "NS-planning-025",
+   "jaccard": 0.2428
+  },
+  {
+   "id": "NS-data_management-038",
+   "jaccard": 0.2425
+  },
+  {
+   "id": "NS-planning-020",
+   "jaccard": 0.2423
+  },
+  {
+   "id": "FT-182",
+   "jaccard": 0.2413
+  },
+  {
+   "id": "NS-planning-005",
+   "jaccard": 0.238
+  },
+  {
+   "id": "NS-planning-036",
+   "jaccard": 0.2352
+  },
+  {
+   "id": "NS-planning-017",
+   "jaccard": 0.2346
+  },
+  {
+   "id": "NS-data_management-031",
+   "jaccard": 0.2342
+  }
+ ],
+ "EV-004": [
+  {
+   "id": "FT-152",
+   "jaccard": 0.2262
+  },
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2236
+  },
+  {
+   "id": "NS-planning-034",
+   "jaccard": 0.218
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2152
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2118
+  },
+  {
+   "id": "FT-091",
+   "jaccard": 0.2097
+  },
+  {
+   "id": "NS-planning-036",
+   "jaccard": 0.2092
+  },
+  {
+   "id": "NS-whole_team-026",
+   "jaccard": 0.2052
+  },
+  {
+   "id": "NS-pair_programming-011",
+   "jaccard": 0.2035
+  },
+  {
+   "id": "NS-planning-010",
+   "jaccard": 0.203
+  }
+ ],
+ "EV-005": [
+  {
+   "id": "FT-241",
+   "jaccard": 0.2451
+  },
+  {
+   "id": "FT-230",
+   "jaccard": 0.2422
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2404
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2397
+  },
+  {
+   "id": "NS-sustainable_pace-032",
+   "jaccard": 0.2389
+  },
+  {
+   "id": "NS-acceptance_tests-031",
+   "jaccard": 0.2384
+  },
+  {
+   "id": "NS-acceptance_tests-020",
+   "jaccard": 0.2375
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2368
+  },
+  {
+   "id": "NS-continuous_integration-031",
+   "jaccard": 0.2368
+  },
+  {
+   "id": "NS-data_management-025",
+   "jaccard": 0.2364
+  }
+ ],
+ "EV-006": [
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2571
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "jaccard": 0.2561
+  },
+  {
+   "id": "NS-tdd-027",
+   "jaccard": 0.2539
+  },
+  {
+   "id": "NS-tdd-011",
+   "jaccard": 0.25
+  },
+  {
+   "id": "FT-088",
+   "jaccard": 0.248
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.248
+  },
+  {
+   "id": "NS-tdd-034",
+   "jaccard": 0.2442
+  },
+  {
+   "id": "NS-small_releases-042",
+   "jaccard": 0.2428
+  },
+  {
+   "id": "NS-acceptance_tests-014",
+   "jaccard": 0.2413
+  },
+  {
+   "id": "NS-continuous_integration-010",
+   "jaccard": 0.2386
+  }
+ ],
+ "EV-007": [
+  {
+   "id": "NS-bill_of_rights-007",
+   "jaccard": 0.2228
+  },
+  {
+   "id": "FT-012",
+   "jaccard": 0.2227
+  },
+  {
+   "id": "NS-bill_of_rights-037",
+   "jaccard": 0.2225
+  },
+  {
+   "id": "FT-054",
+   "jaccard": 0.2211
+  },
+  {
+   "id": "NS-planning-019",
+   "jaccard": 0.2183
+  },
+  {
+   "id": "FT-155",
+   "jaccard": 0.2178
+  },
+  {
+   "id": "NS-data_management-033",
+   "jaccard": 0.2169
+  },
+  {
+   "id": "NS-data_management-025",
+   "jaccard": 0.2142
+  },
+  {
+   "id": "FT-067",
+   "jaccard": 0.2138
+  },
+  {
+   "id": "NS-bill_of_rights-039",
+   "jaccard": 0.2136
+  }
+ ],
+ "EV-008": [
+  {
+   "id": "FT-215",
+   "jaccard": 0.2715
+  },
+  {
+   "id": "NS-data_management-032",
+   "jaccard": 0.2667
+  },
+  {
+   "id": "NS-bill_of_rights-007",
+   "jaccard": 0.255
+  },
+  {
+   "id": "NS-data_management-038",
+   "jaccard": 0.255
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2541
+  },
+  {
+   "id": "NS-data_management-033",
+   "jaccard": 0.2515
+  },
+  {
+   "id": "NS-bill_of_rights-028",
+   "jaccard": 0.2514
+  },
+  {
+   "id": "NS-data_management-026",
+   "jaccard": 0.2462
+  },
+  {
+   "id": "NS-data_management-014",
+   "jaccard": 0.2437
+  },
+  {
+   "id": "NS-data_management-031",
+   "jaccard": 0.2418
+  }
+ ],
+ "EV-009": [
+  {
+   "id": "NS-small_releases-033",
+   "jaccard": 0.2503
+  },
+  {
+   "id": "NS-small_releases-010",
+   "jaccard": 0.2496
+  },
+  {
+   "id": "NS-small_releases-036",
+   "jaccard": 0.2482
+  },
+  {
+   "id": "NS-continuous_integration-010",
+   "jaccard": 0.246
+  },
+  {
+   "id": "NS-small_releases-013",
+   "jaccard": 0.2434
+  },
+  {
+   "id": "NS-small_releases-011",
+   "jaccard": 0.2409
+  },
+  {
+   "id": "NS-small_releases-026",
+   "jaccard": 0.2371
+  },
+  {
+   "id": "NS-small_releases-007",
+   "jaccard": 0.235
+  },
+  {
+   "id": "FT-130",
+   "jaccard": 0.2325
+  },
+  {
+   "id": "FT-204",
+   "jaccard": 0.2316
+  }
+ ],
+ "EV-010": [
+  {
+   "id": "NS-small_releases-011",
+   "jaccard": 0.2755
+  },
+  {
+   "id": "NS-small_releases-036",
+   "jaccard": 0.2733
+  },
+  {
+   "id": "NS-small_releases-035",
+   "jaccard": 0.2627
+  },
+  {
+   "id": "NS-small_releases-040",
+   "jaccard": 0.2596
+  },
+  {
+   "id": "NS-small_releases-002",
+   "jaccard": 0.2591
+  },
+  {
+   "id": "FT-204",
+   "jaccard": 0.2572
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.255
+  },
+  {
+   "id": "NS-small_releases-007",
+   "jaccard": 0.2538
+  },
+  {
+   "id": "NS-small_releases-042",
+   "jaccard": 0.2524
+  },
+  {
+   "id": "FT-083",
+   "jaccard": 0.2522
+  }
+ ],
+ "EV-012": [
+  {
+   "id": "NS-small_releases-037",
+   "jaccard": 0.2835
+  },
+  {
+   "id": "NS-small_releases-039",
+   "jaccard": 0.274
+  },
+  {
+   "id": "NS-small_releases-033",
+   "jaccard": 0.2703
+  },
+  {
+   "id": "NS-small_releases-008",
+   "jaccard": 0.2691
+  },
+  {
+   "id": "NS-small_releases-010",
+   "jaccard": 0.2684
+  },
+  {
+   "id": "NS-small_releases-036",
+   "jaccard": 0.2668
+  },
+  {
+   "id": "NS-small_releases-032",
+   "jaccard": 0.2632
+  },
+  {
+   "id": "NS-small_releases-023",
+   "jaccard": 0.2582
+  },
+  {
+   "id": "FT-166",
+   "jaccard": 0.2547
+  },
+  {
+   "id": "NS-small_releases-042",
+   "jaccard": 0.2542
+  }
+ ],
+ "EV-013": [
+  {
+   "id": "NS-acceptance_tests-038",
+   "jaccard": 0.2324
+  },
+  {
+   "id": "NS-bill_of_rights-010",
+   "jaccard": 0.2311
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.217
+  },
+  {
+   "id": "NS-acceptance_tests-008",
+   "jaccard": 0.2165
+  },
+  {
+   "id": "NS-acceptance_tests-039",
+   "jaccard": 0.2106
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2087
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2077
+  },
+  {
+   "id": "NS-bill_of_rights-025",
+   "jaccard": 0.206
+  },
+  {
+   "id": "NS-bill_of_rights-035",
+   "jaccard": 0.2049
+  },
+  {
+   "id": "NS-tdd-011",
+   "jaccard": 0.2045
+  }
+ ],
+ "EV-014": [
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.3149
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.3054
+  },
+  {
+   "id": "FT-124",
+   "jaccard": 0.3036
+  },
+  {
+   "id": "NS-acceptance_tests-027",
+   "jaccard": 0.2945
+  },
+  {
+   "id": "NS-acceptance_tests-008",
+   "jaccard": 0.2918
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "jaccard": 0.289
+  },
+  {
+   "id": "NS-acceptance_tests-031",
+   "jaccard": 0.288
+  },
+  {
+   "id": "NS-acceptance_tests-014",
+   "jaccard": 0.2879
+  },
+  {
+   "id": "NS-acceptance_tests-002",
+   "jaccard": 0.2851
+  },
+  {
+   "id": "NS-acceptance_tests-018",
+   "jaccard": 0.2849
+  }
+ ],
+ "EV-015": [
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2693
+  },
+  {
+   "id": "NS-acceptance_tests-008",
+   "jaccard": 0.2641
+  },
+  {
+   "id": "NS-acceptance_tests-011",
+   "jaccard": 0.262
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "jaccard": 0.2583
+  },
+  {
+   "id": "NS-acceptance_tests-029",
+   "jaccard": 0.2546
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2517
+  },
+  {
+   "id": "NS-acceptance_tests-014",
+   "jaccard": 0.25
+  },
+  {
+   "id": "NS-acceptance_tests-040",
+   "jaccard": 0.25
+  },
+  {
+   "id": "NS-acceptance_tests-017",
+   "jaccard": 0.2487
+  },
+  {
+   "id": "NS-acceptance_tests-020",
+   "jaccard": 0.2486
+  }
+ ],
+ "EV-016": [
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2721
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2705
+  },
+  {
+   "id": "FT-086",
+   "jaccard": 0.2632
+  },
+  {
+   "id": "NS-acceptance_tests-014",
+   "jaccard": 0.2611
+  },
+  {
+   "id": "NS-acceptance_tests-039",
+   "jaccard": 0.2588
+  },
+  {
+   "id": "NS-acceptance_tests-027",
+   "jaccard": 0.2553
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "jaccard": 0.2546
+  },
+  {
+   "id": "NS-whole_team-019",
+   "jaccard": 0.2514
+  },
+  {
+   "id": "NS-whole_team-041",
+   "jaccard": 0.2486
+  },
+  {
+   "id": "FT-197",
+   "jaccard": 0.2481
+  }
+ ],
+ "EV-017": [
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2533
+  },
+  {
+   "id": "FT-143",
+   "jaccard": 0.2451
+  },
+  {
+   "id": "FT-242",
+   "jaccard": 0.239
+  },
+  {
+   "id": "NS-whole_team-026",
+   "jaccard": 0.2389
+  },
+  {
+   "id": "NS-whole_team-024",
+   "jaccard": 0.2375
+  },
+  {
+   "id": "NS-whole_team-017",
+   "jaccard": 0.2355
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2319
+  },
+  {
+   "id": "NS-whole_team-036",
+   "jaccard": 0.2319
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2292
+  },
+  {
+   "id": "NS-whole_team-041",
+   "jaccard": 0.2265
+  }
+ ],
+ "EV-018": [
+  {
+   "id": "NS-whole_team-016",
+   "jaccard": 0.2477
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2443
+  },
+  {
+   "id": "NS-whole_team-003",
+   "jaccard": 0.2422
+  },
+  {
+   "id": "FT-143",
+   "jaccard": 0.2332
+  },
+  {
+   "id": "NS-whole_team-041",
+   "jaccard": 0.2317
+  },
+  {
+   "id": "NS-whole_team-010",
+   "jaccard": 0.2312
+  },
+  {
+   "id": "FT-030",
+   "jaccard": 0.2285
+  },
+  {
+   "id": "NS-collective_ownership-014",
+   "jaccard": 0.2285
+  },
+  {
+   "id": "FT-088",
+   "jaccard": 0.2279
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2279
+  }
+ ],
+ "EV-019": [
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2624
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2497
+  },
+  {
+   "id": "NS-whole_team-006",
+   "jaccard": 0.2457
+  },
+  {
+   "id": "NS-whole_team-036",
+   "jaccard": 0.2454
+  },
+  {
+   "id": "NS-whole_team-017",
+   "jaccard": 0.2442
+  },
+  {
+   "id": "NS-whole_team-018",
+   "jaccard": 0.2432
+  },
+  {
+   "id": "NS-whole_team-019",
+   "jaccard": 0.2427
+  },
+  {
+   "id": "NS-whole_team-009",
+   "jaccard": 0.2388
+  },
+  {
+   "id": "FT-091",
+   "jaccard": 0.2386
+  },
+  {
+   "id": "FT-242",
+   "jaccard": 0.2369
+  }
+ ],
+ "EV-020": [
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2599
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2591
+  },
+  {
+   "id": "FT-152",
+   "jaccard": 0.2531
+  },
+  {
+   "id": "NS-whole_team-024",
+   "jaccard": 0.2522
+  },
+  {
+   "id": "NS-agile_values-025",
+   "jaccard": 0.2473
+  },
+  {
+   "id": "NS-whole_team-019",
+   "jaccard": 0.2454
+  },
+  {
+   "id": "FT-091",
+   "jaccard": 0.238
+  },
+  {
+   "id": "FT-146",
+   "jaccard": 0.2361
+  },
+  {
+   "id": "NS-planning-034",
+   "jaccard": 0.234
+  },
+  {
+   "id": "NS-whole_team-017",
+   "jaccard": 0.233
+  }
+ ],
+ "EV-021": [
+  {
+   "id": "NS-sustainable_pace-024",
+   "jaccard": 0.2653
+  },
+  {
+   "id": "NS-sustainable_pace-008",
+   "jaccard": 0.2635
+  },
+  {
+   "id": "NS-sustainable_pace-006",
+   "jaccard": 0.2594
+  },
+  {
+   "id": "NS-sustainable_pace-005",
+   "jaccard": 0.2557
+  },
+  {
+   "id": "NS-sustainable_pace-016",
+   "jaccard": 0.2553
+  },
+  {
+   "id": "NS-sustainable_pace-025",
+   "jaccard": 0.2544
+  },
+  {
+   "id": "NS-sustainable_pace-023",
+   "jaccard": 0.2533
+  },
+  {
+   "id": "NS-continuous_integration-006",
+   "jaccard": 0.2382
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2372
+  },
+  {
+   "id": "NS-acceptance_tests-008",
+   "jaccard": 0.2358
+  }
+ ],
+ "EV-022": [
+  {
+   "id": "NS-sustainable_pace-012",
+   "jaccard": 0.2182
+  },
+  {
+   "id": "NS-whole_team-004",
+   "jaccard": 0.2182
+  },
+  {
+   "id": "NS-acceptance_tests-017",
+   "jaccard": 0.2163
+  },
+  {
+   "id": "NS-continuous_integration-022",
+   "jaccard": 0.2155
+  },
+  {
+   "id": "NS-collective_ownership-024",
+   "jaccard": 0.2154
+  },
+  {
+   "id": "NS-whole_team-001",
+   "jaccard": 0.2148
+  },
+  {
+   "id": "NS-small_releases-042",
+   "jaccard": 0.2136
+  },
+  {
+   "id": "NS-continuous_integration-027",
+   "jaccard": 0.2131
+  },
+  {
+   "id": "NS-small_releases-036",
+   "jaccard": 0.2123
+  },
+  {
+   "id": "NS-sustainable_pace-026",
+   "jaccard": 0.2119
+  }
+ ],
+ "EV-023": [
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2403
+  },
+  {
+   "id": "FT-242",
+   "jaccard": 0.236
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2344
+  },
+  {
+   "id": "NS-data_management-035",
+   "jaccard": 0.2292
+  },
+  {
+   "id": "NS-data_management-038",
+   "jaccard": 0.2272
+  },
+  {
+   "id": "NS-sustainable_pace-023",
+   "jaccard": 0.2261
+  },
+  {
+   "id": "NS-whole_team-038",
+   "jaccard": 0.2261
+  },
+  {
+   "id": "FT-143",
+   "jaccard": 0.2255
+  },
+  {
+   "id": "NS-sustainable_pace-014",
+   "jaccard": 0.2252
+  },
+  {
+   "id": "NS-whole_team-004",
+   "jaccard": 0.2251
+  }
+ ],
+ "EV-024": [
+  {
+   "id": "FT-212",
+   "jaccard": 0.2387
+  },
+  {
+   "id": "NS-sustainable_pace-006",
+   "jaccard": 0.2293
+  },
+  {
+   "id": "NS-sustainable_pace-031",
+   "jaccard": 0.2287
+  },
+  {
+   "id": "NS-bill_of_rights-038",
+   "jaccard": 0.2224
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.22
+  },
+  {
+   "id": "NS-collective_ownership-015",
+   "jaccard": 0.2192
+  },
+  {
+   "id": "FT-175",
+   "jaccard": 0.2188
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2181
+  },
+  {
+   "id": "FT-228",
+   "jaccard": 0.216
+  },
+  {
+   "id": "NS-sustainable_pace-005",
+   "jaccard": 0.2157
+  }
+ ],
+ "EV-025": [
+  {
+   "id": "FT-033",
+   "jaccard": 0.2657
+  },
+  {
+   "id": "NS-collective_ownership-015",
+   "jaccard": 0.2639
+  },
+  {
+   "id": "FT-094",
+   "jaccard": 0.2566
+  },
+  {
+   "id": "FT-057",
+   "jaccard": 0.2558
+  },
+  {
+   "id": "FT-055",
+   "jaccard": 0.255
+  },
+  {
+   "id": "NS-collective_ownership-014",
+   "jaccard": 0.2527
+  },
+  {
+   "id": "NS-collective_ownership-034",
+   "jaccard": 0.2524
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2506
+  },
+  {
+   "id": "FT-159",
+   "jaccard": 0.2496
+  },
+  {
+   "id": "NS-collective_ownership-010",
+   "jaccard": 0.2494
+  }
+ ],
+ "EV-026": [
+  {
+   "id": "NS-collective_ownership-008",
+   "jaccard": 0.25
+  },
+  {
+   "id": "FT-137",
+   "jaccard": 0.2405
+  },
+  {
+   "id": "NS-collective_ownership-014",
+   "jaccard": 0.2311
+  },
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2276
+  },
+  {
+   "id": "NS-collective_ownership-010",
+   "jaccard": 0.2245
+  },
+  {
+   "id": "FT-226",
+   "jaccard": 0.224
+  },
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2195
+  },
+  {
+   "id": "FT-094",
+   "jaccard": 0.216
+  },
+  {
+   "id": "NS-collective_ownership-016",
+   "jaccard": 0.2144
+  },
+  {
+   "id": "NS-collective_ownership-029",
+   "jaccard": 0.2119
+  }
+ ],
+ "EV-027": [
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2411
+  },
+  {
+   "id": "FT-094",
+   "jaccard": 0.2396
+  },
+  {
+   "id": "NS-collective_ownership-014",
+   "jaccard": 0.23
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2251
+  },
+  {
+   "id": "NS-continuous_integration-035",
+   "jaccard": 0.2209
+  },
+  {
+   "id": "NS-continuous_integration-031",
+   "jaccard": 0.2163
+  },
+  {
+   "id": "NS-collective_ownership-034",
+   "jaccard": 0.2156
+  },
+  {
+   "id": "NS-collective_ownership-029",
+   "jaccard": 0.2154
+  },
+  {
+   "id": "NS-collective_ownership-021",
+   "jaccard": 0.2132
+  },
+  {
+   "id": "NS-collective_ownership-016",
+   "jaccard": 0.213
+  }
+ ],
+ "EV-029": [
+  {
+   "id": "NS-continuous_integration-035",
+   "jaccard": 0.3005
+  },
+  {
+   "id": "NS-continuous_integration-039",
+   "jaccard": 0.2961
+  },
+  {
+   "id": "NS-continuous_integration-012",
+   "jaccard": 0.2808
+  },
+  {
+   "id": "FT-112",
+   "jaccard": 0.2804
+  },
+  {
+   "id": "NS-continuous_integration-002",
+   "jaccard": 0.2801
+  },
+  {
+   "id": "NS-continuous_integration-024",
+   "jaccard": 0.2793
+  },
+  {
+   "id": "NS-continuous_integration-006",
+   "jaccard": 0.2788
+  },
+  {
+   "id": "NS-continuous_integration-027",
+   "jaccard": 0.2784
+  },
+  {
+   "id": "NS-continuous_integration-022",
+   "jaccard": 0.2726
+  },
+  {
+   "id": "NS-continuous_integration-001",
+   "jaccard": 0.2713
+  }
+ ],
+ "EV-030": [
+  {
+   "id": "NS-continuous_integration-027",
+   "jaccard": 0.2528
+  },
+  {
+   "id": "NS-continuous_integration-034",
+   "jaccard": 0.2429
+  },
+  {
+   "id": "NS-continuous_integration-022",
+   "jaccard": 0.2425
+  },
+  {
+   "id": "NS-continuous_integration-010",
+   "jaccard": 0.2407
+  },
+  {
+   "id": "NS-continuous_integration-035",
+   "jaccard": 0.2387
+  },
+  {
+   "id": "NS-continuous_integration-012",
+   "jaccard": 0.2384
+  },
+  {
+   "id": "FT-210",
+   "jaccard": 0.2365
+  },
+  {
+   "id": "NS-continuous_integration-001",
+   "jaccard": 0.2365
+  },
+  {
+   "id": "FT-029",
+   "jaccard": 0.2348
+  },
+  {
+   "id": "NS-continuous_integration-039",
+   "jaccard": 0.234
+  }
+ ],
+ "EV-031": [
+  {
+   "id": "FT-210",
+   "jaccard": 0.3069
+  },
+  {
+   "id": "NS-continuous_integration-006",
+   "jaccard": 0.301
+  },
+  {
+   "id": "NS-continuous_integration-003",
+   "jaccard": 0.2873
+  },
+  {
+   "id": "NS-continuous_integration-021",
+   "jaccard": 0.275
+  },
+  {
+   "id": "NS-continuous_integration-012",
+   "jaccard": 0.2665
+  },
+  {
+   "id": "NS-continuous_integration-009",
+   "jaccard": 0.266
+  },
+  {
+   "id": "NS-continuous_integration-031",
+   "jaccard": 0.2652
+  },
+  {
+   "id": "NS-continuous_integration-010",
+   "jaccard": 0.2648
+  },
+  {
+   "id": "NS-continuous_integration-020",
+   "jaccard": 0.2638
+  },
+  {
+   "id": "NS-continuous_integration-037",
+   "jaccard": 0.2638
+  }
+ ],
+ "EV-032": [
+  {
+   "id": "NS-collective_ownership-010",
+   "jaccard": 0.2666
+  },
+  {
+   "id": "NS-continuous_integration-006",
+   "jaccard": 0.253
+  },
+  {
+   "id": "NS-collective_ownership-015",
+   "jaccard": 0.2503
+  },
+  {
+   "id": "NS-continuous_integration-009",
+   "jaccard": 0.249
+  },
+  {
+   "id": "NS-continuous_integration-034",
+   "jaccard": 0.2468
+  },
+  {
+   "id": "NS-continuous_integration-015",
+   "jaccard": 0.2458
+  },
+  {
+   "id": "NS-continuous_integration-035",
+   "jaccard": 0.2408
+  },
+  {
+   "id": "NS-continuous_integration-022",
+   "jaccard": 0.238
+  },
+  {
+   "id": "NS-whole_team-017",
+   "jaccard": 0.2346
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2328
+  }
+ ],
+ "EV-033": [
+  {
+   "id": "NS-standup-042",
+   "jaccard": 0.2614
+  },
+  {
+   "id": "NS-standup-024",
+   "jaccard": 0.2607
+  },
+  {
+   "id": "NS-standup-017",
+   "jaccard": 0.2476
+  },
+  {
+   "id": "FT-065",
+   "jaccard": 0.2406
+  },
+  {
+   "id": "NS-standup-004",
+   "jaccard": 0.2369
+  },
+  {
+   "id": "NS-standup-014",
+   "jaccard": 0.2355
+  },
+  {
+   "id": "NS-standup-026",
+   "jaccard": 0.2336
+  },
+  {
+   "id": "NS-standup-039",
+   "jaccard": 0.2327
+  },
+  {
+   "id": "NS-standup-037",
+   "jaccard": 0.2281
+  },
+  {
+   "id": "NS-standup-019",
+   "jaccard": 0.2279
+  }
+ ],
+ "EV-034": [
+  {
+   "id": "FT-195",
+   "jaccard": 0.2553
+  },
+  {
+   "id": "NS-standup-021",
+   "jaccard": 0.2478
+  },
+  {
+   "id": "NS-standup-001",
+   "jaccard": 0.2404
+  },
+  {
+   "id": "NS-standup-033",
+   "jaccard": 0.2376
+  },
+  {
+   "id": "NS-standup-010",
+   "jaccard": 0.2338
+  },
+  {
+   "id": "FT-126",
+   "jaccard": 0.233
+  },
+  {
+   "id": "NS-standup-011",
+   "jaccard": 0.2324
+  },
+  {
+   "id": "NS-standup-041",
+   "jaccard": 0.2324
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2271
+  },
+  {
+   "id": "NS-standup-024",
+   "jaccard": 0.2268
+  }
+ ],
+ "EV-035": [
+  {
+   "id": "NS-standup-019",
+   "jaccard": 0.2608
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2582
+  },
+  {
+   "id": "NS-standup-033",
+   "jaccard": 0.2526
+  },
+  {
+   "id": "FT-126",
+   "jaccard": 0.2488
+  },
+  {
+   "id": "FT-207",
+   "jaccard": 0.248
+  },
+  {
+   "id": "FT-203",
+   "jaccard": 0.247
+  },
+  {
+   "id": "NS-standup-024",
+   "jaccard": 0.2456
+  },
+  {
+   "id": "NS-standup-018",
+   "jaccard": 0.2392
+  },
+  {
+   "id": "NS-standup-020",
+   "jaccard": 0.2366
+  },
+  {
+   "id": "NS-standup-026",
+   "jaccard": 0.2341
+  }
+ ],
+ "EV-036": [
+  {
+   "id": "NS-standup-021",
+   "jaccard": 0.2865
+  },
+  {
+   "id": "FT-042",
+   "jaccard": 0.2778
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2662
+  },
+  {
+   "id": "NS-whole_team-019",
+   "jaccard": 0.2645
+  },
+  {
+   "id": "NS-standup-010",
+   "jaccard": 0.2611
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2584
+  },
+  {
+   "id": "NS-standup-003",
+   "jaccard": 0.2561
+  },
+  {
+   "id": "NS-standup-019",
+   "jaccard": 0.2545
+  },
+  {
+   "id": "FT-117",
+   "jaccard": 0.2516
+  },
+  {
+   "id": "FT-170",
+   "jaccard": 0.2438
+  }
+ ],
+ "EV-037": [
+  {
+   "id": "NS-tdd-017",
+   "jaccard": 0.2635
+  },
+  {
+   "id": "FT-019",
+   "jaccard": 0.2602
+  },
+  {
+   "id": "NS-tdd-009",
+   "jaccard": 0.2573
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.256
+  },
+  {
+   "id": "NS-tdd-003",
+   "jaccard": 0.2456
+  },
+  {
+   "id": "FT-070",
+   "jaccard": 0.2389
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2388
+  },
+  {
+   "id": "NS-tdd-004",
+   "jaccard": 0.2368
+  },
+  {
+   "id": "NS-tdd-042",
+   "jaccard": 0.2327
+  },
+  {
+   "id": "NS-tdd-021",
+   "jaccard": 0.2271
+  }
+ ],
+ "EV-038": [
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2444
+  },
+  {
+   "id": "FT-089",
+   "jaccard": 0.2384
+  },
+  {
+   "id": "NS-acceptance_tests-032",
+   "jaccard": 0.2355
+  },
+  {
+   "id": "NS-tdd-028",
+   "jaccard": 0.2251
+  },
+  {
+   "id": "NS-continuous_integration-009",
+   "jaccard": 0.2224
+  },
+  {
+   "id": "NS-collective_ownership-009",
+   "jaccard": 0.2219
+  },
+  {
+   "id": "FT-124",
+   "jaccard": 0.2207
+  },
+  {
+   "id": "FT-175",
+   "jaccard": 0.2202
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2187
+  },
+  {
+   "id": "NS-continuous_integration-018",
+   "jaccard": 0.2179
+  }
+ ],
+ "EV-039": [
+  {
+   "id": "NS-tdd-027",
+   "jaccard": 0.2515
+  },
+  {
+   "id": "NS-tdd-039",
+   "jaccard": 0.2428
+  },
+  {
+   "id": "NS-tdd-042",
+   "jaccard": 0.242
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2407
+  },
+  {
+   "id": "NS-tdd-034",
+   "jaccard": 0.2363
+  },
+  {
+   "id": "NS-tdd-017",
+   "jaccard": 0.2355
+  },
+  {
+   "id": "FT-238",
+   "jaccard": 0.2331
+  },
+  {
+   "id": "NS-tdd-021",
+   "jaccard": 0.2322
+  },
+  {
+   "id": "NS-tdd-033",
+   "jaccard": 0.2319
+  },
+  {
+   "id": "NS-tdd-018",
+   "jaccard": 0.231
+  }
+ ],
+ "EV-040": [
+  {
+   "id": "NS-tdd-011",
+   "jaccard": 0.2297
+  },
+  {
+   "id": "NS-tdd-012",
+   "jaccard": 0.2291
+  },
+  {
+   "id": "NS-bill_of_rights-010",
+   "jaccard": 0.2288
+  },
+  {
+   "id": "FT-019",
+   "jaccard": 0.2285
+  },
+  {
+   "id": "NS-tdd-017",
+   "jaccard": 0.2278
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2277
+  },
+  {
+   "id": "NS-continuous_integration-027",
+   "jaccard": 0.2268
+  },
+  {
+   "id": "NS-tdd-038",
+   "jaccard": 0.2256
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.225
+  },
+  {
+   "id": "FT-020",
+   "jaccard": 0.2231
+  }
+ ],
+ "EV-041": [
+  {
+   "id": "NS-tdd-017",
+   "jaccard": 0.2622
+  },
+  {
+   "id": "FT-175",
+   "jaccard": 0.25
+  },
+  {
+   "id": "NS-tdd-004",
+   "jaccard": 0.2455
+  },
+  {
+   "id": "NS-tdd-014",
+   "jaccard": 0.2348
+  },
+  {
+   "id": "NS-tdd-042",
+   "jaccard": 0.2346
+  },
+  {
+   "id": "NS-refactoring-030",
+   "jaccard": 0.2308
+  },
+  {
+   "id": "NS-tdd-015",
+   "jaccard": 0.2308
+  },
+  {
+   "id": "NS-tdd-007",
+   "jaccard": 0.2299
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2278
+  },
+  {
+   "id": "NS-tdd-038",
+   "jaccard": 0.2274
+  }
+ ],
+ "EV-042": [
+  {
+   "id": "NS-refactoring-010",
+   "jaccard": 0.293
+  },
+  {
+   "id": "NS-refactoring-030",
+   "jaccard": 0.2855
+  },
+  {
+   "id": "FT-025",
+   "jaccard": 0.2695
+  },
+  {
+   "id": "NS-refactoring-021",
+   "jaccard": 0.2674
+  },
+  {
+   "id": "NS-refactoring-006",
+   "jaccard": 0.2659
+  },
+  {
+   "id": "NS-refactoring-011",
+   "jaccard": 0.2622
+  },
+  {
+   "id": "NS-refactoring-022",
+   "jaccard": 0.2619
+  },
+  {
+   "id": "NS-refactoring-038",
+   "jaccard": 0.2613
+  },
+  {
+   "id": "NS-refactoring-008",
+   "jaccard": 0.2603
+  },
+  {
+   "id": "FT-069",
+   "jaccard": 0.2602
+  }
+ ],
+ "EV-044": [
+  {
+   "id": "NS-refactoring-030",
+   "jaccard": 0.2829
+  },
+  {
+   "id": "NS-refactoring-038",
+   "jaccard": 0.2777
+  },
+  {
+   "id": "NS-refactoring-016",
+   "jaccard": 0.2705
+  },
+  {
+   "id": "NS-refactoring-041",
+   "jaccard": 0.2649
+  },
+  {
+   "id": "NS-refactoring-040",
+   "jaccard": 0.2561
+  },
+  {
+   "id": "FT-025",
+   "jaccard": 0.2514
+  },
+  {
+   "id": "NS-refactoring-022",
+   "jaccard": 0.2491
+  },
+  {
+   "id": "NS-refactoring-035",
+   "jaccard": 0.2451
+  },
+  {
+   "id": "NS-refactoring-032",
+   "jaccard": 0.2416
+  },
+  {
+   "id": "FT-196",
+   "jaccard": 0.2405
+  }
+ ],
+ "EV-045": [
+  {
+   "id": "FT-095",
+   "jaccard": 0.2355
+  },
+  {
+   "id": "FT-140",
+   "jaccard": 0.2273
+  },
+  {
+   "id": "NS-simple_design-019",
+   "jaccard": 0.2268
+  },
+  {
+   "id": "NS-simple_design-008",
+   "jaccard": 0.2254
+  },
+  {
+   "id": "NS-simple_design-028",
+   "jaccard": 0.2138
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2117
+  },
+  {
+   "id": "NS-simple_design-040",
+   "jaccard": 0.2077
+  },
+  {
+   "id": "FT-010",
+   "jaccard": 0.2067
+  },
+  {
+   "id": "NS-acceptance_tests-042",
+   "jaccard": 0.2047
+  },
+  {
+   "id": "NS-tdd-033",
+   "jaccard": 0.2037
+  }
+ ],
+ "EV-046": [
+  {
+   "id": "NS-tdd-028",
+   "jaccard": 0.226
+  },
+  {
+   "id": "NS-simple_design-013",
+   "jaccard": 0.2238
+  },
+  {
+   "id": "NS-tdd-034",
+   "jaccard": 0.2222
+  },
+  {
+   "id": "NS-refactoring-038",
+   "jaccard": 0.2202
+  },
+  {
+   "id": "NS-simple_design-034",
+   "jaccard": 0.2192
+  },
+  {
+   "id": "NS-simple_design-030",
+   "jaccard": 0.2188
+  },
+  {
+   "id": "NS-simple_design-032",
+   "jaccard": 0.2139
+  },
+  {
+   "id": "NS-refactoring-041",
+   "jaccard": 0.2137
+  },
+  {
+   "id": "FT-141",
+   "jaccard": 0.2109
+  },
+  {
+   "id": "NS-simple_design-041",
+   "jaccard": 0.2109
+  }
+ ],
+ "EV-047": [
+  {
+   "id": "NS-simple_design-014",
+   "jaccard": 0.2493
+  },
+  {
+   "id": "NS-simple_design-016",
+   "jaccard": 0.2413
+  },
+  {
+   "id": "NS-simple_design-026",
+   "jaccard": 0.2302
+  },
+  {
+   "id": "FT-095",
+   "jaccard": 0.2294
+  },
+  {
+   "id": "NS-simple_design-032",
+   "jaccard": 0.2288
+  },
+  {
+   "id": "NS-simple_design-008",
+   "jaccard": 0.2255
+  },
+  {
+   "id": "NS-simple_design-035",
+   "jaccard": 0.2211
+  },
+  {
+   "id": "NS-simple_design-024",
+   "jaccard": 0.2186
+  },
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2148
+  },
+  {
+   "id": "NS-simple_design-027",
+   "jaccard": 0.2147
+  }
+ ],
+ "EV-048": [
+  {
+   "id": "FT-095",
+   "jaccard": 0.2343
+  },
+  {
+   "id": "NS-simple_design-005",
+   "jaccard": 0.2235
+  },
+  {
+   "id": "NS-simple_design-033",
+   "jaccard": 0.2217
+  },
+  {
+   "id": "NS-simple_design-016",
+   "jaccard": 0.2215
+  },
+  {
+   "id": "NS-simple_design-022",
+   "jaccard": 0.2212
+  },
+  {
+   "id": "NS-simple_design-008",
+   "jaccard": 0.2197
+  },
+  {
+   "id": "FT-151",
+   "jaccard": 0.2195
+  },
+  {
+   "id": "NS-simple_design-030",
+   "jaccard": 0.2193
+  },
+  {
+   "id": "NS-tdd-034",
+   "jaccard": 0.2168
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2162
+  }
+ ],
+ "EV-049": [
+  {
+   "id": "NS-pair_programming-023",
+   "jaccard": 0.2638
+  },
+  {
+   "id": "NS-pair_programming-035",
+   "jaccard": 0.2547
+  },
+  {
+   "id": "NS-pair_programming-018",
+   "jaccard": 0.2481
+  },
+  {
+   "id": "NS-pair_programming-017",
+   "jaccard": 0.2398
+  },
+  {
+   "id": "NS-collective_ownership-038",
+   "jaccard": 0.2366
+  },
+  {
+   "id": "NS-pair_programming-027",
+   "jaccard": 0.2356
+  },
+  {
+   "id": "NS-pair_programming-031",
+   "jaccard": 0.2331
+  },
+  {
+   "id": "NS-pair_programming-007",
+   "jaccard": 0.2322
+  },
+  {
+   "id": "NS-collective_ownership-025",
+   "jaccard": 0.2321
+  },
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2292
+  }
+ ],
+ "EV-050": [
+  {
+   "id": "NS-pair_programming-038",
+   "jaccard": 0.2785
+  },
+  {
+   "id": "NS-pair_programming-031",
+   "jaccard": 0.2727
+  },
+  {
+   "id": "NS-pair_programming-018",
+   "jaccard": 0.2602
+  },
+  {
+   "id": "NS-pair_programming-006",
+   "jaccard": 0.2571
+  },
+  {
+   "id": "NS-pair_programming-023",
+   "jaccard": 0.2548
+  },
+  {
+   "id": "FT-155",
+   "jaccard": 0.2537
+  },
+  {
+   "id": "NS-pair_programming-017",
+   "jaccard": 0.2441
+  },
+  {
+   "id": "NS-pair_programming-002",
+   "jaccard": 0.2419
+  },
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2389
+  },
+  {
+   "id": "NS-pair_programming-022",
+   "jaccard": 0.2375
+  }
+ ],
+ "EV-051": [
+  {
+   "id": "FT-077",
+   "jaccard": 0.2432
+  },
+  {
+   "id": "NS-whole_team-019",
+   "jaccard": 0.2417
+  },
+  {
+   "id": "FT-052",
+   "jaccard": 0.2413
+  },
+  {
+   "id": "NS-whole_team-009",
+   "jaccard": 0.241
+  },
+  {
+   "id": "NS-collective_ownership-034",
+   "jaccard": 0.2384
+  },
+  {
+   "id": "NS-whole_team-034",
+   "jaccard": 0.2287
+  },
+  {
+   "id": "FT-033",
+   "jaccard": 0.2283
+  },
+  {
+   "id": "FT-155",
+   "jaccard": 0.227
+  },
+  {
+   "id": "FT-075",
+   "jaccard": 0.2222
+  },
+  {
+   "id": "NS-whole_team-026",
+   "jaccard": 0.2218
+  }
+ ],
+ "EV-052": [
+  {
+   "id": "FT-109",
+   "jaccard": 0.2376
+  },
+  {
+   "id": "NS-pair_programming-007",
+   "jaccard": 0.2369
+  },
+  {
+   "id": "NS-collective_ownership-025",
+   "jaccard": 0.2368
+  },
+  {
+   "id": "NS-pair_programming-038",
+   "jaccard": 0.2365
+  },
+  {
+   "id": "NS-pair_programming-035",
+   "jaccard": 0.236
+  },
+  {
+   "id": "NS-pair_programming-018",
+   "jaccard": 0.2359
+  },
+  {
+   "id": "NS-collective_ownership-013",
+   "jaccard": 0.2327
+  },
+  {
+   "id": "FT-228",
+   "jaccard": 0.2298
+  },
+  {
+   "id": "NS-collective_ownership-006",
+   "jaccard": 0.2286
+  },
+  {
+   "id": "FT-018",
+   "jaccard": 0.2263
+  }
+ ],
+ "EV-053": [
+  {
+   "id": "NS-bill_of_rights-039",
+   "jaccard": 0.2443
+  },
+  {
+   "id": "FT-032",
+   "jaccard": 0.2374
+  },
+  {
+   "id": "FT-200",
+   "jaccard": 0.2352
+  },
+  {
+   "id": "NS-bill_of_rights-033",
+   "jaccard": 0.2337
+  },
+  {
+   "id": "FT-128",
+   "jaccard": 0.2209
+  },
+  {
+   "id": "NS-bill_of_rights-010",
+   "jaccard": 0.2202
+  },
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2199
+  },
+  {
+   "id": "NS-data_management-027",
+   "jaccard": 0.2169
+  },
+  {
+   "id": "NS-bill_of_rights-025",
+   "jaccard": 0.216
+  },
+  {
+   "id": "FT-187",
+   "jaccard": 0.2159
+  }
+ ],
+ "EV-054": [
+  {
+   "id": "NS-bill_of_rights-019",
+   "jaccard": 0.2879
+  },
+  {
+   "id": "NS-bill_of_rights-039",
+   "jaccard": 0.2538
+  },
+  {
+   "id": "NS-bill_of_rights-007",
+   "jaccard": 0.253
+  },
+  {
+   "id": "FT-128",
+   "jaccard": 0.2464
+  },
+  {
+   "id": "NS-bill_of_rights-025",
+   "jaccard": 0.2405
+  },
+  {
+   "id": "NS-bill_of_rights-035",
+   "jaccard": 0.2393
+  },
+  {
+   "id": "NS-bill_of_rights-008",
+   "jaccard": 0.2342
+  },
+  {
+   "id": "NS-collective_ownership-010",
+   "jaccard": 0.2338
+  },
+  {
+   "id": "NS-planning-034",
+   "jaccard": 0.2337
+  },
+  {
+   "id": "NS-bill_of_rights-033",
+   "jaccard": 0.228
+  }
+ ],
+ "EV-055": [
+  {
+   "id": "FT-115",
+   "jaccard": 0.2518
+  },
+  {
+   "id": "FT-152",
+   "jaccard": 0.242
+  },
+  {
+   "id": "FT-228",
+   "jaccard": 0.2373
+  },
+  {
+   "id": "FT-175",
+   "jaccard": 0.237
+  },
+  {
+   "id": "NS-sustainable_pace-016",
+   "jaccard": 0.2367
+  },
+  {
+   "id": "NS-planning-019",
+   "jaccard": 0.2339
+  },
+  {
+   "id": "NS-tdd-042",
+   "jaccard": 0.2315
+  },
+  {
+   "id": "NS-simple_design-020",
+   "jaccard": 0.2277
+  },
+  {
+   "id": "FT-163",
+   "jaccard": 0.226
+  },
+  {
+   "id": "NS-tdd-002",
+   "jaccard": 0.2258
+  }
+ ],
+ "EV-056": [
+  {
+   "id": "FT-010",
+   "jaccard": 0.2712
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2527
+  },
+  {
+   "id": "NS-planning-034",
+   "jaccard": 0.2462
+  },
+  {
+   "id": "NS-planning-036",
+   "jaccard": 0.2412
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "jaccard": 0.2405
+  },
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2397
+  },
+  {
+   "id": "NS-planning-041",
+   "jaccard": 0.2384
+  },
+  {
+   "id": "NS-bill_of_rights-039",
+   "jaccard": 0.2368
+  },
+  {
+   "id": "NS-whole_team-032",
+   "jaccard": 0.2362
+  },
+  {
+   "id": "NS-refactoring-015",
+   "jaccard": 0.2359
+  }
+ ],
+ "EV-057": [
+  {
+   "id": "FT-126",
+   "jaccard": 0.2476
+  },
+  {
+   "id": "NS-agile_values-039",
+   "jaccard": 0.2419
+  },
+  {
+   "id": "NS-standup-020",
+   "jaccard": 0.2411
+  },
+  {
+   "id": "NS-agile_values-038",
+   "jaccard": 0.2396
+  },
+  {
+   "id": "NS-planning-003",
+   "jaccard": 0.2389
+  },
+  {
+   "id": "NS-continuous_integration-010",
+   "jaccard": 0.2372
+  },
+  {
+   "id": "FT-143",
+   "jaccard": 0.2352
+  },
+  {
+   "id": "NS-agile_values-006",
+   "jaccard": 0.2349
+  },
+  {
+   "id": "NS-agile_values-004",
+   "jaccard": 0.2347
+  },
+  {
+   "id": "FT-241",
+   "jaccard": 0.2318
+  }
+ ],
+ "EV-058": [
+  {
+   "id": "FT-058",
+   "jaccard": 0.2496
+  },
+  {
+   "id": "NS-continuous_integration-031",
+   "jaccard": 0.2387
+  },
+  {
+   "id": "NS-data_management-034",
+   "jaccard": 0.2335
+  },
+  {
+   "id": "NS-agile_values-015",
+   "jaccard": 0.2329
+  },
+  {
+   "id": "FT-187",
+   "jaccard": 0.2319
+  },
+  {
+   "id": "FT-011",
+   "jaccard": 0.2313
+  },
+  {
+   "id": "NS-agile_values-018",
+   "jaccard": 0.2286
+  },
+  {
+   "id": "NS-continuous_integration-006",
+   "jaccard": 0.2272
+  },
+  {
+   "id": "NS-whole_team-018",
+   "jaccard": 0.2266
+  },
+  {
+   "id": "NS-whole_team-024",
+   "jaccard": 0.2264
+  }
+ ],
+ "EV-059": [
+  {
+   "id": "FT-241",
+   "jaccard": 0.2588
+  },
+  {
+   "id": "NS-whole_team-024",
+   "jaccard": 0.2463
+  },
+  {
+   "id": "FT-011",
+   "jaccard": 0.243
+  },
+  {
+   "id": "FT-077",
+   "jaccard": 0.241
+  },
+  {
+   "id": "NS-collective_ownership-001",
+   "jaccard": 0.2376
+  },
+  {
+   "id": "FT-175",
+   "jaccard": 0.2339
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2329
+  },
+  {
+   "id": "NS-agile_values-038",
+   "jaccard": 0.2315
+  },
+  {
+   "id": "NS-data_management-025",
+   "jaccard": 0.2304
+  },
+  {
+   "id": "NS-collective_ownership-008",
+   "jaccard": 0.2302
+  }
+ ],
+ "EV-060": [
+  {
+   "id": "NS-bill_of_rights-028",
+   "jaccard": 0.2407
+  },
+  {
+   "id": "NS-refactoring-030",
+   "jaccard": 0.2388
+  },
+  {
+   "id": "NS-tdd-029",
+   "jaccard": 0.2335
+  },
+  {
+   "id": "NS-collective_ownership-015",
+   "jaccard": 0.2323
+  },
+  {
+   "id": "NS-continuous_integration-031",
+   "jaccard": 0.232
+  },
+  {
+   "id": "NS-collective_ownership-002",
+   "jaccard": 0.2316
+  },
+  {
+   "id": "NS-planning-040",
+   "jaccard": 0.2316
+  },
+  {
+   "id": "NS-whole_team-018",
+   "jaccard": 0.2303
+  },
+  {
+   "id": "NS-refactoring-041",
+   "jaccard": 0.2302
+  },
+  {
+   "id": "NS-standup-020",
+   "jaccard": 0.2302
+  }
+ ]
+}

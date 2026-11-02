@@ -1,0 +1,36 @@
+{
+ "valid_set": "data/distill/valid.jsonl",
+ "valid_n": 49,
+ "best_step": 100,
+ "best_principle_acc": 0.4694,
+ "base_list_principle_acc": 0.3673,
+ "base_list_metrics": {
+  "n": 49,
+  "format_ok": 0.0,
+  "verdict_acc": 0.0,
+  "principle_acc": 0.3673,
+  "both_acc": 0.0,
+  "verdict_acc_lenient": 0.4082,
+  "principle_acc_lenient": 0.3673,
+  "both_acc_lenient": 0.1837,
+  "avg_chars": 809.7959,
+  "avg_sec": 1.942,
+  "avg_prompt_tokens": 304.531,
+  "avg_gen_tokens": 248.204,
+  "hit_max_tokens": 0.0,
+  "wall_sec": 95.2,
+  "prompt_tps": 500.65,
+  "generation_tps": 186.77,
+  "peak_memory_gb": 5.4636
+ },
+ "rule": "best < 0.60 OR best < base+list + 0.10",
+ "trigger": {
+  "fallback": true,
+  "below_abs": true,
+  "below_base_plus": false,
+  "best": 0.4694,
+  "base_list": 0.3673
+ },
+ "read_eval": false,
+ "base_result_reused": "results/student/eval_valid__base__list.json"
+}

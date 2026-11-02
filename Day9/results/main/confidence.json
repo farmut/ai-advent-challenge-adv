@@ -1,0 +1,29 @@
+{
+ "model": "models/student-fused",
+ "prompt": "student:gist",
+ "metrics": {
+  "valid": {
+   "n": 49,
+   "ece": 0.3411423309038353,
+   "auroc": 0.6294117647058823,
+   "mean_confidence": 0.5554266544490568,
+   "median_confidence": 0.5881913468270419,
+   "mean_verdict_margin": 0.50258559088227,
+   "mean_principle_margin": 0.6236143861420043
+  },
+  "eval": {
+   "n": 57,
+   "ece": 0.2497173205758124,
+   "auroc": 0.7464387464387464,
+   "mean_confidence": 0.5275685526570599,
+   "median_confidence": 0.542579873326772,
+   "mean_verdict_margin": 0.4721740727942814,
+   "mean_principle_margin": 0.6202935224758358
+  }
+ },
+ "first_token_distinguishable": {
+  "verdicts": true,
+  "principles": false
+ },
+ "confidence_definition": "p(verdict)*p(principle|argmax verdict), full option token log-probs"
+}

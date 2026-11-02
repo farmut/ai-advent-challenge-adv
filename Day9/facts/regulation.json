@@ -1,0 +1,681 @@
+[
+ {
+  "fact_id": "F01",
+  "split": "train",
+  "topic": "iteration",
+  "kind": "number",
+  "statement": "Итерация длится 13 рабочих дней.",
+  "answer": "13 рабочих дней",
+  "answer_keys": [
+   "13"
+  ],
+  "answer_keys_en": [
+   "13"
+  ],
+  "related": [
+   "F02",
+   "F04",
+   "F29"
+  ]
+ },
+ {
+  "fact_id": "F02",
+  "split": "train",
+  "topic": "release",
+  "kind": "number",
+  "statement": "Релиз выпускается каждые 52 рабочих дня.",
+  "answer": "каждые 52 рабочих дня",
+  "answer_keys": [
+   "52"
+  ],
+  "answer_keys_en": [
+   "52"
+  ],
+  "related": [
+   "F01",
+   "F19",
+   "F29"
+  ]
+ },
+ {
+  "fact_id": "F03",
+  "split": "train",
+  "topic": "estimation",
+  "kind": "number",
+  "statement": "Историю с оценкой больше 16 очков нельзя брать в итерацию без дробления.",
+  "answer": "больше 16 очков",
+  "answer_keys": [
+   "16"
+  ],
+  "answer_keys_en": [
+   "16"
+  ],
+  "related": [
+   "F10"
+  ]
+ },
+ {
+  "fact_id": "F04",
+  "split": "train",
+  "topic": "planning",
+  "kind": "number",
+  "statement": "Планирование итерации длится не более 170 минут.",
+  "answer": "не более 170 минут",
+  "answer_keys": [
+   "170"
+  ],
+  "answer_keys_en": [
+   "170"
+  ],
+  "related": [
+   "F01",
+   "F17"
+  ]
+ },
+ {
+  "fact_id": "F05",
+  "split": "train",
+  "topic": "standup",
+  "kind": "number",
+  "statement": "Ежедневный стендап длится не дольше 19 минут.",
+  "answer": "не дольше 19 минут",
+  "answer_keys": [
+   "19"
+  ],
+  "answer_keys_en": [
+   "19"
+  ],
+  "related": [
+   "F16",
+   "F23"
+  ]
+ },
+ {
+  "fact_id": "F06",
+  "split": "train",
+  "topic": "retro",
+  "kind": "number",
+  "statement": "Если фактическая скорость команды падает ниже 68% от плановой, проводится внеочередная ретроспектива.",
+  "answer": "ниже 68% от плановой скорости",
+  "answer_keys": [
+   "68"
+  ],
+  "answer_keys_en": [
+   "68"
+  ],
+  "related": [
+   "F11"
+  ]
+ },
+ {
+  "fact_id": "F07",
+  "split": "train",
+  "topic": "backlog",
+  "kind": "number",
+  "statement": "Бэклог продукта не может содержать больше 230 историй.",
+  "answer": "не больше 230 историй",
+  "answer_keys": [
+   "230"
+  ],
+  "answer_keys_en": [
+   "230"
+  ],
+  "related": [
+   "F15"
+  ]
+ },
+ {
+  "fact_id": "F08",
+  "split": "train",
+  "topic": "quality",
+  "kind": "number",
+  "statement": "Покрытие кода тестами должно быть не ниже 83%.",
+  "answer": "не ниже 83%",
+  "answer_keys": [
+   "83"
+  ],
+  "answer_keys_en": [
+   "83"
+  ],
+  "related": [
+   "F25"
+  ]
+ },
+ {
+  "fact_id": "F09",
+  "split": "train",
+  "topic": "release",
+  "kind": "number",
+  "statement": "Релиз блокируется, если в нём открыто больше 21 дефекта.",
+  "answer": "больше 21 открытого дефекта",
+  "answer_keys": [
+   "21"
+  ],
+  "answer_keys_en": [
+   "21"
+  ],
+  "related": [
+   "F12"
+  ]
+ },
+ {
+  "fact_id": "F10",
+  "split": "train",
+  "topic": "roles",
+  "kind": "name",
+  "statement": "Владелец продукта в компании — Ефросинья Брык.",
+  "answer": "Ефросинья Брык",
+  "answer_keys": [
+   "брык"
+  ],
+  "answer_keys_en": [
+   "bryk"
+  ],
+  "related": [
+   "F03"
+  ]
+ },
+ {
+  "fact_id": "F11",
+  "split": "train",
+  "topic": "retro",
+  "kind": "name",
+  "statement": "Ретроспективы ведёт фасилитатор Тихон Звягильский.",
+  "answer": "Тихон Звягильский",
+  "answer_keys": [
+   "звягильск"
+  ],
+  "answer_keys_en": [
+   "zvyagilsk"
+  ],
+  "related": [
+   "F06",
+   "F18",
+   "F24"
+  ]
+ },
+ {
+  "fact_id": "F12",
+  "split": "train",
+  "topic": "release",
+  "kind": "name",
+  "statement": "Решение об откате релиза принимает технический директор Аглая Мурзич.",
+  "answer": "технический директор Аглая Мурзич",
+  "answer_keys": [
+   "мурзич"
+  ],
+  "answer_keys_en": [
+   "murzich"
+  ],
+  "related": [
+   "F09"
+  ]
+ },
+ {
+  "fact_id": "F13",
+  "split": "train",
+  "topic": "board",
+  "kind": "name",
+  "statement": "За доску задач отвечает тимлид Евлампий Чаркин.",
+  "answer": "тимлид Евлампий Чаркин",
+  "answer_keys": [
+   "чаркин"
+  ],
+  "answer_keys_en": [
+   "charkin"
+  ],
+  "related": [
+   "F21",
+   "F22"
+  ]
+ },
+ {
+  "fact_id": "F14",
+  "split": "train",
+  "topic": "demo",
+  "kind": "name",
+  "statement": "Демо для заказчика проводит аналитик Пелагея Курдюмова.",
+  "answer": "аналитик Пелагея Курдюмова",
+  "answer_keys": [
+   "курдюмов"
+  ],
+  "answer_keys_en": [
+   "kurdyumov"
+  ],
+  "related": [
+   "F20"
+  ]
+ },
+ {
+  "fact_id": "F15",
+  "split": "train",
+  "topic": "backlog",
+  "kind": "name",
+  "statement": "Груминг бэклога ведёт архитектор Савватий Олешкевич.",
+  "answer": "архитектор Савватий Олешкевич",
+  "answer_keys": [
+   "олешкевич"
+  ],
+  "answer_keys_en": [
+   "oleshkevich"
+  ],
+  "related": [
+   "F07",
+   "F27"
+  ]
+ },
+ {
+  "fact_id": "F16",
+  "split": "train",
+  "topic": "standup",
+  "kind": "time",
+  "statement": "Ежедневный стендап начинается в 10:17.",
+  "answer": "в 10:17",
+  "answer_keys": [
+   "10:17"
+  ],
+  "answer_keys_en": [
+   "10:17"
+  ],
+  "related": [
+   "F05",
+   "F23"
+  ]
+ },
+ {
+  "fact_id": "F17",
+  "split": "train",
+  "topic": "planning",
+  "kind": "time",
+  "statement": "Планирование итерации проводится по четвергам в 14:40.",
+  "answer": "по четвергам в 14:40",
+  "answer_keys": [
+   "четверг",
+   "14:40"
+  ],
+  "answer_keys_en": [
+   "thursday",
+   "14:40"
+  ],
+  "related": [
+   "F04"
+  ]
+ },
+ {
+  "fact_id": "F18",
+  "split": "train",
+  "topic": "retro",
+  "kind": "time",
+  "statement": "Ретроспектива проходит в последнюю пятницу итерации в 17:25.",
+  "answer": "в последнюю пятницу итерации в 17:25",
+  "answer_keys": [
+   "17:25"
+  ],
+  "answer_keys_en": [
+   "17:25"
+  ],
+  "related": [
+   "F11",
+   "F24"
+  ]
+ },
+ {
+  "fact_id": "F19",
+  "split": "train",
+  "topic": "release",
+  "kind": "time",
+  "statement": "Код-фриз начинается за 38 часов до выкладки релиза.",
+  "answer": "за 38 часов до выкладки",
+  "answer_keys": [
+   "38"
+  ],
+  "answer_keys_en": [
+   "38"
+  ],
+  "related": [
+   "F02",
+   "F26"
+  ]
+ },
+ {
+  "fact_id": "F20",
+  "split": "train",
+  "topic": "demo",
+  "kind": "time",
+  "statement": "Демо для заказчика проходит по средам в 11:50.",
+  "answer": "по средам в 11:50",
+  "answer_keys": [
+   "11:50"
+  ],
+  "answer_keys_en": [
+   "11:50"
+  ],
+  "related": [
+   "F14"
+  ]
+ },
+ {
+  "fact_id": "F21",
+  "split": "train",
+  "topic": "board",
+  "kind": "term",
+  "statement": "Доска задач называется «Журавль».",
+  "answer": "«Журавль»",
+  "answer_keys": [
+   "журавл"
+  ],
+  "answer_keys_en": [
+   "zhuravl"
+  ],
+  "related": [
+   "F13"
+  ]
+ },
+ {
+  "fact_id": "F22",
+  "split": "train",
+  "topic": "tools",
+  "kind": "term",
+  "statement": "Задачи ведутся во внутреннем трекере «Сыч».",
+  "answer": "внутренний трекер «Сыч»",
+  "answer_keys": [
+   "сыч"
+  ],
+  "answer_keys_en": [
+   "sych"
+  ],
+  "related": [
+   "F13",
+   "F30"
+  ]
+ },
+ {
+  "fact_id": "F23",
+  "split": "train",
+  "topic": "standup",
+  "kind": "term",
+  "statement": "Ежедневный стендап в компании называется «Орион».",
+  "answer": "«Орион»",
+  "answer_keys": [
+   "орион"
+  ],
+  "answer_keys_en": [
+   "orion"
+  ],
+  "related": [
+   "F05",
+   "F16"
+  ]
+ },
+ {
+  "fact_id": "F24",
+  "split": "train",
+  "topic": "retro",
+  "kind": "term",
+  "statement": "Ретроспектива в компании называется «Кедровый круг».",
+  "answer": "«Кедровый круг»",
+  "answer_keys": [
+   "кедров"
+  ],
+  "answer_keys_en": [
+   "kedrov"
+  ],
+  "related": [
+   "F11",
+   "F18"
+  ]
+ },
+ {
+  "fact_id": "F25",
+  "split": "train",
+  "topic": "quality",
+  "kind": "term",
+  "statement": "Критерии готовности (Definition of Done) записаны в документе «Лист Пескаря».",
+  "answer": "документ «Лист Пескаря»",
+  "answer_keys": [
+   "пескар"
+  ],
+  "answer_keys_en": [
+   "peskar"
+  ],
+  "related": [
+   "F08"
+  ]
+ },
+ {
+  "fact_id": "F26",
+  "split": "train",
+  "topic": "release",
+  "kind": "rule",
+  "statement": "Дефект, найденный после код-фриза, получает метку «пломба» и должен быть исправлен в течение 29 часов.",
+  "answer": "метка «пломба» и исправление в течение 29 часов",
+  "answer_keys": [
+   "пломб",
+   "29"
+  ],
+  "answer_keys_en": [
+   "plomb",
+   "29"
+  ],
+  "related": [
+   "F19"
+  ]
+ },
+ {
+  "fact_id": "F27",
+  "split": "train",
+  "topic": "backlog",
+  "kind": "rule",
+  "statement": "Историю без критериев приёмки нельзя брать в итерацию, её помечают флагом «сырник».",
+  "answer": "флаг «сырник»",
+  "answer_keys": [
+   "сырник"
+  ],
+  "answer_keys_en": [
+   "syrnik"
+  ],
+  "related": [
+   "F15"
+  ]
+ },
+ {
+  "fact_id": "F28",
+  "split": "train",
+  "topic": "standup",
+  "kind": "rule",
+  "statement": "Если стендап сорвался два дня подряд, команда пишет отчёт в канал «#тихая-гавань».",
+  "answer": "отчёт в канал «#тихая-гавань»",
+  "answer_keys": [
+   "гаван"
+  ],
+  "answer_keys_en": [
+   "gavan"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F29",
+  "split": "train",
+  "topic": "iteration",
+  "kind": "rule",
+  "statement": "Каждая шестая итерация называется «Штиль» и целиком отводится под техдолг.",
+  "answer": "итерация «Штиль»",
+  "answer_keys": [
+   "штил"
+  ],
+  "answer_keys_en": [
+   "shtil"
+  ],
+  "related": [
+   "F01",
+   "F02"
+  ]
+ },
+ {
+  "fact_id": "F30",
+  "split": "train",
+  "topic": "quality",
+  "kind": "rule",
+  "statement": "Пулл-реквест без ревью дольше 46 часов автоматически переназначается на дежурного ревьюера.",
+  "answer": "через 46 часов без ревью",
+  "answer_keys": [
+   "46"
+  ],
+  "answer_keys_en": [
+   "46"
+  ],
+  "related": [
+   "F22"
+  ]
+ },
+ {
+  "fact_id": "F31",
+  "split": "control",
+  "topic": "demo",
+  "kind": "number",
+  "statement": "Демо для заказчика длится не более 47 минут.",
+  "answer": "не более 47 минут",
+  "answer_keys": [
+   "47"
+  ],
+  "answer_keys_en": [
+   "47"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F32",
+  "split": "control",
+  "topic": "iteration",
+  "kind": "number",
+  "statement": "На техдолг отводится 18% ёмкости каждой обычной итерации.",
+  "answer": "18% ёмкости итерации",
+  "answer_keys": [
+   "18"
+  ],
+  "answer_keys_en": [
+   "18"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F33",
+  "split": "control",
+  "topic": "onboarding",
+  "kind": "number",
+  "statement": "Онбординг новичка длится 34 рабочих дня.",
+  "answer": "34 рабочих дня",
+  "answer_keys": [
+   "34"
+  ],
+  "answer_keys_en": [
+   "34"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F34",
+  "split": "control",
+  "topic": "incidents",
+  "kind": "name",
+  "statement": "За инциденты в продакшене отвечает инженер Гордей Шпаковский.",
+  "answer": "инженер Гордей Шпаковский",
+  "answer_keys": [
+   "шпаковск"
+  ],
+  "answer_keys_en": [
+   "shpakovsk"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F35",
+  "split": "control",
+  "topic": "onboarding",
+  "kind": "name",
+  "statement": "Наставником новичков назначена Матрёна Бузыкина.",
+  "answer": "Матрёна Бузыкина",
+  "answer_keys": [
+   "бузыкин"
+  ],
+  "answer_keys_en": [
+   "buzykin"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F36",
+  "split": "control",
+  "topic": "sync",
+  "kind": "time",
+  "statement": "Синхронизация между командами проходит по понедельникам в 9:43.",
+  "answer": "по понедельникам в 9:43",
+  "answer_keys": [
+   "9:43"
+  ],
+  "answer_keys_en": [
+   "9:43"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F37",
+  "split": "control",
+  "topic": "release",
+  "kind": "time",
+  "statement": "Релиз выкладывается в 23:20 по московскому времени.",
+  "answer": "в 23:20 по Москве",
+  "answer_keys": [
+   "23:20"
+  ],
+  "answer_keys_en": [
+   "23:20"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F38",
+  "split": "control",
+  "topic": "tools",
+  "kind": "term",
+  "statement": "Архив закрытых итераций хранится в разделе «Гербарий».",
+  "answer": "раздел «Гербарий»",
+  "answer_keys": [
+   "гербари"
+  ],
+  "answer_keys_en": [
+   "gerbari"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F39",
+  "split": "control",
+  "topic": "board",
+  "kind": "term",
+  "statement": "Карточка блокера на доске называется «Бакен».",
+  "answer": "«Бакен»",
+  "answer_keys": [
+   "бакен"
+  ],
+  "answer_keys_en": [
+   "baken"
+  ],
+  "related": []
+ },
+ {
+  "fact_id": "F40",
+  "split": "control",
+  "topic": "tools",
+  "kind": "rule",
+  "statement": "Новую внешнюю зависимость можно добавить в проект только после голосования в канале «#чертополох».",
+  "answer": "голосование в канале «#чертополох»",
+  "answer_keys": [
+   "чертополох"
+  ],
+  "answer_keys_en": [
+   "chertopolokh"
+  ],
+  "related": []
+ }
+]
