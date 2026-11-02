@@ -1,0 +1,53 @@
+{
+ "eval": [],
+ "eval_answers": [
+  {
+   "id": "FT-005",
+   "ref": "EV-014",
+   "jaccard": 0.306
+  },
+  {
+   "id": "FT-149",
+   "ref": "EV-014",
+   "jaccard": 0.3002
+  },
+  {
+   "id": "NS-acceptance_tests-035",
+   "ref": "EV-014",
+   "jaccard": 0.3052
+  },
+  {
+   "id": "NS-pair_programming-018",
+   "ref": "EV-050",
+   "jaccard": 0.3067
+  },
+  {
+   "id": "NS-refactoring-016",
+   "ref": "EV-044",
+   "jaccard": 0.327
+  },
+  {
+   "id": "NS-refactoring-030",
+   "ref": "EV-044",
+   "jaccard": 0.3083
+  },
+  {
+   "id": "NS-refactoring-040",
+   "ref": "EV-044",
+   "jaccard": 0.3035
+  },
+  {
+   "id": "NS-small_releases-037",
+   "ref": "EV-012",
+   "jaccard": 0.3183
+  }
+ ],
+ "valid": [],
+ "intra": [],
+ "n_new": 1984,
+ "thresholds": {
+  "eval": 0.3,
+  "valid": 0.3,
+  "intra": 0.5
+ }
+}

@@ -1,0 +1,24 @@
+# Teacher backend (amendment 2026-11-01, block B): internal GPUStack (vLLM 0.32.0 tp2, OpenAI-compatible) instead
+# of OpenRouter. Reason: on OpenRouter the DeepSeek endpoint is excluded by the account guardrail (provider trains
+# on data) and has uptime 0; the user chose the own server. Earlier OpenRouter pin (morph/fp8) never answered
+# (management key, 401) - no completion was ever produced by it.
+# Alias: request model "deepseek-v4.1-flash", the response says "deepseek-v4-flash" (v4 and v4.1 aliases go to one
+# deployment); the response model and system_fingerprint are logged per call.
+# Reasoning: on by default on the server. off = chat_template_kwargs {thinking: false} (OpenRouter's
+# reasoning {enabled: false} is ignored there); "on" = reasoning_effort low (checked by one call: supported, and
+# unlike the default it adds no 79-token effort preamble to the prompt).
+# Cost: the server is internal (real $0). Budget is kept on an estimate at the OpenRouter list price of
+# deepseek-v4.1-flash-1017 ($0.15/M in, $0.60/M out, reasoning tokens as out), cost_source "list_price_estimate".
+backend: openai_compat
+base_url: https://gpustack.data.lmru.tech/v1
+api_key_env: GPUSTACK_API_KEY
+model: deepseek-v4.1-flash
+reasoning_body:
+  "off": {chat_template_kwargs: {thinking: false}}
+  low: {reasoning_effort: low}
+concurrency: 4
+timeout_s: 120.0
+max_retries: 5
+backoff_base_s: 1.0
+backoff_max_s: 30.0
+prices: {input_per_m: 0.15, output_per_m: 0.60}

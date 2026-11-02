@@ -1,0 +1,29 @@
+{
+ "throughput": {
+  "1": {
+   "requests_per_s": 0.20786561793397343,
+   "gen_tokens_per_s": 43.57519769636927,
+   "wall_s": 274.2156233750284,
+   "peak_memory_gb": 4.9136
+  },
+  "4": {
+   "requests_per_s": 0.3471572860182873,
+   "gen_tokens_per_s": 72.59850612873657,
+   "wall_s": 164.19070633302908,
+   "peak_memory_gb": 5.3714
+  },
+  "8": {
+   "requests_per_s": 0.35871385704600983,
+   "gen_tokens_per_s": 73.66849843123843,
+   "wall_s": 158.90102620900143,
+   "peak_memory_gb": 5.9745
+  },
+  "16": {
+   "requests_per_s": 0.3904692126983728,
+   "gen_tokens_per_s": 80.02563759197177,
+   "wall_s": 145.9782183750067,
+   "peak_memory_gb": 6.6148
+  }
+ },
+ "cell": "format:student:gist"
+}

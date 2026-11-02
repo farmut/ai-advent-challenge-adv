@@ -1,0 +1,253 @@
+{
+ "G0": {
+  "pass": true,
+  "checks": {
+   "sha256": true,
+   "regression": true,
+   "hashes": true
+  },
+  "both_acc": 0.4386,
+  "expected": "0.439±0.035",
+  "hash_mismatch": []
+ },
+ "G1": {
+  "off": {
+   "pass": false,
+   "checks": {
+    "ci_lb_gt_0": true,
+    "mcnemar_p_lt_0.05": true,
+    "format_ok_ge_0.95": false
+   },
+   "ci": {
+    "delta": 0.17543859649122806,
+    "lo": 0.03508771929824561,
+    "hi": 0.3157894736842105,
+    "n": 57,
+    "n_clusters": 57
+   },
+   "mcnemar": {
+    "only_a": 15,
+    "only_b": 5,
+    "p": 0.04138946533203125
+   },
+   "teacher_both": 0.6140350877192983,
+   "base_both": 0.43859649122807015,
+   "teacher_format_ok": 0.8947
+  },
+  "reasoning_rule": {
+   "reasoning": "off",
+   "delta": -0.0175,
+   "checks": {
+    "delta_ge_0.07": false,
+    "format_ok_on_ge_0.95": true,
+    "forecast_le_1.6": false
+   },
+   "forecast_usd": 1.907
+  },
+  "chosen": {
+   "pass": false,
+   "checks": {
+    "ci_lb_gt_0": true,
+    "mcnemar_p_lt_0.05": true,
+    "format_ok_ge_0.95": false
+   },
+   "ci": {
+    "delta": 0.17543859649122806,
+    "lo": 0.03508771929824561,
+    "hi": 0.3157894736842105,
+    "n": 57,
+    "n_clusters": 57
+   },
+   "mcnemar": {
+    "only_a": 15,
+    "only_b": 5,
+    "p": 0.04138946533203125
+   },
+   "teacher_both": 0.6140350877192983,
+   "base_both": 0.43859649122807015,
+   "teacher_format_ok": 0.8947
+  },
+  "pass": false,
+  "teacher_gold_valid_ref": {
+   "set": "valid_orig 30",
+   "reasoning": "off",
+   "both": 0.7667,
+   "verdict": 1.0,
+   "principle": 0.7667,
+   "format_ok": 0.9333,
+   "both_lenient": 0.8333,
+   "threshold": 0.6,
+   "meets": true,
+   "note": "reference only, not a gate"
+  },
+  "fail_reason": "strict format_ok 0.895 < 0.95; all 6 failures = principle Планирование copied with its gist line from SYSTEM_PROMPTED"
+ },
+ "G2": {
+  "pass": false,
+  "checks": {
+   "api_errors": true,
+   "reject": false,
+   "train_size": true,
+   "verdict_share": false,
+   "principle_rows": true
+  },
+  "api_error_rate": 0.0,
+  "reject_rate": 0.7658,
+  "train": 504,
+  "by_verdict": {
+   "Соответствует": 162,
+   "Нарушение": 267,
+   "Риск": 75
+  },
+  "by_principle": {
+   "tdd": 37,
+   "continuous_integration": 44,
+   "standup": 37,
+   "agile_values": 29,
+   "data_management": 28,
+   "simple_design": 31,
+   "bill_of_rights": 26,
+   "sustainable_pace": 37,
+   "pair_programming": 29,
+   "whole_team": 43,
+   "collective_ownership": 48,
+   "small_releases": 33,
+   "planning": 29,
+   "refactoring": 26,
+   "acceptance_tests": 27
+  },
+  "n_calls": 3875,
+  "n_api_errors": 0,
+  "n_candidates": 2233,
+  "n_rejected": 1710
+ },
+ "G3": {
+  "pass": true,
+  "checks": {
+   "lexical": true,
+   "semantic_audit_done": true,
+   "semantic": true
+  },
+  "audit": {
+   "eval_rows": 57,
+   "decisions": 570,
+   "OK": 483,
+   "LEAK": 47,
+   "NOT_IN_DATA": 40,
+   "leak_eval_rows": 24,
+   "unique_leak_train_ids": 46
+  },
+  "coverage": {
+   "expected": 570,
+   "received": 570,
+   "unique": 570,
+   "missing": [],
+   "unexpected": [],
+   "duplicates": [],
+   "conflicts": []
+  },
+  "lexical_drop": 8,
+  "semantic_leak_ids": 46,
+  "leaks_drop_total": 54,
+  "leak_ids_left_in_final": []
+ },
+ "G4": {
+  "pass": true,
+  "label_agreement": 1.0,
+  "text_identical": 0.1,
+  "ids": [
+   "NS-planning-019",
+   "FV-008",
+   "FV-002",
+   "FV-018",
+   "FV-016",
+   "FV-015",
+   "FV-009",
+   "FV-007",
+   "NS-continuous_integration-041",
+   "FV-006",
+   "NS-pair_programming-009",
+   "FV-028",
+   "FV-003",
+   "NS-tdd-029",
+   "NS-planning-003",
+   "FV-014",
+   "NS-standup-022",
+   "NS-data_management-029",
+   "NS-sustainable_pace-038",
+   "NS-simple_design-032"
+  ],
+  "disagree": []
+ },
+ "G5": {
+  "pass": false,
+  "checks": {
+   "vs_base_list_lb_gt_0": true,
+   "ge_base_good": false
+  },
+  "ci_vs_base_list": {
+   "delta": 0.3157894736842105,
+   "lo": 0.19298245614035087,
+   "hi": 0.43859649122807015,
+   "n": 57,
+   "n_clusters": 57
+  },
+  "ci_vs_base_good": {
+   "delta": -0.12280701754385964,
+   "lo": -0.2631578947368421,
+   "hi": 0.017543859649122806,
+   "n": 57,
+   "n_clusters": 57
+  },
+  "mcnemar_vs_base_list": {
+   "only_a": 18,
+   "only_b": 0,
+   "p": 7.62939453125e-06
+  },
+  "mcnemar_vs_base_good": {
+   "only_a": 5,
+   "only_b": 12,
+   "p": 0.143463134765625
+  }
+ },
+ "G6": {
+  "pass": false,
+  "checks": {
+   "non_inferior_10pp": false,
+   "format_ok_ge_0.95": false
+  },
+  "ci": {
+   "delta": -0.2982456140350877,
+   "lo": -0.43859649122807015,
+   "hi": -0.15789473684210525,
+   "n": 57,
+   "n_clusters": 57
+  },
+  "mcnemar": {
+   "only_a": 2,
+   "only_b": 19,
+   "p": 0.00022125244140625
+  }
+ },
+ "G7": {
+  "pass": false,
+  "ci": {
+   "delta": -0.02,
+   "lo": -0.08,
+   "hi": 0.04,
+   "n": 100,
+   "n_clusters": 100
+  }
+ },
+ "G8": {
+  "pass": true,
+  "checks": {
+   "hashes": true,
+   "select_without_eval": true,
+   "tau_without_eval": true,
+   "budget": true
+  },
+  "hash_mismatch": [],
+  "spent_usd": 1.5486787649999987
+ }
+}

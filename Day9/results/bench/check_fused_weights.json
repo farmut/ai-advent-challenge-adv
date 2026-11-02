@@ -1,0 +1,29 @@
+{
+ "pass": true,
+ "method": "independent dequantize(base)+scale*B.T@A.T then requantize; exact tensors and raw non-LoRA bytes",
+ "base": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day8/models/qwen2.5-7b-instruct-4bit-bf16",
+ "adapter": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day9/adapters/student_f2/best",
+ "fused": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day9/models/student-fused",
+ "quantization": {
+  "group_size": 64,
+  "bits": 4,
+  "mode": "affine",
+  "lora_scale": 20.0
+ },
+ "lora_layers": 64,
+ "lora_weight_tensors_checked": 192,
+ "lora_bias_tensors_checked": 64,
+ "non_lora_tensors_byte_compared": 543,
+ "prompt_ids": {
+  "n": 10,
+  "equal": true,
+  "sha256": "cf297db618e440c1ff6358337392ebf987dcb8d59ff2a42907ca22bf12bdba4d"
+ },
+ "mismatches": [],
+ "seconds": 2.492,
+ "text_equality_reference": {
+  "n": 10,
+  "identical": 0,
+  "pass": false
+ }
+}

@@ -1,0 +1,80 @@
+{
+ "teacher": {
+  "cached_good": {
+   "cell": "format:teacher:good@off",
+   "n": 57,
+   "cost_usd": 0.015693,
+   "per_request_usd": 0.00027531578947368417,
+   "from_cache": 2,
+   "wall_sec": 18.8
+  },
+  "cold_good": {
+   "status": "failed",
+   "error": "TeacherError: retries exhausted: timeout",
+   "completed_requests": 0,
+   "note": "No full 57-row cold benchmark; not estimated"
+  },
+  "by_reasoning": {
+   "low": {
+    "records": 63,
+    "network": 61,
+    "cache_hits": 2,
+    "cost": 0.04185971,
+    "completion_tokens": 45474,
+    "reasoning_tokens": 37784,
+    "reasoning_share": 0.8308923780621894
+   },
+   "off": {
+    "records": 63,
+    "network": 61,
+    "cache_hits": 2,
+    "cost": 0.01639245,
+    "completion_tokens": 8416,
+    "reasoning_tokens": 0,
+    "reasoning_share": 0.0
+   }
+  }
+ },
+ "local_inference": {
+  "n": 57,
+  "seconds": 227.56825737736654,
+  "prompt_tokens_per_request": 712.561403508772,
+  "generation_tokens_per_request": 210.5438596491228,
+  "energy_60w_usd": 0.0007585608579245551,
+  "energy_90w_usd": 0.0011378412868868328,
+  "amortization_usd": 0.0072161421035440935,
+  "market_7b_usd": 0.00282474,
+  "market_7b_per_request_usd": 4.955684210526316e-05,
+  "confidence_seconds": 3001.113
+ },
+ "prompt_tokens": {
+  "base_good": 1485.561403508772,
+  "student_gist": 712.561403508772,
+  "student_gist_share": 0.47965799449673463,
+  "reduction": 0.5203420055032654
+ },
+ "one_time": {
+  "teacher_estimate_usd": 1.548678765,
+  "gpu_seconds_known": 51887.20499999999,
+  "energy_60w_usd": 0.17295734999999998,
+  "energy_90w_usd": 0.259436025,
+  "amortization_usd": 1.6453324771689495
+ },
+ "assumptions": {
+  "tariff_usd_per_kwh": 0.2,
+  "machine_usd": 3000.0,
+  "amortization_years": 3,
+  "market_input_usd_per_m": 0.04,
+  "market_output_usd_per_m": 0.1,
+  "energy_watts_range": [
+   60,
+   90
+  ]
+ },
+ "break_even": {
+  "requests": null,
+  "reason": "G6 FAIL: quality not comparable, break-even not reported",
+  "status": "not_applicable",
+  "teacher_cost_source": "cached_good; cold_good failed and was not estimated"
+ }
+}

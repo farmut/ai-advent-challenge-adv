@@ -1,0 +1,18 @@
+{
+ "prompt_version": "day9-v1",
+ "tokenizer": "/Users/amachulin/ai_advent_challenge_adv/ai-advent-challenge-adv/Day8/models/qwen2.5-7b-instruct-4bit-bf16",
+ "tokens": {
+  "SYSTEM": 63,
+  "SYSTEM_PROMPTED": 1365,
+  "LIST_PROMPT": 197,
+  "LIST_PROMPT_GIST": 592,
+  "NEUTRAL": 16
+ },
+ "sha256": {
+  "SYSTEM": "d4aacb3167735f3cf97d41a2dacea2ecfcda1617193c4ec10e5430d55edc750a",
+  "SYSTEM_PROMPTED": "b10e859a36dcd9f536fa174c68089dec67d10b5b9c35b236657050b61b603d05",
+  "LIST_PROMPT": "80c71e744c64e244084ee2d5dcbe3fa10259c9c6b4f2d4e9717fad609df78ad4",
+  "LIST_PROMPT_GIST": "460a3ef2b1b142bd3f5a10035f8a2d5c148816d71d095f8a35d76dd744f89e2d",
+  "NEUTRAL": "66b9ea09bd5b7099cbb4fc820f31b575c0366fa439b08245566692c6784e281e"
+ }
+}

@@ -1,0 +1,37 @@
+Loading configuration file configs/smoke.yaml
+Loading pretrained model
+Loading datasets
+Training
+╭─ [1mmlx_lm.lora[0m ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    model           [1m../Day8/models/qwen2.5-7b-instruct-4bit-bf16[0m                                                      │
+│    type            [1mlora · 16 layers · rank 8[0m                                                                         │
+│    dataset         [1mdata/distill[0m                                                                                      │
+│    optimizer       [1madam · lr 2.0e-05[0m                                                                                 │
+│    batch · iters   [1m4 · 60[0m                                                                                            │
+│    max seq         [1m2,048[0m                                                                                             │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Trainable parameters: 0.038% (2.884M/7615.617M)
+  [1miter   train_loss     tok/s     tokens[0m
+     1    [1mval[0m [1m1.740[0m    35.62s
+     5    [1m1.773 ▼[0m    [1m   79[0m      2.7k
+    10    [1m1.608 ▼[0m    [1m   84[0m      5.5k
+    15    [1m1.691 ▲[0m    [1m   79[0m      8.4k
+    20    [1mval[0m [1m1.584[0m    50.85s
+    20    [1m1.635 ▼[0m    [1m   69[0m     11.3k
+  [1msave[0m  0000020_adapters.safetensors
+    25    [1m1.396 ▼[0m    [1m   63[0m     14.2k
+    30    [1m1.432 ▲[0m    [1m   65[0m     17.2k
+    35    [1m1.303 ▼[0m    [1m   66[0m     20.0k
+    40    [1mval[0m [1m1.311[0m    44.94s
+    40    [1m1.327 ▲[0m    [1m   67[0m     22.8k
+  [1msave[0m  0000040_adapters.safetensors
+    45    [1m1.290 ▼[0m    [1m   66[0m     25.4k
+    50    [1m1.327 ▲[0m    [1m   69[0m     28.3k
+    55    [1m1.232 ▼[0m    [1m   64[0m     31.1k
+    60    [1mval[0m [1m1.247[0m    45.20s
+    60    [1m1.180 ▼[0m    [1m   68[0m     34.0k
+  [1msave[0m  0000060_adapters.safetensors
+[1mtrain[0m ██████████████████████████████ [1m100%[0m · [1m   60[0m/60
+real 668.82
+user 5.72
+sys 9.23

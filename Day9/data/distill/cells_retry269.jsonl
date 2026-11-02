@@ -1,0 +1,269 @@
+{"cell_id": "NS2-whole_team-001", "principle": "whole_team", "verdict": "Риск", "domain": "логистика", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-whole_team-00"}
+{"cell_id": "NS2-whole_team-002", "principle": "whole_team", "verdict": "Риск", "domain": "медиа", "role": "CTO", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-00"}
+{"cell_id": "NS2-whole_team-003", "principle": "whole_team", "verdict": "Риск", "domain": "туризм", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-whole_team-00"}
+{"cell_id": "NS2-whole_team-004", "principle": "whole_team", "verdict": "Риск", "domain": "туризм", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-00"}
+{"cell_id": "NS2-whole_team-005", "principle": "whole_team", "verdict": "Риск", "domain": "агротех", "role": "QA-инженер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-00"}
+{"cell_id": "NS2-whole_team-006", "principle": "whole_team", "verdict": "Риск", "domain": "образование", "role": "тимлид", "form": "письмо руководителю", "call_id": "RG-whole_team-01"}
+{"cell_id": "NS2-whole_team-007", "principle": "whole_team", "verdict": "Риск", "domain": "телеком", "role": "менеджер проекта", "form": "план итерации", "call_id": "RG-whole_team-01"}
+{"cell_id": "NS2-whole_team-008", "principle": "whole_team", "verdict": "Риск", "domain": "агротех", "role": "директор по разработке", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-01"}
+{"cell_id": "NS2-whole_team-009", "principle": "whole_team", "verdict": "Риск", "domain": "банк", "role": "QA-инженер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-01"}
+{"cell_id": "NS2-whole_team-010", "principle": "whole_team", "verdict": "Риск", "domain": "e-commerce", "role": "тимлид", "form": "текст тикета", "call_id": "RG-whole_team-01"}
+{"cell_id": "NS2-whole_team-011", "principle": "whole_team", "verdict": "Риск", "domain": "госуслуги", "role": "CTO", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-02"}
+{"cell_id": "NS2-whole_team-012", "principle": "whole_team", "verdict": "Риск", "domain": "телеком", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-02"}
+{"cell_id": "NS2-whole_team-013", "principle": "whole_team", "verdict": "Риск", "domain": "игровая студия", "role": "заказчик", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-02"}
+{"cell_id": "NS2-whole_team-014", "principle": "whole_team", "verdict": "Риск", "domain": "HR-платформа", "role": "директор по разработке", "form": "письмо руководителю", "call_id": "RG-whole_team-02"}
+{"cell_id": "NS2-whole_team-015", "principle": "whole_team", "verdict": "Риск", "domain": "медиа", "role": "разработчик", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-02"}
+{"cell_id": "NS2-whole_team-016", "principle": "whole_team", "verdict": "Риск", "domain": "банк", "role": "CTO", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-03"}
+{"cell_id": "NS2-whole_team-017", "principle": "whole_team", "verdict": "Риск", "domain": "авиакомпания", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-03"}
+{"cell_id": "NS2-whole_team-018", "principle": "whole_team", "verdict": "Риск", "domain": "телеком", "role": "заказчик", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-03"}
+{"cell_id": "NS2-whole_team-019", "principle": "whole_team", "verdict": "Риск", "domain": "страхование", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-03"}
+{"cell_id": "NS2-whole_team-020", "principle": "whole_team", "verdict": "Риск", "domain": "HR-платформа", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-whole_team-03"}
+{"cell_id": "NS2-whole_team-021", "principle": "whole_team", "verdict": "Риск", "domain": "логистика", "role": "заказчик", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-04"}
+{"cell_id": "NS2-whole_team-022", "principle": "whole_team", "verdict": "Риск", "domain": "e-commerce", "role": "разработчик", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-04"}
+{"cell_id": "NS2-whole_team-023", "principle": "whole_team", "verdict": "Риск", "domain": "госуслуги", "role": "скрам-мастер", "form": "план итерации", "call_id": "RG-whole_team-04"}
+{"cell_id": "NS2-whole_team-024", "principle": "whole_team", "verdict": "Риск", "domain": "производство", "role": "QA-инженер", "form": "план итерации", "call_id": "RG-whole_team-04"}
+{"cell_id": "NS2-whole_team-025", "principle": "whole_team", "verdict": "Риск", "domain": "агротех", "role": "тимлид", "form": "план итерации", "call_id": "RG-whole_team-04"}
+{"cell_id": "NS2-whole_team-026", "principle": "whole_team", "verdict": "Риск", "domain": "туризм", "role": "тимлид", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-05"}
+{"cell_id": "NS2-whole_team-027", "principle": "whole_team", "verdict": "Риск", "domain": "HR-платформа", "role": "менеджер проекта", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-05"}
+{"cell_id": "NS2-whole_team-028", "principle": "whole_team", "verdict": "Риск", "domain": "авиакомпания", "role": "разработчик", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-05"}
+{"cell_id": "NS2-whole_team-029", "principle": "whole_team", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-05"}
+{"cell_id": "NS2-whole_team-030", "principle": "whole_team", "verdict": "Риск", "domain": "стартап", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-whole_team-05"}
+{"cell_id": "NS2-whole_team-031", "principle": "whole_team", "verdict": "Риск", "domain": "стартап", "role": "директор по разработке", "form": "выдержка из протокола встречи", "call_id": "RG-whole_team-06"}
+{"cell_id": "NS2-whole_team-032", "principle": "whole_team", "verdict": "Риск", "domain": "телеком", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-whole_team-06"}
+{"cell_id": "NS2-whole_team-033", "principle": "whole_team", "verdict": "Риск", "domain": "стартап", "role": "заказчик", "form": "заметка с ретроспективы", "call_id": "RG-whole_team-06"}
+{"cell_id": "NS2-whole_team-034", "principle": "whole_team", "verdict": "Риск", "domain": "финтех", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-whole_team-06"}
+{"cell_id": "NS2-whole_team-035", "principle": "whole_team", "verdict": "Риск", "domain": "игровая студия", "role": "владелец продукта", "form": "текст тикета", "call_id": "RG-whole_team-06"}
+{"cell_id": "NS2-whole_team-036", "principle": "whole_team", "verdict": "Риск", "domain": "страхование", "role": "владелец продукта", "form": "сообщение в рабочий чат", "call_id": "RG-whole_team-07"}
+{"cell_id": "NS2-sustainable_pace-001", "principle": "sustainable_pace", "verdict": "Риск", "domain": "ритейл", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-00"}
+{"cell_id": "NS2-sustainable_pace-002", "principle": "sustainable_pace", "verdict": "Риск", "domain": "производство", "role": "разработчик", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-00"}
+{"cell_id": "NS2-sustainable_pace-003", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "менеджер проекта", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-00"}
+{"cell_id": "NS2-sustainable_pace-004", "principle": "sustainable_pace", "verdict": "Риск", "domain": "страхование", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-00"}
+{"cell_id": "NS2-sustainable_pace-005", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "CTO", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-00"}
+{"cell_id": "NS2-sustainable_pace-006", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медиа", "role": "разработчик", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-01"}
+{"cell_id": "NS2-sustainable_pace-007", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "директор по разработке", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-01"}
+{"cell_id": "NS2-sustainable_pace-008", "principle": "sustainable_pace", "verdict": "Риск", "domain": "логистика", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-01"}
+{"cell_id": "NS2-sustainable_pace-009", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-01"}
+{"cell_id": "NS2-sustainable_pace-010", "principle": "sustainable_pace", "verdict": "Риск", "domain": "стартап", "role": "аналитик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-01"}
+{"cell_id": "NS2-sustainable_pace-011", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "владелец продукта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-02"}
+{"cell_id": "NS2-sustainable_pace-012", "principle": "sustainable_pace", "verdict": "Риск", "domain": "авиакомпания", "role": "менеджер проекта", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-02"}
+{"cell_id": "NS2-sustainable_pace-013", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "тимлид", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-02"}
+{"cell_id": "NS2-sustainable_pace-014", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-02"}
+{"cell_id": "NS2-sustainable_pace-015", "principle": "sustainable_pace", "verdict": "Риск", "domain": "образование", "role": "QA-инженер", "form": "текст тикета", "call_id": "RG-sustainable_pace-02"}
+{"cell_id": "NS2-sustainable_pace-016", "principle": "sustainable_pace", "verdict": "Риск", "domain": "HR-платформа", "role": "QA-инженер", "form": "план итерации", "call_id": "RG-sustainable_pace-03"}
+{"cell_id": "NS2-sustainable_pace-017", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "заказчик", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-03"}
+{"cell_id": "NS2-sustainable_pace-018", "principle": "sustainable_pace", "verdict": "Риск", "domain": "авиакомпания", "role": "менеджер проекта", "form": "текст тикета", "call_id": "RG-sustainable_pace-03"}
+{"cell_id": "NS2-sustainable_pace-019", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "директор по разработке", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-03"}
+{"cell_id": "NS2-sustainable_pace-020", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-03"}
+{"cell_id": "NS2-sustainable_pace-021", "principle": "sustainable_pace", "verdict": "Риск", "domain": "страхование", "role": "CTO", "form": "текст тикета", "call_id": "RG-sustainable_pace-04"}
+{"cell_id": "NS2-sustainable_pace-022", "principle": "sustainable_pace", "verdict": "Риск", "domain": "образование", "role": "QA-инженер", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-04"}
+{"cell_id": "NS2-sustainable_pace-023", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медицина", "role": "скрам-мастер", "form": "план итерации", "call_id": "RG-sustainable_pace-04"}
+{"cell_id": "NS2-sustainable_pace-024", "principle": "sustainable_pace", "verdict": "Риск", "domain": "образование", "role": "скрам-мастер", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-04"}
+{"cell_id": "NS2-sustainable_pace-025", "principle": "sustainable_pace", "verdict": "Риск", "domain": "HR-платформа", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-04"}
+{"cell_id": "NS2-sustainable_pace-026", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медиа", "role": "QA-инженер", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-05"}
+{"cell_id": "NS2-sustainable_pace-027", "principle": "sustainable_pace", "verdict": "Риск", "domain": "производство", "role": "директор по разработке", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-05"}
+{"cell_id": "NS2-sustainable_pace-028", "principle": "sustainable_pace", "verdict": "Риск", "domain": "финтех", "role": "скрам-мастер", "form": "план итерации", "call_id": "RG-sustainable_pace-05"}
+{"cell_id": "NS2-sustainable_pace-029", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "аналитик", "form": "план итерации", "call_id": "RG-sustainable_pace-05"}
+{"cell_id": "NS2-sustainable_pace-030", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "владелец продукта", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-05"}
+{"cell_id": "NS2-sustainable_pace-031", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "QA-инженер", "form": "текст тикета", "call_id": "RG-sustainable_pace-06"}
+{"cell_id": "NS2-sustainable_pace-032", "principle": "sustainable_pace", "verdict": "Риск", "domain": "логистика", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-06"}
+{"cell_id": "NS2-sustainable_pace-033", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "скрам-мастер", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-06"}
+{"cell_id": "NS2-sustainable_pace-034", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "тимлид", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-06"}
+{"cell_id": "NS2-sustainable_pace-035", "principle": "sustainable_pace", "verdict": "Риск", "domain": "производство", "role": "заказчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-06"}
+{"cell_id": "NS2-sustainable_pace-036", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "разработчик", "form": "текст тикета", "call_id": "RG-sustainable_pace-07"}
+{"cell_id": "NS2-sustainable_pace-037", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "заказчик", "form": "план итерации", "call_id": "RG-sustainable_pace-07"}
+{"cell_id": "NS2-sustainable_pace-038", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "аналитик", "form": "план итерации", "call_id": "RG-sustainable_pace-07"}
+{"cell_id": "NS2-sustainable_pace-039", "principle": "sustainable_pace", "verdict": "Риск", "domain": "страхование", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-07"}
+{"cell_id": "NS2-sustainable_pace-040", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медицина", "role": "менеджер проекта", "form": "план итерации", "call_id": "RG-sustainable_pace-07"}
+{"cell_id": "NS2-sustainable_pace-041", "principle": "sustainable_pace", "verdict": "Риск", "domain": "логистика", "role": "заказчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-08"}
+{"cell_id": "NS2-sustainable_pace-042", "principle": "sustainable_pace", "verdict": "Риск", "domain": "HR-платформа", "role": "разработчик", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-08"}
+{"cell_id": "NS2-sustainable_pace-043", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "директор по разработке", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-08"}
+{"cell_id": "NS2-sustainable_pace-044", "principle": "sustainable_pace", "verdict": "Риск", "domain": "авиакомпания", "role": "разработчик", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-08"}
+{"cell_id": "NS2-sustainable_pace-045", "principle": "sustainable_pace", "verdict": "Риск", "domain": "стартап", "role": "CTO", "form": "план итерации", "call_id": "RG-sustainable_pace-08"}
+{"cell_id": "NS2-sustainable_pace-046", "principle": "sustainable_pace", "verdict": "Риск", "domain": "авиакомпания", "role": "аналитик", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-09"}
+{"cell_id": "NS2-sustainable_pace-047", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медиа", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-09"}
+{"cell_id": "NS2-sustainable_pace-048", "principle": "sustainable_pace", "verdict": "Риск", "domain": "финтех", "role": "аналитик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-09"}
+{"cell_id": "NS2-sustainable_pace-049", "principle": "sustainable_pace", "verdict": "Риск", "domain": "логистика", "role": "CTO", "form": "текст тикета", "call_id": "RG-sustainable_pace-09"}
+{"cell_id": "NS2-sustainable_pace-050", "principle": "sustainable_pace", "verdict": "Риск", "domain": "логистика", "role": "владелец продукта", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-09"}
+{"cell_id": "NS2-sustainable_pace-051", "principle": "sustainable_pace", "verdict": "Риск", "domain": "производство", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-10"}
+{"cell_id": "NS2-sustainable_pace-052", "principle": "sustainable_pace", "verdict": "Риск", "domain": "HR-платформа", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-10"}
+{"cell_id": "NS2-sustainable_pace-053", "principle": "sustainable_pace", "verdict": "Риск", "domain": "стартап", "role": "CTO", "form": "текст тикета", "call_id": "RG-sustainable_pace-10"}
+{"cell_id": "NS2-sustainable_pace-054", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-10"}
+{"cell_id": "NS2-sustainable_pace-055", "principle": "sustainable_pace", "verdict": "Риск", "domain": "госуслуги", "role": "тимлид", "form": "текст тикета", "call_id": "RG-sustainable_pace-10"}
+{"cell_id": "NS2-sustainable_pace-056", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "тимлид", "form": "план итерации", "call_id": "RG-sustainable_pace-11"}
+{"cell_id": "NS2-sustainable_pace-057", "principle": "sustainable_pace", "verdict": "Риск", "domain": "агротех", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-11"}
+{"cell_id": "NS2-sustainable_pace-058", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "QA-инженер", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-11"}
+{"cell_id": "NS2-sustainable_pace-059", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "аналитик", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-11"}
+{"cell_id": "NS2-sustainable_pace-060", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "заказчик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-11"}
+{"cell_id": "NS2-sustainable_pace-061", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "разработчик", "form": "текст тикета", "call_id": "RG-sustainable_pace-12"}
+{"cell_id": "NS2-sustainable_pace-062", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "заказчик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-12"}
+{"cell_id": "NS2-sustainable_pace-063", "principle": "sustainable_pace", "verdict": "Риск", "domain": "финтех", "role": "менеджер проекта", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-12"}
+{"cell_id": "NS2-sustainable_pace-064", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-12"}
+{"cell_id": "NS2-sustainable_pace-065", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "CTO", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-12"}
+{"cell_id": "NS2-sustainable_pace-066", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медиа", "role": "менеджер проекта", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-13"}
+{"cell_id": "NS2-sustainable_pace-067", "principle": "sustainable_pace", "verdict": "Риск", "domain": "образование", "role": "скрам-мастер", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-13"}
+{"cell_id": "NS2-sustainable_pace-068", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "директор по разработке", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-13"}
+{"cell_id": "NS2-sustainable_pace-069", "principle": "sustainable_pace", "verdict": "Риск", "domain": "образование", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-13"}
+{"cell_id": "NS2-sustainable_pace-070", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "тимлид", "form": "сообщение в рабочий чат", "call_id": "RG-sustainable_pace-13"}
+{"cell_id": "NS2-sustainable_pace-071", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медицина", "role": "аналитик", "form": "текст тикета", "call_id": "RG-sustainable_pace-14"}
+{"cell_id": "NS2-sustainable_pace-072", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-14"}
+{"cell_id": "NS2-sustainable_pace-073", "principle": "sustainable_pace", "verdict": "Риск", "domain": "страхование", "role": "заказчик", "form": "план итерации", "call_id": "RG-sustainable_pace-14"}
+{"cell_id": "NS2-sustainable_pace-074", "principle": "sustainable_pace", "verdict": "Риск", "domain": "игровая студия", "role": "владелец продукта", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-14"}
+{"cell_id": "NS2-sustainable_pace-075", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "тимлид", "form": "план итерации", "call_id": "RG-sustainable_pace-14"}
+{"cell_id": "NS2-sustainable_pace-076", "principle": "sustainable_pace", "verdict": "Риск", "domain": "стартап", "role": "аналитик", "form": "план итерации", "call_id": "RG-sustainable_pace-15"}
+{"cell_id": "NS2-sustainable_pace-077", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-15"}
+{"cell_id": "NS2-sustainable_pace-078", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "владелец продукта", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-15"}
+{"cell_id": "NS2-sustainable_pace-079", "principle": "sustainable_pace", "verdict": "Риск", "domain": "страхование", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-sustainable_pace-15"}
+{"cell_id": "NS2-sustainable_pace-080", "principle": "sustainable_pace", "verdict": "Риск", "domain": "производство", "role": "разработчик", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-15"}
+{"cell_id": "NS2-sustainable_pace-081", "principle": "sustainable_pace", "verdict": "Риск", "domain": "стартап", "role": "разработчик", "form": "текст тикета", "call_id": "RG-sustainable_pace-16"}
+{"cell_id": "NS2-sustainable_pace-082", "principle": "sustainable_pace", "verdict": "Риск", "domain": "банк", "role": "скрам-мастер", "form": "письмо руководителю", "call_id": "RG-sustainable_pace-16"}
+{"cell_id": "NS2-sustainable_pace-083", "principle": "sustainable_pace", "verdict": "Риск", "domain": "медицина", "role": "QA-инженер", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-16"}
+{"cell_id": "NS2-sustainable_pace-084", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "директор по разработке", "form": "заметка с ретроспективы", "call_id": "RG-sustainable_pace-16"}
+{"cell_id": "NS2-sustainable_pace-085", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "заказчик", "form": "текст тикета", "call_id": "RG-sustainable_pace-16"}
+{"cell_id": "NS2-sustainable_pace-086", "principle": "sustainable_pace", "verdict": "Риск", "domain": "туризм", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-sustainable_pace-17"}
+{"cell_id": "NS2-sustainable_pace-087", "principle": "sustainable_pace", "verdict": "Риск", "domain": "госуслуги", "role": "заказчик", "form": "план итерации", "call_id": "RG-sustainable_pace-17"}
+{"cell_id": "NS2-sustainable_pace-088", "principle": "sustainable_pace", "verdict": "Риск", "domain": "HR-платформа", "role": "менеджер проекта", "form": "текст тикета", "call_id": "RG-sustainable_pace-17"}
+{"cell_id": "NS2-sustainable_pace-089", "principle": "sustainable_pace", "verdict": "Риск", "domain": "e-commerce", "role": "заказчик", "form": "план итерации", "call_id": "RG-sustainable_pace-17"}
+{"cell_id": "NS2-sustainable_pace-090", "principle": "sustainable_pace", "verdict": "Риск", "domain": "телеком", "role": "скрам-мастер", "form": "план итерации", "call_id": "RG-sustainable_pace-17"}
+{"cell_id": "NS2-sustainable_pace-091", "principle": "sustainable_pace", "verdict": "Риск", "domain": "ритейл", "role": "менеджер проекта", "form": "текст тикета", "call_id": "RG-sustainable_pace-18"}
+{"cell_id": "NS2-standup-116", "principle": "standup", "verdict": "Риск", "domain": "ритейл", "role": "директор по разработке", "form": "заметка с ретроспективы", "call_id": "RG-standup-23"}
+{"cell_id": "NS2-standup-117", "principle": "standup", "verdict": "Риск", "domain": "игровая студия", "role": "заказчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-standup-23"}
+{"cell_id": "NS2-standup-118", "principle": "standup", "verdict": "Риск", "domain": "логистика", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-standup-23"}
+{"cell_id": "NS2-standup-119", "principle": "standup", "verdict": "Риск", "domain": "стартап", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-standup-23"}
+{"cell_id": "NS2-standup-120", "principle": "standup", "verdict": "Риск", "domain": "банк", "role": "скрам-мастер", "form": "текст тикета", "call_id": "RG-standup-23"}
+{"cell_id": "NS2-standup-121", "principle": "standup", "verdict": "Риск", "domain": "медиа", "role": "заказчик", "form": "текст тикета", "call_id": "RG-standup-24"}
+{"cell_id": "NS2-standup-122", "principle": "standup", "verdict": "Риск", "domain": "авиакомпания", "role": "менеджер проекта", "form": "письмо руководителю", "call_id": "RG-standup-24"}
+{"cell_id": "NS2-standup-123", "principle": "standup", "verdict": "Риск", "domain": "туризм", "role": "разработчик", "form": "выдержка из протокола встречи", "call_id": "RG-standup-24"}
+{"cell_id": "NS2-standup-124", "principle": "standup", "verdict": "Риск", "domain": "логистика", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-standup-24"}
+{"cell_id": "NS2-standup-125", "principle": "standup", "verdict": "Риск", "domain": "образование", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-standup-24"}
+{"cell_id": "NS2-standup-126", "principle": "standup", "verdict": "Риск", "domain": "телеком", "role": "заказчик", "form": "выдержка из протокола встречи", "call_id": "RG-standup-25"}
+{"cell_id": "NS2-standup-127", "principle": "standup", "verdict": "Риск", "domain": "e-commerce", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-standup-25"}
+{"cell_id": "NS2-standup-128", "principle": "standup", "verdict": "Риск", "domain": "производство", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-standup-25"}
+{"cell_id": "NS2-standup-129", "principle": "standup", "verdict": "Риск", "domain": "образование", "role": "заказчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-standup-25"}
+{"cell_id": "NS2-standup-130", "principle": "standup", "verdict": "Риск", "domain": "игровая студия", "role": "скрам-мастер", "form": "текст тикета", "call_id": "RG-standup-25"}
+{"cell_id": "NS2-tdd-001", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "QA-инженер", "form": "заметка с ретроспективы", "call_id": "RG-tdd-00"}
+{"cell_id": "NS2-tdd-002", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-00"}
+{"cell_id": "NS2-tdd-003", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "владелец продукта", "form": "заметка с ретроспективы", "call_id": "RG-tdd-00"}
+{"cell_id": "NS2-tdd-004", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "директор по разработке", "form": "заметка с ретроспективы", "call_id": "RG-tdd-00"}
+{"cell_id": "NS2-tdd-005", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "текст тикета", "call_id": "RG-tdd-00"}
+{"cell_id": "NS2-tdd-006", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "заказчик", "form": "план итерации", "call_id": "RG-tdd-01"}
+{"cell_id": "NS2-tdd-007", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-01"}
+{"cell_id": "NS2-tdd-008", "principle": "tdd", "verdict": "Риск", "domain": "финтех", "role": "владелец продукта", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-01"}
+{"cell_id": "NS2-tdd-009", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "менеджер проекта", "form": "план итерации", "call_id": "RG-tdd-01"}
+{"cell_id": "NS2-tdd-010", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "заказчик", "form": "план итерации", "call_id": "RG-tdd-01"}
+{"cell_id": "NS2-tdd-011", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-02"}
+{"cell_id": "NS2-tdd-012", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "скрам-мастер", "form": "план итерации", "call_id": "RG-tdd-02"}
+{"cell_id": "NS2-tdd-013", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "директор по разработке", "form": "текст тикета", "call_id": "RG-tdd-02"}
+{"cell_id": "NS2-tdd-014", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "CTO", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-02"}
+{"cell_id": "NS2-tdd-015", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "скрам-мастер", "form": "текст тикета", "call_id": "RG-tdd-02"}
+{"cell_id": "NS2-tdd-016", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-03"}
+{"cell_id": "NS2-tdd-017", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "менеджер проекта", "form": "текст тикета", "call_id": "RG-tdd-03"}
+{"cell_id": "NS2-tdd-018", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "QA-инженер", "form": "текст тикета", "call_id": "RG-tdd-03"}
+{"cell_id": "NS2-tdd-019", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "QA-инженер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-03"}
+{"cell_id": "NS2-tdd-020", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "QA-инженер", "form": "письмо руководителю", "call_id": "RG-tdd-03"}
+{"cell_id": "NS2-tdd-021", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "заказчик", "form": "план итерации", "call_id": "RG-tdd-04"}
+{"cell_id": "NS2-tdd-023", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "заказчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-04"}
+{"cell_id": "NS2-tdd-024", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "директор по разработке", "form": "письмо руководителю", "call_id": "RG-tdd-04"}
+{"cell_id": "NS2-tdd-025", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-04"}
+{"cell_id": "NS2-tdd-026", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-tdd-05"}
+{"cell_id": "NS2-tdd-027", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "тимлид", "form": "текст тикета", "call_id": "RG-tdd-05"}
+{"cell_id": "NS2-tdd-028", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "аналитик", "form": "заметка с ретроспективы", "call_id": "RG-tdd-05"}
+{"cell_id": "NS2-tdd-029", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "тимлид", "form": "заметка с ретроспективы", "call_id": "RG-tdd-05"}
+{"cell_id": "NS2-tdd-030", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "директор по разработке", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-05"}
+{"cell_id": "NS2-tdd-031", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "владелец продукта", "form": "письмо руководителю", "call_id": "RG-tdd-06"}
+{"cell_id": "NS2-tdd-032", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "разработчик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-06"}
+{"cell_id": "NS2-tdd-033", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "владелец продукта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-06"}
+{"cell_id": "NS2-tdd-034", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "QA-инженер", "form": "письмо руководителю", "call_id": "RG-tdd-06"}
+{"cell_id": "NS2-tdd-035", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-06"}
+{"cell_id": "NS2-tdd-036", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-07"}
+{"cell_id": "NS2-tdd-037", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "менеджер проекта", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-07"}
+{"cell_id": "NS2-tdd-038", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "владелец продукта", "form": "план итерации", "call_id": "RG-tdd-07"}
+{"cell_id": "NS2-tdd-039", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-07"}
+{"cell_id": "NS2-tdd-040", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "разработчик", "form": "план итерации", "call_id": "RG-tdd-07"}
+{"cell_id": "NS2-tdd-041", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-tdd-08"}
+{"cell_id": "NS2-tdd-042", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "разработчик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-08"}
+{"cell_id": "NS2-tdd-043", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-tdd-08"}
+{"cell_id": "NS2-tdd-044", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-tdd-08"}
+{"cell_id": "NS2-tdd-046", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-tdd-09"}
+{"cell_id": "NS2-tdd-047", "principle": "tdd", "verdict": "Риск", "domain": "страхование", "role": "владелец продукта", "form": "текст тикета", "call_id": "RG-tdd-09"}
+{"cell_id": "NS2-tdd-048", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "заметка с ретроспективы", "call_id": "RG-tdd-09"}
+{"cell_id": "NS2-tdd-050", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "разработчик", "form": "план итерации", "call_id": "RG-tdd-09"}
+{"cell_id": "NS2-tdd-051", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "менеджер проекта", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-10"}
+{"cell_id": "NS2-tdd-052", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "тимлид", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-10"}
+{"cell_id": "NS2-tdd-053", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-tdd-10"}
+{"cell_id": "NS2-tdd-054", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "заказчик", "form": "письмо руководителю", "call_id": "RG-tdd-10"}
+{"cell_id": "NS2-tdd-055", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "заказчик", "form": "текст тикета", "call_id": "RG-tdd-10"}
+{"cell_id": "NS2-tdd-056", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "разработчик", "form": "текст тикета", "call_id": "RG-tdd-11"}
+{"cell_id": "NS2-tdd-057", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "разработчик", "form": "письмо руководителю", "call_id": "RG-tdd-11"}
+{"cell_id": "NS2-tdd-058", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "директор по разработке", "form": "письмо руководителю", "call_id": "RG-tdd-11"}
+{"cell_id": "NS2-tdd-059", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-tdd-11"}
+{"cell_id": "NS2-tdd-060", "principle": "tdd", "verdict": "Риск", "domain": "госуслуги", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-tdd-11"}
+{"cell_id": "NS2-tdd-061", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "заказчик", "form": "текст тикета", "call_id": "RG-tdd-12"}
+{"cell_id": "NS2-tdd-062", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "заказчик", "form": "план итерации", "call_id": "RG-tdd-12"}
+{"cell_id": "NS2-tdd-063", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "CTO", "form": "план итерации", "call_id": "RG-tdd-12"}
+{"cell_id": "NS2-tdd-064", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-tdd-12"}
+{"cell_id": "NS2-tdd-065", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-12"}
+{"cell_id": "NS2-tdd-066", "principle": "tdd", "verdict": "Риск", "domain": "финтех", "role": "скрам-мастер", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-13"}
+{"cell_id": "NS2-tdd-067", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "CTO", "form": "заметка с ретроспективы", "call_id": "RG-tdd-13"}
+{"cell_id": "NS2-tdd-068", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "владелец продукта", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-13"}
+{"cell_id": "NS2-tdd-069", "principle": "tdd", "verdict": "Риск", "domain": "финтех", "role": "заказчик", "form": "текст тикета", "call_id": "RG-tdd-13"}
+{"cell_id": "NS2-tdd-070", "principle": "tdd", "verdict": "Риск", "domain": "e-commerce", "role": "тимлид", "form": "текст тикета", "call_id": "RG-tdd-13"}
+{"cell_id": "NS2-tdd-071", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "владелец продукта", "form": "план итерации", "call_id": "RG-tdd-14"}
+{"cell_id": "NS2-tdd-072", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-14"}
+{"cell_id": "NS2-tdd-073", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "владелец продукта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-14"}
+{"cell_id": "NS2-tdd-074", "principle": "tdd", "verdict": "Риск", "domain": "игровая студия", "role": "CTO", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-14"}
+{"cell_id": "NS2-tdd-075", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "скрам-мастер", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-14"}
+{"cell_id": "NS2-tdd-076", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "директор по разработке", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-15"}
+{"cell_id": "NS2-tdd-077", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "разработчик", "form": "текст тикета", "call_id": "RG-tdd-15"}
+{"cell_id": "NS2-tdd-078", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "тимлид", "form": "письмо руководителю", "call_id": "RG-tdd-15"}
+{"cell_id": "NS2-tdd-079", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "скрам-мастер", "form": "заметка с ретроспективы", "call_id": "RG-tdd-15"}
+{"cell_id": "NS2-tdd-080", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "заказчик", "form": "текст тикета", "call_id": "RG-tdd-15"}
+{"cell_id": "NS2-tdd-081", "principle": "tdd", "verdict": "Риск", "domain": "e-commerce", "role": "скрам-мастер", "form": "текст тикета", "call_id": "RG-tdd-16"}
+{"cell_id": "NS2-tdd-082", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "CTO", "form": "план итерации", "call_id": "RG-tdd-16"}
+{"cell_id": "NS2-tdd-083", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "QA-инженер", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-16"}
+{"cell_id": "NS2-tdd-084", "principle": "tdd", "verdict": "Риск", "domain": "госуслуги", "role": "менеджер проекта", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-16"}
+{"cell_id": "NS2-tdd-085", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-16"}
+{"cell_id": "NS2-tdd-086", "principle": "tdd", "verdict": "Риск", "domain": "e-commerce", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-tdd-17"}
+{"cell_id": "NS2-tdd-087", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-17"}
+{"cell_id": "NS2-tdd-088", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "аналитик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-17"}
+{"cell_id": "NS2-tdd-089", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "разработчик", "form": "заметка с ретроспективы", "call_id": "RG-tdd-17"}
+{"cell_id": "NS2-tdd-090", "principle": "tdd", "verdict": "Риск", "domain": "госуслуги", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-17"}
+{"cell_id": "NS2-tdd-091", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-18"}
+{"cell_id": "NS2-tdd-092", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "владелец продукта", "form": "план итерации", "call_id": "RG-tdd-18"}
+{"cell_id": "NS2-tdd-093", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "аналитик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-18"}
+{"cell_id": "NS2-tdd-094", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "разработчик", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-18"}
+{"cell_id": "NS2-tdd-095", "principle": "tdd", "verdict": "Риск", "domain": "медицина", "role": "владелец продукта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-18"}
+{"cell_id": "NS2-tdd-096", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "скрам-мастер", "form": "текст тикета", "call_id": "RG-tdd-19"}
+{"cell_id": "NS2-tdd-097", "principle": "tdd", "verdict": "Риск", "domain": "банк", "role": "заказчик", "form": "текст тикета", "call_id": "RG-tdd-19"}
+{"cell_id": "NS2-tdd-098", "principle": "tdd", "verdict": "Риск", "domain": "медицина", "role": "скрам-мастер", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-19"}
+{"cell_id": "NS2-tdd-099", "principle": "tdd", "verdict": "Риск", "domain": "финтех", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-19"}
+{"cell_id": "NS2-tdd-100", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "CTO", "form": "план итерации", "call_id": "RG-tdd-19"}
+{"cell_id": "NS2-tdd-101", "principle": "tdd", "verdict": "Риск", "domain": "e-commerce", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-20"}
+{"cell_id": "NS2-tdd-102", "principle": "tdd", "verdict": "Риск", "domain": "госуслуги", "role": "QA-инженер", "form": "письмо руководителю", "call_id": "RG-tdd-20"}
+{"cell_id": "NS2-tdd-103", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-20"}
+{"cell_id": "NS2-tdd-104", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "CTO", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-20"}
+{"cell_id": "NS2-tdd-105", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "директор по разработке", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-20"}
+{"cell_id": "NS2-tdd-106", "principle": "tdd", "verdict": "Риск", "domain": "образование", "role": "менеджер проекта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-21"}
+{"cell_id": "NS2-tdd-107", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "скрам-мастер", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-21"}
+{"cell_id": "NS2-tdd-108", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "владелец продукта", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-21"}
+{"cell_id": "NS2-tdd-109", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "CTO", "form": "письмо руководителю", "call_id": "RG-tdd-21"}
+{"cell_id": "NS2-tdd-110", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "скрам-мастер", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-21"}
+{"cell_id": "NS2-tdd-111", "principle": "tdd", "verdict": "Риск", "domain": "финтех", "role": "аналитик", "form": "письмо руководителю", "call_id": "RG-tdd-22"}
+{"cell_id": "NS2-tdd-112", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "владелец продукта", "form": "письмо руководителю", "call_id": "RG-tdd-22"}
+{"cell_id": "NS2-tdd-113", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "заказчик", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-22"}
+{"cell_id": "NS2-tdd-114", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "CTO", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-22"}
+{"cell_id": "NS2-tdd-115", "principle": "tdd", "verdict": "Риск", "domain": "HR-платформа", "role": "владелец продукта", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-22"}
+{"cell_id": "NS2-tdd-116", "principle": "tdd", "verdict": "Риск", "domain": "ритейл", "role": "CTO", "form": "текст тикета", "call_id": "RG-tdd-23"}
+{"cell_id": "NS2-tdd-117", "principle": "tdd", "verdict": "Риск", "domain": "игровая студия", "role": "директор по разработке", "form": "план итерации", "call_id": "RG-tdd-23"}
+{"cell_id": "NS2-tdd-118", "principle": "tdd", "verdict": "Риск", "domain": "логистика", "role": "скрам-мастер", "form": "сообщение в рабочий чат", "call_id": "RG-tdd-23"}
+{"cell_id": "NS2-tdd-119", "principle": "tdd", "verdict": "Риск", "domain": "телеком", "role": "директор по разработке", "form": "план итерации", "call_id": "RG-tdd-23"}
+{"cell_id": "NS2-tdd-120", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "CTO", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-23"}
+{"cell_id": "NS2-tdd-121", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "директор по разработке", "form": "выдержка из протокола встречи", "call_id": "RG-tdd-24"}
+{"cell_id": "NS2-tdd-122", "principle": "tdd", "verdict": "Риск", "domain": "медиа", "role": "владелец продукта", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-24"}
+{"cell_id": "NS2-tdd-123", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "разработчик", "form": "текст тикета", "call_id": "RG-tdd-24"}
+{"cell_id": "NS2-tdd-124", "principle": "tdd", "verdict": "Риск", "domain": "стартап", "role": "аналитик", "form": "план итерации", "call_id": "RG-tdd-24"}
+{"cell_id": "NS2-tdd-125", "principle": "tdd", "verdict": "Риск", "domain": "e-commerce", "role": "аналитик", "form": "план итерации", "call_id": "RG-tdd-24"}
+{"cell_id": "NS2-tdd-126", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "аналитик", "form": "текст тикета", "call_id": "RG-tdd-25"}
+{"cell_id": "NS2-tdd-127", "principle": "tdd", "verdict": "Риск", "domain": "туризм", "role": "менеджер проекта", "form": "план итерации", "call_id": "RG-tdd-25"}
+{"cell_id": "NS2-tdd-128", "principle": "tdd", "verdict": "Риск", "domain": "агротех", "role": "разработчик", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-25"}
+{"cell_id": "NS2-tdd-129", "principle": "tdd", "verdict": "Риск", "domain": "авиакомпания", "role": "аналитик", "form": "план итерации", "call_id": "RG-tdd-25"}
+{"cell_id": "NS2-tdd-130", "principle": "tdd", "verdict": "Риск", "domain": "производство", "role": "тимлид", "form": "вопрос «правильно ли мы делаем?»", "call_id": "RG-tdd-25"}

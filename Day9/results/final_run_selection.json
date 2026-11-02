@@ -1,0 +1,60 @@
+{
+ "rule": "max valid both_acc; tie -> lower pooled valid loss -> earlier step -> run order student, student_f1, student_f2",
+ "valid_set": "data/distill/valid.jsonl",
+ "valid_n": 49,
+ "read_eval": false,
+ "candidates": [
+  {
+   "run": "student",
+   "step": 450,
+   "both_acc": 0.1224,
+   "principle_acc": 0.1837,
+   "format_ok": 0.7755,
+   "val_loss": 1.158,
+   "adapter_path": "adapters/student/best",
+   "evidence": "results/student/select_ckpt.json"
+  },
+  {
+   "run": "student_f1",
+   "step": 900,
+   "both_acc": 0.2245,
+   "principle_acc": 0.2857,
+   "format_ok": 0.4694,
+   "val_loss": 1.541,
+   "adapter_path": "adapters/student_f1/best",
+   "evidence": "results/student_f1/select_ckpt.json"
+  },
+  {
+   "run": "student_f2",
+   "step": 100,
+   "both_acc": 0.3061,
+   "principle_acc": 0.4694,
+   "format_ok": 0.9388,
+   "val_loss": 1.021,
+   "adapter_path": "adapters/student_f2/best",
+   "evidence": "results/student_f2/select_ckpt.json"
+  }
+ ],
+ "selected_run": "student_f2",
+ "selected_step": 100,
+ "adapter_path": "adapters/student_f2/best",
+ "selected_metrics": {
+  "run": "student_f2",
+  "step": 100,
+  "both_acc": 0.3061,
+  "principle_acc": 0.4694,
+  "format_ok": 0.9388,
+  "val_loss": 1.021,
+  "adapter_path": "adapters/student_f2/best",
+  "evidence": "results/student_f2/select_ckpt.json"
+ },
+ "f2_fallback_trigger": {
+  "fallback": true,
+  "below_abs": true,
+  "below_base_plus": false,
+  "best": 0.4694,
+  "base_list": 0.3673
+ },
+ "fallback_launched": false,
+ "fused_copied": false
+}

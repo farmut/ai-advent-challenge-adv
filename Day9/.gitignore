@@ -1,0 +1,9 @@
+__pycache__/
+.venv/
+# teacher responses (re-creatable only for money; kept locally, not committed)
+cache/
+# LoRA adapters and checkpoints, fused / bf16 model weights
+adapters/
+models/
+results/*/tmp/
+results/.teacher.lock
