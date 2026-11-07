@@ -1,0 +1,8 @@
+models/
+logs/
+bin/
+*.log
+.DS_Store
+benchmarks/results-*.md
+reports/*
+!reports/summary/
