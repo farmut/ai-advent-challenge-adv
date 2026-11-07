@@ -1,0 +1,26 @@
+models:
+    baseline:
+        name: baseline-qwen2.5-7b-4bit
+        path: models/baseline-qwen2.5-7b-4bit
+        default: true
+    tuned:
+        name: agile-v1.0-4bit
+        path: models/agile-v1.0-4bit
+        default: false
+    v1.1:
+        name: agile-v1.1-4bit
+        path: models/agile-v1.1-4bit
+        default: false
+server:
+    host: 127.0.0.1
+    port: 8080
+    bind: 127.0.0.1:8080
+inference:
+    max_tokens: 1024
+    temperature: 0.7
+    top_p: 0.9
+log:
+    level: info
+    path: logs/agile-consultant.log
+prompt:
+    file: configs/prompts/consultant.v2.txt

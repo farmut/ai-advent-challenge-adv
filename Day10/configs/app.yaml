@@ -2,7 +2,7 @@ models:
     baseline:
         name: baseline-qwen2.5-7b-4bit
         path: models/baseline-qwen2.5-7b-4bit
-        default: false
+        default: true
     tuned:
         name: agile-v1.0-4bit
         path: models/agile-v1.0-4bit
@@ -10,7 +10,7 @@ models:
     v1.1:
         name: agile-v1.1-4bit
         path: models/agile-v1.1-4bit
-        default: true
+        default: false
 server:
     host: 127.0.0.1
     port: 8080
