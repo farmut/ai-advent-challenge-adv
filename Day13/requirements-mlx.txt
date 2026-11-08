@@ -1,0 +1,8 @@
+# MLX backend for the local qwen2.5-7b-local route (Apple Silicon only).
+# Installed by "make setup" into .venv. Pins are the versions actually
+# installed and checked on 2026-11-08 (Python 3.14.6, macOS arm64).
+mlx-lm==0.32.2
+huggingface_hub==2.4.0
+# mlx-lm declares only lower bounds for these; pinned for a reproducible stand.
+mlx==0.32.4
+transformers==5.22.2
