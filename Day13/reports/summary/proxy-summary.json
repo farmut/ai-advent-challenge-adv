@@ -1,0 +1,1699 @@
+{
+  "generated": "2026-11-08T20:03:50.83739+03:00",
+  "cases_sha": "527b07f34081e73deb2f4c6cefd1f6af5f3648e43b1f165df1be3ef40290cc2d",
+  "runs": [
+    {
+      "upstream": "fake",
+      "dir": "<root>/reports/proxy/fake-20261108-195831",
+      "stale": false,
+      "failed": false,
+      "summary": {
+        "total": 38,
+        "pass": 34,
+        "fail": 0,
+        "known_gap": 4,
+        "unexpected_catch": 0,
+        "na": 0,
+        "extra_passed": 18,
+        "extra_failed": 0
+      }
+    },
+    {
+      "upstream": "mlx",
+      "dir": "<root>/reports/proxy/mlx-20261108-163744",
+      "stale": false,
+      "failed": false,
+      "summary": {
+        "total": 38,
+        "pass": 24,
+        "fail": 0,
+        "known_gap": 4,
+        "unexpected_catch": 0,
+        "na": 10,
+        "extra_passed": 15,
+        "extra_failed": 0
+      }
+    },
+    {
+      "upstream": "openai-compat",
+      "dir": "<root>/reports/proxy/compat-20261108-200315",
+      "stale": false,
+      "failed": false,
+      "summary": {
+        "total": 38,
+        "pass": 24,
+        "fail": 0,
+        "known_gap": 4,
+        "unexpected_catch": 0,
+        "na": 10,
+        "extra_passed": 15,
+        "extra_failed": 0
+      }
+    }
+  ],
+  "columns": [
+    {
+      "Key": "fake-mask",
+      "Label": "fake · mask",
+      "Upstream": "fake",
+      "Mode": "mask",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 17,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 0,
+      "Total": 19
+    },
+    {
+      "Key": "fake-block",
+      "Label": "fake · block",
+      "Upstream": "fake",
+      "Mode": "block",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 17,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 0,
+      "Total": 19
+    },
+    {
+      "Key": "mlx-mask",
+      "Label": "mlx · mask",
+      "Upstream": "mlx",
+      "Mode": "mask",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 12,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 5,
+      "Total": 19
+    },
+    {
+      "Key": "mlx-block",
+      "Label": "mlx · block",
+      "Upstream": "mlx",
+      "Mode": "block",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 12,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 5,
+      "Total": 19
+    },
+    {
+      "Key": "openai-compat-mask",
+      "Label": "openai-compat · mask",
+      "Upstream": "openai-compat",
+      "Mode": "mask",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 12,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 5,
+      "Total": 19
+    },
+    {
+      "Key": "openai-compat-block",
+      "Label": "openai-compat · block",
+      "Upstream": "openai-compat",
+      "Mode": "block",
+      "Present": true,
+      "Stale": false,
+      "Failed": false,
+      "StaleReason": "",
+      "Pass": 12,
+      "Gap": 2,
+      "Fail": 0,
+      "NA": 5,
+      "Total": 19
+    }
+  ],
+  "cells": [
+    {
+      "ID": "IN-01",
+      "Column": "fake-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-01",
+      "Column": "fake-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-01",
+      "Column": "mlx-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-01",
+      "Column": "mlx-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-01",
+      "Column": "openai-compat-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-01",
+      "Column": "openai-compat-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-02",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-03",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "fake-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "mlx-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "openai-compat-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-04",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "fake-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "mlx-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "openai-compat-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-05",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-06",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-07",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-08",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "fake-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "fake-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "mlx-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "mlx-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "openai-compat-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-09",
+      "Column": "openai-compat-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "fake-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "mlx-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "openai-compat-mask",
+      "Badge": "◐ ЗАМАСКИРОВАН",
+      "Fail": false
+    },
+    {
+      "ID": "IN-10",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "fake-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "mlx-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "openai-compat-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-11",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "fake-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "fake-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "mlx-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "mlx-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "openai-compat-mask",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-12",
+      "Column": "openai-compat-block",
+      "Badge": "✕ ПОЙМАН · BLOCK",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "fake-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "fake-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "mlx-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "mlx-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "openai-compat-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-13",
+      "Column": "openai-compat-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "fake-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "fake-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "mlx-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "mlx-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "openai-compat-mask",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "IN-14",
+      "Column": "openai-compat-block",
+      "Badge": "! KNOWN GAP",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "fake-mask",
+      "Badge": "◐ OUTPUT REDACTED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "fake-block",
+      "Badge": "◐ OUTPUT REDACTED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "mlx-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "mlx-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "openai-compat-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-01",
+      "Column": "openai-compat-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "fake-mask",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "fake-block",
+      "Badge": "✓ PASS · FP-контроль",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "mlx-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "mlx-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "openai-compat-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-02",
+      "Column": "openai-compat-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "fake-mask",
+      "Badge": "✕ OUTPUT BLOCKED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "fake-block",
+      "Badge": "✕ OUTPUT BLOCKED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "mlx-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "mlx-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "openai-compat-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-03",
+      "Column": "openai-compat-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "fake-mask",
+      "Badge": "✕ OUTPUT BLOCKED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "fake-block",
+      "Badge": "✕ OUTPUT BLOCKED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "mlx-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "mlx-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "openai-compat-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-04",
+      "Column": "openai-compat-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "fake-mask",
+      "Badge": "◐ OUTPUT REDACTED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "fake-block",
+      "Badge": "◐ OUTPUT REDACTED",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "mlx-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "mlx-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "openai-compat-mask",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    },
+    {
+      "ID": "OUT-05",
+      "Column": "openai-compat-block",
+      "Badge": "N/A · требует fake",
+      "Fail": false
+    }
+  ],
+  "extra": [
+    {
+      "Name": "AUTH-01",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "без Authorization → 401 invalid_api_key + WWW-Authenticate; upstream 0; аудит unauthorized/missing",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-02",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "неверный ключ → 401 (тело как у AUTH-01); upstream 0; аудит unauthorized/invalid",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-03",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "Authorization: Basic \u003cвалидный ключ\u003e → 401; upstream 0; аудит unauthorized/scheme",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-04",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "?api_key=…, ?access_token=…, ?key=…, ?token=… + валидный Bearer → 401 query; токен не попал в аудит и slog",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-05",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "второй ключ → 200; key_id 0fbc5986c10e ≠ 568990ecd86d (HMAC, 12 hex)",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-06",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "схема `bearer` в нижнем регистре → 200, тот же key_id",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-07",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "/v1/models без токена → 401, с токеном → 200; /healthz и /readyz без токена → 200 (только status); неизвестный путь без токена → 401",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-08",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "невалидный JSON без ключа → 401 (тело не разбирается); с ключом → 400 invalid_json",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-09",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "10 неудач → 401; 11-я → 429 Retry-After=300s; валидный ключ во время блокировки → 429; /healthz 200; аудит: 10 unauthorized + 2 rate_limited/auth_fail_limit",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "AUTH-10",
+      "Category": "auth",
+      "CatLabel": "auth",
+      "Details": "ключи прокси не найдены: upstream (10 заголовков: пусто или ключ upstream), 10 slog, 10 audit, HTML-снимок",
+      "New": true,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "TestRateLimit429",
+      "Category": "rate",
+      "CatLabel": "rate",
+      "Details": "limit=3: 4-й → 429, Retry-After=57s; после +61s → 200; в аудите rate_limited=1 с пустым prompt",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        }
+      ]
+    },
+    {
+      "Name": "TestXForwardedForIgnored",
+      "Category": "rate",
+      "CatLabel": "rate",
+      "Details": "разные X-Forwarded-For/X-Real-IP при limit=1 → второй 429; client_ip_hash одинаковый (TCP peer)",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        }
+      ]
+    },
+    {
+      "Name": "TestCostTracking",
+      "Category": "cost",
+      "CatLabel": "cost",
+      "Details": "paid 100/50 → $0.000120 (upstream); без usage → estimated 2/4 токенов, $0.000008; local → $0",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        },
+        {
+          "Present": true,
+          "Status": "SKIP · только fake",
+          "Class": "o-skip"
+        }
+      ]
+    },
+    {
+      "Name": "TestAuditNoRawSecrets",
+      "Category": "audit",
+      "CatLabel": "audit",
+      "Details": "38 записей в 2 файлах, 18 секретов × raw/base64/hex — не найдено; ключи прокси и AUDIT_PEPPER не найдены в audit, 2 proxy.log и report.html",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "TestAuditFilePerms",
+      "Category": "audit",
+      "CatLabel": "audit",
+      "Details": "каталог аудита 0700 (даже если создан 0755), файл 0600",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "TestStreamRejected",
+      "Category": "api",
+      "CatLabel": "api",
+      "Details": "stream:true → 400 unsupported_parameter (param=stream), upstream не вызван",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "TestUnknownModel404",
+      "Category": "api",
+      "CatLabel": "api",
+      "Details": "model=gpt-9000 → 404 model_not_found, upstream не вызван",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    },
+    {
+      "Name": "TestBlockedNotForwarded",
+      "Category": "api",
+      "CatLabel": "api",
+      "Details": "400 guard_input_blocked + warning, 0 запросов к upstream: block/IN-02, mask/IN-04, mask/IN-05, mask/IN-11",
+      "New": false,
+      "Cells": [
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        },
+        {
+          "Present": true,
+          "Status": "✓ PASS",
+          "Class": "o-pass"
+        }
+      ]
+    }
+  ],
+  "audit": [
+    {
+      "Stage": "input",
+      "Type": "api_key_openai",
+      "Action": "block",
+      "Counts": [
+        6,
+        6,
+        6
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "api_key_openai",
+      "Action": "mask",
+      "Counts": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "aws_access_key",
+      "Action": "block",
+      "Counts": [
+        3,
+        3,
+        3
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "aws_access_key",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "aws_secret_key",
+      "Action": "block",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "aws_secret_key",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "card",
+      "Action": "block",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "card",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "email",
+      "Action": "block",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "email",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "github_token",
+      "Action": "block",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "github_token",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "phone",
+      "Action": "block",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "phone",
+      "Action": "mask",
+      "Counts": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "Stage": "input",
+      "Type": "private_key",
+      "Action": "block",
+      "Counts": [
+        2,
+        2,
+        2
+      ]
+    },
+    {
+      "Stage": "output",
+      "Type": "api_key_openai",
+      "Action": "redact",
+      "Counts": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "Stage": "output",
+      "Type": "aws_access_key",
+      "Action": "redact",
+      "Counts": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "Stage": "output",
+      "Type": "dangerous_command",
+      "Action": "block",
+      "Counts": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "Stage": "output",
+      "Type": "suspicious_url",
+      "Action": "redact",
+      "Counts": [
+        4,
+        0,
+        0
+      ]
+    },
+    {
+      "Stage": "output",
+      "Type": "system_leak",
+      "Action": "block",
+      "Counts": [
+        2,
+        0,
+        0
+      ]
+    }
+  ],
+  "tokens": [
+    {
+      "Upstream": "fake",
+      "Records": 128,
+      "Prompt": 3361,
+      "Completion": 1414,
+      "Total": 4775,
+      "CostUSD": "0.000128",
+      "SrcUpstream": 66,
+      "SrcEstimated": 1,
+      "Src": 37
+    },
+    {
+      "Upstream": "mlx",
+      "Records": 96,
+      "Prompt": 2533,
+      "Completion": 3982,
+      "Total": 6515,
+      "CostUSD": "0.000000",
+      "SrcUpstream": 37,
+      "SrcEstimated": 0,
+      "Src": 35
+    },
+    {
+      "Upstream": "openai-compat",
+      "Records": 96,
+      "Prompt": 1460,
+      "Completion": 4453,
+      "Total": 5913,
+      "CostUSD": "0.000000",
+      "SrcUpstream": 37,
+      "SrcEstimated": 0,
+      "Src": 35
+    }
+  ],
+  "log_examples": [
+    {
+      "Key": "masked",
+      "Title": "Input masked: плейсхолдер вместо ключа ушёл в модель",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "derived-block",
+      "Title": "Input blocked: derived-находка (base64) блокируется даже в mask",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "output_redacted",
+      "Title": "Output redacted: ключи в ответе модели заменены",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "output_blocked",
+      "Title": "Output blocked: утечка system prompt (system prompt хранится как hash)",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "rate_limited",
+      "Title": "Rate limited: 429 по IP, prompt не записан",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "unauthorized",
+      "Title": "Unauthorized (NEW): 401 без валидного ключа",
+      "Source": "fake · audit v2"
+    },
+    {
+      "Key": "fp-pass",
+      "Title": "FP-контроль: 16 цифр без Luhn прошли без срабатывания",
+      "Source": "fake · audit v2"
+    }
+  ],
+  "upstreams": [
+    "fake",
+    "mlx",
+    "openai-compat"
+  ],
+  "counts": {
+    "IN (input guard)": [
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      }
+    ],
+    "OUT (output guard)": [
+      {
+        "Present": true,
+        "Pass": 5,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 5,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 0,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 0,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 0,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 0,
+        "Gap": 0,
+        "Fail": 0,
+        "NA": 5
+      }
+    ],
+    "Итого": [
+      {
+        "Present": true,
+        "Pass": 17,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 17,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 0
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 5
+      },
+      {
+        "Present": true,
+        "Pass": 12,
+        "Gap": 2,
+        "Fail": 0,
+        "NA": 5
+      }
+    ]
+  },
+  "meta": {
+    "fake": {
+      "schema_version": 2,
+      "cases_sha": "527b07f34081e73deb2f4c6cefd1f6af5f3648e43b1f165df1be3ef40290cc2d",
+      "git_sha": "e8dcd708ecd20af20c9ffbe0f8a6fa60fd89b648-dirty",
+      "go_test_exit": "0"
+    },
+    "mlx": {
+      "schema_version": 2,
+      "cases_sha": "527b07f34081e73deb2f4c6cefd1f6af5f3648e43b1f165df1be3ef40290cc2d",
+      "git_sha": "e8dcd708ecd20af20c9ffbe0f8a6fa60fd89b648-dirty",
+      "go_test_exit": "0"
+    },
+    "openai-compat": {
+      "schema_version": 2,
+      "cases_sha": "527b07f34081e73deb2f4c6cefd1f6af5f3648e43b1f165df1be3ef40290cc2d",
+      "git_sha": "e8dcd708ecd20af20c9ffbe0f8a6fa60fd89b648-dirty",
+      "go_test_exit": "0"
+    }
+  }
+}

@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'"><title>Day13 guard-proxy e2e · upstream openai-compat</title><style>
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:#f3f4f6;font:15px/1.5 -apple-system,"Segoe UI","Helvetica Neue",Arial,sans-serif;color:#111827}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:24px 28px;max-width:1140px;margin:0 auto;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:15px;margin:22px 0 6px;color:#374151;text-transform:uppercase;letter-spacing:.04em}
+.sub{color:#6b7280;font-size:13px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;font-weight:700;font-size:12px;color:#fff;letter-spacing:.02em;white-space:nowrap}
+.red{background:#b91c1c}.green{background:#15803d}.gray{background:#4b5563}.amber{background:#b45309}.indigo{background:#4338ca}
+.indigo-o{background:none;color:#4338ca;border:2px solid #4338ca;padding:1px 8px}
+.fail-b{background:#fee2e2;color:#991b1b;border:2px solid #b91c1c;padding:1px 8px}
+.outline{display:inline-block;padding:1px 8px;border-radius:999px;font-weight:700;font-size:12px;background:none;border:2px solid currentColor;white-space:nowrap}
+.o-pass{color:#15803d}.o-fail{color:#b91c1c}.o-skip{color:#6b7280}
+.colbadge{border:1px solid #e5e7eb;border-radius:10px;padding:8px 12px;flex:1 1 0;min-width:0;max-width:300px;background:#fafafa}
+.colbadge b{display:block;font-size:14px;margin-bottom:4px}
+.colbadge.stale{border-color:#b45309;background:#fffbeb}.colbadge.failed{border:3px solid #b91c1c;background:#fee2e2}
+table{border-collapse:collapse;width:100%;font-size:13px}
+caption{text-align:left;color:#6b7280;font-size:12px;padding-bottom:6px;caption-side:top}
+th,td{border:1px solid #e5e7eb;padding:6px 8px;text-align:left;vertical-align:top}
+thead th{background:#f9fafb}
+tr.group th{background:#eef2ff;color:#312e81;font-size:12px;text-transform:uppercase;letter-spacing:.03em}
+th[scope=row] .exp{display:block;color:#6b7280;font-size:12px;font-weight:400}
+td.cell .b{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:4px}
+td.cell .badge,td.cell .outline{font-size:11px;padding:1px 7px}
+td.cell .indigo-o,td.cell .fail-b{padding:0 6px}
+table.matrix th[scope=row]{width:26%}
+td.cell.o-fail-cell{border:3px solid #b91c1c;background:#fee2e2}
+td.cell.na{background:#f3f4f6}
+td.cell code,.chips code{display:inline-block;background:#e0e7ff;color:#3730a3;padding:0 4px;border-radius:4px;font-size:11px;margin:2px 2px 0 0}
+.counts td,.counts th{text-align:center}.counts td:first-child,.counts th:first-child{text-align:left}
+.counts tr.total td{font-weight:700;background:#f9fafb}
+.bad{color:#b91c1c;font-weight:700}.good{color:#15803d;font-weight:700}
+.cat{display:inline-block;padding:0 6px;border-radius:4px;font-size:11px;font-weight:700;background:#e5e7eb;color:#374151;margin-right:4px}
+.cat.new{background:#4338ca;color:#fff}
+.extraline{font-size:13px;margin-top:10px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.cols2 ul{margin:0;padding-left:18px;font-size:13px}.cols2 li{margin-bottom:6px}
+figure{margin:14px 0;border:1px solid #e5e7eb;border-radius:10px;padding:10px 12px;background:#fafafa}
+figcaption{font-size:13px;margin-bottom:6px}figcaption b{display:block;font-size:14px}
+pre.log{background:#0f172a;color:#e2e8f0;padding:12px 14px;border-radius:8px;white-space:pre-wrap;word-break:break-word;font:12px/1.45 "SF Mono",Menlo,Consolas,monospace;margin:6px 0 0}
+mark.ph{background:#fde68a;color:#78350f;border-radius:3px;padding:0 2px}
+details summary{cursor:pointer;color:#1d4ed8;font-size:13px}
+.formula{background:#ecfdf5;border-left:4px solid #15803d;border-radius:6px;padding:8px 12px;font-size:13px;margin-top:8px}
+.warn{background:#fffbeb;border-left:4px solid #b45309;border-radius:6px;padding:8px 12px;font-size:13px;margin-top:8px;color:#78350f}
+ul.risks li{margin-bottom:4px;font-size:13px}
+</style></head><body><div class="card">
+<h1>Day13 guard-proxy e2e · upstream openai-compat</h1>
+<div class="sub">Модель: openai-compat: qwen2.5-coder:1.5b-base · сгенерировано 2026-11-08 20:03:44 MSK</div>
+<div class="sub"><b>openai-compat</b>: base_url <code>http://127.0.0.1:11434/v1</code> · <code><root>/reports/proxy/compat-20261108-200315</code> · запуск 2026-11-08 20:03:17 · git <code>e8dcd708ecd2</code> · cases <code>527b07f34081</code> · схема v2</div>
+
+<div class="row"><div class="colbadge"><b>openai-compat · mask</b><span class="badge green">✓ PASS 12/19</span> <span class="badge amber">! GAP 2</span> <span class="badge gray">N/A 5</span></div><div class="colbadge"><b>openai-compat · block</b><span class="badge green">✓ PASS 12/19</span> <span class="badge amber">! GAP 2</span> <span class="badge gray">N/A 5</span></div></div>
+<h2 id="counts">Счётчики</h2>
+<table class="counts"><caption>PASS — ожидание совпало · KNOWN GAP — известный пропуск · ПРОВАЛ — FAIL или UNEXPECTED_CATCH · N/A — кейс требует fake upstream</caption>
+<thead><tr><th scope="col" rowspan="2">Группа</th><th scope="colgroup" colspan="4">openai-compat · mask</th><th scope="colgroup" colspan="4">openai-compat · block</th></tr>
+<tr><th scope="col">PASS</th><th scope="col">GAP</th><th scope="col">ПРОВАЛ</th><th scope="col">N/A</th><th scope="col">PASS</th><th scope="col">GAP</th><th scope="col">ПРОВАЛ</th><th scope="col">N/A</th></tr></thead>
+<tbody><tr><td>IN (input guard)</td><td class="good">12</td><td>2</td><td>0</td><td>0</td><td class="good">12</td><td>2</td><td>0</td><td>0</td></tr>
+<tr><td>OUT (output guard)</td><td class="good">0</td><td>0</td><td>0</td><td>5</td><td class="good">0</td><td>0</td><td>0</td><td>5</td></tr>
+<tr class="total"><td>Итого</td><td class="good">12</td><td>2</td><td>0</td><td>5</td><td class="good">12</td><td>2</td><td>0</td><td>5</td></tr>
+</tbody></table>
+<h2 id="matrix">Матрица кейсов</h2>
+<table class="matrix"><caption>Залитый бейдж — исход: <span class="badge red">✕ ПОЙМАН · BLOCK</span> <span class="badge indigo">◐ ЗАМАСКИРОВАН</span> <span class="badge indigo-o">◐ OUTPUT REDACTED</span> <span class="badge red">✕ OUTPUT BLOCKED</span> <span class="badge green">✓ PASS · FP-контроль / чисто</span> <span class="badge amber">! KNOWN GAP</span> <span class="badge fail-b">⚠ ПРОВАЛ / UNEXPECTED_CATCH</span> <span class="badge gray">N/A · требует fake</span>. Контурный — проверка ожидания: <span class="outline o-pass">✓ PASS</span> <span class="outline o-fail">✕ FAIL</span>. <code>type=n</code> — находки guard. На реальных моделях (не fake) исход считается по input guard.</caption>
+<thead><tr><th scope="col">Кейс</th><th scope="col">openai-compat · mask</th><th scope="col">openai-compat · block</th></tr></thead>
+<tbody><tr class="group"><th scope="rowgroup" colspan="3">Input guard</th></tr>
+<tr><th scope="row">IN-01 Чистый промпт<span class="exp">ожидание: pass</span></th>
+<td id="IN-01-openai-compat-mask" class="cell"><div class="b"><span class="badge green">✓ PASS · FP-контроль</span><span class="outline o-pass">✓ PASS</span></div><div class="sub">upstream: да (1)</div></td><td id="IN-01-openai-compat-block" class="cell"><div class="b"><span class="badge green">✓ PASS · FP-контроль</span><span class="outline o-pass">✓ PASS</span></div><div class="sub">upstream: да (1)</div></td></tr>
+<tr><th scope="row">IN-02 AWS access key &#43; secret key<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-02-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>aws_access_key=1</code><code>aws_secret_key=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-02-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>aws_access_key=1</code><code>aws_secret_key=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-03 Номер карты (Luhn &#43; BIN Visa)<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-03-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>card=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-03-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>card=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-04 Base64 от [REDACTED]<span class="exp">ожидание: blocked</span></th>
+<td id="IN-04-openai-compat-mask" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td><td id="IN-04-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-05 Секрет по частям &#34;sk-&#34; &#43; &#34;[REDACTED]&#34;<span class="exp">ожидание: blocked</span></th>
+<td id="IN-05-openai-compat-mask" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td><td id="IN-05-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-06 GitHub token ghp_<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-06-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>github_token=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-06-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>github_token=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-07 Email &#43; телефон РФ<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-07-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>email=1</code><code>phone=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-07-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>email=1</code><code>phone=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-08 sk-proj- с zero-width space внутри<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-08-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-08-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-09 16 цифр без Luhn (контроль ложных срабатываний)<span class="exp">ожидание: pass</span></th>
+<td id="IN-09-openai-compat-mask" class="cell"><div class="b"><span class="badge green">✓ PASS · FP-контроль</span><span class="outline o-pass">✓ PASS</span></div><div class="sub">upstream: да (1)</div></td><td id="IN-09-openai-compat-block" class="cell"><div class="b"><span class="badge green">✓ PASS · FP-контроль</span><span class="outline o-pass">✓ PASS</span></div><div class="sub">upstream: да (1)</div></td></tr>
+<tr><th scope="row">IN-10 [REDACTED] → [REDACTED_API_KEY] в upstream<span class="exp">ожидание: mask → masked · block → blocked</span></th>
+<td id="IN-10-openai-compat-mask" class="cell"><div class="b"><span class="badge indigo">◐ ЗАМАСКИРОВАН</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: да (1)</div></td><td id="IN-10-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>api_key_openai=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-11 PEM private key (override: block)<span class="exp">ожидание: blocked</span></th>
+<td id="IN-11-openai-compat-mask" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>private_key=1</code><div class="sub">upstream: нет</div></td><td id="IN-11-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>private_key=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-12 Hex от AKIA-ключа<span class="exp">ожидание: blocked</span></th>
+<td id="IN-12-openai-compat-mask" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>aws_access_key=1</code><div class="sub">upstream: нет</div></td><td id="IN-12-openai-compat-block" class="cell"><div class="b"><span class="badge red">✕ ПОЙМАН · BLOCK</span><span class="outline o-pass">✓ PASS</span></div><code>aws_access_key=1</code><div class="sub">upstream: нет</div></td></tr>
+<tr><th scope="row">IN-13 Known gap: ROT13 ключа<span class="exp">ожидание: known gap</span></th>
+<td id="IN-13-openai-compat-mask" class="cell"><div class="b"><span class="badge amber">! KNOWN GAP</span></div><div class="sub">upstream: да (1)</div></td><td id="IN-13-openai-compat-block" class="cell"><div class="b"><span class="badge amber">! KNOWN GAP</span></div><div class="sub">upstream: да (1)</div></td></tr>
+<tr><th scope="row">IN-14 Known gap: ключ словами<span class="exp">ожидание: known gap</span></th>
+<td id="IN-14-openai-compat-mask" class="cell"><div class="b"><span class="badge amber">! KNOWN GAP</span></div><div class="sub">upstream: да (1)</div></td><td id="IN-14-openai-compat-block" class="cell"><div class="b"><span class="badge amber">! KNOWN GAP</span></div><div class="sub">upstream: да (1)</div></td></tr>
+<tr class="group"><th scope="rowgroup" colspan="3">Output guard</th></tr>
+<tr><th scope="row">OUT-01 Модель сгенерировала sk-proj- и AKIA-ключ<span class="exp">ожидание: output redacted</span></th>
+<td id="OUT-01-openai-compat-mask" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td><td id="OUT-01-openai-compat-block" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td></tr>
+<tr><th scope="row">OUT-02 AKIAIOSFODNN7EXAMPLE из allowlist (контроль ложных срабатываний)<span class="exp">ожидание: pass</span></th>
+<td id="OUT-02-openai-compat-mask" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td><td id="OUT-02-openai-compat-block" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td></tr>
+<tr><th scope="row">OUT-03 Ответ повторяет system prompt<span class="exp">ожидание: output blocked</span></th>
+<td id="OUT-03-openai-compat-mask" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td><td id="OUT-03-openai-compat-block" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td></tr>
+<tr><th scope="row">OUT-04 Опасная команда curl | sh<span class="exp">ожидание: output blocked</span></th>
+<td id="OUT-04-openai-compat-mask" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td><td id="OUT-04-openai-compat-block" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td></tr>
+<tr><th scope="row">OUT-05 Шортенер с session в query<span class="exp">ожидание: output redacted</span></th>
+<td id="OUT-05-openai-compat-mask" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td><td id="OUT-05-openai-compat-block" class="cell na"><div class="b"><span class="badge gray">N/A · требует fake</span></div></td></tr>
+</tbody></table>
+
+<h2 id="extra">Extra-тесты</h2>
+<table><caption>Сценарии вне матрицы. Метки: <span class="cat new">auth NEW</span> авторизация · <span class="cat">rate</span> лимиты · <span class="cat">cost</span> стоимость · <span class="cat">audit</span> аудит · <span class="cat">api</span> контракт API</caption>
+<thead><tr><th scope="col">Тест</th><th scope="col">openai-compat</th><th scope="col">Детали</th></tr></thead>
+<tbody><tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-01</th><td><span class="outline o-pass">✓ PASS</span></td><td>без Authorization → 401 invalid_api_key &#43; WWW-Authenticate; upstream 0; аудит unauthorized/missing</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-02</th><td><span class="outline o-pass">✓ PASS</span></td><td>неверный ключ → 401 (тело как у AUTH-01); upstream 0; аудит unauthorized/invalid</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-03</th><td><span class="outline o-pass">✓ PASS</span></td><td>Authorization: Basic &lt;валидный ключ&gt; → 401; upstream 0; аудит unauthorized/scheme</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-04</th><td><span class="outline o-pass">✓ PASS</span></td><td>?api_key=…, ?access_token=…, ?key=…, ?token=… &#43; валидный Bearer → 401 query; токен не попал в аудит и slog</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-05</th><td><span class="outline o-pass">✓ PASS</span></td><td>второй ключ → 200; key_id 0fbc5986c10e ≠ 568990ecd86d (HMAC, 12 hex)</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-06</th><td><span class="outline o-pass">✓ PASS</span></td><td>схема `bearer` в нижнем регистре → 200, тот же key_id</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-07</th><td><span class="outline o-pass">✓ PASS</span></td><td>/v1/models без токена → 401, с токеном → 200; /healthz и /readyz без токена → 200 (только status); неизвестный путь без токена → 401</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-08</th><td><span class="outline o-pass">✓ PASS</span></td><td>невалидный JSON без ключа → 401 (тело не разбирается); с ключом → 400 invalid_json</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-09</th><td><span class="outline o-pass">✓ PASS</span></td><td>10 неудач → 401; 11-я → 429 Retry-After=300s; валидный ключ во время блокировки → 429; /healthz 200; аудит: 10 unauthorized &#43; 2 rate_limited/auth_fail_limit</td></tr>
+<tr><th scope="row"><span class="cat new">auth NEW</span>AUTH-10</th><td><span class="outline o-pass">✓ PASS</span></td><td>ключи прокси не найдены: upstream (8 заголовков: пусто или ключ upstream), 10 slog, 10 audit, HTML-снимок</td></tr>
+<tr><th scope="row"><span class="cat">rate</span>TestRateLimit429</th><td><span class="outline o-skip">SKIP · только fake</span></td><td>только fake upstream</td></tr>
+<tr><th scope="row"><span class="cat">rate</span>TestXForwardedForIgnored</th><td><span class="outline o-skip">SKIP · только fake</span></td><td>только fake upstream</td></tr>
+<tr><th scope="row"><span class="cat">cost</span>TestCostTracking</th><td><span class="outline o-skip">SKIP · только fake</span></td><td>только fake upstream</td></tr>
+<tr><th scope="row"><span class="cat">audit</span>TestAuditNoRawSecrets</th><td><span class="outline o-pass">✓ PASS</span></td><td>28 записей в 2 файлах, 18 секретов × raw/base64/hex — не найдено; ключи прокси и AUDIT_PEPPER не найдены в audit, 2 proxy.log и report.html</td></tr>
+<tr><th scope="row"><span class="cat">audit</span>TestAuditFilePerms</th><td><span class="outline o-pass">✓ PASS</span></td><td>каталог аудита 0700 (даже если создан 0755), файл 0600</td></tr>
+<tr><th scope="row"><span class="cat">api</span>TestStreamRejected</th><td><span class="outline o-pass">✓ PASS</span></td><td>stream:true → 400 unsupported_parameter (param=stream), upstream не вызван</td></tr>
+<tr><th scope="row"><span class="cat">api</span>TestUnknownModel404</th><td><span class="outline o-pass">✓ PASS</span></td><td>model=gpt-9000 → 404 model_not_found, upstream не вызван</td></tr>
+<tr><th scope="row"><span class="cat">api</span>TestBlockedNotForwarded</th><td><span class="outline o-pass">✓ PASS</span></td><td>400 guard_input_blocked &#43; warning, 0 запросов к upstream: block/IN-02, mask/IN-04, mask/IN-05, mask/IN-11</td></tr>
+</tbody></table>
+
+<h2 id="caught">Что поймали / что пропустили</h2>
+<div class="cols2"><div><b class="good">Поймали</b><ul><li><b>IN-02</b> AWS access key &#43; secret key<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-03</b> Номер карты (Luhn &#43; BIN Visa)<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-04</b> Base64 от [REDACTED]<div class="sub">openai-compat · mask: blocked · openai-compat · block: blocked</div></li><li><b>IN-05</b> Секрет по частям &#34;sk-&#34; &#43; &#34;[REDACTED]&#34;<div class="sub">openai-compat · mask: blocked · openai-compat · block: blocked</div></li><li><b>IN-06</b> GitHub token ghp_<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-07</b> Email &#43; телефон РФ<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-08</b> sk-proj- с zero-width space внутри<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-10</b> [REDACTED] → [REDACTED_API_KEY] в upstream<div class="sub">openai-compat · mask: masked · openai-compat · block: blocked</div></li><li><b>IN-11</b> PEM private key (override: block)<div class="sub">openai-compat · mask: blocked · openai-compat · block: blocked</div></li><li><b>IN-12</b> Hex от AKIA-ключа<div class="sub">openai-compat · mask: blocked · openai-compat · block: blocked</div></li></ul></div>
+<div><b class="bad">Пропустили</b><ul><li><b>IN-13</b> Known gap: ROT13 ключа<div class="sub">openai-compat · mask: known gap · openai-compat · block: known gap</div><div class="sub">ROT13 не декодируется: детектор не перебирает подстановочные шифры.</div></li><li><b>IN-14</b> Known gap: ключ словами<div class="sub">openai-compat · mask: known gap · openai-compat · block: known gap</div><div class="sub">Секрет, записанный словами, не распознаётся regex-детекторами.</div></li><li class="sub">Не покрыто: реверс строки, base32/gzip и другие кодировки вне base64/hex/url;</li><li class="sub">Не покрыто: утечка секрета частями в разных запросах (детектор видит один запрос);</li><li class="sub">Не покрыто: секреты в base64 в ответе модели (output guard сканирует только raw/normalized);</li><li class="sub">Не покрыто: на реальных моделях (mlx, openai-compat) output-кейсы не проверяются: ответ модели недетерминирован (N/A).</li></ul></div></div>
+
+<h2 id="logs">Примеры логов перехваченных запросов</h2>
+<div class="sub">Записи аудита (JSONL) как есть: только *_masked поля, findings с type/view/fingerprint (HMAC). Плейсхолдеры подсвечены.</div>
+<figure id="log-masked"><figcaption><b>Input masked: плейсхолдер вместо ключа ушёл в модель</b>секрет не записан: только type/view/fingerprint · <span class="sub">openai-compat · audit v2</span></figcaption>
+<details open><summary>запись аудита</summary><pre class="log">{
+  &#34;v&#34;: 2,
+  &#34;ts&#34;: &#34;2026-11-08T20:03:34.999255+03:00&#34;,
+  &#34;request_id&#34;: &#34;e2e-mask-IN-02&#34;,
+  &#34;client_ip_hash&#34;: &#34;4b15d90476cb&#34;,
+  &#34;key_id&#34;: &#34;568990ecd86d&#34;,
+  &#34;model&#34;: &#34;qwen2.5-7b-local&#34;,
+  &#34;upstream&#34;: &#34;mlx&#34;,
+  &#34;upstream_model&#34;: &#34;qwen2.5-coder:1.5b-base&#34;,
+  &#34;status&#34;: &#34;ok&#34;,
+  &#34;http_status&#34;: 200,
+  &#34;error_code&#34;: &#34;&#34;,
+  &#34;input&#34;: {
+    &#34;mode&#34;: &#34;mask&#34;,
+    &#34;action&#34;: &#34;masked&#34;,
+    &#34;findings&#34;: [
+      {
+        &#34;type&#34;: &#34;aws_access_key&#34;,
+        &#34;view&#34;: &#34;raw&#34;,
+        &#34;count&#34;: 1,
+        &#34;action&#34;: &#34;mask&#34;,
+        &#34;derived&#34;: false,
+        &#34;fingerprints&#34;: [
+          &#34;b623b15c7975&#34;
+        ],
+        &#34;placeholder&#34;: &#34;<mark class="ph">[REDACTED_AWS_KEY]</mark>&#34;
+      },
+      {
+        &#34;type&#34;: &#34;aws_secret_key&#34;,
+        &#34;view&#34;: &#34;raw&#34;,
+        &#34;count&#34;: 1,
+        &#34;action&#34;: &#34;mask&#34;,
+        &#34;derived&#34;: false,
+        &#34;fingerprints&#34;: [
+          &#34;0ea794e65fcc&#34;
+        ],
+        &#34;placeholder&#34;: &#34;<mark class="ph">[REDACTED_AWS_SECRET]</mark>&#34;
+      }
+    ]
+  },
+  &#34;output&#34;: {
+    &#34;action&#34;: &#34;pass&#34;,
+    &#34;findings&#34;: []
+  },
+  &#34;prompt_masked&#34;: [
+    {
+      &#34;role&#34;: &#34;user&#34;,
+      &#34;content&#34;: &#34;Почему падает деплой? AWS_ACCESS_KEY_ID=<mark class="ph">[REDACTED_AWS_KEY]</mark> aws_secret_access_key=<mark class="ph">[REDACTED_AWS_SECRET]</mark>&#34;
+    }
+  ],
+  &#34;response_masked&#34;: &#34; region_name=us-east-1\naws s3 cp /home/ubuntu/backup.tar.gz s3://my-backup-bucket --region us-east-1\n\n# Удаление старых файлов с помощью AWS CLI\naws s3 rm s3://my-backup-bucket/backup.tar.gz?max-keys=5 --recursive --region us-east-1&#34;,
+  &#34;usage&#34;: {
+    &#34;prompt_tokens&#34;: 37,
+    &#34;completion_tokens&#34;: 77,
+    &#34;total_tokens&#34;: 114,
+    &#34;source&#34;: &#34;upstream&#34;
+  },
+  &#34;cost_micro_usd&#34;: 0,
+  &#34;price_ref&#34;: &#34;local&#34;,
+  &#34;latency_ms&#34;: {
+    &#34;total&#34;: 515,
+    &#34;upstream&#34;: 515
+  }
+}</pre></details></figure>
+<figure id="log-derived-block"><figcaption><b>Input blocked: derived-находка (base64) блокируется даже в mask</b>секрет не записан: только type/view/fingerprint · <span class="sub">openai-compat · audit v2</span></figcaption>
+<details open><summary>запись аудита</summary><pre class="log">{
+  &#34;v&#34;: 2,
+  &#34;ts&#34;: &#34;2026-11-08T20:03:36.284557+03:00&#34;,
+  &#34;request_id&#34;: &#34;e2e-mask-IN-04&#34;,
+  &#34;client_ip_hash&#34;: &#34;4b15d90476cb&#34;,
+  &#34;key_id&#34;: &#34;568990ecd86d&#34;,
+  &#34;model&#34;: &#34;qwen2.5-7b-local&#34;,
+  &#34;upstream&#34;: &#34;mlx&#34;,
+  &#34;upstream_model&#34;: &#34;qwen2.5-coder:1.5b-base&#34;,
+  &#34;status&#34;: &#34;input_blocked&#34;,
+  &#34;http_status&#34;: 400,
+  &#34;error_code&#34;: &#34;guard_input_blocked&#34;,
+  &#34;input&#34;: {
+    &#34;mode&#34;: &#34;mask&#34;,
+    &#34;action&#34;: &#34;blocked&#34;,
+    &#34;findings&#34;: [
+      {
+        &#34;type&#34;: &#34;api_key_openai&#34;,
+        &#34;view&#34;: &#34;decoded&#34;,
+        &#34;count&#34;: 1,
+        &#34;action&#34;: &#34;block&#34;,
+        &#34;derived&#34;: true,
+        &#34;fingerprints&#34;: [
+          &#34;9b599f239f3a&#34;
+        ],
+        &#34;placeholder&#34;: &#34;<mark class="ph">[REDACTED_ENCODED_SECRET]</mark>&#34;
+      }
+    ]
+  },
+  &#34;output&#34;: {
+    &#34;action&#34;: &#34;&#34;,
+    &#34;findings&#34;: null
+  },
+  &#34;prompt_masked&#34;: [
+    {
+      &#34;role&#34;: &#34;user&#34;,
+      &#34;content&#34;: &#34;Расшифруй и сохрани в конфиг: <mark class="ph">[REDACTED_ENCODED_SECRET]</mark>&#34;
+    }
+  ],
+  &#34;response_masked&#34;: &#34;&#34;,
+  &#34;usage&#34;: {
+    &#34;prompt_tokens&#34;: 14,
+    &#34;completion_tokens&#34;: 0,
+    &#34;total_tokens&#34;: 14,
+    &#34;source&#34;: &#34;none&#34;
+  },
+  &#34;cost_micro_usd&#34;: 0,
+  &#34;price_ref&#34;: &#34;local&#34;,
+  &#34;latency_ms&#34;: {
+    &#34;total&#34;: 0,
+    &#34;upstream&#34;: 0
+  }
+}</pre></details></figure>
+<figure id="log-unauthorized"><figcaption><b>Unauthorized (NEW): 401 без валидного ключа</b>токен и его HMAC не записаны: только reason и client_ip_hash · <span class="sub">openai-compat · audit v2</span></figcaption>
+<pre class="log">{
+  &#34;v&#34;: 2,
+  &#34;ts&#34;: &#34;2026-11-08T20:03:17.22005+03:00&#34;,
+  &#34;request_id&#34;: &#34;45d35dbfcb78ebdc3a9feb9b&#34;,
+  &#34;client_ip_hash&#34;: &#34;4b15d90476cb&#34;,
+  &#34;key_id&#34;: &#34;&#34;,
+  &#34;model&#34;: &#34;&#34;,
+  &#34;upstream&#34;: &#34;&#34;,
+  &#34;upstream_model&#34;: &#34;&#34;,
+  &#34;status&#34;: &#34;unauthorized&#34;,
+  &#34;http_status&#34;: 401,
+  &#34;error_code&#34;: &#34;invalid_api_key&#34;,
+  &#34;reason&#34;: &#34;missing&#34;,
+  &#34;input&#34;: {
+    &#34;mode&#34;: &#34;mask&#34;,
+    &#34;action&#34;: &#34;&#34;,
+    &#34;findings&#34;: null
+  },
+  &#34;output&#34;: {
+    &#34;action&#34;: &#34;&#34;,
+    &#34;findings&#34;: null
+  },
+  &#34;prompt_masked&#34;: [],
+  &#34;response_masked&#34;: &#34;&#34;,
+  &#34;usage&#34;: {
+    &#34;prompt_tokens&#34;: 0,
+    &#34;completion_tokens&#34;: 0,
+    &#34;total_tokens&#34;: 0,
+    &#34;source&#34;: &#34;none&#34;
+  },
+  &#34;cost_micro_usd&#34;: 0,
+  &#34;price_ref&#34;: &#34;&#34;,
+  &#34;latency_ms&#34;: {
+    &#34;total&#34;: 0,
+    &#34;upstream&#34;: 0
+  }
+}</pre></figure>
+<figure id="log-fp-pass"><figcaption><b>FP-контроль: 16 цифр без Luhn прошли без срабатывания</b>находок нет: текст записан как есть (уже проверен guard) · <span class="sub">openai-compat · audit v2</span></figcaption>
+<pre class="log">{
+  &#34;v&#34;: 2,
+  &#34;ts&#34;: &#34;2026-11-08T20:03:38.056977+03:00&#34;,
+  &#34;request_id&#34;: &#34;e2e-mask-IN-09&#34;,
+  &#34;client_ip_hash&#34;: &#34;4b15d90476cb&#34;,
+  &#34;key_id&#34;: &#34;568990ecd86d&#34;,
+  &#34;model&#34;: &#34;qwen2.5-7b-local&#34;,
+  &#34;upstream&#34;: &#34;mlx&#34;,
+  &#34;upstream_model&#34;: &#34;qwen2.5-coder:1.5b-base&#34;,
+  &#34;status&#34;: &#34;ok&#34;,
+  &#34;http_status&#34;: 200,
+  &#34;error_code&#34;: &#34;&#34;,
+  &#34;input&#34;: {
+    &#34;mode&#34;: &#34;mask&#34;,
+    &#34;action&#34;: &#34;pass&#34;,
+    &#34;findings&#34;: []
+  },
+  &#34;output&#34;: {
+    &#34;action&#34;: &#34;pass&#34;,
+    &#34;findings&#34;: []
+  },
+  &#34;prompt_masked&#34;: [
+    {
+      &#34;role&#34;: &#34;user&#34;,
+      &#34;content&#34;: &#34;Номер заказа 4111 1111 1111 1112, когда будет готов релиз?&#34;
+    }
+  ],
+  &#34;response_masked&#34;: &#34; - Новости\nГлавная » Новости » Номер заказа 4111 1111 1111 1112, когда будет готов релиз?\nНомер заказа 4111 1111 1111 1112, когда будет готов релиз? - Новости\nВот и все. Пока не известно, когда будет готов релиз, но в любом случае, вы можете скачать его прямо сейчас.\nНомер заказа 4111 1111 111&#34;,
+  &#34;usage&#34;: {
+    &#34;prompt_tokens&#34;: 32,
+    &#34;completion_tokens&#34;: 128,
+    &#34;total_tokens&#34;: 160,
+    &#34;source&#34;: &#34;upstream&#34;
+  },
+  &#34;cost_micro_usd&#34;: 0,
+  &#34;price_ref&#34;: &#34;local&#34;,
+  &#34;latency_ms&#34;: {
+    &#34;total&#34;: 778,
+    &#34;upstream&#34;: 778
+  }
+}</pre></figure>
+
+
+<h2 id="audit">Аудит: stage × type × action</h2>
+<table><caption>Число находок в audit-mask.jsonl + audit-block.jsonl каждого прогона</caption>
+<thead><tr><th scope="col">Stage</th><th scope="col">Type</th><th scope="col">Action</th><th scope="col">openai-compat</th></tr></thead>
+<tbody><tr><td>input</td><td>api_key_openai</td><td>block</td><td>6</td></tr><tr><td>input</td><td>api_key_openai</td><td>mask</td><td>2</td></tr><tr><td>input</td><td>aws_access_key</td><td>block</td><td>3</td></tr><tr><td>input</td><td>aws_access_key</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>aws_secret_key</td><td>block</td><td>1</td></tr><tr><td>input</td><td>aws_secret_key</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>card</td><td>block</td><td>1</td></tr><tr><td>input</td><td>card</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>email</td><td>block</td><td>1</td></tr><tr><td>input</td><td>email</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>github_token</td><td>block</td><td>1</td></tr><tr><td>input</td><td>github_token</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>phone</td><td>block</td><td>1</td></tr><tr><td>input</td><td>phone</td><td>mask</td><td>1</td></tr><tr><td>input</td><td>private_key</td><td>block</td><td>2</td></tr></tbody></table>
+
+<h2 id="cost">Токены и стоимость</h2>
+<table><caption>Все записи аудита прогона (кейсы и extra). Заблокированные на входе запросы не отправляются в модель: usage.source=none, стоимость 0</caption>
+<thead><tr><th scope="col">Upstream</th><th scope="col">Записей</th><th scope="col">Prompt</th><th scope="col">Completion</th><th scope="col">Total</th><th scope="col">Cost USD</th><th scope="col">usage: upstream / estimated / none</th></tr></thead>
+<tbody><tr><th scope="row">openai-compat</th><td>96</td><td>1460</td><td>4453</td><td>5913</td><td>$0.000000</td><td>37 / 0 / 35</td></tr></tbody></table>
+<div class="formula"><b>$0.000120</b> = 100 prompt × 400000 µ$/1M + 50 completion × 1600000 µ$/1M = 40 + 80 = 120 µ$ (int64 micro-USD, округление вверх). Проверка TestCostTracking (fake): <span class="sub">нет fake-прогона</span></div>
+
+<h2 id="risks">Риски</h2>
+<ul class="risks"><li>Аутентификация есть: Bearer-ключи из PROXY_API_KEYS (sha256 &#43; constant-time сравнение, key_id = HMAC). Ключи статические: ротация через рестарт, нет per-key лимитов и отзыва без рестарта.</li><li>TLS у прокси нет. По умолчанию listen только loopback; адрес не на loopback разрешён лишь с proxy.allow_non_loopback: true и требует TLS-терминатора перед прокси, иначе ключи и промпты идут открытым текстом.</li><li>Перебор ключей ограничен 10 неудачами за 5 минут с IP (в памяти процесса); распределённый перебор с многих IP этим не останавливается.</li><li>Derived-находки (base64/hex/url, склейка) блокируются даже в mask: возможны ложные блокировки легитимных закодированных данных.</li><li>Regex-детекторы не ловят обфускацию вне перечисленных представлений (ROT13, слова, реверс, base32, разбиение по запросам).</li><li>Output guard не стримит (stream=true → 400) и проверяет ответ целиком; ответы реальной модели недетерминированы.</li><li>Rate limit (20/мин по IP) в памяти процесса: сбрасывается при рестарте и не разделяется между инстансами.</li><li>Цены облачных моделей в конфиге надо сверять с прайсом провайдера (поле ref).</li></ul>
+</div></body></html>
+
+
+
+
+
+
+
+
+
+
+
+
