@@ -192,10 +192,10 @@ stand-up: $(STAND_DIR) ## Поднять стенд: backend (UPSTREAM) + про
 	@echo "  Loop:    make run-loop GOAL='@agent/testdata/loop/sqli_goal.md'"
 	@echo "  Стоп:    make stand-down"
 
-stand-agent: ## Запустить агента против поднятого стенда (ARGS="--interactive" или --query "…")
+stand-agent: ## Запустить агента против поднятого стенда (ARGS="--interactive" или --query "…", AGENT_CONFIG=path.yaml)
 	@if [ -z "$(PROXY_KEY)" ]; then echo "сначала make stand-up"; exit 1; fi
 	@cd $(AGENT_MAKE_DIR) && LLM_API_KEY="$(PROXY_KEY)" ./ai-adv-agent-agent \
-		--config agent.config.yaml --model "$(STAND_MODEL)" $(ARGS)
+		--config $(or $(AGENT_CONFIG),agent.config.yaml) --model "$(STAND_MODEL)" $(ARGS)
 
 stand-down: ## Остановить стенд (proxy и бэкенд, запущенные stand-up)
 	@for name in proxy mlx ollama; do \

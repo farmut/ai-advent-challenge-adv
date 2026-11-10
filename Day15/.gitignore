@@ -1,0 +1,3 @@
+# Day15 runtime artifacts (если появятся локальные логи/каталоги)
+.stand/
+*.log
