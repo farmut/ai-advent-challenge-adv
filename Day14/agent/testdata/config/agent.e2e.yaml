@@ -1,0 +1,67 @@
+# Fast limits for functional and e2e runs (plan section 7.2). Production-safe
+# defaults live in code and agent.config.yaml; only test configs may be fast.
+llm:
+  provider: openai
+  model: e2e-fake            # alias served by the fake upstream behind the proxy
+  base_url: http://127.0.0.1:8090/v1
+  timeout: 30s
+  request_max_bytes: 900000
+  rate_limit:
+    enabled: false           # the proxy in e2e runs with a high per_minute
+  retry:
+    max_attempts: 2
+    base_delay: 1ms
+    max_delay: 5ms
+    jitter: 0
+
+memory:
+  dir: e2e_session.json
+  stm: { enabled: false }
+  wm: { enabled: false }
+  ltm: { enabled: false }
+  facts: { enabled: false }
+  profile: { enabled: false }
+  task_memory: { enabled: false }
+
+rag: { enabled: false }
+consultant: { enabled: false }
+mcp: { enabled: false }
+
+orchestrator:
+  enabled: true
+  max_rounds: 8
+  json_retries: 2
+
+profiles:
+  dir: ../../profiles   # resolved against this file's directory
+
+# Fast pipeline limits for e2e (plan section 7.2): small caps, small byte
+# budgets; commands still must sit in the sandbox allow list.
+pipeline:
+  max_security_iterations: 2
+  json_retries: 1
+  generator_profile: coder
+  reviewers: { go: security-go, vue: security-vue }
+  test_commands:
+    go:  [["go", "vet", "./..."], ["go", "test", "./..."]]
+    vue: [["vue-tsc", "--noEmit"], ["vitest", "run"]]
+  sast:
+    go:  ["gosec", "-fmt=json", "-no-fail", "./..."]
+    vue: ["eslint", "-c", "/opt/sandbox/eslint.security.mjs", "-f", "json", "."]
+  command_timeout: 60s
+  test_output_max_bytes: 4096
+  review_file_max_bytes: 16384
+  review_total_max_bytes: 65536
+  max_tool_rounds: 5
+
+# Fast loop budgets for e2e (plan section 7.2): generous call/token headroom
+# so the scenario never trips the budget, a short deadline, no replans.
+loop:
+  max_subtasks: 10
+  max_attempts_per_subtask: 3
+  max_llm_calls: 500
+  max_tokens: 10000000
+  max_cost_usd: 10.0
+  deadline: 5m
+  max_replans: 1
+  on_ask_user: decide

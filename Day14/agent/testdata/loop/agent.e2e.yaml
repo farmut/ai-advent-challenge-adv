@@ -1,0 +1,86 @@
+# Loop e2e config (plan section 4/7.2): fast limits, fake LLM behind the Day13
+# proxy, real docker sandbox. Artifacts (chat_history.loop.*.json, the loop
+# lock) land next to this file via memory.dir, so the e2e test can assert on
+# them without searching the tree.
+llm:
+  provider: openai
+  model: fake-coder            # alias served by the fake upstream behind the proxy
+  base_url: http://127.0.0.1:8090/v1
+  timeout: 30s
+  request_max_bytes: 900000
+  rate_limit:
+    enabled: false             # the proxy in e2e runs with a high per_minute
+  retry:
+    max_attempts: 2
+    base_delay: 1ms
+    max_delay: 5ms
+    jitter: 0
+
+memory:
+  dir: loop_e2e_session.json
+  stm: { enabled: false }
+  wm: { enabled: false }
+  ltm: { enabled: false }
+  facts: { enabled: false }
+  profile: { enabled: false }
+  task_memory: { enabled: false }
+
+rag: { enabled: false }
+consultant: { enabled: false }
+mcp: { enabled: false }
+
+orchestrator:
+  enabled: false
+
+profiles:
+  dir: ../../profiles          # resolved against this file's directory
+
+sandbox:
+  runtime: docker
+  docker_bin: docker
+  image: ai-adv-sandbox:1      # built by make sandbox-image
+  platform: linux/amd64
+  workspace_root: ../../workspace-loop-e2e
+  templates:                   # seeded into the run's base (paths vs this file)
+    go: ../../../sandbox/templates/go
+    vue: ../../../sandbox/templates/vue
+  timeout: 5m
+  kill_timeout: 10s
+  max_output_bytes: 262144
+  memory: 1g
+  cpus: "2"
+  pids: 256
+  tmpfs_size: 1g
+  copy_max_files: 5000
+  copy_max_bytes: 52428800
+  allowed_binaries: [go, gofmt, gosec, eslint, vitest, vue-tsc, npm]
+
+pipeline:
+  max_security_iterations: 2
+  json_retries: 1
+  generator_profile: coder
+  reviewers: { go: security-go, vue: security-vue }
+  test_commands:
+    go:  [["go", "vet", "./..."], ["go", "test", "./..."]]
+    vue: [["vue-tsc", "--noEmit"], ["vitest", "run"]]
+  sast:
+    go:  ["gosec", "-fmt=json", "-no-fail", "./..."]
+    vue: ["eslint", "-c", "/opt/sandbox/eslint.security.mjs", "-f", "json", "."]
+  command_timeout: 60s
+  test_output_max_bytes: 4096
+  review_file_max_bytes: 16384
+  review_total_max_bytes: 65536
+  max_tool_rounds: 5
+
+# Generous call/token headroom so the happy-path scenario never trips the
+# budget; a short deadline; the negative budget variant (plan section 4 в)
+# overrides max_llm_calls from the Makefile.
+loop:
+  max_subtasks: 10
+  max_attempts_per_subtask: 3
+  max_llm_calls: 500
+  max_tokens: 10000000
+  max_cost_usd: 10.0
+  deadline: 5m
+  max_replans: 1
+  on_ask_user: decide

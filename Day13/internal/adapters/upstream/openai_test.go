@@ -157,3 +157,66 @@ func TestRouter(t *testing.T) {
 		})
 	}
 }
+
+func TestOpenAIToolCalls(t *testing.T) {
+	tests := []struct {
+		name     string
+		resp     string
+		wantErr  bool
+		wantArgs string
+		wantText string
+	}{
+		{"content null with tool_calls", `{"choices":[{"message":{"role":"assistant","content":null,"tool_calls":[{"id":"call_1","type":"function","function":{"name":"write_file","arguments":"{\"path\":\"a.go\"}"}}]},"finish_reason":"tool_calls"}]}`,
+			false, `{"path":"a.go"}`, ""},
+		{"arguments as object, type omitted", `{"choices":[{"message":{"content":"","tool_calls":[{"id":"call_1","function":{"name":"write_file","arguments":{"path": "a.go"}}}]},"finish_reason":"tool_calls"}]}`,
+			false, `{"path":"a.go"}`, ""},
+		{"content and tool_calls", `{"choices":[{"message":{"content":"ok","tool_calls":[{"id":"c","type":"function","function":{"name":"w","arguments":"{}"}}]},"finish_reason":"tool_calls"}]}`,
+			false, `{}`, "ok"},
+		{"content null without tool_calls", `{"choices":[{"message":{"content":null},"finish_reason":"stop"}]}`, true, "", ""},
+		{"arguments number", `{"choices":[{"message":{"content":null,"tool_calls":[{"id":"c","type":"function","function":{"name":"w","arguments":1}}]}}]}`, true, "", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) { _, _ = io.WriteString(w, tt.resp) }))
+			defer srv.Close()
+			res, err := NewOpenAI(srv.URL+"/v1", "", time.Second, nil).Chat(context.Background(), ports.UpstreamRequest{Model: "m", Messages: []ports.ChatMessage{{Role: "user", Content: "x"}}})
+			if tt.wantErr {
+				if !errors.Is(err, ports.ErrUpstreamBadResponse) {
+					t.Fatalf("err = %v", err)
+				}
+				return
+			}
+			if err != nil {
+				t.Fatal(err)
+			}
+			if len(res.ToolCalls) != 1 || res.ToolCalls[0].Type != "function" || res.ToolCalls[0].Function.Arguments != tt.wantArgs || res.Content != tt.wantText || res.FinishReason != "tool_calls" {
+				t.Fatalf("res %+v", res)
+			}
+		})
+	}
+}
+
+// TestOpenAIForwardsTools: tools, tool_choice and the tool round of the
+// conversation are sent upstream in the OpenAI format.
+func TestOpenAIForwardsTools(t *testing.T) {
+	var got map[string]json.RawMessage
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		b, _ := io.ReadAll(r.Body)
+		_ = json.Unmarshal(b, &got)
+		_, _ = io.WriteString(w, `{"choices":[{"message":{"content":"hi"},"finish_reason":"stop"}]}`)
+	}))
+	defer srv.Close()
+	req := ports.UpstreamRequest{Model: "m",
+		Messages: []ports.ChatMessage{
+			{Role: "assistant", ToolCalls: []ports.ToolCall{{ID: "call_1", Type: "function", Function: ports.ToolFunction{Name: "w", Arguments: `{"a":1}`}}}},
+			{Role: "tool", ToolCallID: "call_1", Content: "ok"},
+		},
+		Tools: json.RawMessage(`[{"type":"function","function":{"name":"w"}}]`), ToolChoice: json.RawMessage(`"auto"`)}
+	if _, err := NewOpenAI(srv.URL+"/v1", "", time.Second, nil).Chat(context.Background(), req); err != nil {
+		t.Fatal(err)
+	}
+	want := `[{"role":"assistant","content":"","tool_calls":[{"id":"call_1","type":"function","function":{"name":"w","arguments":"{\"a\":1}"}}]},{"role":"tool","content":"ok","tool_call_id":"call_1"}]`
+	if string(got["messages"]) != want || string(got["tools"]) != `[{"type":"function","function":{"name":"w"}}]` || string(got["tool_choice"]) != `"auto"` {
+		t.Fatalf("body %s / %s / %s", got["messages"], got["tools"], got["tool_choice"])
+	}
+}

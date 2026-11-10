@@ -96,8 +96,8 @@ func TestBuildWiring(t *testing.T) {
 	if !strings.Contains(string(data), `"upstream_model":"models/baseline-qwen2.5-7b-4bit"`) {
 		t.Fatalf("upstream_model must be relative:\n%s", data)
 	}
-	if !strings.Contains(string(data), `"key_id":"`) || !strings.Contains(string(data), `"v":2`) {
-		t.Fatalf("audit v2 with key_id expected:\n%s", data)
+	if !strings.Contains(string(data), `"key_id":"`) || !strings.Contains(string(data), `"v":3`) {
+		t.Fatalf("audit v3 with key_id expected:\n%s", data)
 	}
 }
 

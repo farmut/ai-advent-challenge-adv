@@ -33,7 +33,7 @@ const (
 	envOut       = "E2E_OUT"        // default <root>/reports/proxy/<ts>-<upstream>
 	envCopyTo    = "E2E_COPY_TO"    // copy report.md to <dir>/proxy-<upstream>.md
 	envBaseURL   = "E2E_BASE_URL"   // mlx: running mlx_lm.server (http://host:port); openai-compat: required ".../v1"
-	envModelPath = "E2E_MODEL_PATH" // mlx mode: model dir (default from configs/proxy.yaml)
+	envModelPath = "E2E_MODEL_PATH" // mlx mode: model dir (default from configs/proxy.e2e.yaml)
 	envModel     = "E2E_MODEL"      // openai-compat mode (required): upstream model id, e.g. qwen2.5:7b-instruct
 
 	upstreamFake   = UpstreamFake
@@ -124,7 +124,9 @@ func setup() error {
 		return err
 	}
 	st.root = config.ModuleRoot(wd)
-	st.cfgPath = filepath.Join(st.root, "configs", "proxy.yaml")
+	// Functional e2e runs on the fast test config (high rate limit); limits
+	// are checked separately (configs/proxy.limits.yaml).
+	st.cfgPath = filepath.Join(st.root, "configs", "proxy.e2e.yaml")
 	st.outDir = os.Getenv(envOut)
 	if st.outDir == "" {
 		st.outDir = filepath.Join(st.root, "reports", "proxy", time.Now().Format("20060102-150405")+"-"+st.upstream)
@@ -300,7 +302,6 @@ func newHarness(t testing.TB, mode, name string, mutate func(*config.Proxy)) *ha
 	dir := filepath.Join(st.outDir, name)
 	env := map[string]string{
 		config.EnvProxyGuardMode:      mode,
-		config.EnvProxyRate:           "1000",
 		config.EnvProxyAuditPath:      filepath.Join(dir, "audit.jsonl"),
 		"PROXY_UPSTREAM_MLX_BASE_URL": st.recBase,
 		"AUDIT_PEPPER":                e2ePepper,

@@ -31,6 +31,17 @@ upstreams:
     api_key_env: OPENAI_API_KEY
     timeout: 60s
 
+  # OpenRouter: any cloud model by id. Key from env only (OPENROUTER_API_KEY);
+  # the route is "not ready" until the key is set, other aliases are unaffected.
+  openrouter:
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    # The egress to OpenRouter can sit behind a Cloudflare strict window for
+    # minutes; the test relay (scripts/or_relay.py) retries patiently, so the
+    # upstream timeout must outlive that patience (proxy 503s cut it off at
+    # 120s while the relay was still retrying).
+    timeout: 300s
+
 # Public model aliases (allowlist). Prices: micro-USD per 1M tokens.
 # PROXY_MODEL_<ALIAS>_UPSTREAM_MODEL overrides upstream_model (alias upper-cased,
 # '-' and '.' -> '_'), e.g. PROXY_MODEL_QWEN2_5_7B_OLLAMA_UPSTREAM_MODEL=gemma4:12b.
@@ -56,10 +67,31 @@ models:
     # Verify against https://openai.com/api/pricing before relying on cost figures.
     price: { input_micro_usd_per_1m: 400000, output_micro_usd_per_1m: 1600000, ref: "openai-pricing-2026-11" }
 
+  # deepseek/deepseek-v4.1-flash-1017 via OpenRouter. Prices from the public
+  # OpenRouter catalog (2026-11-10): $0.006 / $0.50 per 1M tokens.
+  deepseek-flash:
+    upstream: openrouter
+    upstream_model: deepseek/deepseek-v4.1-flash-1017
+    price: { input_micro_usd_per_1m: 6000, output_micro_usd_per_1m: 500000, ref: "openrouter-2026-11-10" }
+
+# All limits live here (nothing is hard-coded). Fast values for tests are only
+# in configs/proxy.e2e.yaml; configs/proxy.limits.yaml is for limit checks.
 rate_limit:
   per_minute: 20
   window: 1m
   max_keys: 10000
+
+# Per client IP: after max_failures 401s within window -> 429 without checking the key.
+auth:
+  bruteforce:
+    max_failures: 10
+    window: 5m
+
+# Tool calling (tools / tool_calls / role=tool). Requests over a limit get 400 invalid_request.
+tools:
+  max_tools: 64
+  max_definitions_bytes: 262144   # JSON size of "tools"
+  max_arguments_bytes: 65536      # one tool_calls[].function.arguments
 
 guard:
   input:

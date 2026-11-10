@@ -121,8 +121,8 @@ func TestContract(t *testing.T) {
 		code    string
 		headers map[string]string
 	}{
-		{"ok", proxy.Outcome{Kind: proxy.KindOK, InputAction: "pass", OutputAction: "pass", Content: "hi", FinishReason: "stop", CostMicroUSD: 120, Usage: ports.Usage{PromptTokens: 100, CompletionTokens: 50, Source: "upstream"}},
-			200, "", map[string]string{"X-Guard-Input": "pass", "X-Guard-Output": "pass", "X-Guard-Cost-USD": "0.000120", "X-Guard-Usage-Source": "upstream", "X-RateLimit-Limit": "20", "X-RateLimit-Remaining": "19", "X-RateLimit-Reset": "60"}},
+		{"ok", proxy.Outcome{Kind: proxy.KindOK, InputAction: "pass", OutputAction: "pass", Content: "hi", FinishReason: "stop", CostMicroUSD: 120, Usage: ports.Usage{PromptTokens: 100, CompletionTokens: 50, Source: "upstream"}, UpstreamModel: "qwen2.5:7b-instruct"},
+			200, "", map[string]string{"X-Guard-Input": "pass", "X-Guard-Output": "pass", "X-Guard-Cost-USD": "0.000120", "X-Guard-Usage-Source": "upstream", "X-Upstream-Model": "qwen2.5:7b-instruct", "X-RateLimit-Limit": "20", "X-RateLimit-Remaining": "19", "X-RateLimit-Reset": "60"}},
 		{"masked", proxy.Outcome{Kind: proxy.KindOK, InputAction: "masked", InputFindings: []ports.AuditFinding{{Type: "email", Count: 1}, {Type: "api_key_openai", Count: 1}}, OutputAction: "pass"},
 			200, "", map[string]string{"X-Guard-Input": "masked", "X-Guard-Input-Findings": "api_key_openai=1,email=1"}},
 		{"output redacted", proxy.Outcome{Kind: proxy.KindOK, OutputAction: "redacted", OutputFindings: []ports.AuditFinding{{Type: "suspicious_url", Count: 2}}},
@@ -202,8 +202,29 @@ func TestParsing(t *testing.T) {
 		}},
 		{"n", `{"model":"a","n":2,"messages":[]}`, "n", "", nil},
 		{"n=1 ok", `{"model":"a","n":1,"messages":[]}`, "", "", nil},
-		{"tools", `{"model":"a","tools":[{}],"messages":[]}`, "tools", "", nil},
+		{"tools passthrough", `{"model":"a","tools":[{"type":"function","function":{"name":"w"}}],"tool_choice":"auto","messages":[]}`, "", "", func(t *testing.T, c proxy.Call) {
+			if string(c.Tools) != `[{"type":"function","function":{"name":"w"}}]` || string(c.ToolChoice) != `"auto"` {
+				t.Fatalf("tools %s choice %s", c.Tools, c.ToolChoice)
+			}
+		}},
+		{"tools null", `{"model":"a","tools":null,"tool_choice":null,"messages":[]}`, "", "", func(t *testing.T, c proxy.Call) {
+			if c.Tools != nil || c.ToolChoice != nil {
+				t.Fatalf("tools %s choice %s", c.Tools, c.ToolChoice)
+			}
+		}},
+		{"tool round", `{"model":"a","messages":[{"role":"assistant","content":null,"tool_calls":[{"id":"call_1","type":"function","function":{"name":"w","arguments":"{\"p\":1}"}}]},{"role":"tool","tool_call_id":"call_1","name":"w","content":"done"}]}`, "", "", func(t *testing.T, c proxy.Call) {
+			a, tm := c.Messages[0], c.Messages[1]
+			if len(a.ToolCalls) != 1 || a.ToolCalls[0].ID != "call_1" || a.ToolCalls[0].Function.Arguments != `{"p":1}` || a.Content != "" {
+				t.Fatalf("assistant %+v", a)
+			}
+			if tm.ToolCallID != "call_1" || tm.Name != "w" || tm.Content != "done" {
+				t.Fatalf("tool %+v", tm)
+			}
+		}},
+		{"tool_calls not array", `{"model":"a","messages":[{"role":"assistant","tool_calls":{"id":"x"}}]}`, "", "invalid_request", nil},
+		{"arguments object", `{"model":"a","messages":[{"role":"assistant","tool_calls":[{"id":"c","type":"function","function":{"name":"w","arguments":{"p":1}}}]}]}`, "", "invalid_request", nil},
 		{"functions", `{"model":"a","functions":[{}],"messages":[]}`, "functions", "", nil},
+		{"function_call", `{"model":"a","function_call":"auto","messages":[]}`, "functions", "", nil},
 		{"image", `{"model":"a","messages":[{"role":"user","content":[{"type":"image_url","image_url":{"url":"x"}}]}]}`, "messages.content", "", nil},
 		{"invalid json", `{"model":`, "", "invalid_json", nil},
 		{"wrong type", `{"model":1}`, "", "invalid_json", nil},
@@ -281,6 +302,41 @@ func TestEndpoints(t *testing.T) {
 			}
 			if tt.name == "models" && !strings.Contains(w.Body.String(), `"id":"a"`) {
 				t.Fatalf("models %s", w.Body)
+			}
+		})
+	}
+}
+
+// TestToolCallResponse: an answer with tool calls has content null,
+// tool_calls and finish_reason "tool_calls"; a text answer keeps content.
+func TestToolCallResponse(t *testing.T) {
+	calls := []ports.ToolCall{{ID: "call_1", Type: "function", Function: ports.ToolFunction{Name: "write_file", Arguments: `{"path":"a.go"}`}}}
+	tests := []struct {
+		name string
+		out  proxy.Outcome
+		want string
+	}{
+		{"tool calls", proxy.Outcome{Kind: proxy.KindOK, OutputAction: "pass", ToolCalls: calls, FinishReason: "tool_calls"},
+			`{"role":"assistant","content":null,"tool_calls":[{"id":"call_1","type":"function","function":{"name":"write_file","arguments":"{\"path\":\"a.go\"}"}}]}`},
+		{"text and tool calls", proxy.Outcome{Kind: proxy.KindOK, OutputAction: "pass", Content: "ok", ToolCalls: calls, FinishReason: "tool_calls"},
+			`{"role":"assistant","content":"ok","tool_calls":[{"id":"call_1","type":"function","function":{"name":"write_file","arguments":"{\"path\":\"a.go\"}"}}]}`},
+		{"empty text", proxy.Outcome{Kind: proxy.KindOK, OutputAction: "pass", FinishReason: "stop"}, `{"role":"assistant","content":""}`},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			tt.out.Created, tt.out.Decision = now, decision()
+			w := do(newTestRouter(t, &stubService{out: tt.out}, true), "POST", "/v1/chat/completions", `{"model":"a","messages":[{"role":"user","content":"x"}]}`, nil)
+			var body struct {
+				Choices []struct {
+					Message      json.RawMessage `json:"message"`
+					FinishReason string          `json:"finish_reason"`
+				} `json:"choices"`
+			}
+			if err := json.Unmarshal(w.Body.Bytes(), &body); err != nil || w.Code != 200 || len(body.Choices) != 1 {
+				t.Fatalf("status %d body %s", w.Code, w.Body)
+			}
+			if string(body.Choices[0].Message) != tt.want || body.Choices[0].FinishReason != tt.out.FinishReason {
+				t.Fatalf("message %s finish %s", body.Choices[0].Message, body.Choices[0].FinishReason)
 			}
 		})
 	}

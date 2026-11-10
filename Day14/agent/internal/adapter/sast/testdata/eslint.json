@@ -1,0 +1,29 @@
+[
+  {
+    "filePath": "/tmp/work/src/app.vue",
+    "messages": [
+      {"ruleId": "vue/no-v-html", "severity": 2, "message": "'v-html' directive can lead to XSS attack", "line": 3, "column": 11},
+      {"ruleId": "security/detect-object-injection", "severity": 1, "message": "Generic object injection sink", "line": 9, "column": 5}
+    ],
+    "errorCount": 2,
+    "warningCount": 0
+  },
+  {
+    "filePath": "/tmp/work/server.js",
+    "messages": [
+      {"ruleId": "security/detect-eval-with-expression", "severity": 2, "message": "eval with expression", "line": 7, "column": 3},
+      {"ruleId": "security/detect-child-process", "severity": 2, "message": "Child process spawned with variable", "line": 4, "column": 9},
+      {"ruleId": "security/detect-non-literal-require", "severity": 2, "message": "Non-literal require of module", "line": 11, "column": 14}
+    ],
+    "errorCount": 3,
+    "warningCount": 0
+  },
+  {
+    "filePath": "/tmp/work/README.md.js",
+    "messages": [
+      {"ruleId": null, "severity": 2, "message": "Inline configuration is not allowed", "line": 2, "column": 1}
+    ],
+    "errorCount": 1,
+    "warningCount": 0
+  }
+]

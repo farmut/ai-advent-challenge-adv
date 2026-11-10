@@ -64,8 +64,36 @@ func TestBuildV2Unauthorized(t *testing.T) {
 
 func TestReadRejectsUnknownVersion(t *testing.T) {
 	p := filepath.Join(t.TempDir(), "a.jsonl")
-	_ = os.WriteFile(p, []byte(`{"v":3,"status":"ok"}`+"\n"), 0o600)
-	if _, _, err := Read([]string{p}); err == nil || !strings.Contains(err.Error(), "unsupported audit schema v3") {
+	_ = os.WriteFile(p, []byte(`{"v":4,"status":"ok"}`+"\n"), 0o600)
+	if _, _, err := Read([]string{p}); err == nil || !strings.Contains(err.Error(), "unsupported audit schema v4") {
 		t.Fatalf("err = %v", err)
+	}
+}
+
+// TestReadV1V2V3 reads every supported schema version; v3 records carry
+// masked tool calls.
+func TestReadV1V2V3(t *testing.T) {
+	p := filepath.Join(t.TempDir(), "a.jsonl")
+	lines := `{"v":1,"status":"ok","model":"m"}` + "\n" +
+		`{"v":2,"status":"ok","model":"m","key_id":"k1"}` + "\n" +
+		`{"v":3,"status":"ok","model":"m","key_id":"k1","prompt_masked":[{"role":"assistant","content":"","tool_calls":[{"id":"call_1","type":"function","function":{"name":"write_file","arguments":"{\"k\":\"[REDACTED_API_KEY]\"}"}}]},{"role":"tool","content":"ok","tool_call_id":"call_1"}],"response_tool_calls_masked":[{"id":"call_2","type":"function","function":{"name":"read_text_file","arguments":"{}"}}]}` + "\n"
+	_ = os.WriteFile(p, []byte(lines), 0o600)
+	recs, _, err := Read([]string{p})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(recs) != 3 || recs[2].PromptMasked[0].ToolCalls[0].Function.Name != "write_file" ||
+		recs[2].PromptMasked[1].ToolCallID != "call_1" || recs[2].ResponseToolCallsMasked[0].ID != "call_2" {
+		t.Fatalf("records %+v", recs)
+	}
+	r := Build(recs, nil)
+	for _, v := range []string{"v1", "v2", "v3"} {
+		found := false
+		for _, c := range r.ByVersion {
+			found = found || (c.Key == v && c.Count == 1)
+		}
+		if !found {
+			t.Errorf("ByVersion lacks %s: %+v", v, r.ByVersion)
+		}
 	}
 }

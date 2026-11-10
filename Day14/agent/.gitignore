@@ -1,0 +1,11 @@
+# Build output
+ai-adv-agent-*
+
+# Runtime state: logs, dialogue history and loop state may hold personal data
+agent-tui.log
+chat_history*.json
+*.loop*.json
+*.loop.lock
+
+# Loop workspaces live in Day14/workspace/ — ignored by Day14/.gitignore
+# (a .gitignore cannot match paths above its own directory).

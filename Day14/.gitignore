@@ -1,0 +1,7 @@
+# Agent write root and loop workspaces (workspace/<runID>/...)
+/workspace/
+/agent/workspace-loop-e2e/
+/agent/testdata/loop/loop_e2e_session.json
+/git-mcp-server/git-mcp-server
+/.stand/
+

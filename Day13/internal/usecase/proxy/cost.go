@@ -16,7 +16,7 @@ func estimateTokens(s string) int {
 func estimateMessages(ms []ports.ChatMessage) int {
 	t := 0
 	for _, m := range ms {
-		t += estimateTokens(m.Content)
+		t += estimateTokens(m.Content) + estimateToolCalls(m.ToolCalls)
 	}
 	return t
 }

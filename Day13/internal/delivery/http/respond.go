@@ -21,6 +21,7 @@ const (
 	HeaderGuardWarning        = "X-Guard-Warning"
 	HeaderGuardCost           = "X-Guard-Cost-USD"
 	HeaderGuardUsageSource    = "X-Guard-Usage-Source"
+	HeaderUpstreamModel       = "X-Upstream-Model"
 	HeaderRateLimit           = "X-RateLimit-Limit"
 	HeaderRateRemaining       = "X-RateLimit-Remaining"
 	HeaderRateReset           = "X-RateLimit-Reset"
@@ -99,9 +100,17 @@ func writeOutcome(c *gin.Context, o proxy.Outcome) {
 }
 
 type chatChoice struct {
-	Index        int               `json:"index"`
-	Message      ports.ChatMessage `json:"message"`
-	FinishReason string            `json:"finish_reason"`
+	Index        int             `json:"index"`
+	Message      responseMessage `json:"message"`
+	FinishReason string          `json:"finish_reason"`
+}
+
+// responseMessage is the assistant message. As in the OpenAI API, content
+// is null when the model only called tools.
+type responseMessage struct {
+	Role      string           `json:"role"`
+	Content   *string          `json:"content"`
+	ToolCalls []ports.ToolCall `json:"tool_calls,omitempty"`
 }
 
 type chatUsage struct {
@@ -134,9 +143,21 @@ func writeOK(c *gin.Context, o proxy.Outcome) {
 	}
 	c.Header(HeaderGuardCost, proxy.FormatUSD(o.CostMicroUSD))
 	c.Header(HeaderGuardUsageSource, o.Usage.Source)
+	if o.UpstreamModel != "" {
+		c.Header(HeaderUpstreamModel, o.UpstreamModel)
+	}
 	c.JSON(http.StatusOK, chatCompletion{
 		ID: "chatcmpl-" + reqID(c), Object: "chat.completion", Created: o.Created.Unix(), Model: o.Model,
-		Choices: []chatChoice{{Index: 0, Message: ports.ChatMessage{Role: "assistant", Content: o.Content}, FinishReason: o.FinishReason}},
+		Choices: []chatChoice{{Index: 0, Message: assistantMessage(o), FinishReason: o.FinishReason}},
 		Usage:   chatUsage{PromptTokens: o.Usage.PromptTokens, CompletionTokens: o.Usage.CompletionTokens, TotalTokens: o.Usage.PromptTokens + o.Usage.CompletionTokens},
 	})
+}
+
+func assistantMessage(o proxy.Outcome) responseMessage {
+	m := responseMessage{Role: "assistant", ToolCalls: o.ToolCalls}
+	if o.Content != "" || len(o.ToolCalls) == 0 {
+		content := o.Content
+		m.Content = &content
+	}
+	return m
 }

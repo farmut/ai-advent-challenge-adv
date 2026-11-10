@@ -82,6 +82,73 @@ func TestLoadProxyRepoConfig(t *testing.T) {
 	}
 }
 
+// TestLimitsProxyConfigs: every limit comes from the config; the e2e
+// config is fast (high rate limit), the limits config is tiny, and both
+// keep the production pipeline (guard modes, routes).
+func TestLimitsProxyConfigs(t *testing.T) {
+	dir := filepath.Dir(repoConfig(t))
+	tests := []struct {
+		file                string
+		perMinute, failures int
+		authWindow          time.Duration
+	}{
+		{"proxy.yaml", 20, 10, 5 * time.Minute},
+		{"proxy.e2e.yaml", 100000, 10, 5 * time.Minute},
+		{"proxy.limits.yaml", 3, 3, time.Minute},
+	}
+	for _, tt := range tests {
+		t.Run(tt.file, func(t *testing.T) {
+			cfg, err := LoadProxyEnv(filepath.Join(dir, tt.file), noEnv)
+			if err != nil {
+				t.Fatal(err)
+			}
+			if cfg.RateLimit.PerMinute != tt.perMinute || cfg.RateLimit.Window != time.Minute ||
+				cfg.Auth.Bruteforce.MaxFailures != tt.failures || cfg.Auth.Bruteforce.Window != tt.authWindow {
+				t.Fatalf("limits rate=%+v auth=%+v", cfg.RateLimit, cfg.Auth)
+			}
+			if cfg.Tools.MaxTools != 64 || cfg.Tools.MaxDefinitionsBytes != 256<<10 || cfg.Tools.MaxArgumentsBytes != 64<<10 {
+				t.Fatalf("tools %+v", cfg.Tools)
+			}
+			if cfg.Guard.Input.Mode != "mask" || cfg.Guard.Input.Overrides["private_key"] != "block" {
+				t.Fatalf("guard %+v", cfg.Guard.Input)
+			}
+			if _, ok := cfg.Models["qwen2.5-7b-local"]; !ok {
+				t.Fatal("qwen2.5-7b-local route is required by the e2e harness")
+			}
+			if tt.file != "proxy.yaml" {
+				if m, ok := cfg.Models["fake-coder"]; !ok || m.Upstream != "fake" || m.Price.InputMicroUSDPer1M <= 0 {
+					t.Fatalf("fake-coder route %+v", m)
+				}
+			}
+		})
+	}
+}
+
+// TestLimitsProxyDefaults: absent limit keys get safe defaults.
+func TestLimitsProxyDefaults(t *testing.T) {
+	src, err := os.ReadFile(repoConfig(t))
+	if err != nil {
+		t.Fatal(err)
+	}
+	s := string(src)
+	i, j := strings.Index(s, "auth:\n"), strings.Index(s, "guard:\n")
+	if i < 0 || j < i {
+		t.Fatal("auth/tools sections not found")
+	}
+	path := filepath.Join(t.TempDir(), "proxy.yaml")
+	if err := os.WriteFile(path, []byte(s[:i]+s[j:]), 0o600); err != nil {
+		t.Fatal(err)
+	}
+	cfg, err := LoadProxyEnv(path, noEnv)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cfg.Auth.Bruteforce.MaxFailures != DefaultAuthMaxFailures || cfg.Auth.Bruteforce.Window != DefaultAuthWindow ||
+		cfg.Tools.MaxTools != DefaultMaxTools || cfg.Tools.MaxArgumentsBytes != DefaultMaxToolArgumentBytes {
+		t.Fatalf("defaults auth=%+v tools=%+v", cfg.Auth, cfg.Tools)
+	}
+}
+
 func TestLoadProxyEnvOverrides(t *testing.T) {
 	env := map[string]string{
 		EnvProxyListen:                "[::1]:9999",
@@ -121,6 +188,15 @@ func TestLoadProxyInvalid(t *testing.T) {
 		{"bad system_content", nil, func(s string) string {
 			return strings.Replace(s, "system_content: hash", "system_content: plain", 1)
 		}, "audit.system_content"},
+		{"negative bruteforce failures", nil, func(s string) string { return strings.Replace(s, "max_failures: 10", "max_failures: -1", 1) }, "auth.bruteforce"},
+		{"negative bruteforce window", nil, func(s string) string { return strings.Replace(s, "window: 5m", "window: -1s", 1) }, "auth.bruteforce"},
+		{"negative max_tools", nil, func(s string) string { return strings.Replace(s, "max_tools: 64", "max_tools: -1", 1) }, "tools.max_tools"},
+		{"arguments over body", nil, func(s string) string {
+			return strings.Replace(s, "max_arguments_bytes: 65536", "max_arguments_bytes: 2097152", 1)
+		}, "proxy.max_body_bytes"},
+		{"unknown auth field", nil, func(s string) string {
+			return strings.Replace(s, "    max_failures: 10", "    max_failures: 10\n    api_keys: [x]", 1)
+		}, "field api_keys not found"},
 		{"negative price", nil, func(s string) string {
 			return strings.Replace(s, "input_micro_usd_per_1m: 400000", "input_micro_usd_per_1m: -1", 1)
 		}, "price"},

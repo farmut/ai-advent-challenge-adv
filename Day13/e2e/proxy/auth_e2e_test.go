@@ -10,7 +10,6 @@ import (
 	"strconv"
 	"strings"
 	"testing"
-	"time"
 
 	"agile-consultant/internal/ports"
 )
@@ -195,7 +194,9 @@ func TestAuth09BruteForce(t *testing.T) {
 	extra(t, "AUTH-09", false, func(t *testing.T) string {
 		h := newHarness(t, "mask", "extra/auth-09", nil)
 		before := st.rec.Count()
-		for i := 1; i <= 10; i++ {
+		// The limit comes from auth.bruteforce in the config (no constants).
+		maxFail, window := h.cfg.Auth.Bruteforce.MaxFailures, h.cfg.Auth.Bruteforce.Window
+		for i := 1; i <= maxFail; i++ {
 			r := h.raw(t, http.MethodPost, "/v1/chat/completions", chatBody(), authHeader(fmt.Sprintf("Bearer %s%02d", wrongKey[:len(wrongKey)-2], i)))
 			if r.status != 401 {
 				t.Fatalf("failure %d: %d", i, r.status)
@@ -203,8 +204,8 @@ func TestAuth09BruteForce(t *testing.T) {
 		}
 		r11 := h.raw(t, http.MethodPost, "/v1/chat/completions", chatBody(), authHeader("Bearer "+wrongKey))
 		ra, _ := strconv.Atoi(r11.header.Get("Retry-After"))
-		if r11.status != 429 || r11.code != "rate_limit_exceeded" || ra <= 0 || ra > int((5*time.Minute).Seconds()) {
-			t.Fatalf("11th: %d %s Retry-After %q", r11.status, r11.code, r11.header.Get("Retry-After"))
+		if r11.status != 429 || r11.code != "rate_limit_exceeded" || ra <= 0 || ra > int(window.Seconds()) {
+			t.Fatalf("over the limit: %d %s Retry-After %q", r11.status, r11.code, r11.header.Get("Retry-After"))
 		}
 		r12 := h.raw(t, http.MethodPost, "/v1/chat/completions", chatBody(), authHeader("Bearer "+e2eKey1))
 		if r12.status != 429 {
@@ -226,10 +227,11 @@ func TestAuth09BruteForce(t *testing.T) {
 				limited++
 			}
 		}
-		if unauth != 10 || limited != 2 {
+		if unauth != maxFail || limited != 2 {
 			t.Fatalf("audit unauthorized=%d rate_limited/auth_fail_limit=%d", unauth, limited)
 		}
-		return fmt.Sprintf("10 неудач → 401; 11-я → 429 Retry-After=%ds; валидный ключ во время блокировки → 429; /healthz 200; аудит: 10 unauthorized + 2 rate_limited/auth_fail_limit", ra)
+		return fmt.Sprintf("%d неудач → 401; %d-я → 429 Retry-After=%ds; валидный ключ во время блокировки → 429; /healthz 200; аудит: %d unauthorized + 2 rate_limited/auth_fail_limit",
+			maxFail, maxFail+1, ra, maxFail)
 	})
 }
 

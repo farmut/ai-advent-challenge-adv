@@ -1,0 +1,14 @@
+{"time":"2026-11-09T16:49:47.45197+03:00","level":"WARN","msg":"AUDIT_PEPPER is not set; using a random key, fingerprints will not match across restarts"}
+{"time":"2026-11-09T16:49:47.452191+03:00","level":"WARN","msg":"upstream API key is not set; its models answer 503","upstream":"openai","env":"OPENAI_API_KEY"}
+{"time":"2026-11-09T16:49:47.452287+03:00","level":"INFO","msg":"llm-proxy listening","addr":"127.0.0.1:8090","audit":"logs/audit/proxy-e2e-audit.jsonl","mode":"mask","rate_per_min":100000,"auth":true,"models":["fake-coder","gpt-4.1-mini","qwen2.5-7b-lmstudio","qwen2.5-7b-local","qwen2.5-7b-ollama"]}
+{"time":"2026-11-09T16:49:48.350504+03:00","level":"INFO","msg":"http","request_id":"8218cb52da575374e876b839","method":"GET","path":"/readyz","status":200,"latency_ms":0}
+{"time":"2026-11-09T16:49:48.846904+03:00","level":"INFO","msg":"http","request_id":"51a4cddb688e533827835b58","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":6}
+{"time":"2026-11-09T16:49:48.866335+03:00","level":"INFO","msg":"http","request_id":"33bb1c6f1136d124b0fdcc45","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":5}
+{"time":"2026-11-09T16:49:48.872131+03:00","level":"INFO","msg":"http","request_id":"c7ade12671bcc575a862ea4c","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":5}
+{"time":"2026-11-09T16:49:48.877737+03:00","level":"INFO","msg":"http","request_id":"c4473861a3c32e084459ad6f","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":5}
+{"time":"2026-11-09T16:49:54.128289+03:00","level":"INFO","msg":"http","request_id":"8c2ebdbdfba35790e1ac3250","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":15}
+{"time":"2026-11-09T16:49:54.166079+03:00","level":"INFO","msg":"http","request_id":"50a3bb840e2ee9552220940c","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":10}
+{"time":"2026-11-09T16:49:54.176442+03:00","level":"INFO","msg":"http","request_id":"97d6d1c98ece4ec53a4cde01","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":9}
+{"time":"2026-11-09T16:49:59.444281+03:00","level":"INFO","msg":"http","request_id":"121d1d83ea49212fd1a7e9f7","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":21}
+{"time":"2026-11-09T16:49:59.473556+03:00","level":"INFO","msg":"http","request_id":"1458ebbb9428fc3bece2d963","method":"POST","path":"/v1/chat/completions","status":200,"latency_ms":11}
+{"time":"2026-11-09T16:49:59.48535+03:00","level":"INFO","msg":"shutting down"}

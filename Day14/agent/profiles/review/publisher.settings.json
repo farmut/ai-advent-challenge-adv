@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [],
+    "deny": [
+      "WebFetch",
+      "WebSearch",
+      "Task",
+      "Agent",
+      "Bash",
+      "Edit(./**)",
+      "Write(./**)"
+    ]
+  }
+}

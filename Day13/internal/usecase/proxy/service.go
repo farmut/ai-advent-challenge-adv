@@ -32,7 +32,10 @@ type Deps struct {
 	// SystemContent is how system/developer prompts are written to the
 	// audit: SystemAuditHash (default) or SystemAuditFull.
 	SystemContent string
-	Logger        *slog.Logger
+	// Tools bounds tool definitions and tool call arguments (zero values
+	// use the defaults).
+	Tools  ToolLimits
+	Logger *slog.Logger
 }
 
 // System prompt audit modes (Deps.SystemContent).
@@ -63,7 +66,11 @@ type Call struct {
 	Messages []ports.ChatMessage
 	Params   ports.ChatParams
 	Stream   bool
-	// Unsupported names an unsupported parameter ("n", "tools",
+	// Tools and ToolChoice are the raw client "tools" and "tool_choice"
+	// (nil = absent). They are validated and re-encoded by the service.
+	Tools      []byte
+	ToolChoice []byte
+	// Unsupported names an unsupported parameter ("n", "functions",
 	// "messages.content"); "" when everything is supported.
 	Unsupported string
 	Reject      *Reject
@@ -84,12 +91,19 @@ type Outcome struct {
 	OutputAction   string
 	OutputFindings []ports.AuditFinding
 
-	Content      string
+	Content string
+	// ToolCalls are the delivered tool calls of the answer (arguments
+	// masked when the output guard redacted them; nil when blocked).
+	ToolCalls    []ports.ToolCall
 	FinishReason string
 	Usage        ports.Usage
 	CostMicroUSD int64
 	Model        string
-	Created      time.Time
+	// UpstreamModel is the real model name the proxy sent upstream (empty
+	// when the request never reached an upstream). Surfaced to clients as
+	// the X-Upstream-Model header so they can show alias → real model.
+	UpstreamModel string
+	Created       time.Time
 }
 
 // Service runs the guard pipeline.
@@ -105,6 +119,7 @@ type Service struct {
 	maxRunes  int
 	scanRoles map[string]bool
 	sysHash   bool
+	tools     ToolLimits
 	log       *slog.Logger
 }
 
@@ -131,7 +146,8 @@ func NewService(d Deps) (*Service, error) {
 	return &Service{
 		scanner: d.Scanner, policy: d.Policy, router: d.Router, audit: d.Audit,
 		limiter: d.Limiter, clock: d.Clock, fp: d.FP, out: d.Out,
-		maxRunes: d.MaxAuditRunes, scanRoles: roles, sysHash: d.SystemContent != SystemAuditFull, log: d.Logger,
+		maxRunes: d.MaxAuditRunes, scanRoles: roles, sysHash: d.SystemContent != SystemAuditFull,
+		tools: d.Tools.withDefaults(), log: d.Logger,
 	}, nil
 }
 
@@ -142,11 +158,15 @@ var validRoles = map[string]bool{"system": true, "user": true, "assistant": true
 
 // scanned is one input message after the guard.
 type scanned struct {
-	role     string
-	sent     string // content sent upstream
-	masked   string // content written to the audit (always masked)
-	findings []secrets.Finding
-	guarded  bool
+	role       string
+	sent       string // content sent upstream
+	masked     string // content written to the audit (always masked)
+	callsSent  []ports.ToolCall
+	callsAudit []ports.ToolCall // always masked
+	toolCallID string
+	name       string
+	findings   []secrets.Finding
+	guarded    bool
 }
 
 // Chat runs the pipeline. The audit record is written on every path.
@@ -189,13 +209,36 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 	}
 	out.InputFindings = s.summarizeInput(all)
 	rec.Input.Findings = out.InputFindings
-	promptEstimate := ports.Usage{PromptTokens: estimateSent(msgs), Source: ports.UsageSourceNone}
+	promptEstimate := ports.Usage{PromptTokens: estimateSent(msgs) + estimateTokens(string(c.Tools)), Source: ports.UsageSourceNone}
 
 	// 2. validate
 	if o, bad := validate(c, out); bad {
 		o.Usage = promptEstimate
 		return finish(o, 0)
 	}
+	vt, ip := validateTools(c, s.tools)
+	if ip == nil {
+		ip = validateToolMessages(c.Messages, s.tools)
+	}
+	if ip != nil {
+		out.Kind, out.Code, out.Param, out.Message = KindInvalid, CodeInvalidRequest, ip.param, ip.msg
+		out.Usage = promptEstimate
+		return finish(out, 0)
+	}
+	// Tool definitions go upstream too: their free text (descriptions,
+	// enum/default values) passes the input guard like message content.
+	toolsSent, err := maskToolDefs(vt.defs, func(text string) string {
+		r := s.scanner.Scan(text)
+		all = append(all, r.Findings...)
+		return secrets.Redact(r.Canonical, r.Findings)
+	})
+	if err != nil {
+		out.Kind, out.Code, out.Param, out.Message = KindInvalid, CodeInvalidRequest, "tools", "tools could not be encoded."
+		out.Usage = promptEstimate
+		return finish(out, 0)
+	}
+	out.InputFindings = s.summarizeInput(all)
+	rec.Input.Findings = out.InputFindings
 
 	// 3. route
 	route, ok := s.router.Resolve(c.Model)
@@ -209,6 +252,7 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 	if route.AuditModel != "" {
 		rec.UpstreamModel = route.AuditModel
 	}
+	out.UpstreamModel = route.UpstreamModel
 	if !route.Ready || route.Upstream == nil {
 		out.Kind, out.Code = KindUpstreamNotConfigured, CodeUpstreamNotReady
 		out.Message = "The upstream for this model is not configured (missing API key)."
@@ -229,10 +273,10 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 	}
 
 	// 6. upstream
-	req := ports.UpstreamRequest{Model: route.UpstreamModel, Params: c.Params}
+	req := ports.UpstreamRequest{Model: route.UpstreamModel, Params: c.Params, Tools: toolsSent, ToolChoice: vt.choice}
 	var systems []string
 	for _, m := range msgs {
-		req.Messages = append(req.Messages, ports.ChatMessage{Role: m.role, Content: m.sent})
+		req.Messages = append(req.Messages, ports.ChatMessage{Role: m.role, Content: m.sent, ToolCalls: m.callsSent, ToolCallID: m.toolCallID, Name: m.name})
 		if isSystemRole(m.role) {
 			systems = append(systems, m.sent)
 		}
@@ -247,9 +291,9 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 	}
 
 	// 7. output guard
-	og := s.checkOutput(res.Content, systems)
+	og := s.checkOutput(res.Content, res.ToolCalls, systems)
 	out.OutputAction, out.OutputFindings = og.action, og.findings
-	out.Content, out.FinishReason = og.delivered, res.FinishReason
+	out.Content, out.ToolCalls, out.FinishReason = og.delivered, og.deliveredCalls, res.FinishReason
 	if out.FinishReason == "" {
 		out.FinishReason = "stop"
 	}
@@ -258,6 +302,7 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 	}
 	rec.Output = ports.AuditOutput{Action: og.action, Findings: og.findings}
 	rec.ResponseMasked = s.truncate(og.masked)
+	rec.ResponseToolCallsMasked = s.truncateCalls(og.maskedCalls)
 	if s.sysHash && og.systemLeak {
 		rec.ResponseMasked = PlaceholderSystemLeak
 		rec.Output.Findings = withSystemLeakPlaceholder(og.findings)
@@ -268,7 +313,11 @@ func (s *Service) Chat(ctx context.Context, c Call) Outcome {
 		out.Usage = res.Usage
 		out.Usage.Source = ports.UsageSourceUpstream
 	} else {
-		out.Usage = ports.Usage{PromptTokens: estimateMessages(req.Messages), CompletionTokens: estimateTokens(res.Content), Source: ports.UsageSourceEstimated}
+		out.Usage = ports.Usage{
+			PromptTokens:     estimateMessages(req.Messages) + estimateTokens(string(req.Tools)),
+			CompletionTokens: estimateTokens(res.Content) + estimateToolCalls(res.ToolCalls),
+			Source:           ports.UsageSourceEstimated,
+		}
 	}
 	out.CostMicroUSD = cost(out.Usage, route.Price)
 	out.Kind = KindOK
@@ -351,17 +400,35 @@ func upstreamKind(err error) (OutcomeKind, string, string) {
 	return KindUpstreamUnavailable, CodeUpstreamDown, "The upstream model is unavailable."
 }
 
-// scan canonicalises and masks every message. Messages with roles outside
-// ScanRoles are forwarded as is but still masked in the audit.
+// scan canonicalises and masks every message: the content and every
+// string value of tool_calls[].function.arguments. Messages with roles
+// outside ScanRoles are forwarded as is but still masked in the audit.
 func (s *Service) scan(ms []ports.ChatMessage) []scanned {
 	out := make([]scanned, 0, len(ms))
 	for _, m := range ms {
 		r := s.scanner.Scan(m.Content)
 		masked := secrets.Redact(r.Canonical, r.Findings)
-		sc := scanned{role: m.Role, masked: masked, findings: r.Findings, sent: m.Content}
-		if s.scanRoles == nil || s.scanRoles[m.Role] {
-			sc.guarded = true
+		sc := scanned{role: m.Role, masked: masked, findings: r.Findings, sent: m.Content, toolCallID: m.ToolCallID, name: m.Name}
+		sc.guarded = s.scanRoles == nil || s.scanRoles[m.Role]
+		if sc.guarded {
 			sc.sent = masked
+		}
+		for _, tc := range m.ToolCalls {
+			var fs []secrets.Finding
+			maskedArgs, _ := mapStringLeaves(tc.Function.Arguments, func(leaf string) string {
+				lr := s.scanner.Scan(leaf)
+				fs = append(fs, lr.Findings...)
+				return secrets.Redact(lr.Canonical, lr.Findings)
+			})
+			sc.findings = append(sc.findings, fs...)
+			audit := tc
+			audit.Function.Arguments = maskedArgs
+			sc.callsAudit = append(sc.callsAudit, audit)
+			if sc.guarded {
+				sc.callsSent = append(sc.callsSent, audit)
+			} else {
+				sc.callsSent = append(sc.callsSent, tc)
+			}
 		}
 		out = append(out, sc)
 	}
@@ -371,7 +438,7 @@ func (s *Service) scan(ms []ports.ChatMessage) []scanned {
 func estimateSent(ms []scanned) int {
 	t := 0
 	for _, m := range ms {
-		t += estimateTokens(m.sent)
+		t += estimateTokens(m.sent) + estimateToolCalls(m.callsSent)
 	}
 	return t
 }
@@ -383,7 +450,20 @@ func (s *Service) auditPrompt(ms []scanned) []ports.ChatMessage {
 		if s.sysHash && isSystemRole(m.role) {
 			content = s.systemDigest(m.masked)
 		}
-		out = append(out, ports.ChatMessage{Role: m.role, Content: content})
+		out = append(out, ports.ChatMessage{Role: m.role, Content: content, ToolCalls: s.truncateCalls(m.callsAudit), ToolCallID: m.toolCallID, Name: m.name})
+	}
+	return out
+}
+
+// truncateCalls truncates the (already masked) arguments for the audit.
+func (s *Service) truncateCalls(calls []ports.ToolCall) []ports.ToolCall {
+	if len(calls) == 0 {
+		return nil
+	}
+	out := make([]ports.ToolCall, len(calls))
+	for i, c := range calls {
+		c.Function.Arguments = s.truncate(c.Function.Arguments)
+		out[i] = c
 	}
 	return out
 }
