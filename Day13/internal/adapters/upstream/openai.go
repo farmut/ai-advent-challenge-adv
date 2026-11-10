@@ -52,12 +52,16 @@ type chatRequest struct {
 	Temperature *float64            `json:"temperature,omitempty"`
 	TopP        *float64            `json:"top_p,omitempty"`
 	Stop        []string            `json:"stop,omitempty"`
+	// Tools and ToolChoice are validated and re-encoded by the use case.
+	Tools      json.RawMessage `json:"tools,omitempty"`
+	ToolChoice json.RawMessage `json:"tool_choice,omitempty"`
 }
 
 type chatResponse struct {
 	Choices []struct {
 		Message struct {
-			Content *string `json:"content"`
+			Content   *string        `json:"content"`
+			ToolCalls []respToolCall `json:"tool_calls"`
 		} `json:"message"`
 		FinishReason string `json:"finish_reason"`
 	} `json:"choices"`
@@ -67,11 +71,48 @@ type chatResponse struct {
 	} `json:"usage"`
 }
 
+// respToolCall is a tool call of the upstream answer. arguments is a JSON
+// string in the OpenAI API; some compatible servers send a JSON object,
+// which is accepted as its compact text.
+type respToolCall struct {
+	ID       string `json:"id"`
+	Type     string `json:"type"`
+	Function struct {
+		Name      string          `json:"name"`
+		Arguments json.RawMessage `json:"arguments"`
+	} `json:"function"`
+}
+
+func (t respToolCall) toPort() (ports.ToolCall, error) {
+	c := ports.ToolCall{ID: t.ID, Type: t.Type, Function: ports.ToolFunction{Name: t.Function.Name}}
+	if c.Type == "" {
+		c.Type = "function" // some OpenAI-compatible servers omit it
+	}
+	raw := bytes.TrimSpace(t.Function.Arguments)
+	switch {
+	case len(raw) == 0 || bytes.Equal(raw, []byte("null")):
+	case raw[0] == '"':
+		if err := json.Unmarshal(raw, &c.Function.Arguments); err != nil {
+			return c, errors.New("tool call arguments: invalid string")
+		}
+	case raw[0] == '{':
+		var b bytes.Buffer
+		if err := json.Compact(&b, raw); err != nil {
+			return c, errors.New("tool call arguments: invalid object")
+		}
+		c.Function.Arguments = b.String()
+	default:
+		return c, errors.New("tool call arguments must be a string or an object")
+	}
+	return c, nil
+}
+
 // Chat sends one request. The upstream body is never included in errors.
 func (o *OpenAI) Chat(ctx context.Context, r ports.UpstreamRequest) (ports.UpstreamResult, error) {
 	body, err := json.Marshal(chatRequest{
 		Model: r.Model, Messages: r.Messages, Stream: false,
 		MaxTokens: r.Params.MaxTokens, Temperature: r.Params.Temperature, TopP: r.Params.TopP, Stop: r.Params.Stop,
+		Tools: r.Tools, ToolChoice: r.ToolChoice,
 	})
 	if err != nil {
 		return ports.UpstreamResult{}, fmt.Errorf("marshal request: %w", err)
@@ -113,10 +154,25 @@ func (o *OpenAI) Chat(ctx context.Context, r ports.UpstreamRequest) (ports.Upstr
 	if err := json.Unmarshal(data, &cr); err != nil {
 		return ports.UpstreamResult{}, fmt.Errorf("%w: invalid JSON", ports.ErrUpstreamBadResponse)
 	}
-	if len(cr.Choices) == 0 || cr.Choices[0].Message.Content == nil {
+	if len(cr.Choices) == 0 {
 		return ports.UpstreamResult{}, fmt.Errorf("%w: no choices", ports.ErrUpstreamBadResponse)
 	}
-	res := ports.UpstreamResult{Content: *cr.Choices[0].Message.Content, FinishReason: cr.Choices[0].FinishReason}
+	msg := cr.Choices[0].Message
+	// content may be null only when the model called tools.
+	if msg.Content == nil && len(msg.ToolCalls) == 0 {
+		return ports.UpstreamResult{}, fmt.Errorf("%w: no content", ports.ErrUpstreamBadResponse)
+	}
+	res := ports.UpstreamResult{FinishReason: cr.Choices[0].FinishReason}
+	if msg.Content != nil {
+		res.Content = *msg.Content
+	}
+	for _, tc := range msg.ToolCalls {
+		call, err := tc.toPort()
+		if err != nil {
+			return ports.UpstreamResult{}, fmt.Errorf("%w: %v", ports.ErrUpstreamBadResponse, err)
+		}
+		res.ToolCalls = append(res.ToolCalls, call)
+	}
 	if cr.Usage != nil {
 		res.HasUsage = true
 		res.Usage = ports.Usage{PromptTokens: cr.Usage.PromptTokens, CompletionTokens: cr.Usage.CompletionTokens, Source: ports.UsageSourceUpstream}

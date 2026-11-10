@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os"
 	"strings"
-	"time"
 
 	"agile-consultant/internal/adapters/apikey"
 	"agile-consultant/internal/adapters/audit"
@@ -35,12 +34,6 @@ type Options struct {
 	// (default os.Getenv).
 	Getenv func(string) string
 }
-
-// Authentication failure limit per client IP (spec: 10 per 5 minutes).
-const (
-	AuthFailLimit  = 10
-	AuthFailWindow = 5 * time.Minute
-)
 
 // App is the wired proxy.
 type App struct {
@@ -102,7 +95,7 @@ func Build(cfg *config.Proxy, opt Options) (*App, error) {
 	limiter := ratelimit.New(cfg.RateLimit.PerMinute, cfg.RateLimit.Window, cfg.RateLimit.MaxKeys, opt.Clock)
 	ctx, cancel := context.WithCancel(context.Background())
 	limiter.Start(ctx)
-	authFails := ratelimit.New(AuthFailLimit, AuthFailWindow, cfg.RateLimit.MaxKeys, opt.Clock)
+	authFails := ratelimit.New(cfg.Auth.Bruteforce.MaxFailures, cfg.Auth.Bruteforce.Window, cfg.RateLimit.MaxKeys, opt.Clock)
 	authFails.Start(ctx)
 	router := upstream.NewRouter(cfg, opt.Getenv, opt.HTTPClient, opt.Logger)
 
@@ -116,7 +109,11 @@ func Build(cfg *config.Proxy, opt Options) (*App, error) {
 		MaxAuditRunes: cfg.Audit.MaxTextRunes,
 		ScanRoles:     cfg.Guard.Input.ScanRoles,
 		SystemContent: cfg.Audit.SystemContent,
-		Logger:        opt.Logger,
+		Tools: proxy.ToolLimits{
+			MaxTools: cfg.Tools.MaxTools, MaxDefinitionsBytes: cfg.Tools.MaxDefinitionsBytes,
+			MaxArgumentsBytes: cfg.Tools.MaxArgumentsBytes,
+		},
+		Logger: opt.Logger,
 	})
 	if err != nil {
 		cancel()

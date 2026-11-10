@@ -126,7 +126,7 @@ func TestChatPaths(t *testing.T) {
 		{"ok", secrets.ModeMask, true, Call{Model: "paid", Messages: user("привет")}, nil, KindOK, "ok", 1},
 		{"rate limited", secrets.ModeMask, false, Call{Model: "paid", Messages: user(fakeAWSKey)}, nil, KindRateLimited, "rate_limited", 0},
 		{"stream", secrets.ModeMask, true, Call{Model: "paid", Stream: true, Messages: user("x")}, nil, KindInvalid, "invalid", 0},
-		{"unsupported", secrets.ModeMask, true, Call{Model: "paid", Unsupported: "tools", Messages: user("x")}, nil, KindInvalid, "invalid", 0},
+		{"unsupported", secrets.ModeMask, true, Call{Model: "paid", Unsupported: "functions", Messages: user("x")}, nil, KindInvalid, "invalid", 0},
 		{"empty messages", secrets.ModeMask, true, Call{Model: "paid"}, nil, KindInvalid, "invalid", 0},
 		{"bad role", secrets.ModeMask, true, Call{Model: "paid", Messages: []ports.ChatMessage{{Role: "root", Content: "x"}}}, nil, KindInvalid, "invalid", 0},
 		{"reject", secrets.ModeMask, true, Call{Reject: &Reject{Kind: KindTooLarge, Code: CodeTooLarge}}, nil, KindTooLarge, "invalid", 0},

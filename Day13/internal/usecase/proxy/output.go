@@ -76,61 +76,106 @@ type outputResult struct {
 	findings   []ports.AuditFinding
 	delivered  string
 	masked     string
+	// deliveredCalls are the tool calls returned to the client (nil when
+	// blocked); maskedCalls are written to the audit.
+	deliveredCalls []ports.ToolCall
+	maskedCalls    []ports.ToolCall
 }
 
 type outHit struct {
 	typ, view, action, value, placeholder string
 }
 
-// checkOutput validates a model answer. systems are the system messages as
-// sent upstream.
-func (s *Service) checkOutput(answer string, systems []string) outputResult {
-	r := s.scanner.ScanDirect(answer)
-	canon := r.Canonical
-	low := strings.ToLower(canon)
-	var hits []outHit
-	var spans []secrets.Span
-	blocked := false
+// inspection is the output guard verdict for one text.
+type inspection struct {
+	canon      string
+	hits       []outHit
+	spans      []secrets.Span
+	blocked    bool
+	systemLeak bool
+}
+
+// inspect runs the output checks on text: secrets and suspicious URLs are
+// redacted, dangerous commands block. System prompt leaks are checked only
+// against non-empty systems.
+func (s *Service) inspect(text string, systems []string) inspection {
+	r := s.scanner.ScanDirect(text)
+	in := inspection{canon: r.Canonical}
+	low := strings.ToLower(in.canon)
 
 	for _, f := range r.Findings {
-		hits = append(hits, outHit{string(f.Type), string(f.View), "redact", f.Value, f.Placeholder()})
+		in.hits = append(in.hits, outHit{string(f.Type), string(f.View), "redact", f.Value, f.Placeholder()})
 	}
-	spans = append(spans, secrets.Spans(r.Findings)...)
+	in.spans = append(in.spans, secrets.Spans(r.Findings)...)
 
 	for _, sys := range systems {
 		sysLow := strings.ToLower(s.scanner.Canonicalize(sys))
 		if guard.LeaksSystemN(low, sysLow, s.out.NGram) {
-			hits = append(hits, outHit{OutSystemLeak, "", "block", sysLow, ""})
-			blocked = true
+			in.hits = append(in.hits, outHit{OutSystemLeak, "", "block", sysLow, ""})
+			in.blocked, in.systemLeak = true, true
 			break
 		}
 	}
 	for _, re := range dangerousCommands {
 		for _, m := range re.FindAllString(low, -1) {
-			hits = append(hits, outHit{OutDangerousCommand, "", "block", m, ""})
-			blocked = true
+			in.hits = append(in.hits, outHit{OutDangerousCommand, "", "block", m, ""})
+			in.blocked = true
 		}
 	}
-	for _, loc := range s.suspiciousURLs(canon) {
-		hits = append(hits, outHit{OutSuspiciousURL, "", "redact", canon[loc[0]:loc[1]], PlaceholderURL})
-		spans = append(spans, secrets.Span{Start: loc[0], End: loc[1], Placeholder: PlaceholderURL, Priority: 100})
+	for _, loc := range s.suspiciousURLs(in.canon) {
+		in.hits = append(in.hits, outHit{OutSuspiciousURL, "", "redact", in.canon[loc[0]:loc[1]], PlaceholderURL})
+		in.spans = append(in.spans, secrets.Span{Start: loc[0], End: loc[1], Placeholder: PlaceholderURL, Priority: 100})
 	}
+	return in
+}
 
-	res := outputResult{findings: s.summarizeOutput(hits)}
-	res.masked = secrets.RedactSpans(canon, spans)
+// checkOutput validates a model answer: the content and every string value
+// of the tool call arguments. systems are the system messages as sent
+// upstream; system leaks are checked only in the content (generated code
+// in arguments may legitimately overlap with the prompt). The action is
+// the strictest over content and tool calls; a block withholds both.
+func (s *Service) checkOutput(answer string, calls []ports.ToolCall, systems []string) outputResult {
+	ci := s.inspect(answer, systems)
+	hits := append([]outHit(nil), ci.hits...)
+	blocked, redacted := ci.blocked, len(ci.spans) > 0
+
+	res := outputResult{masked: secrets.RedactSpans(ci.canon, ci.spans), systemLeak: ci.systemLeak}
+	for _, c := range calls {
+		if strings.TrimSpace(c.Function.Arguments) == "" {
+			c.Function.Arguments = "{}" // no-argument call: keep it a JSON object
+		}
+		masked, changed := mapStringLeaves(c.Function.Arguments, func(leaf string) string {
+			li := s.inspect(leaf, nil)
+			hits = append(hits, li.hits...)
+			blocked = blocked || li.blocked
+			if len(li.spans) == 0 {
+				return leaf
+			}
+			redacted = true
+			return secrets.RedactSpans(li.canon, li.spans)
+		})
+		mc := c
+		if changed {
+			mc.Function.Arguments = masked
+		}
+		res.maskedCalls = append(res.maskedCalls, mc)
+	}
+	res.findings = s.summarizeOutput(hits)
 	switch {
 	case blocked:
 		res.action = OutputBlocked
-		for _, h := range hits {
-			res.systemLeak = res.systemLeak || h.typ == OutSystemLeak
-		}
 		res.delivered = s.refusal()
-	case len(spans) > 0:
+	case redacted:
 		res.action = OutputRedacted
-		res.delivered = res.masked
+		res.delivered = answer
+		if len(ci.spans) > 0 {
+			res.delivered = res.masked
+		}
+		res.deliveredCalls = res.maskedCalls
 	default:
 		res.action = OutputPass
 		res.delivered = answer
+		res.deliveredCalls = res.maskedCalls
 	}
 	return res
 }

@@ -1,0 +1,107 @@
+# Guard-proxy config for functional tests and e2e (go test ./e2e/proxy/,
+# Day14 make e2e-loop-fake). Same pipeline as configs/proxy.yaml, but the rate
+# limit is high so tests never wait on it. Limits themselves are checked
+# separately with configs/proxy.limits.yaml. Keys: env PROXY_API_KEYS only.
+proxy:
+  listen: 127.0.0.1:8090
+  max_body_bytes: 1048576
+  allow_non_loopback: false
+
+# OpenAI-compatible APIs. Keys are read only from the env variable named in
+# api_key_env (never from this file). PROXY_UPSTREAM_<NAME>_BASE_URL overrides base_url.
+# base_url: no userinfo/query/fragment; with api_key_env it must be https or
+# loopback; a keyless upstream must be loopback unless allow_remote: true
+# (then a WARN is logged: Ollama/LM Studio have no auth).
+upstreams:
+  mlx:
+    base_url: http://127.0.0.1:18081/v1
+    api_key_env: ""
+    timeout: 180s
+  ollama:
+    base_url: http://127.0.0.1:11434/v1
+    api_key_env: ""
+    timeout: 180s
+  lmstudio:
+    base_url: http://127.0.0.1:1234/v1
+    api_key_env: ""
+    timeout: 180s
+  openai:
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    timeout: 60s
+  # Deterministic fake upstream (Day14 e2e, make e2e-loop-fake); override with
+  # PROXY_UPSTREAM_FAKE_BASE_URL.
+  fake:
+    base_url: http://127.0.0.1:18099/v1
+    api_key_env: ""
+    timeout: 30s
+
+# Public model aliases (allowlist). Prices: micro-USD per 1M tokens.
+# PROXY_MODEL_<ALIAS>_UPSTREAM_MODEL overrides upstream_model (alias upper-cased,
+# '-' and '.' -> '_'), e.g. PROXY_MODEL_QWEN2_5_7B_OLLAMA_UPSTREAM_MODEL=gemma4:12b.
+models:
+  qwen2.5-7b-local:
+    upstream: mlx
+    upstream_model: models/baseline-qwen2.5-7b-4bit
+    local_path: true
+    price: { input_micro_usd_per_1m: 0, output_micro_usd_per_1m: 0, ref: local }
+  qwen2.5-7b-ollama:
+    upstream: ollama
+    upstream_model: qwen2.5:7b-instruct
+    local_path: false
+    price: { input_micro_usd_per_1m: 0, output_micro_usd_per_1m: 0, ref: local }
+  qwen2.5-7b-lmstudio:
+    upstream: lmstudio
+    upstream_model: qwen2.5-7b-instruct
+    local_path: false
+    price: { input_micro_usd_per_1m: 0, output_micro_usd_per_1m: 0, ref: local }
+  gpt-4.1-mini:
+    upstream: openai
+    upstream_model: gpt-4.1-mini
+    # Verify against https://openai.com/api/pricing before relying on cost figures.
+    price: { input_micro_usd_per_1m: 400000, output_micro_usd_per_1m: 1600000, ref: "openai-pricing-2026-11" }
+
+  # Fake coder model behind the fake upstream; non-zero price so cost headers are checked.
+  fake-coder:
+    upstream: fake
+    upstream_model: fake-coder
+    price: { input_micro_usd_per_1m: 400000, output_micro_usd_per_1m: 1600000, ref: "e2e-fake" }
+
+rate_limit:
+  per_minute: 100000
+  window: 1m
+  max_keys: 10000
+
+# Per client IP: after max_failures 401s within window -> 429 without checking the key.
+auth:
+  bruteforce:
+    max_failures: 10
+    window: 5m
+
+# Tool calling (tools / tool_calls / role=tool). Requests over a limit get 400 invalid_request.
+tools:
+  max_tools: 64
+  max_definitions_bytes: 262144   # JSON size of "tools"
+  max_arguments_bytes: 65536      # one tool_calls[].function.arguments
+
+guard:
+  input:
+    mode: mask              # mask | block (env PROXY_GUARD_MODE)
+    overrides:
+      private_key: block
+    max_decode_depth: 2
+    scan_roles: [system, user, assistant, tool, developer]
+  output:
+    system_leak_ngram: 8
+    url_allowlist: [github.com, docs.python.org, go.dev, wikipedia.org]
+    refusal_text: "Ответ модели скрыт политикой безопасности прокси."
+  # Public documentation example values (AWS docs) are never reported.
+  allowlist: [AKIAIOSFODNN7EXAMPLE, wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY]
+
+audit:
+  path: logs/audit/proxy-e2e-audit.jsonl
+  max_text_runes: 4000
+  system_content: hash      # hash: "[SYSTEM sha=<hmac12> runes=N]" | full: masked text
+
+log:
+  level: info

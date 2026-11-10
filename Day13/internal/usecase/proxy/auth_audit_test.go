@@ -34,7 +34,7 @@ func TestRejectAuditsWithoutRequestData(t *testing.T) {
 				t.Fatalf("calls %d recs %d", len(e.up.calls), len(e.audit.recs))
 			}
 			r := e.audit.recs[0]
-			if r.V != 2 || r.Status != tt.status || r.HTTPStatus != tt.http || r.Reason != tt.d.Reason || r.KeyID != "" ||
+			if r.V != ports.AuditVersion || r.Status != tt.status || r.HTTPStatus != tt.http || r.Reason != tt.d.Reason || r.KeyID != "" ||
 				r.ClientIPHash == "" || len(r.PromptMasked) != 0 || r.Usage.Source != ports.UsageSourceNone || r.RequestID != tt.d.RequestID {
 				t.Fatalf("record %+v", r)
 			}

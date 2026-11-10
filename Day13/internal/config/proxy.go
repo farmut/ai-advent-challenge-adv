@@ -28,6 +28,8 @@ type Proxy struct {
 	Upstreams        map[string]Upstream   `yaml:"upstreams"`
 	Models           map[string]ModelRoute `yaml:"models"`
 	RateLimit        RateLimit             `yaml:"rate_limit"`
+	Auth             ProxyAuth             `yaml:"auth"`
+	Tools            ToolLimits            `yaml:"tools"`
 	Guard            ProxyGuard            `yaml:"guard"`
 	Audit            Audit                 `yaml:"audit"`
 	Log              ProxyLog              `yaml:"log"`
@@ -99,6 +101,39 @@ type RateLimit struct {
 	Window    time.Duration `yaml:"window"`
 	MaxKeys   int           `yaml:"max_keys"`
 }
+
+// ProxyAuth configures authentication. Proxy API keys are never part of
+// the file (env PROXY_API_KEYS only).
+type ProxyAuth struct {
+	Bruteforce Bruteforce `yaml:"bruteforce"`
+}
+
+// Bruteforce limits authentication failures per client IP: after
+// MaxFailures failures within Window the client gets 429 without its key
+// being checked.
+type Bruteforce struct {
+	MaxFailures int           `yaml:"max_failures"`
+	Window      time.Duration `yaml:"window"`
+}
+
+// ToolLimits bound tool calling requests.
+type ToolLimits struct {
+	// MaxTools is the maximum number of entries in "tools".
+	MaxTools int `yaml:"max_tools"`
+	// MaxDefinitionsBytes caps the JSON size of "tools".
+	MaxDefinitionsBytes int `yaml:"max_definitions_bytes"`
+	// MaxArgumentsBytes caps tool_calls[].function.arguments of one call.
+	MaxArgumentsBytes int `yaml:"max_arguments_bytes"`
+}
+
+// Defaults of the limits (used when a key is absent from the file).
+const (
+	DefaultAuthMaxFailures      = 10
+	DefaultAuthWindow           = 5 * time.Minute
+	DefaultMaxTools             = 64
+	DefaultMaxToolDefsBytes     = 256 << 10
+	DefaultMaxToolArgumentBytes = 64 << 10
+)
 
 // ProxyGuard configures the input and output guards.
 type ProxyGuard struct {
@@ -230,6 +265,21 @@ func (c *Proxy) applyDefaults() {
 	if c.RateLimit.MaxKeys == 0 {
 		c.RateLimit.MaxKeys = 10000
 	}
+	if c.Auth.Bruteforce.MaxFailures == 0 {
+		c.Auth.Bruteforce.MaxFailures = DefaultAuthMaxFailures
+	}
+	if c.Auth.Bruteforce.Window == 0 {
+		c.Auth.Bruteforce.Window = DefaultAuthWindow
+	}
+	if c.Tools.MaxTools == 0 {
+		c.Tools.MaxTools = DefaultMaxTools
+	}
+	if c.Tools.MaxDefinitionsBytes == 0 {
+		c.Tools.MaxDefinitionsBytes = DefaultMaxToolDefsBytes
+	}
+	if c.Tools.MaxArgumentsBytes == 0 {
+		c.Tools.MaxArgumentsBytes = DefaultMaxToolArgumentBytes
+	}
 	if c.Guard.Input.Mode == "" {
 		c.Guard.Input.Mode = string(secrets.ModeMask)
 	}
@@ -318,6 +368,15 @@ func (c *Proxy) Validate() error {
 	}
 	if c.RateLimit.Window <= 0 || c.RateLimit.MaxKeys <= 0 {
 		return errors.New("rate_limit.window and rate_limit.max_keys must be > 0")
+	}
+	if c.Auth.Bruteforce.MaxFailures <= 0 || c.Auth.Bruteforce.Window <= 0 {
+		return errors.New("auth.bruteforce.max_failures and auth.bruteforce.window must be > 0")
+	}
+	if c.Tools.MaxTools <= 0 || c.Tools.MaxDefinitionsBytes <= 0 || c.Tools.MaxArgumentsBytes <= 0 {
+		return errors.New("tools.max_tools, tools.max_definitions_bytes and tools.max_arguments_bytes must be > 0")
+	}
+	if int64(c.Tools.MaxDefinitionsBytes) > c.MaxBodyBytes || int64(c.Tools.MaxArgumentsBytes) > c.MaxBodyBytes {
+		return errors.New("tools.max_definitions_bytes and tools.max_arguments_bytes must not exceed proxy.max_body_bytes")
 	}
 	if _, err := secrets.ParseMode(c.Guard.Input.Mode); err != nil {
 		return fmt.Errorf("guard.input.mode: %w", err)

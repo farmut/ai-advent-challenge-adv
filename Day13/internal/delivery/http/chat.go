@@ -3,6 +3,7 @@ package httpdelivery
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"strings"
 
@@ -31,9 +32,22 @@ type chatRequest struct {
 }
 
 type messageDTO struct {
-	Role      string          `json:"role"`
-	Content   json.RawMessage `json:"content"`
-	ToolCalls json.RawMessage `json:"tool_calls"`
+	Role       string          `json:"role"`
+	Content    json.RawMessage `json:"content"`
+	ToolCalls  json.RawMessage `json:"tool_calls"`
+	ToolCallID string          `json:"tool_call_id"`
+	Name       string          `json:"name"`
+}
+
+// toolCallDTO is one assistant tool call. arguments must be a JSON string
+// (as in the OpenAI API); its content is validated by the use case.
+type toolCallDTO struct {
+	ID       string `json:"id"`
+	Type     string `json:"type"`
+	Function struct {
+		Name      string `json:"name"`
+		Arguments string `json:"arguments"`
+	} `json:"function"`
 }
 
 type contentPart struct {
@@ -87,22 +101,47 @@ func fill(call *proxy.Call, req chatRequest) *proxy.Reject {
 	switch {
 	case req.N != nil && *req.N != 1:
 		call.Unsupported = "n"
-	case present(req.Tools) || present(req.ToolChoice):
-		call.Unsupported = "tools"
 	case present(req.Functions) || present(req.FunctionCall):
 		call.Unsupported = "functions"
 	}
-	for _, m := range req.Messages {
+	// tools/tool_choice are validated and re-encoded by the use case.
+	if present(req.Tools) {
+		call.Tools = append([]byte(nil), req.Tools...)
+	}
+	if present(req.ToolChoice) {
+		call.ToolChoice = append([]byte(nil), req.ToolChoice...)
+	}
+	for i, m := range req.Messages {
 		text, ok := contentText(m.Content)
 		if !ok && call.Unsupported == "" {
 			call.Unsupported = "messages.content"
 		}
-		if present(m.ToolCalls) && call.Unsupported == "" {
-			call.Unsupported = "tools"
+		msg := ports.ChatMessage{Role: m.Role, Content: text, ToolCallID: m.ToolCallID, Name: m.Name}
+		if present(m.ToolCalls) {
+			calls, rej := parseToolCalls(i, m.ToolCalls)
+			if rej != nil {
+				return rej
+			}
+			msg.ToolCalls = calls
 		}
-		call.Messages = append(call.Messages, ports.ChatMessage{Role: m.Role, Content: text})
+		call.Messages = append(call.Messages, msg)
 	}
 	return nil
+}
+
+// parseToolCalls decodes messages[i].tool_calls. Only the shape is checked
+// here; ids, names and arguments are validated by the use case.
+func parseToolCalls(i int, raw json.RawMessage) ([]ports.ToolCall, *proxy.Reject) {
+	var dtos []toolCallDTO
+	if err := json.Unmarshal(raw, &dtos); err != nil {
+		return nil, &proxy.Reject{Kind: proxy.KindInvalid, Code: proxy.CodeInvalidRequest, Param: fmt.Sprintf("messages[%d].tool_calls", i),
+			Message: "tool_calls must be an array of {id, type, function:{name, arguments}} with arguments as a JSON string."}
+	}
+	out := make([]ports.ToolCall, 0, len(dtos))
+	for _, d := range dtos {
+		out = append(out, ports.ToolCall{ID: d.ID, Type: d.Type, Function: ports.ToolFunction{Name: d.Function.Name, Arguments: d.Function.Arguments}})
+	}
+	return out, nil
 }
 
 // contentText accepts a string, null or an array of text parts. Any other

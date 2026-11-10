@@ -1,6 +1,6 @@
 .PHONY: build run test vet bench bench-compare lint clean preflight e2e-injection-off e2e-injection-on e2e-injection-summary \
-	proxy-build proxy proxy-mlx-upstream e2e-proxy e2e-proxy-mlx e2e-proxy-compat e2e-proxy-summary audit-report fmt-check arch-check \
-	setup model
+	proxy-build proxy proxy-e2e proxy-mlx-upstream test-limits e2e-proxy e2e-proxy-mlx e2e-proxy-compat e2e-proxy-summary audit-report fmt-check arch-check \
+	setup model fake-upstream
 
 BINARY=bin/agile-consultant
 CONFIG=configs/app.yaml
@@ -38,6 +38,12 @@ clean:
 
 fmt-check:
 	@out="$$(gofmt -l .)"; if [ -n "$$out" ]; then echo "gofmt needed:"; echo "$$out"; exit 1; fi
+
+# Limit checks only (fake clock, no sleeps): rate limit and auth bruteforce from
+# configs/proxy.limits.yaml, limit config validation. Functional tests and e2e
+# use configs/proxy.e2e.yaml (high rate limit).
+test-limits:
+	go test -count=1 -run 'Limits' ./internal/app/ ./internal/config/
 
 # Clean Architecture guard: usecase/ports must not import Gin/YAML/adapters; Gin only in delivery/http.
 arch-check:
@@ -82,6 +88,19 @@ proxy-build:
 # on 127.0.0.1:8090; OPENAI_API_KEY enables the cloud route.
 proxy: proxy-build
 	./$(PROXY_BINARY) --config $(PROXY_CONFIG)
+
+# Proxy with the fast test config (rate limit 100000/min, fake-coder route to the
+# fake upstream on 127.0.0.1:18099); for Day14 e2e. Needs PROXY_API_KEYS.
+proxy-e2e: proxy-build
+	./$(PROXY_BINARY) --config configs/proxy.e2e.yaml
+
+# Deterministic fake upstream binary for the Day14 loop e2e (make e2e-loop-fake):
+# scripted OpenAI-compatible server, roles from a JSON script
+# (see internal/testkit/fakeupstream). Requires -script on run.
+FAKE_UPSTREAM_BINARY=bin/fake-upstream
+
+fake-upstream:
+	go build -o $(FAKE_UPSTREAM_BINARY) ./cmd/fake-upstream
 
 # Local upstream for the qwen2.5-7b-local route (absolute model path, so no reload per request).
 proxy-mlx-upstream:

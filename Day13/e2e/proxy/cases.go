@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"agile-consultant/internal/ports"
+	"agile-consultant/internal/testkit/fakeupstream"
 )
 
 // Facts and expectations.
@@ -33,11 +34,8 @@ const (
 	VerdictNA              = "N/A"
 )
 
-// Usage is a scripted upstream usage.
-type Usage struct {
-	Prompt     int `json:"prompt_tokens"`
-	Completion int `json:"completion_tokens"`
-}
+// Usage is a scripted upstream usage (alias of testkit/fakeupstream.Usage).
+type Usage = fakeupstream.Usage
 
 // Case is one e2e case from testdata/cases.json.
 type Case struct {

@@ -2,16 +2,36 @@ package ports
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"time"
 )
 
 // Day13 guard-proxy ports. They depend only on the standard library.
 
-// ChatMessage is one OpenAI-style chat message.
+// ChatMessage is one OpenAI-style chat message. ToolCalls is set on
+// assistant messages that call tools; ToolCallID links a role=tool message
+// to the call it answers.
 type ChatMessage struct {
-	Role    string `json:"role"`
-	Content string `json:"content"`
+	Role       string     `json:"role"`
+	Content    string     `json:"content"`
+	ToolCalls  []ToolCall `json:"tool_calls,omitempty"`
+	ToolCallID string     `json:"tool_call_id,omitempty"`
+	Name       string     `json:"name,omitempty"`
+}
+
+// ToolCall is one function call requested by the model (OpenAI format).
+type ToolCall struct {
+	ID       string       `json:"id"`
+	Type     string       `json:"type"`
+	Function ToolFunction `json:"function"`
+}
+
+// ToolFunction is the called function. Arguments is a JSON object encoded
+// as a string, exactly as in the OpenAI API.
+type ToolFunction struct {
+	Name      string `json:"name"`
+	Arguments string `json:"arguments"`
 }
 
 // ChatParams are the generation parameters forwarded upstream (whitelist).
@@ -22,11 +42,15 @@ type ChatParams struct {
 	Stop        []string
 }
 
-// UpstreamRequest is a non-streaming chat completion request.
+// UpstreamRequest is a non-streaming chat completion request. Tools and
+// ToolChoice are re-encoded by the use case after validation (only known
+// fields), never the raw client bodies; nil means "not sent".
 type UpstreamRequest struct {
-	Model    string
-	Messages []ChatMessage
-	Params   ChatParams
+	Model      string
+	Messages   []ChatMessage
+	Params     ChatParams
+	Tools      json.RawMessage
+	ToolChoice json.RawMessage
 }
 
 // Usage sources.
@@ -47,6 +71,7 @@ type Usage struct {
 // did not report token usage.
 type UpstreamResult struct {
 	Content      string
+	ToolCalls    []ToolCall
 	FinishReason string
 	Usage        Usage
 	HasUsage     bool
@@ -136,8 +161,10 @@ type Authenticator interface {
 }
 
 // AuditVersion is the audit schema version. v2 adds key_id, reason and the
-// unauthorized status; system prompts are stored as a hash by default.
-const AuditVersion = 2
+// unauthorized status; system prompts are stored as a hash by default. v3
+// adds tool calls: prompt_masked[].tool_calls (masked arguments) and
+// response_tool_calls_masked.
+const AuditVersion = 3
 
 // Audit statuses.
 const (
@@ -163,8 +190,8 @@ const (
 	AuthReasonFailLimit = "auth_fail_limit"
 )
 
-// AuditRecord is one line of the audit log (schema v2; v1 records lack
-// key_id and reason). It never contains raw secrets: prompts and responses
+// AuditRecord is one line of the audit log (schema v3; v1 records lack
+// key_id and reason, v1/v2 records lack tool calls). It never contains raw secrets: prompts and responses
 // are masked, findings carry only fingerprints, and neither the proxy API
 // key nor its HMAC is written (only key_id of an authenticated key).
 type AuditRecord struct {
@@ -184,10 +211,13 @@ type AuditRecord struct {
 	Output         AuditOutput   `json:"output"`
 	PromptMasked   []ChatMessage `json:"prompt_masked"`
 	ResponseMasked string        `json:"response_masked"`
-	Usage          AuditUsage    `json:"usage"`
-	CostMicroUSD   int64         `json:"cost_micro_usd"`
-	PriceRef       string        `json:"price_ref"`
-	LatencyMS      AuditLatency  `json:"latency_ms"`
+	// ResponseToolCallsMasked are the tool calls of the model answer with
+	// secrets and suspicious URLs masked in the arguments (v3).
+	ResponseToolCallsMasked []ToolCall   `json:"response_tool_calls_masked,omitempty"`
+	Usage                   AuditUsage   `json:"usage"`
+	CostMicroUSD            int64        `json:"cost_micro_usd"`
+	PriceRef                string       `json:"price_ref"`
+	LatencyMS               AuditLatency `json:"latency_ms"`
 }
 
 // AuditInput is the input guard section.

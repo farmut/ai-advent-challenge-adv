@@ -204,12 +204,19 @@ r = client.chat.completions.create(model="qwen2.5-7b-local", messages=[{"role": 
 
 ## Конфиг `configs/proxy.yaml`
 
+Все лимиты и окна задаются только в конфиге (в коде — безопасные значения по умолчанию для отсутствующих ключей; `<= 0` — ошибка). Рядом лежат два тестовых конфига с тем же конвейером:
+
+- `configs/proxy.e2e.yaml` — для функциональных тестов и e2e (`go test -tags e2e ./e2e/proxy/`, Day14 `make e2e-loop-fake`): `rate_limit.per_minute: 100000`, маршрут `fake-coder` → upstream `fake` (`127.0.0.1:18099`, переопределяется `PROXY_UPSTREAM_FAKE_BASE_URL`), аудит `logs/audit/proxy-e2e-audit.jsonl`;
+- `configs/proxy.limits.yaml` — только для проверки лимитов (`make test-limits`, Day14 `make e2e-limits`): `per_minute: 3`, `auth.bruteforce.max_failures: 3`, окно 1m.
+
 | Секция | Что задаёт |
 |---|---|
 | `proxy.listen`, `proxy.max_body_bytes`, `proxy.allow_non_loopback` | адрес (по умолчанию только loopback), лимит тела (1 MiB), разрешение адреса не на loopback (false) |
 | `upstreams.<name>` | `base_url`, `api_key_env` (имя env-переменной, сам ключ в файл не пишется), `timeout`, `allow_remote`. Upstream'ы: `mlx` (127.0.0.1:18081), `ollama` (127.0.0.1:11434), `lmstudio` (127.0.0.1:1234), `openai` |
 | `models.<alias>` | allowlist моделей: `upstream`, `upstream_model`, `local_path` (путь относительно корня модуля → абсолютный), `price` (micro-USD за 1M токенов, `ref` — источник цены). Алиасы: `qwen2.5-7b-local` (mlx), `qwen2.5-7b-ollama` (`qwen2.5:7b-instruct`), `qwen2.5-7b-lmstudio` (`qwen2.5-7b-instruct`), `gpt-4.1-mini` |
 | `rate_limit` | `per_minute` (20), `window` (1m), `max_keys` |
+| `auth.bruteforce` | `max_failures` (10), `window` (5m): после стольких 401 с IP за окно — 429 без проверки ключа |
+| `tools` | `max_tools` (64), `max_definitions_bytes` (256 KiB, размер `tools`), `max_arguments_bytes` (64 KiB, одни `arguments`); не больше `proxy.max_body_bytes` |
 | `guard.input` | `mode` mask/block, `overrides` по типу (`private_key: block`), `max_decode_depth` (2), `scan_roles` |
 | `guard.output` | `system_leak_ngram` (8), `url_allowlist`, `refusal_text` |
 | `guard.allowlist` | значения, которые никогда не считаются секретом (`AKIAIOSFODNN7EXAMPLE` из документации AWS) |
@@ -224,19 +231,42 @@ r = client.chat.completions.create(model="qwen2.5-7b-local", messages=[{"role": 
 | Ситуация | Код | Тело / заголовки |
 |---|---|---|
 | Нет / неверный ключ, не Bearer, токен в query | 401 | `invalid_api_key`, `WWW-Authenticate: Bearer realm="llm-proxy"`; одинаковое тело во всех случаях |
-| Больше 10 неудач авторизации за 5 минут с IP | 429 | `rate_limit_exceeded`, `Retry-After`; ключ не проверяется |
-| OK | 200 | стандартный `chat.completion`; `X-Guard-Input: pass`, `X-Guard-Output: pass`, `X-Guard-Cost-USD`, `X-Guard-Usage-Source` |
+| Больше `auth.bruteforce.max_failures` (10) неудач авторизации за `window` (5m) с IP | 429 | `rate_limit_exceeded`, `Retry-After`; ключ не проверяется |
+| OK | 200 | стандартный `chat.completion`; `X-Guard-Input: pass`, `X-Guard-Output: pass`, `X-Guard-Cost-USD`, `X-Guard-Usage-Source`, `X-Upstream-Model` (реальное имя upstream-модели для алиаса; пусто, если запрос до upstream не дошёл) |
 | Input masked | 200 | `X-Guard-Input: masked`, `X-Guard-Input-Findings: api_key_openai=1,email=1` |
 | Input blocked | 400 | `error.code=guard_input_blocked`, `warning=secrets_detected`, `findings[{type,count,view}]`; `X-Guard-Warning` |
 | Output redacted / blocked | 200 | `[REDACTED_*]` в content / `refusal_text` с `finish_reason=content_filter`; `X-Guard-Output` |
 | Rate limit | 429 | `rate_limit_exceeded`, `Retry-After` |
-| `stream:true`, `n>1`, `tools`/`functions`, image | 400 | `unsupported_parameter`, `param` |
+| `stream:true`, `n>1`, `functions`/`function_call`, image | 400 | `unsupported_parameter`, `param` |
+| Невалидные `tools` / `tool_choice` / `tool_calls` / `role=tool` | 400 | `invalid_request`, `param` (например `messages[2].tool_call_id`) |
 | Невалидный JSON / пустые messages / тело больше лимита | 400 / 400 / 413 | `invalid_json` / `invalid_request` / `request_too_large` |
 | Неизвестная модель / нет ключа upstream | 404 / 503 | `model_not_found` / `upstream_not_configured` |
 | Upstream недоступен / таймаут / плохой ответ | 503 / 504 / 502 | `upstream_unavailable` / `upstream_timeout` / `upstream_error`; тело upstream клиенту не возвращается |
 | Upstream ответил 404 (модель не скачана / не загружена в Ollama или LM Studio, неверный id) | 502 | `upstream_model_not_found`, «Upstream model not found (pull/load the model).»; тело upstream клиенту не возвращается |
 
-На всех ответах чата ставятся `X-Request-ID` (принимается, если совпадает с `^[A-Za-z0-9._-]{1,64}$`, иначе генерируется), `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` (секунды до сброса). Также есть `GET /v1/models` (требует ключ), `/healthz` и `/readyz` (без ключа, тело только `status`; `/readyz` → 503, если аудит закрыт или нет ни одного готового маршрута). `/readyz` проверяет конфигурацию, а не живость upstream: при остановленных MLX/Ollama/LM Studio он отвечает 200. Неизвестные пути и методы без ключа тоже получают 401. Клиентский `Authorization` в upstream не передаётся. Параметры передаются по whitelist: `model`, `messages`, `max_tokens`, `temperature`, `top_p`, `stop`.
+На всех ответах чата ставятся `X-Request-ID` (принимается, если совпадает с `^[A-Za-z0-9._-]{1,64}$`, иначе генерируется), `X-RateLimit-Limit`, `X-RateLimit-Remaining`, `X-RateLimit-Reset` (секунды до сброса). Также есть `GET /v1/models` (требует ключ), `/healthz` и `/readyz` (без ключа, тело только `status`; `/readyz` → 503, если аудит закрыт или нет ни одного готового маршрута). `/readyz` проверяет конфигурацию, а не живость upstream: при остановленных MLX/Ollama/LM Studio он отвечает 200. Неизвестные пути и методы без ключа тоже получают 401. Клиентский `Authorization` в upstream не передаётся. Параметры передаются по whitelist: `model`, `messages`, `max_tokens`, `temperature`, `top_p`, `stop`, `tools`, `tool_choice`.
+
+### Tool calling
+
+Прокси пропускает `tools`, `tool_choice`, `messages[].tool_calls` и сообщения `role=tool` (формат OpenAI, без стриминга). Проверки fail-closed, 400 `invalid_request` с `param`:
+
+- `tools` — массив из 1..`tools.max_tools` элементов, `type=function`, имя `^[A-Za-z0-9_-]{1,64}$` без повторов, `parameters` — JSON-объект, суммарно не больше `tools.max_definitions_bytes`. В upstream уходит перекодированное определение (только `type`, `function.{name,description,parameters,strict}`), а не исходное тело;
+- `tool_choice` — `auto` / `none` / `required` или `{type:function,function:{name}}` с именем из `tools`; без `tools` — 400;
+- `tool_calls` — только у `assistant`; `id` (`^[A-Za-z0-9_.:-]{1,128}$`) уникален, `type=function`, `arguments` — строка с JSON-объектом не больше `tools.max_arguments_bytes`;
+- `role=tool` — `tool_call_id` обязателен и ссылается на ещё не отвеченный вызов предыдущего assistant-сообщения.
+
+Input guard сканирует содержимое `tool`-сообщений, каждый строковый лист JSON в `arguments`, а также `tools[].function.description` и строковые значения `parameters` (description, enum, default) — mask / block как для текста; имена и JSON-структура сохраняются. Output guard проверяет строковые листья `arguments` ответа: секреты и подозрительные URL маскируются (`X-Guard-Output: redacted`), опасная команда блокирует весь ответ (`finish_reason=content_filter`, `tool_calls` удаляются, `content=refusal_text`). Утечка system prompt в `arguments` не проверяется: сгенерированный код может легитимно пересекаться с промптом. Ответ только с вызовами отдаётся с `content: null` и `finish_reason: tool_calls`. В аудите (схема v3) — только маскированные `prompt_masked[].tool_calls` и `response_tool_calls_masked`.
+
+### Fake upstream (`cmd/fake-upstream`)
+
+Детерминированный OpenAI-совместимый сервер для e2e: отвечает по скрипту, без модели и сети.
+
+```bash
+make fake-upstream                 # собрать bin/fake-upstream
+bin/fake-upstream -listen 127.0.0.1:18099 -script script.json
+```
+
+Скрипт — JSON `{"roles": {"<роль>": [ответ, …]}, "default": {ответ}}`. Роль определяется маркером `# profile: <name>` или `# role: <name>` в первых строках system-промпта; очередь роли выдаётся по одному ответу, затем повторяется последний; роль без очереди — `default`. Ответ: `content` и/или `tool_calls` (формат OpenAI), `finish_reason`, `usage`. Загрузка fail-closed: невалидный JSON, неизвестные поля, пустые очереди — ошибка запуска. Логика переиспользуется e2e-прогонами через `internal/testkit/fakeupstream`. Алиас `fake-coder` в `configs/proxy.e2e.yaml` смотрит на `http://127.0.0.1:18099/v1` с ненулевой ценой — так `X-Guard-Cost-USD` и аудит видны в проверках.
 
 ## Детекторы и обходы
 
@@ -252,7 +282,7 @@ r = client.chat.completions.create(model="qwen2.5-7b-local", messages=[{"role": 
 
 ## Аудит
 
-Файл `logs/audit/proxy-audit.jsonl`, схема v2 (v1 без `key_id`/`reason` читается `audit-report`), одна строка на запрос. Поля: `request_id`, `client_ip_hash` (HMAC), `key_id` (HMAC ключа прокси, не сам ключ), `model`/`upstream`, `status` (`ok|input_blocked|output_blocked|rate_limited|invalid|model_not_found|upstream_error|unauthorized`), `reason` (для `unauthorized`: `missing|invalid|scheme|query|too_long`; для 429 перебора: `auth_fail_limit`), `input`/`output` (`action`, `findings[{type, view, count, action, derived, fingerprints, placeholder}]`), `prompt_masked`, `response_masked`, `usage{source}`, `cost_micro_usd`, `price_ref`, `latency_ms`.
+Файл `logs/audit/proxy-audit.jsonl`, схема v3 (v1 без `key_id`/`reason` и v2 читаются `audit-report`), одна строка на запрос. Поля: `request_id`, `client_ip_hash` (HMAC), `key_id` (HMAC ключа прокси, не сам ключ), `model`/`upstream`, `status` (`ok|input_blocked|output_blocked|rate_limited|invalid|model_not_found|upstream_error|unauthorized`), `reason` (для `unauthorized`: `missing|invalid|scheme|query|too_long`; для 429 перебора: `auth_fail_limit`), `input`/`output` (`action`, `findings[{type, view, count, action, derived, fingerprints, placeholder}]`), `prompt_masked`, `response_masked`, `response_tool_calls_masked` (выходные вызовы — только маскированные, появились в v3), `usage{source}`, `cost_micro_usd`, `price_ref`, `latency_ms`.
 
 Инварианты:
 - сырые секреты в аудит не попадают никогда: маскирование выполняется всегда, в том числе в block mode;
