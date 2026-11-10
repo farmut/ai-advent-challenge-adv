@@ -121,9 +121,9 @@ e2e-limits: ## Limit-only e2e (plan section 7.3): proxy.limits.yaml + agent.limi
 # stand-agent не приходилось дублировать UPSTREAM=; переопределение —
 # аргументом: make stand-agent UPSTREAM=lmstudio
 UPSTREAM = $(shell cat $(CURDIR)/.stand/upstream 2>/dev/null || echo ollama)
-# Алиас агента следует за бэкендом автоматически (cloud → gpt-4.1-mini);
+# Алиас агента следует за бэкендом автоматически (cloud → deepseek-flash/OpenRouter);
 # переопределение — только аргументом: make stand-agent STAND_MODEL=<alias>
-STAND_MODEL    = $(if $(filter cloud,$(UPSTREAM)),gpt-4.1-mini,qwen2.5-7b-$(UPSTREAM))
+STAND_MODEL    = $(if $(filter cloud,$(UPSTREAM)),deepseek-flash,qwen2.5-7b-$(UPSTREAM))
 STAND_DIR      := $(CURDIR)/.stand
 PROXY_KEY      := $(shell sed -n 's/^PROXY_API_KEYS=//p' $(DAY13_DIR)/.env 2>/dev/null | cut -d, -f1)
 
@@ -166,8 +166,12 @@ stand-up: $(STAND_DIR) ## Поднять стенд: backend (UPSTREAM) + про
 				lms server start --port 1234 || exit 1; \
 			fi ;; \
 		cloud) \
-			if [ -z "$$OPENAI_API_KEY" ]; then \
-				echo "[stand] UPSTREAM=cloud требует env OPENAI_API_KEY (алиас gpt-4.1-mini)"; exit 1; \
+			if [ -z "$$OPENAI_API_KEY" ] && [ -z "$$OPENROUTER_API_KEY" ] && [ -z "$$LLM_API_KEY" ]; then \
+				echo "[stand] UPSTREAM=cloud требует env: LLM_API_KEY (OpenRouter, алиас deepseek-flash) или OPENAI_API_KEY (gpt-4.1-mini)"; exit 1; \
+			fi; \
+			if [ -z "$$OPENROUTER_API_KEY" ] && [ -n "$$LLM_API_KEY" ]; then \
+				export OPENROUTER_API_KEY="$$LLM_API_KEY"; \
+				echo "[stand] OPENROUTER_API_KEY взят из LLM_API_KEY"; \
 			fi; \
 			echo "[stand] облачный маршрут, бэкенд не нужен" ;; \
 		*) echo "неизвестный UPSTREAM=$(UPSTREAM) (ollama|mlx|lmstudio|cloud)"; exit 2 ;; \
