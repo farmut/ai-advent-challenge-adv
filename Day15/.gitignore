@@ -1,3 +1,6 @@
 # Day15 runtime artifacts (если появятся локальные логи/каталоги)
 .stand/
 *.log
+# partner_bundle runtime
+partner_bundle/.venv/
+partner_bundle/.agent-tmp/

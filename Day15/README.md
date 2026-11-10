@@ -244,3 +244,80 @@ make -C Day14 clean                # бинарь агента (git-mcp не т�
 ```
 
 Образ песочницы и скачанные модели не удаляются — переиспользуются между запусками.
+
+---
+
+## partner_bundle: автономный Python red-team стенд
+
+Отдельный сервис в [`partner_bundle/`](partner_bundle/README.md) — локальная репетиция
+контура «HTTP gateway → генерация → проверки → LLM security review → known-risk policy →
+commit» без привязки к Go-стеку Day13/Day14. Связка с основным стендом не нужна:
+свой gateway на `127.0.0.1:8093` (guards/audit/rate-limit настоящие, провайдер — fixture
+или реальный GigaChat/Anthropic). Проверено на этой машине 2026-11-10: 347 тестов pytest
+зелёные, loop 3/3 задачи в commit, redteam-after 33 наблюдения без успешных атак.
+
+```bash
+cd partner_bundle
+python3 -m venv .venv && . .venv/bin/activate   # Python 3.11+ (проверено 3.13/3.14)
+pip install -r requirements.txt
+mkdir -p .agent-tmp
+
+# офлайн-прогон (scripted fixture, НЕ LLM):
+python docs/day15-redteam/scripts/fixture_gateway.py &   # баннер OFFLINE_SCRIPTED_FIXTURE_NOT_LLM
+curl http://127.0.0.1:8093/health
+curl http://127.0.0.1:8093/v1/chat -H 'Content-Type: application/json' \
+  -d '{"prompt":"Объясни HTTP кратко.","input_mode":"block"}'
+python -m src.tools.security_loop --output .agent-tmp/partner-loop-1
+python docs/day15-redteam/scripts/evaluate.py --phase after --output .agent-tmp/redteam-after
+python -m pytest tests -q -p no:cacheprovider   # 347 тестов
+# реальный провайдер (credentials свои, в чат/отчёты не включать):
+# export GIGACHAT_SCOPE=GIGACHAT_API_PERS GIGACHAT_CA_BUNDLE=/path/to/ca.pem
+# python -m src.tools.llm_gateway --config config/llm_gateway.gigachat.json --env-file /path/local.env
+```
+
+Контракт gateway: `POST /v1/chat` `{"prompt":"≤16000 символов","input_mode":"block|mask"}`;
+200 — ответ прошёл guard, 422 — секрет/PII заблокирован до API, 502 — output guard,
+429 — лимит, 503 — audit недоступен; до 10 POST/мин/IP; модель/system prompt из запроса
+не задаются. Loop работает в отдельном git-репозитории внутри output-каталога, чужой
+проект не трогает, push не делает. Границы пакета и формат отчёта партнёру — в
+[`partner_bundle/README.md`](partner_bundle/README.md).
+
+### Провайдеры bundle (после доработки 2026-11-10)
+
+Помимо fixture/GigaChat/Anthropic добавлены два OpenAI-совместимых провайдера
+(`provider: "openai_compatible"`, опциональные `base_url`/`api_key_env`/`api_key_required`):
+
+| Конфиг | Что за ним | Ключ |
+|---|---|---|
+| `config/llm_gateway.local.json` | локальная модель: LM Studio `:1234` (или Ollama `:11434` — смените `base_url`), дефолт `qwen2.5-coder-7b-instruct` | не нужен (`api_key_required: false`) |
+| `config/llm_gateway.deepseek.json` | облако: `deepseek/deepseek-v4.1-flash-1017` через OpenRouter (та, что тестировали с Go-агентом Day14), цены в конфиге из каталога | `OPENROUTER_API_KEY` (или `LLM_API_KEY`) |
+
+```bash
+# локальная модель (LM Studio должен быть запущен):
+python -m src.tools.llm_gateway --config config/llm_gateway.local.json
+# deepseek:
+OPENROUTER_API_KEY=sk-or-... python -m src.tools.llm_gateway --config config/llm_gateway.deepseek.json
+```
+
+Проверено живьём: локальный провайдер ответил «Москва» через LM Studio (usage реальный,
+cost `unknown` — тариф не задан); deepseek-конфиг валидируется, live-прогон — после
+возврата ключа. Известный предел: слабые локальные модели не проходят строгий контракт
+сигнатур loop (`invalid_signature` на всех попытках) — тот же класс, что `plan.v1` в Day14.
+
+### E2E bundle (адаптированная копия Day14)
+
+`partner_bundle/e2e/bundle_e2e_test.go` — копия `Day14/agent/e2e/loop_e2e_test.go`,
+переделанная под Python-сервис (свой gateway вместо Day13, свой loop, контракт
+`/v1/chat`). Три сценария: fixture (офлайн, строгие asserts), local (live LM Studio),
+deepseek (live, skip без ключа). Полный loop против живой модели — по флагу:
+
+```bash
+cd partner_bundle/e2e && go test -tags bundle_e2e -v .          # быстрые сценарии
+BUNDLE_E2E_FULL_LOOP=1 go test -tags bundle_e2e -run 'Local|Deepseek' -v .
+```
+
+Нюансы адаптации (зафиксированы в коде теста): артефакты — только внутри
+`bundle/.agent-tmp` (runner отказывается по symlink-путям macOS `/tmp`/`t.TempDir`);
+между фазами тест перезапускает gateway — лимит 10 POST/мин/IP хранится в памяти
+процесса. Зелёный прогон 2026-11-10: fixture loop 9 запросов / 3 коммита,
+redteam-after 33 кейса без успешных атак, local chat 200.
