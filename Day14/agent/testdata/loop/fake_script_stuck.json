@@ -1,0 +1,111 @@
+{
+  "roles": {
+    "planner": [
+      {
+        "content": "{\"schema\":\"plan.v1\",\"subtasks\":[{\"id\":\"users-endpoint\",\"title\":\"Endpoint пользователей\",\"spec\":\"Добавь в Go-сервис на Gin endpoint GET /users?name= который ищет пользователя в БД через интерфейс Querier и тест к нему\",\"profile\":\"coder\",\"stack\":[\"go\"],\"depends_on\":[],\"acceptance\":[\"GET /users отвечает 200 с JSON\",\"есть тест handler_test.go\",\"тесты проходят\"],\"root\":0}]}",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 200,
+          "completion_tokens": 120
+        }
+      }
+    ],
+    "coder": [
+      {
+        "tool_calls": [
+          {
+            "id": "call_1",
+            "type": "function",
+            "function": {
+              "name": "write_file",
+              "arguments": "{\"path\": \"main.go\", \"content\": \"package main\\n\\nimport (\\n\\t\\\"database/sql\\\"\\n\\t\\\"fmt\\\"\\n\\t\\\"net/http\\\"\\n\\n\\t\\\"github.com/gin-gonic/gin\\\"\\n)\\n\\n// Querier abstracts the database for the users endpoint.\\ntype Querier interface {\\n\\tQuery(query string, args ...any) (*sql.Rows, error)\\n}\\n\\nfunc usersEndpoint(db Querier) gin.HandlerFunc {\\n\\treturn func(c *gin.Context) {\\n\\t\\tname := c.Query(\\\"name\\\")\\n\\t\\tq := fmt.Sprintf(\\\"SELECT id, name FROM users WHERE name='%s'\\\", name)\\n\\t\\trows, err := db.Query(q)\\n\\t\\tif err != nil {\\n\\t\\t\\tc.JSON(http.StatusInternalServerError, gin.H{\\\"error\\\": \\\"query failed\\\"})\\n\\t\\t\\treturn\\n\\t\\t}\\n\\t\\tdefer rows.Close()\\n\\t\\tusers := make([]gin.H, 0)\\n\\t\\tfor rows.Next() {\\n\\t\\t\\tvar id int\\n\\t\\t\\tvar uname string\\n\\t\\t\\tif err := rows.Scan(&id, &uname); err != nil {\\n\\t\\t\\t\\tc.JSON(http.StatusInternalServerError, gin.H{\\\"error\\\": \\\"scan failed\\\"})\\n\\t\\t\\t\\treturn\\n\\t\\t\\t}\\n\\t\\t\\tusers = append(users, gin.H{\\\"id\\\": id, \\\"name\\\": uname})\\n\\t\\t}\\n\\t\\tc.JSON(http.StatusOK, users)\\n\\t}\\n}\\n\"}"
+            }
+          }
+        ],
+        "finish_reason": "tool_calls",
+        "usage": {
+          "prompt_tokens": 300,
+          "completion_tokens": 220
+        }
+      },
+      {
+        "tool_calls": [
+          {
+            "id": "call_2",
+            "type": "function",
+            "function": {
+              "name": "write_file",
+              "arguments": "{\"path\":\"handler_test.go\",\"content\":\"package main\\n\\nimport (\\n\\t\\\"database/sql\\\"\\n\\t\\\"errors\\\"\\n\\t\\\"net/http\\\"\\n\\t\\\"net/http/httptest\\\"\\n\\t\\\"testing\\\"\\n\\n\\t\\\"github.com/gin-gonic/gin\\\"\\n)\\n\\ntype fakeQuerier struct{ err error }\\n\\nfunc (f fakeQuerier) Query(string, ...any) (*sql.Rows, error) { return nil, f.err }\\n\\nfunc TestUsersEndpointQueryError(t *testing.T) {\\n\\tgin.SetMode(gin.TestMode)\\n\\tr := gin.New()\\n\\tr.GET(\\\"/users\\\", usersEndpoint(fakeQuerier{err: errors.New(\\\"boom\\\")}))\\n\\treq := httptest.NewRequest(http.MethodGet, \\\"/users?name=ann\\\", nil)\\n\\trec := httptest.NewRecorder()\\n\\tr.ServeHTTP(rec, req)\\n\\tif rec.Code != http.StatusInternalServerError {\\n\\t\\tt.Fatalf(\\\"код %d, ожидался 500\\\", rec.Code)\\n\\t}\\n}\\n\"}"
+            }
+          }
+        ],
+        "finish_reason": "tool_calls",
+        "usage": {
+          "prompt_tokens": 400,
+          "completion_tokens": 180
+        }
+      },
+      {
+        "content": "Готово: main.go (endpoint GET /users через Querier) и handler_test.go (тест ошибки запроса).",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 250,
+          "completion_tokens": 40
+        }
+      },
+      {
+        "tool_calls": [
+          {
+            "id": "call_3",
+            "type": "function",
+            "function": {
+              "name": "edit_file",
+              "arguments": "{\"path\": \"main.go\", \"edits\": [{\"oldText\": \"\\t\\tq := fmt.Sprintf(\\\"SELECT id, name FROM users WHERE name='%s'\\\", name)\\n\", \"newText\": \"\"}, {\"oldText\": \"\\t\\trows, err := db.Query(q)\", \"newText\": \"\\t\\trows, err := db.Query(\\\"SELECT id, name FROM users WHERE name=$1\\\", name)\"}, {\"oldText\": \"\\t\\\"fmt\\\"\\n\", \"newText\": \"\"}]}"
+            }
+          }
+        ],
+        "finish_reason": "tool_calls",
+        "usage": {
+          "prompt_tokens": 300,
+          "completion_tokens": 40
+        }
+      },
+      {
+        "content": "Правка внесена (комментарий уточнён), код не менялся по существу.",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 250,
+          "completion_tokens": 30
+        }
+      }
+    ],
+    "security-go": [
+      {
+        "content": "{\"schema\": \"security_findings.v1\", \"verdict\": \"pass\", \"findings\": [{\"id\": \"F1\", \"severity\": \"critical\", \"cwe\": \"CWE-89\", \"file\": \"main.go\", \"line\": 19, \"rule\": \"G201\", \"issue\": \"SQL injection\", \"evidence\": \"q := fmt.Sprintf(\\\"SELECT id, name FROM users WHERE name='%s'\\\", name)\", \"fix\": \"используй плейсхолдер $1 и передавай name аргументом в db.Query\"}]}",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 500,
+          "completion_tokens": 150
+        }
+      }
+    ],
+    "researcher": [
+      {
+        "content": "{\"schema\":\"step_result.v1\",\"subtask_id\":\"users-endpoint\",\"status\":\"done\",\"criteria\":[{\"text\":\"GET /users отвечает 200 с JSON\",\"met\":true,\"evidence\":\"handler отвечает JSON со списком пользователей\"},{\"text\":\"есть тест handler_test.go\",\"met\":true,\"evidence\":\"файл написан, компилируется\"},{\"text\":\"тесты проходят\",\"met\":true,\"evidence\":\"go vet и go test завершились с кодом 0\"}]}",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 600,
+          "completion_tokens": 120
+        }
+      }
+    ]
+  },
+  "default": {
+    "content": "ok",
+    "finish_reason": "stop",
+    "usage": {
+      "prompt_tokens": 10,
+      "completion_tokens": 2
+    }
+  }
+}

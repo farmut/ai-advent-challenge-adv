@@ -1,0 +1,80 @@
+# Day32: PR-review orchestrator config for CI (GitHub Actions).
+#
+# The orchestrator reviews a GitHub pull request: a sub-agent fetches the PR
+# diff through the official github-mcp-server (stdio, docker), three analyst
+# sub-agents examine it (bugs / architecture / code quality), and a publisher
+# sub-agent posts the review back to the PR: inline comments on concrete lines
+# plus a summary review body.
+#
+# Required environment:
+#   LLM_PROVIDER / LLM_API_KEY — provider and key (the key only from env)
+#   --model <name> — the reviewing model (pick one with a large context
+#     window: the whole PR diff goes into the prompt)
+#   GITHUB_PERSONAL_ACCESS_TOKEN — token for github-mcp-server (in Actions:
+#     secrets.GITHUB_TOKEN with pull-requests: write permission)
+#   GITHUB_TOOLSETS=pull_requests — keeps the MCP tool list small
+#
+# Run:
+#   ./ai-adv-agent-agent --config agent.review.yaml --model "$LLM_MODEL" \
+#     --query "Проведи ревью PR #123 в репозитории owner/repo"
+
+llm:
+  provider: ""          # env LLM_PROVIDER
+  model: ""             # required: pass --model <name> in CI (LLM_MODEL is not read in --config mode)
+  temperature: 0.2      # review must be conservative and reproducible
+  max_tokens: 0
+
+# CI run is ephemeral — no memory files should be written or read.
+memory:
+  dir: review_session.json
+  auto_update: false
+  stm:  { enabled: false }
+  wm:   { enabled: false }
+  ltm:  { enabled: false }
+  facts: { enabled: false }
+  profile: { enabled: false }
+  task_memory: { enabled: false }
+
+rag:
+  enabled: false
+
+# Official GitHub MCP server, stdio via docker. The token and toolset limit are
+# inherited from the parent environment (the MCP adapter passes os.Environ()
+# through), docker just forwards them into the container.
+mcp:
+  enabled: true
+  servers:
+    - name: github
+      type: stdio
+      command: docker
+      args:
+        - run
+        - -i
+        - --rm
+        - -e
+        - GITHUB_PERSONAL_ACCESS_TOKEN
+        - -e
+        - GITHUB_TOOLSETS
+        - ghcr.io/github/github-mcp-server
+
+invariants:
+  enabled: false
+
+consultant:
+  enabled: false
+
+# Roles are profiles (Day2 format) in profiles/review/: the prompt lives in
+# <name>.md, permissions in <name>.settings.json (none of them gets file tools
+# or commands). `mcp:` grants non-file MCP servers on top of the profile.
+profiles:
+  dir: profiles/review
+
+orchestrator:
+  enabled: true
+  max_rounds: 10
+  subagents:
+    - { profile: diff-reader,   rag: false, mcp: ["github"], memory: { wm: false } }
+    - { profile: bug-hunter,    rag: false, mcp: [],         memory: { wm: false } }
+    - { profile: architect,     rag: false, mcp: [],         memory: { wm: false } }
+    - { profile: code-reviewer, rag: false, mcp: [],         memory: { wm: false } }
+    - { profile: publisher,     rag: false, mcp: ["github"], memory: { wm: false } }
