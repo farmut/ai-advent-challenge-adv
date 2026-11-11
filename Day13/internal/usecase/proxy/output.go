@@ -99,7 +99,11 @@ type inspection struct {
 // redacted, dangerous commands block. System prompt leaks are checked only
 // against non-empty systems.
 func (s *Service) inspect(text string, systems []string) inspection {
-	r := s.scanner.ScanDirect(text)
+	// PEER-02: model output is subject to the same view pipeline as input —
+	// an encoded secret in the answer must be redacted like a direct one.
+	// Derived findings redact the encoded carrier precisely (placeholder in
+	// place of the blob), so no block is needed for them.
+	r := s.scanner.Scan(text)
 	in := inspection{canon: r.Canonical}
 	low := strings.ToLower(in.canon)
 

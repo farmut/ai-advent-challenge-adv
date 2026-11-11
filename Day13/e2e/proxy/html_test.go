@@ -148,11 +148,11 @@ func TestBuildAndRenderPage(t *testing.T) {
 	if len(page.Cols) != 4 || page.Cols[0].Key != "fake-mask" || page.Cols[3].Key != "mlx-block" {
 		t.Fatalf("cols %+v", page.Cols)
 	}
-	if len(page.Groups) != 2 || len(page.Groups[0].Rows) != 14 || len(page.Groups[1].Rows) != 5 {
+	if len(page.Groups) != 2 || len(page.Groups[0].Rows) != 15 || len(page.Groups[1].Rows) != 5 {
 		t.Fatalf("groups %d", len(page.Groups))
 	}
 	tot := page.Counts[2].Cells
-	if tot[0].Pass != 17 || tot[0].Gap != 2 || tot[1].Fail != 1 || tot[2].NA != 5 {
+	if tot[0].Pass != 19 || tot[0].Gap != 1 || tot[1].Fail != 1 || tot[2].NA != 5 {
 		t.Fatalf("totals %+v", tot)
 	}
 	keys := map[string]bool{}

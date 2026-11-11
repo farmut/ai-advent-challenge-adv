@@ -130,6 +130,11 @@ func (r *ProfileRoleRunner) Run(ctx context.Context, req port.RoleRequest) (port
 		out.GuardBlocked = true
 		out.GuardReason = res.GuardReason
 	}
+	// A6: reproducing the data canary means the role leaked the instructions
+	// (boundary forgery / exfil). Fail closed, like a guard block.
+	if usecase.CanaryLeak(res.Content) && !res.GuardBlocked {
+		return port.RoleResult{}, fmt.Errorf("role %q: %w (канарейка безопасности воспроизведена — отказ от утечки инструкций)", req.Profile, usecase.ErrCanaryLeak)
+	}
 	return out, nil
 }
 

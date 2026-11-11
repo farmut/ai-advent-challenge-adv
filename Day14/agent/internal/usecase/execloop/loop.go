@@ -547,9 +547,10 @@ func (l *Loop) pause(run *domain.LoopRun) (domain.LoopRun, error) {
 
 // abort ends the run on a spent budget.
 func (l *Loop) abort(run *domain.LoopRun, reason string) (domain.LoopRun, error) {
-	run.Report = l.report(run) + fmt.Sprintf("\n**Прервано:** %s\n", reason)
 	run.Status = domain.LoopAborted
 	run.UpdatedAt = l.clock.Now()
+	l.syncUsage(run)
+	run.Report = l.report(run) + fmt.Sprintf("\n**Прервано:** %s\n", reason)
 	if err := l.repo.Save(*run); err != nil {
 		return *run, err
 	}
@@ -576,11 +577,14 @@ func (l *Loop) finishErr(run *domain.LoopRun, ctx context.Context, err error) (d
 }
 
 // terminate builds the report, saves the run in its final state and moves it
-// to the archive slot.
+// to the archive slot. PEER-03: the terminal status and the meter usage must
+// be written into the run BEFORE the report is rendered, otherwise the saved
+// report shows the previous status and zero counters.
 func (l *Loop) terminate(run *domain.LoopRun, status domain.LoopStatus) (domain.LoopRun, error) {
-	run.Report = l.report(run)
 	run.Status = status
 	run.UpdatedAt = l.clock.Now()
+	l.syncUsage(run)
+	run.Report = l.report(run)
 	if err := l.repo.Save(*run); err != nil {
 		return *run, err
 	}
@@ -590,9 +594,22 @@ func (l *Loop) terminate(run *domain.LoopRun, status domain.LoopStatus) (domain.
 	return *run, nil
 }
 
+// syncUsage copies the meter's spent budget into the persisted run. Replans
+// stay run-owned: the meter does not know about them. A nil meter (tests that
+// fake the roles) leaves the run untouched.
+func (l *Loop) syncUsage(run *domain.LoopRun) {
+	if l.meter == nil {
+		return
+	}
+	u := l.meter.Usage()
+	u.Replans = run.Usage.Replans
+	run.Usage = u
+}
+
 // persist saves the run write-ahead.
 func (l *Loop) persist(run *domain.LoopRun) error {
 	run.UpdatedAt = l.clock.Now()
+	l.syncUsage(run)
 	return l.repo.Save(*run)
 }
 

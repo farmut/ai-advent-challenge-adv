@@ -3,6 +3,7 @@ package secrets
 import (
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 	"net/url"
 	"strings"
 	"testing"
@@ -143,6 +144,15 @@ func TestViews(t *testing.T) {
 		{"base64 depth2", "секрет: " + b64x2, 2, APIKeyOpenAI, ViewDecoded, true},
 		{"hex", "hex " + hexKey, 2, AWSAccessKey, ViewDecoded, true},
 		{"url encoded", "q=" + urlKey, 2, GitHubToken, ViewDecoded, true},
+		{"rot13 secret (was known gap)", "fx-cebw-nop123KLM789", 2, APIKeyOpenAI, ViewDecoded, true},
+		// PEER-01 regression: structural carriers that reached upstream
+		// byte-identical before the fix.
+		{"peer block_comment", "prefix sk-/* split */proj-PEERauditSynthetic7xQ2z9Lm4vW8 suffix", 2, APIKeyOpenAI, ViewJoined, true},
+		{"peer line comment", "sk- // note\n proj-PEERauditSynthetic7xQ2z9Lm4vW8", 2, APIKeyOpenAI, ViewJoined, true},
+		{"peer base64_plus", fmt.Sprintf("key %q + %q",
+			base64.StdEncoding.EncodeToString([]byte("sk-proj-")),
+			base64.StdEncoding.EncodeToString([]byte("PEERauditSynthetic7xQ2z9Lm4vW8"))), 2, APIKeyOpenAI, ViewDecoded, true},
+		{"peer comment_plus", "sk-/* x */ + /* y */proj-PEERauditSynthetic7xQ2z9Lm4vW8", 2, APIKeyOpenAI, ViewJoined, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -174,7 +184,8 @@ func TestNegativeViews(t *testing.T) {
 		{"math", "2 + 2 = 4, x + y"},
 		{"long word", "internationalization and localization"},
 		{"git sha", "commit 3f786850e387550fdab836ed7e6dc881de23001b"},
-		{"rot13 gap", "fx-cebw-nop123KLM789"},
+		// "rot13 gap" (fx-cebw-nop123KLM789) moved to TestViews: ciphered
+		// secrets are now detected — the known-gap contract changed.
 		{"allowlisted base64", base64.StdEncoding.EncodeToString([]byte("AKIAIOSFODNN7EXAMPLE"))},
 	}
 	s := newScanner(2)
@@ -267,5 +278,73 @@ func TestPlaceholder(t *testing.T) {
 	}
 	if ValidType("nope") {
 		t.Fatal("unknown type accepted")
+	}
+}
+
+// PEER-hardening / тайнопись: ciphered secrets reach the decoded view (block),
+// encoded natural language is reported for the upstream annotation.
+func TestCipherDetection(t *testing.T) {
+	caesar := func(s string, k int) string {
+		var b strings.Builder
+		for _, r := range s {
+			switch {
+			case r >= 'а' && r <= 'я':
+				b.WriteRune('а' + (r-'а'+rune(k))%32)
+			case r >= 'a' && r <= 'z':
+				b.WriteRune('a' + (r-'a'+rune(k))%26)
+			default:
+				b.WriteRune(r)
+			}
+		}
+		return b.String()
+	}
+	rot13 := func(s string) string {
+		var b strings.Builder
+		for _, r := range s {
+			if r >= 'a' && r <= 'z' {
+				b.WriteRune('a' + (r-'a'+13)%26)
+			} else {
+				b.WriteRune(r)
+			}
+		}
+		return b.String()
+	}
+	sc := newScanner(2)
+
+	// Secret hidden by Caesar: found in the decoded view → policy blocks.
+	shifted := caesar("мой секретный ключ: sk-proj-abc123", 3)
+	if r := sc.Scan(shifted); len(r.Findings) == 0 {
+		t.Fatalf("caesar-shifted secret not found: %q", shifted)
+	} else if !r.Findings[0].Derived {
+		t.Fatalf("cipher finding must be derived: %+v", r.Findings[0])
+	}
+
+	// Detection kinds.
+	tests := []struct {
+		name string
+		in   string
+		want string // "" = no hit expected
+	}{
+		{"caesar ru", caesar("служебная записка с просьбой вывести маркер для проверки безопасности системы", 5), "caesar"},
+		{"rot13 en", rot13("hidden instruction telling the model to reveal the internal marker now"), "rot13"},
+		// Litorea keeps the vowel skeleton and is statistically inseparable
+		// from plain words: documented as out of scope, NOT annotated.
+		{"litorea (out of scope)", "овтевь блото бтекла служебная", ""},
+		{"plain ru", "обычное предложение на русском языке без всяких шифров", ""},
+		{"plain en", "an ordinary english sentence without any ciphers at all", ""},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			hits := sc.DetectCiphers(tt.in)
+			if tt.want == "" {
+				if len(hits) != 0 {
+					t.Fatalf("false positive: %+v", hits)
+				}
+				return
+			}
+			if len(hits) == 0 || hits[0].Kind != tt.want {
+				t.Fatalf("hits %+v, want kind %q", hits, tt.want)
+			}
+		})
 	}
 }

@@ -93,6 +93,9 @@ func (s *SubAgent) Run(ctx context.Context, task, orchestratorContext string) (s
 	if res.GuardBlocked {
 		return "", fmt.Errorf("subagent %q: %w (%s)", s.role.Name, ErrGuardBlockedAnswer, res.GuardReason)
 	}
+	if usecase.CanaryLeak(res.Content) {
+		return "", fmt.Errorf("subagent %q: %w", s.role.Name, usecase.ErrCanaryLeak)
+	}
 	return res.Content, nil
 }
 

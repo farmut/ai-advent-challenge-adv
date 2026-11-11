@@ -76,16 +76,49 @@ func (s *Scanner) Canonicalize(raw string) string {
 	return s.n.NFKC(guard.StripInvisible(raw))
 }
 
-// Scan inspects raw, normalized, joined and decoded views.
+// Scan inspects raw, normalized, joined and decoded views. The decoded pass
+// runs over the canonical text and over the joined view, so a secret split by
+// concatenation AND encoded (base64_plus carrier) is still found. Results are
+// deduplicated by (type, span).
 func (s *Scanner) Scan(raw string) Result {
 	canon := s.Canonicalize(raw)
 	direct := s.direct(raw, canon)
+	joined, jm, jok := s.joined(canon, direct)
 	all := append([]Finding(nil), direct...)
-	all = append(all, s.joined(canon, direct)...)
-	all = append(all, s.decoded(canon, direct, s.depth)...)
+	all = append(all, joined...)
+	all = append(all, s.decodedFrom(decodeCandidates(canon), func(a, b int) (int, int) { return a, b }, direct, s.depth)...)
+	if jok {
+		all = append(all, s.decodedFrom(decodeCandidates(jm.text), func(a, b int) (int, int) { return jm.span(a, b) }, direct, s.depth)...)
+	}
+	for _, p := range encodedPartsViews(canon) {
+		for _, f := range match(p.text) {
+			if isPII(f.Type) {
+				continue
+			}
+			if _, ok := s.allow[f.Value]; ok {
+				continue
+			}
+			if sameValue(direct, f.Value) {
+				continue
+			}
+			all = append(all, Finding{Type: f.Type, View: ViewDecoded, Start: p.start, End: p.end, Value: f.Value, Derived: true})
+		}
+	}
+	all = dedupe(all)
 	sortFindings(all)
 	return Result{Canonical: canon, Findings: all}
 }
+
+// DetectCiphers reports encoded-natural-language fragments (Caesar, ROT13,
+// probable simple substitution such as litorea). The caller annotates the
+// upstream request so the model does not execute instructions smuggled in a
+// cipher; secrets in ciphers are handled separately by Scan (decoded view).
+func (s *Scanner) DetectCiphers(raw string) []CipherHit {
+	return detectCiphers(s.Canonicalize(raw))
+}
+
+// CipherHit is the public shape of an encoded-fragment detection.
+type CipherHit = cipherHit
 
 // ScanDirect inspects only the raw and normalized views (used for model
 // output, where derived findings are out of scope).
@@ -170,10 +203,11 @@ func dedupe(fs []Finding) []Finding {
 
 // joined reports credentials that exist only after concatenation syntax is
 // removed. PII is excluded: "user+tag@example.com" must not become a block.
-func (s *Scanner) joined(canon string, direct []Finding) []Finding {
+// The mapped view is returned so Scan can run the decoded pass over it.
+func (s *Scanner) joined(canon string, direct []Finding) ([]Finding, mapped, bool) {
 	m, ok := joinedView(canon)
 	if !ok {
-		return nil
+		return nil, mapped{}, false
 	}
 	var out []Finding
 	for _, f := range match(m.text) {
@@ -189,7 +223,7 @@ func (s *Scanner) joined(canon string, direct []Finding) []Finding {
 		}
 		out = append(out, Finding{Type: f.Type, View: ViewJoined, Start: a, End: b, Value: f.Value, Derived: true})
 	}
-	return out
+	return out, m, true
 }
 
 func sameValue(fs []Finding, v string) bool {
@@ -201,26 +235,34 @@ func sameValue(fs []Finding, v string) bool {
 	return false
 }
 
-// decoded decodes candidate fragments of canon and scans the decoded text
-// (recursively up to depth). Every hit is derived: an encoded secret cannot
-// be masked precisely, so the policy blocks such requests.
-func (s *Scanner) decoded(canon string, direct []Finding, depth int) []Finding {
+// decodedFrom decodes the given candidates, scans each decoding (recursively
+// up to depth) and maps every hit back to canonical offsets through toCanon.
+// Every hit is derived: an encoded secret cannot be masked precisely, so the
+// policy blocks such requests.
+func (s *Scanner) decodedFrom(cands []candidate, toCanon func(a, b int) (int, int), direct []Finding, depth int) []Finding {
 	if depth <= 0 {
 		return nil
 	}
 	var out []Finding
-	for _, c := range decodeCandidates(canon) {
-		if inside(c.start, c.end, direct) {
+	for _, c := range cands {
+		a, b := toCanon(c.start, c.end)
+		if inside(a, b, direct) {
 			continue // already masked as a direct finding
 		}
 		inner := s.Canonicalize(c.decoded)
 		hits := s.direct(c.decoded, inner)
 		hits = append(hits, s.decoded(inner, hits, depth-1)...)
 		for _, h := range hits {
-			out = append(out, Finding{Type: h.Type, View: ViewDecoded, Start: c.start, End: c.end, Value: h.Value, Derived: true})
+			out = append(out, Finding{Type: h.Type, View: ViewDecoded, Start: a, End: b, Value: h.Value, Derived: true})
 		}
 	}
 	return out
+}
+
+// decoded scans encoded candidate fragments of canon (kept for callers that
+// need the canonical-text pass only).
+func (s *Scanner) decoded(canon string, direct []Finding, depth int) []Finding {
+	return s.decodedFrom(decodeCandidates(canon), func(a, b int) (int, int) { return a, b }, direct, depth)
 }
 
 func inside(a, b int, fs []Finding) bool {

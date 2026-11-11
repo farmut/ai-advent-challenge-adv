@@ -36,11 +36,7 @@ upstreams:
   openrouter:
     base_url: https://openrouter.ai/api/v1
     api_key_env: OPENROUTER_API_KEY
-    # The egress to OpenRouter can sit behind a Cloudflare strict window for
-    # minutes; the test relay (scripts/or_relay.py) retries patiently, so the
-    # upstream timeout must outlive that patience (proxy 503s cut it off at
-    # 120s while the relay was still retrying).
-    timeout: 300s
+    timeout: 180s
 
 # Public model aliases (allowlist). Prices: micro-USD per 1M tokens.
 # PROXY_MODEL_<ALIAS>_UPSTREAM_MODEL overrides upstream_model (alias upper-cased,

@@ -106,6 +106,11 @@ func NewChatUseCase(
 
 // Execute runs one full chat turn: load state → build prompt → call LLM → update memory → persist.
 func (uc *ChatUseCase) Execute(ctx context.Context, cfg ChatConfig) (ChatResult, error) {
+	// A4: a top-level query carrying invisible characters is cleaned and
+	// annotated before anything else sees it (the proxy would strip the
+	// characters silently, revealing a ready-made instruction).
+	cfg = sanitizeInvisibleQuery(cfg)
+
 	// ---- Load all state ----
 	history, _ := uc.history.Load()
 	stats, _ := uc.stats.Load()
@@ -342,6 +347,16 @@ func (s *stuckDetector) verdict() (string, bool) {
 			"Последняя ошибка: %s", tool, s.count, strings.SplitN(s.key, "|", 2)[1]), true
 }
 
+// sanitizeInvisibleQuery cleans a top-level query of zero-width/bidi
+// characters and prepends a guard warning, so a hidden instruction cannot
+// ride into the model as plain text after the proxy strips the carrier (A4).
+func sanitizeInvisibleQuery(cfg ChatConfig) ChatConfig {
+	if n := countInvisible(cfg.FullQuery); n > 0 {
+		cfg.FullQuery = fmt.Sprintf("%s (%d шт.)\n\n%s", InvisibleWarning, n, stripInvisible(cfg.FullQuery))
+	}
+	return cfg
+}
+
 // failureKey reduces an error to its stable part: the machine-readable code when
 // the guard produced one, otherwise a trimmed prefix of the message.
 func failureKey(err error) string {
@@ -360,6 +375,7 @@ func failureKey(err error) string {
 // executor callback is invoked and results are fed back until the LLM produces a final
 // text reply.  Falls back to Execute when tools is empty or executor is nil.
 func (uc *ChatUseCase) ExecuteWithTools(ctx context.Context, cfg ChatConfig, tools []domain.MCPTool, executor port.ToolExecutor) (ChatResult, error) {
+	cfg = sanitizeInvisibleQuery(cfg)
 	if len(tools) == 0 || executor == nil {
 		return uc.Execute(ctx, cfg)
 	}

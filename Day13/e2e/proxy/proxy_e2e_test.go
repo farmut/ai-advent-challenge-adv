@@ -85,7 +85,7 @@ func runCase(t *testing.T, h *harness, c Case, mode string) Result {
 			}
 		}
 	}
-	if res.Expect != FactPass && res.Expect != ExpectKnownGap && judged == res.Expect {
+	if res.Expect != ExpectKnownGap && len(c.ExpectFindings) > 0 && judged == res.Expect {
 		for _, f := range c.ExpectFindings {
 			if found[f] == 0 {
 				problems = append(problems, "нет находки "+f)
